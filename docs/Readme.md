@@ -6,10 +6,10 @@ The teams consists of students identified in the following table.
 
 | Student Number | Name              |
 |----------------|-------------------|
-| **1XXXXXX**    | Name of student 1 |
-| **1XXXXXX**    | Name of student 2 |
-| **1XXXXXX**    | Name of student 3 |
-| **1XXXXXX**    | Name of student 4 |
+| **1231072**    | David Gonçalves Costa |
+| **1231079**    | João Paulo Oliveira Tavares Vieira |
+| **1231367**    | Eduardo Gomes Moreira Pinto Ramos |
+| **1231258**    | João Fontes |
 
 # 2. Task Distribution ###
 
