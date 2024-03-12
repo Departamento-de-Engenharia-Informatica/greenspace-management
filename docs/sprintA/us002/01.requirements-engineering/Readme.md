@@ -11,19 +11,19 @@ As an user resources manager, I want to register new jobs.
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	MS has a wide range of employees who carry out the most varied tasks in the context
+    of managing green spaces. Some job examples are designer, estimator, gardener, electrician or bricklayer
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** --
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** --
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** --
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** --
 
 ### 1.3. Acceptance Criteria
 
