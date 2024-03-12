@@ -1,11 +1,11 @@
-# US006 - Create a Task 
+# US002 - Register a job
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As an user resources manager, I want to register new jobs.
 
 ### 1.2. Customer Specifications and Clarifications 
 
