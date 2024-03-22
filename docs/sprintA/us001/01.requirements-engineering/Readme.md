@@ -1,11 +1,13 @@
-# US006 - Create a Task 
+# US001 - As a Human Resources Manager (HRM), I want to register skills that a collaborator may have.
+
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+User Story 1 focuses on optimizing the skill registration process within MusgoSublime (MS) for HR managers. This enhancement aims to streamline collaborator skill management, allowing HR managers to allocate tasks more effectively based on individual competencies. By improving this aspect of the system, MS can enhance project planning and execution efficiency, leading to increased productivity and resource utilization.
+
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -27,10 +29,10 @@ As an organization employee, I want to create a new task in order to be further 
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
-
+* **AC1:** The system must allow the HRM to register skills for a collaborator.
+* **AC2:** Each skill entry must include a name and description.
+* **AC3:** The system must ensure that skills are unique for each collaborator.
+* **AC4:** The HRM should be able to view and modify the skills of each collaborator.
 ### 1.4. Found out Dependencies
 
 * There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
@@ -57,15 +59,12 @@ As an organization employee, I want to create a new task in order to be further 
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
 
-#### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](C:\Users\João Vieira\Desktop\greenspace-management\docs\sprintA\us001\01.requirements-engineering\puml\us01-system-sequence-diagram.puml)
 
-#### Alternative Two
 
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+
 
 ### 1.7 Other Relevant Remarks
 
