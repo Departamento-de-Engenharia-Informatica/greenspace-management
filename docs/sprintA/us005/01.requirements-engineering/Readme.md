@@ -41,7 +41,7 @@ meaning that one team member have 2 skills.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* US001, US002, US003, US004.
 
 ### 1.5 Input and Output Data
 

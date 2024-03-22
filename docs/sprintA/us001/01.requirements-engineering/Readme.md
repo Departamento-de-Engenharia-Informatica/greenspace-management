@@ -41,27 +41,28 @@ The user story implies that there should be a process in place for the HRM to re
 * **AC4:** The HRM should be able to view and modify the skills of each collaborator.
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There are no Found ot Dependencies.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
-* Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
-* Selected data:
-    * a task category 
+*Typed Data:*
+- Skill details entered by the HRM:
+  - Skill name
+  - Description (optional)
+
+*Selected Data:*
+- None
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+*List of Existing Skills:*
+- The system provides a list of skills already registered in the database, enabling the HRM to review existing skills before inputting new ones.
+
+*(In)Success of the Operation:*
+- Upon submitting skill details, the system confirms whether the operation was successful or unsuccessful, providing feedback to the HRM regarding the registration of skills for a collaborator.
+
 
 ### 1.6. System Sequence Diagram (SSD)
 
