@@ -17,38 +17,54 @@ As an user resources manager, I want to register new jobs.
 
 **From the client clarifications:**
 
-> **Question:** --
->
-> **Answer:** --
+> **Question:** "Bom dia,
 
-> **Question:** --
+Para a US02, gostaria de esclarecer o seguinte:
+
+É relevante associar uma área ou setor específico a cada Job? (Por exemplo, "Jardineiro" seria inserido no setor de "Manutenção")
+
+Deve-se incluir informações como salário, tipo de contratação (full-time ou part-time), e modalidade de trabalho (presencial, remoto ou híbrido) no Job? Ou essas informações encaixam-se melhor no âmbito do colaborador, ou talvez nem sejam necessárias?
+
+Que outras informações acha necessárias associar ao Job?
+ 
+
+Agradeço a atenção dispensada."
 >
-> **Answer:** --
+> **Answer:** "Bom dia,
+ não é necessário na medida que não existem US que sugiram que isso possa vir a ser necessário;
+ idem
+ para já nenhumas
+
+De nada."
+
+> **Question:** 
+ "Quais são os dados de entrada para a criação de uma profissão?"
+>
+> **Answer:** "o Nome da profissão:
+jardineiro
+calceteiro
+electricista
+condutor
+...
+"
 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC2:** As a HRM i should be able to create a new job
+* **AC3:** When creating a job that already exist, the system must reject such operation.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+*--
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
-* Selected data:
-    * a task category 
+    * id_job
+    * name_job 
 
 **Output Data:**
 
