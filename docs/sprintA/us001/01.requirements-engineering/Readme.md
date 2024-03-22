@@ -32,15 +32,6 @@ The user story implies that there should be a process in place for the HRM to re
 >
 > Application of agriculture phytopharmaceuticals
 
-**From the client clarifications:**
-
-> **Question:** Which is the unit of measurement used to estimate duration?
->
-> **Answer:** Duration is estimated in days.
-
-> **Question:** Monetary data is expressed in any particular currency?
->
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
 
 ### 1.3. Acceptance Criteria
 
@@ -76,7 +67,7 @@ The user story implies that there should be a process in place for the HRM to re
 
 
 
-![System Sequence Diagram - Alternative One](C:\Users\João Vieira\Desktop\greenspace-management\docs\sprintA\us001\01.requirements-engineering\puml\us01-system-sequence-diagram.puml)
+![System Sequence Diagram - Alternative One](svg/us01-system-sequence-diagram-System_Sequence_Diagram__SSD_.svg)
 
 
 
