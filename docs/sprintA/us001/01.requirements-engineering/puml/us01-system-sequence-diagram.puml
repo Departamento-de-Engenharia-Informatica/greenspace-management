@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - User Story 1
+title System Sequence Diagram (SSD)
 
 autonumber
 
@@ -12,7 +12,7 @@ participant ":System" as System
 
 activate HRM
 
-    HRM -> System : requests to register collaborator skills
+    HRM -> System : requests to register collaborator's skills
     activate System
 
         System --> HRM : prompts for required fields (e.g., skill name, description)

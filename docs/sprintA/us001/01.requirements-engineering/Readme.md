@@ -13,19 +13,25 @@ User Story 1 focuses on optimizing the skill registration process within MusgoSu
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	**Data Required for Skill Registration:**
+The document specifies that the human resources manager (HRM) wants to register skills that a collaborator may have. This indicates that the system needs to collect data related to the skills possessed by employees. 
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	**User Role:**
+The user story specifies the role of the Human Resources Manager (HRM) as the primary user who will be interacting with the system to register skills.
 
-**From the client clarifications:**
+> **Skill Registration Process:**
+The user story implies that there should be a process in place for the HRM to register skills. This process may involve selecting an employee, specifying their skills, and saving the information into the system.
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Skills:**
 >
-> **Answer:** Duration is estimated in days.
-
-> **Question:** Monetary data is expressed in any particular currency?
+>Driving vehicles of different types (e.g. light, or heavy)
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+>Operating machines such as backhoes or tractors
+>
+>  Tree pruning
+>
+> Application of agriculture phytopharmaceuticals
+
 
 ### 1.3. Acceptance Criteria
 
@@ -61,7 +67,7 @@ User Story 1 focuses on optimizing the skill registration process within MusgoSu
 
 
 
-![System Sequence Diagram - Alternative One](C:\Users\João Vieira\Desktop\greenspace-management\docs\sprintA\us001\01.requirements-engineering\puml\us01-system-sequence-diagram.puml)
+![System Sequence Diagram - Alternative One](svg/us01-system-sequence-diagram-System_Sequence_Diagram__SSD_.svg)
 
 
 
