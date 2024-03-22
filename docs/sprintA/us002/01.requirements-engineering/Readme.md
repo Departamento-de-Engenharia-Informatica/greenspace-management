@@ -17,7 +17,9 @@ As an user resources manager, I want to register new jobs.
 
 **From the client clarifications:**
 
-> **Question:** "Bom dia,
+> **Question:** 
+
+"Bom dia,
 
 Para a US02, gostaria de esclarecer o seguinte:
 
@@ -29,8 +31,10 @@ Que outras informações acha necessárias associar ao Job?
  
 
 Agradeço a atenção dispensada."
->
-> **Answer:** "Bom dia,
+
+
+> **Answer:** 
+"Bom dia,
  não é necessário na medida que não existem US que sugiram que isso possa vir a ser necessário;
  idem
  para já nenhumas
@@ -39,8 +43,9 @@ De nada."
 
 > **Question:** 
  "Quais são os dados de entrada para a criação de uma profissão?"
->
-> **Answer:** "o Nome da profissão:
+
+> **Answer:**
+"o Nome da profissão:
 jardineiro
 calceteiro
 electricista
@@ -50,21 +55,19 @@ condutor
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** As a HRM i should be able to create a new job
-* **AC3:** When creating a job that already exist, the system must reject such operation.
+ **AC1:** All required fields must be filled in.
+ **AC2:** As a HRM i should be able to create a new job
+***AC3:** When creating a job that already exist, the system must reject such operation.
 
 ### 1.4. Found out Dependencies
 
-*--
+No found out dependencies
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
-
-* Typed data:
-    * id_job
-    * name_job 
+    > id_job
+    > name_job 
 
 **Output Data:**
 
