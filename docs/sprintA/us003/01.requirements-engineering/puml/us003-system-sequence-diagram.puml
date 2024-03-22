@@ -13,14 +13,27 @@ participant ":System" as System
 activate HRM
 
     HRM -> System : asks to create a new collaborator
+    deactivate HRM
+
     activate System
-        System --> HRM : requests data and lists the jobs that exists
+        System --> HRM : requests data
 
     deactivate System
 
-    HRM -> System : types requested data and selects the job
-    activate System
+    activate HRM
+    HRM -> System : types requested
+    deactivate HRM
 
+    activate System
+    System --> HRM : Lists the existing jobs
+    deactivate System
+
+    activate HRM
+
+    HRM -> System : Selects the job
+    deactivate HRM
+
+    activate System
     System --> HRM : Validates the inputed data and display the information to the user
     deactivate System
     activate HRM
