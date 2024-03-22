@@ -13,9 +13,24 @@ User Story 1 focuses on optimizing the skill registration process within MusgoSu
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	**Data Required for Skill Registration:**
+The document specifies that the human resources manager (HRM) wants to register skills that a collaborator may have. This indicates that the system needs to collect data related to the skills possessed by employees. 
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	**User Role:**
+The user story specifies the role of the Human Resources Manager (HRM) as the primary user who will be interacting with the system to register skills.
+
+> **Skill Registration Process:**
+The user story implies that there should be a process in place for the HRM to register skills. This process may involve selecting an employee, specifying their skills, and saving the information into the system.
+
+> **Skills:**
+>
+>Driving vehicles of different types (e.g. light, or heavy)
+>
+>Operating machines such as backhoes or tractors
+>
+>  Tree pruning
+>
+> Application of agriculture phytopharmaceuticals
 
 **From the client clarifications:**
 
