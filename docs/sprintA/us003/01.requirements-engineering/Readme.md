@@ -5,68 +5,68 @@
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As an Human Resources Manager, I want to register a collaborator with a job and fundamental
+characteristics.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+> There's no pertinent information about this US in the specifications document 
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
->
-> **Answer:** Duration is estimated in days.
+> **Question:** Olá, cliente.
+Na User Story 03 é mencionado o termo 'características fundamentais'. A minha questão é, precisamente, quais são estas características.
+Cumprimentos,
+Gustavo Lima, 1221349
 
-> **Question:** Monetary data is expressed in any particular currency?
->
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** Bom dia,
+os dados essenciais do colaborador mínimos serão nome, data de nascimento, data de admissão, morada, contacto (telefonico e email), documento de identificação e o seu número.
+Podem considerar outros que entendam ser relevantes.
+Cumprimentos,
+Jorge
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** If any required field is not filled in, the system should display a clear error message prompting the user to fill in the missing information before proceeding .
+* **AC2:** The HRM should be able to register a collaborator with a job and fundamental characteristics.
+* **AC3**  Upon successful registration, the system should display a confirmation message to the HRM indicating that the collaborator has been successfully registered.
+* **AC4** When registering a collaborator, the system should validate that the job already exists(or a dropdown should open with the jobs created and the HRM chooses one).
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is a dependency on "US002 - Create a job" as there must be at least one job to associate the collaborator to it.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+    * name
+    * birthdayDate 
+    * admissionDate
+    * address
+    * phoneNumber
+    * email
+    * taxpayerNumber
+    * BINumber
 	
 * Selected data:
-    * a task category 
+    * a job
 
 **Output Data:**
 
-* List of existing task categories
+* List of existing jobs
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
 
-#### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us003-system-sequence-diagram.svg)
 
-#### Alternative Two
 
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
-### 1.7 Other Relevant Remarks
-
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
