@@ -17,29 +17,20 @@ As an user resources manager, I want to register new jobs.
 
 **From the client clarifications:**
 
-> **Question:** 
-
-"Bom dia,
-
-Para a US02, gostaria de esclarecer o seguinte:
-
+> **Question:**
+> "Bom dia, Para a US02, gostaria de esclarecer o seguinte:
 É relevante associar uma área ou setor específico a cada Job? (Por exemplo, "Jardineiro" seria inserido no setor de "Manutenção")
-
 Deve-se incluir informações como salário, tipo de contratação (full-time ou part-time), e modalidade de trabalho (presencial, remoto ou híbrido) no Job? Ou essas informações encaixam-se melhor no âmbito do colaborador, ou talvez nem sejam necessárias?
-
 Que outras informações acha necessárias associar ao Job?
- 
-
 Agradeço a atenção dispensada."
 
 
 > **Answer:** 
 "Bom dia,
  não é necessário na medida que não existem US que sugiram que isso possa vir a ser necessário;
- idem
- para já nenhumas
-
-De nada."
+ idem;
+ para já nenhumas;
+> De nada."
 
 > **Question:** 
  "Quais são os dados de entrada para a criação de uma profissão?"
@@ -57,7 +48,7 @@ condutor
 
  **AC1:** All required fields must be filled in.
  **AC2:** As a HRM i should be able to create a new job
-***AC3:** When creating a job that already exist, the system must reject such operation.
+ **AC3:** When creating a job that already exist, the system must reject such operation.
 
 ### 1.4. Found out Dependencies
 
@@ -66,26 +57,15 @@ No found out dependencies
 ### 1.5 Input and Output Data
 
 **Input Data:**
-    > id_job
-    > name_job 
+     jobName
 
 **Output Data:**
-
-* List of existing task categories
-* (In)Success of the operation
+(In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
 
-#### Alternative One
+![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram.svg)
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
 
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
-
-### 1.7 Other Relevant Remarks
-
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
