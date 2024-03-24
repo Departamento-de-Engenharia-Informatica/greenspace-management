@@ -16,6 +16,15 @@ As a Fleet Manager (FM), I wish to register a vehicle including its details and 
 
 > The frequency of maintenance/check-up should be specified in kilometers.
 
+**From the client clarifications:**
+> **Question:** Should the application identify a registered vehicle by a serial number or other attribute?
+>
+> **Answer:** By plate id.
+
+> **Question:** For the application to work does the FM need to fill all the attributes of the vehicle?
+>
+> **Answer:** yes, besides the vehicle plate that by mistake doesn't appear on the text.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in for vehicle registration.
@@ -33,7 +42,7 @@ As a Fleet Manager (FM), I wish to register a vehicle including its details and 
 **Input Data:**
 
 * Typed data:
-    * Reference/ID
+    * Plate ID
     * Model 
     * Type
     * Tare
