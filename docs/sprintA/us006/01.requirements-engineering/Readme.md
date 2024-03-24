@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US006 - Register a Vehicle 
 
 
 ## 1. Requirements Engineering
@@ -16,17 +16,6 @@ As a Fleet Manager (FM), I wish to register a vehicle including its details and 
 
 > The frequency of maintenance/check-up should be specified in kilometers.
 
-**From the client clarifications:**
-??????????????????
-
-> **Question:** Which is the unit of measurement used to estimate duration?
->
-> **Answer:** Duration is estimated in days.
-
-> **Question:** Monetary data is expressed in any particular currency?
->
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
-
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in for vehicle registration.
@@ -37,7 +26,7 @@ As a Fleet Manager (FM), I wish to register a vehicle including its details and 
 
 ### 1.4. Found out Dependencies
 
-* NO DEPENDENCIES YET
+* Found no dependencies
 
 ### 1.5 Input and Output Data
 
@@ -56,29 +45,16 @@ As a Fleet Manager (FM), I wish to register a vehicle including its details and 
     * Last maintenance date
     * Next maintenance date
   
-
-* Selected data:
-    * a task category 
-
+  
 **Output Data:**
 
-* List of existing task categories.
 * Confirmation message upon successful registration.
-* List of vehicles with their details.
 
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
-
-#### Alternative One
-
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* None

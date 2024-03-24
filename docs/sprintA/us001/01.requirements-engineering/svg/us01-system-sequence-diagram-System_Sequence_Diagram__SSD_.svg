@@ -1,1 +1,87 @@
-<?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="388px" preserveAspectRatio="none" style="width:470px;height:388px;background:#FFFFFF;" version="1.1" viewBox="0 0 470 388" width="470px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="228" x="120" y="30.1074">System Sequence Diagram (SSD)</text><rect fill="#FFFFFF" height="126.1641" style="stroke:#181818;stroke-width:1.0;" width="10" x="61" y="151.8633"/><rect fill="#FFFFFF" height="31.291" style="stroke:#181818;stroke-width:1.0;" width="10" x="427" y="175.1543"/><rect fill="#FFFFFF" height="31.291" style="stroke:#181818;stroke-width:1.0;" width="10" x="427" y="237.7363"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="66" x2="66" y1="141.8633" y2="287.0273"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="432" x2="432" y1="141.8633" y2="287.0273"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="5" y="119.7285">Human Resources</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="13" y="138.3496">Manager (HRM)</text><ellipse cx="66" cy="53.1211" fill="#E3E3E3" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M66,61.1211 L66,88.1211 M53,69.1211 L79,69.1211 M66,88.1211 L53,103.1211 M66,88.1211 L79,103.1211 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="5" y="301.1348">Human Resources</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="13" y="319.7559">Manager (HRM)</text><ellipse cx="66" cy="331.7695" fill="#E3E3E3" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M66,339.7695 L66,366.7695 M53,347.7695 L79,347.7695 M66,366.7695 L53,381.7695 M66,366.7695 L79,381.7695 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E3E3E3" height="32.6211" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="64" x="400" y="108.2422"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="407" y="130.3496">:System</text><rect fill="#E3E3E3" height="32.6211" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="64" x="400" y="286.0273"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="407" y="308.1348">:System</text><rect fill="#FFFFFF" height="126.1641" style="stroke:#181818;stroke-width:1.0;" width="10" x="61" y="151.8633"/><rect fill="#FFFFFF" height="31.291" style="stroke:#181818;stroke-width:1.0;" width="10" x="427" y="175.1543"/><rect fill="#FFFFFF" height="31.291" style="stroke:#181818;stroke-width:1.0;" width="10" x="427" y="237.7363"/><polygon fill="#181818" points="415,171.1543,425,175.1543,415,179.1543,419,175.1543" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="71" x2="421" y1="175.1543" y2="175.1543"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="78" y="169.8916">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="226" x="89" y="169.8916">requests to register collaborator's skills</text><polygon fill="#181818" points="82,202.4453,72,206.4453,82,210.4453,78,206.4453" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="76" x2="431" y1="206.4453" y2="206.4453"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="88" y="201.1826">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="321" x="99" y="201.1826">prompts for required fields (e.g., skill name, description)</text><polygon fill="#181818" points="415,233.7363,425,237.7363,415,241.7363,419,237.7363" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="71" x2="421" y1="237.7363" y2="237.7363"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="78" y="232.4736">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="116" x="89" y="232.4736">provides skill details</text><polygon fill="#181818" points="82,265.0273,72,269.0273,82,273.0273,78,269.0273" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="76" x2="431" y1="269.0273" y2="269.0273"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="88" y="263.7646">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="210" x="99" y="263.7646">confirms successful skill registration</text><!--SRC=[bP0zRW9138NxEOL54v021w18HK53mxPfpAntiPYVpTX3nErZTXSKHKcHgPx6zlUUBHTE0nQC47FA_bno9D1IoScpCg2_O4-DtW918Q-O-l2zGSxOvazEFNGOX9nJLcjjRg8KeQ6FIiaJx1ZxU_koQNOhvx1gJZMUg9ZscWiizZLYWYD9hiMJlAS39dCkiDmV3wi5e809PwxAdWTC2eljP3CM9pdY-8fAOxS3UoPW_VQ8jBKrB9IeW6RJFTjt0Pz3m5CkQ65U16p146GSVm8V3Z2_6RWszjrY2uDTS31kP_lSJRXG2nrJQ0MMjEathnCN4aPwXPR45nwKSrgDq9P-zVgPtsokRCCph2L5_dTMdrF79HgaUZktT3NClEaaTWZBzKUiBm00]--></g></svg>
+<?xml version="1.0" encoding="us-ascii" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css"
+     height="388px" preserveAspectRatio="none" style="width:470px;height:388px;background:#FFFFFF;" version="1.1"
+     viewBox="0 0 470 388" width="470px" zoomAndPan="magnify">
+    <defs/>
+    <g>
+        <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing"
+              textLength="228" x="120" y="30.1074">System Sequence Diagram (SSD)
+        </text>
+        <rect fill="#FFFFFF" height="126.1641" style="stroke:#181818;stroke-width:1.0;" width="10" x="61" y="151.8633"/>
+        <rect fill="#FFFFFF" height="31.291" style="stroke:#181818;stroke-width:1.0;" width="10" x="427" y="175.1543"/>
+        <rect fill="#FFFFFF" height="31.291" style="stroke:#181818;stroke-width:1.0;" width="10" x="427" y="237.7363"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="66" x2="66" y1="141.8633"
+              y2="287.0273"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="432" x2="432" y1="141.8633"
+              y2="287.0273"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="5"
+              y="119.7285">Human Resources
+        </text>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="13"
+              y="138.3496">Manager (HRM)
+        </text>
+        <ellipse cx="66" cy="53.1211" fill="#E3E3E3" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/>
+        <path d="M66,61.1211 L66,88.1211 M53,69.1211 L79,69.1211 M66,88.1211 L53,103.1211 M66,88.1211 L79,103.1211 "
+              fill="none" style="stroke:#181818;stroke-width:0.5;"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="5"
+              y="301.1348">Human Resources
+        </text>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="13"
+              y="319.7559">Manager (HRM)
+        </text>
+        <ellipse cx="66" cy="331.7695" fill="#E3E3E3" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/>
+        <path d="M66,339.7695 L66,366.7695 M53,347.7695 L79,347.7695 M66,366.7695 L53,381.7695 M66,366.7695 L79,381.7695 "
+              fill="none" style="stroke:#181818;stroke-width:0.5;"/>
+        <rect fill="#E3E3E3" height="32.6211" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="64"
+              x="400" y="108.2422"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="407"
+              y="130.3496">:System
+        </text>
+        <rect fill="#E3E3E3" height="32.6211" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="64"
+              x="400" y="286.0273"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="407"
+              y="308.1348">:System
+        </text>
+        <rect fill="#FFFFFF" height="126.1641" style="stroke:#181818;stroke-width:1.0;" width="10" x="61" y="151.8633"/>
+        <rect fill="#FFFFFF" height="31.291" style="stroke:#181818;stroke-width:1.0;" width="10" x="427" y="175.1543"/>
+        <rect fill="#FFFFFF" height="31.291" style="stroke:#181818;stroke-width:1.0;" width="10" x="427" y="237.7363"/>
+        <polygon fill="#181818" points="415,171.1543,425,175.1543,415,179.1543,419,175.1543"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="71" x2="421" y1="175.1543" y2="175.1543"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing"
+              textLength="7" x="78" y="169.8916">1
+        </text>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="226" x="89"
+              y="169.8916">requests to register collaborator's skills
+        </text>
+        <polygon fill="#181818" points="82,202.4453,72,206.4453,82,210.4453,78,206.4453"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="76" x2="431" y1="206.4453"
+              y2="206.4453"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing"
+              textLength="7" x="88" y="201.1826">2
+        </text>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="321" x="99"
+              y="201.1826">prompts for required fields (e.g., skill name, description)
+        </text>
+        <polygon fill="#181818" points="415,233.7363,425,237.7363,415,241.7363,419,237.7363"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="71" x2="421" y1="237.7363" y2="237.7363"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing"
+              textLength="7" x="78" y="232.4736">3
+        </text>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="116" x="89"
+              y="232.4736">provides skill details
+        </text>
+        <polygon fill="#181818" points="82,265.0273,72,269.0273,82,273.0273,78,269.0273"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="76" x2="431" y1="269.0273"
+              y2="269.0273"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing"
+              textLength="7" x="88" y="263.7646">4
+        </text>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="210" x="99"
+              y="263.7646">confirms successful skill registration
+        </text><!--SRC=[bP0zRW9138NxEOL54v021w18HK53mxPfpAntiPYVpTX3nErZTXSKHKcHgPx6zlUUBHTE0nQC47FA_bno9D1IoScpCg2_O4-DtW918Q-O-l2zGSxOvazEFNGOX9nJLcjjRg8KeQ6FIiaJx1ZxU_koQNOhvx1gJZMUg9ZscWiizZLYWYD9hiMJlAS39dCkiDmV3wi5e809PwxAdWTC2eljP3CM9pdY-8fAOxS3UoPW_VQ8jBKrB9IeW6RJFTjt0Pz3m5CkQ65U16p146GSVm8V3Z2_6RWszjrY2uDTS31kP_lSJRXG2nrJQ0MMjEathnCN4aPwXPR45nwKSrgDq9P-zVgPtsokRCCph2L5_dTMdrF79HgaUZktT3NClEaaTWZBzKUiBm00]-->
+    </g>
+</svg>
