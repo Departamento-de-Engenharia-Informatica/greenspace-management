@@ -31,8 +31,8 @@ As a Fleet Manager, I want to view a list of vehicles that are due for a check-u
 * **AC2:** The system should accurately determine which vehicles are due for a check-up based on their maintenance/check-up frequency and current mileage.
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
-
+* There is a dependency on "US006 - Register a Vehicle" as a vehicle must exist before being listed for a check up.
+* There is another dependency on "US007 - Register a Vehicle's check up" as there must be a vehicle check up registered before any check up list.
 ### 1.5 Input and Output Data
 
 **Input Data:**
@@ -67,4 +67,4 @@ As a Fleet Manager, I want to view a list of vehicles that are due for a check-u
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* None
