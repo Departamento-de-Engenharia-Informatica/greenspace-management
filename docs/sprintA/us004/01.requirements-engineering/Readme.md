@@ -1,11 +1,11 @@
-# US006 - Create a Task 
+# US004 - **Assign skills to a collaborator:** 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As an HRM, I want to assign one or more skills to a collaborator.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -17,56 +17,55 @@ As an organization employee, I want to create a new task in order to be further 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** There is a minimum and maximum number of skills?
 >
-> **Answer:** Duration is estimated in days.
-
-> **Question:** Monetary data is expressed in any particular currency?
->
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** No.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
-
+* **AC1:** The system should allow the Human Resources Manager (HRM) to assign one or more skills to a collaborator.
+* **AC2:** The system should provide a list of available skills for selection when assigning skills to a collaborator.
+* **AC3:** After selecting the skills, the system should confirm the assignment and update the collaborator's profile accordingly.
+* **AC4:** If the selected skill is not available or does not exist in the system, the HRM should be notified with an appropriate error message.
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* The dependencies for US04 include US01 and US03. US01 involves registering skills that a collaborator may have, while US03 focuses on registering the collaborator. These dependencies are crucial for effectively assigning skills to collaborators within the organization's workforce management system.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
-* Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
-* Selected data:
-    * a task category 
+*Typed Data:*
+- Collaborator details selected by the HRM:
+  - Collaborator name
+
+*Selected Data:*
+- Skills to be assigned to the collaborator
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+*List of Skills:*
+- The system provides a list of available skills to be assigned to the selected collaborator, allowing the HRM to choose from existing skills.
+
+*(In)Success of the Operation:*
+- Upon submitting the selected skills for the collaborator, the system confirms whether the operation was successful or unsuccessful, providing feedback to the HRM regarding the assignment of skills to the collaborator.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
 
-#### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
 
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative One](svg/us004-system-sequence-diagramSystem_Sequence_Diagram__SSD____US04.svg)
+
+
+
+
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* Ensure validation of entered skills to match predefined criteria.
+* Provide informative feedback upon skill assignment, indicating any errors or successful operations.
+* Implement data integrity measures to prevent duplicate or erroneous skill assignments.
+* Consider integrating assigned skills seamlessly into collaborator profiles for comprehensive record-keeping.
+* Document the process of skill assignment for user reference and training purposes.

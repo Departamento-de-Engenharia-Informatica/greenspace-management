@@ -1,4 +1,4 @@
-# US001 - As a Human Resources Manager (HRM), I want to register skills that a collaborator may have.
+# US001 - Register skills
 
 
 
@@ -6,8 +6,7 @@
 
 ### 1.1. User Story Description
 
-User Story 1 focuses on optimizing the skill registration process within MusgoSublime (MS) for HR managers. This enhancement aims to streamline collaborator skill management, allowing HR managers to allocate tasks more effectively based on individual competencies. By improving this aspect of the system, MS can enhance project planning and execution efficiency, leading to increased productivity and resource utilization.
-
+As a Human Resources Manager (HRM), I want to register skills that a collaborator may have.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -74,4 +73,10 @@ The user story implies that there should be a process in place for the HRM to re
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* Ensure that the system validates the input data for skills entered by the HRM, including checking for any missing or incorrect information.
+
+* The system should provide a mechanism for the HRM to review existing skills in the database before inputting new ones, facilitating consistency and avoiding duplicates.
+
+* Implement a feedback mechanism to inform the HRM about the success or failure of the skill registration operation, helping to ensure clarity and accountability.
+
+* Design the user interface to be intuitive and user-friendly, enabling the HRM to easily navigate the skill registration process and perform actions efficiently.
