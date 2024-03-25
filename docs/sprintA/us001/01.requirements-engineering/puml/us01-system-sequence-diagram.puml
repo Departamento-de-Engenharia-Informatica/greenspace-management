@@ -15,7 +15,7 @@ activate HRM
     HRM -> System : requests to register collaborator's skills
     activate System
 
-        System --> HRM : prompts for required fields (e.g., skill name, description)
+        System --> HRM : prompts for required fields (e.g., skill name)
     deactivate System
 
     HRM -> System : provides skill details

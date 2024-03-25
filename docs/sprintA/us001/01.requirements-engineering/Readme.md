@@ -22,15 +22,16 @@ The user story specifies the role of the Human Resources Manager (HRM) as the pr
 > **Skill Registration Process:**
 The user story implies that there should be a process in place for the HRM to register skills. This process may involve selecting an employee, specifying their skills, and saving the information into the system.
 
-> **Skills:**
+
+**From the client clarifications:**
+
+> **Question:** Which information can be introduced to create a new skill?
 >
->Driving vehicles of different types (e.g. light, or heavy)
+> **Answer:** The skill name;
+
+> **Question:** Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?
 >
->Operating machines such as backhoes or tractors
->
->  Tree pruning
->
-> Application of agriculture phytopharmaceuticals
+> **Answer:** All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name)
 
 
 ### 1.3. Acceptance Criteria
@@ -39,6 +40,7 @@ The user story implies that there should be a process in place for the HRM to re
 * **AC2:** Each skill entry must include a name and description.
 * **AC3:** The system must ensure that skills are unique for each collaborator.
 * **AC4:** The HRM should be able to view and modify the skills of each collaborator.
+* **AC5:** Special characters or algarisms should not be allowed in the skill name
 ### 1.4. Found out Dependencies
 
 * There are no Found ot Dependencies.
@@ -50,10 +52,7 @@ The user story implies that there should be a process in place for the HRM to re
 *Typed Data:*
 - Skill details entered by the HRM:
   - Skill name
-  - Description (optional)
 
-*Selected Data:*
-- None
 
 **Output Data:**
 
