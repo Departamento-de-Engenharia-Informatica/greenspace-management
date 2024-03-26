@@ -2,7 +2,8 @@
 
 # Supplementary Specification (FURPS+)
 
-## Functionality Funcionalidades
+## Functionality Especifica funcionalidades que são comuns em vários EUA/UC e, portanto, não são
+## capturado nos cenários do usuário
 
 _Specifies functionalities that:  
 &nbsp; &nbsp; (i) are common across several US/UC;  
@@ -11,25 +12,25 @@ _Specifies functionalities that:
 (i) Business rules validation must be respected when recording and updating data.  
 (ii) The class structure must be designed to allow easy maintenance and the addition of new features, following the best OO practices.
 
-## Usability user interface
+## Usability user interface  avalia a interface
 
 _Evaluates the user interface. It has several subcategories, among them: error prevention; interface aesthetics and design; help and documentation; consistency and standards._
 
 The application’s graphical interface is to be developed in JavaFX 11. All those who wish to use the application must be authenticated with a password of seven alphanumeric characters, including three capital letters and two digits. The application documentation must be in English language.
 
-## Reliability  integridade do software
+## Reliability  Refere-se à integridade, conformidade e interoperabilidade do software
 
 _Refers to the integrity, compliance and interoperability of the software. The requirements to be considered are: frequency and severity of failure, possibility of recovery, possibility of prediction, accuracy, average time between failures._
 
 The development team must implement unit tests for all methods, except for methods that implement Input/Output operations. The unit tests should be implemented using the JUnit 5 framework. The JaCoCo plugin should be used to generate the coverage report.
 
-## Performance
+## Performance Avalia o desempenho do software (ou seja, tempos de execução, uso, disponibilidade)
 
 _Evaluates the performance requirements of the software, namely: response time, start-up time, recovery time, memory consumption, CPU usage, load capacity and application availability._
 
 (fill in here )
 
-## Supportability
+## Supportability  Diz respeito à estabilidade, manutenabilidade, compatibilidade, configurabilidade, instalação, escalabilidade
 
 _The supportability requirements gather several characteristics, such as: testability, adaptability, maintainability, compatibility, configurability, installability, scalability and more._
 
