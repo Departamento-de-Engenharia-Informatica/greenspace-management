@@ -1,4 +1,4 @@
-Aqui está o template preenchido com as informações fornecidas:
+
 
 # Supplementary Specification (FURPS+)
 
