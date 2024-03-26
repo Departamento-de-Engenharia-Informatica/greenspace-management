@@ -11,7 +11,7 @@ skinparam rectangle{
 
 left to right direction
 
-rectangle "System Actors" as actors {
+rectangle "System Ators" as actors {
     actor Freelancer
     actor "Organization\nEmployee" as Employee
 }

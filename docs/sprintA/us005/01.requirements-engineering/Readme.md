@@ -41,7 +41,7 @@ meaning that one team member have 2 skills.
 
 ### 1.4. Found out Dependencies
 
-* US001, US002, US003, US004.
+* US001, US003, US004.
 
 ### 1.5 Input and Output Data
 
@@ -60,7 +60,7 @@ meaning that one team member have 2 skills.
 
 **Output Data:**
 
-* List of existing task categories: - Lawn Mowing, Tree and Shrub Pruning, Cleanup and Debris Removal, Bed and Flower Maintenance, Equipment Maintenance, Pest and Disease Control, Installation and Maintenance of Irrigation Systems.
+* List of existing 3 categories: - Lawn Mowing, Tree and Shrub Pruning, Cleanup and Debris Removal, Bed and Flower Maintenance, Equipment Maintenance, Pest and Disease Control, Installation and Maintenance of Irrigation Systems.
 * (In)Success of the operation:  Clear indication of whether the automatic team proposal generation was completed successfully or not.
 
 ### 1.6. System Sequence Diagram (SSD)
