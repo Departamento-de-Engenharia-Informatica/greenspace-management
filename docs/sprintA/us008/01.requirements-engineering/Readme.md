@@ -25,10 +25,19 @@ As a Fleet Manager, I want to view a list of vehicles that are due for a check-u
 > 
 > **b)** 33480 (there is a difference minor than 5% of the number of kms of the checkup frequency).
 
+**Not clarified by the client:**
+> **Question:** I'm not sure if I understood everything about US08. In this US we should only list the vehicles that need a check up (surpass the check up frequency in KM) or that will shortly need a check up (5% to the check up frequency *already said in another post*), correct? If so, the information about the checkup frequency for each vehicle should be asked in US07?
+>
+> **What I did:** For a vehicle to be listed for a checkup I need to have their data in US07.
+
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
 * **AC2:** The system should accurately determine which vehicles are due for a check-up based on their maintenance/check-up frequency and current mileage.
+* **AC3:** The generated list should include relevant details such as plate, brand, model, current KM, maintenance/check-up frequency, and last check-up date.
+* **AC4:** The list should contain vehicles that have either exceeded the maintenance/check-up frequency or are within 5% of it.
+
 ### 1.4. Found out Dependencies
 
 * There is a dependency on "US006 - Register a Vehicle" as a vehicle must exist before being listed for a check up.
@@ -38,33 +47,17 @@ As a Fleet Manager, I want to view a list of vehicles that are due for a check-u
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
-* Selected data:
-    * a task category 
+    * None required (system retrieves data internally).
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* List of vehicles needing check-up.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
+![System Sequence Diagram - Alternative One](svg/us008-system-sequence-diagram.svg)
 
-#### Alternative One
-
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
-* None
+* Some of the info was not clarified by the client.
