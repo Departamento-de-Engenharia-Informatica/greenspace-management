@@ -33,10 +33,8 @@ As a Fleet Manager, I want to view a list of vehicles that are due for a check-u
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The system should accurately determine which vehicles are due for a check-up based on their maintenance/check-up frequency and current mileage.
-* **AC3:** The generated list should include relevant details such as plate, brand, model, current KM, maintenance/check-up frequency, and last check-up date.
-* **AC4:** The list should contain vehicles that have either exceeded the maintenance/check-up frequency or are within 5% of it.
+* **AC1:** The system should accurately determine which vehicles are due for a check-up based on their maintenance/check-up frequency and current mileage.
+* **AC2:** The generated list should include relevant details such as plate, brand, model, current KM, maintenance/check-up frequency, and last check-up date.
 
 ### 1.4. Found out Dependencies
 

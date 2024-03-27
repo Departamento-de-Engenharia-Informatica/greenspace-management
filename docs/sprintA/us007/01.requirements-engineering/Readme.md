@@ -38,9 +38,6 @@ between 1992-2005 00-00-XX.
 * **AC3:** The validation requirements for the vehicle ID are: After 2020: AA-00-AA;
   between 2005-2020 00-AA-00;
   between 1992-2005 00-00-XX.
-* **AC4:** A vehicle must exist first before being designed to a check up.
-* **AC5:** Upon successful registration, the system should display a confirmation message.
-* **AC6:** The same vehicle can have more than one check up.
 
 ### 1.4. Found out Dependencies
 
@@ -53,7 +50,7 @@ between 1992-2005 00-00-XX.
 * Typed data:
     * Vehicle ID
     * Date
-    * KM at check up
+    * Current KM
 
 **Output Data:**
 
@@ -65,4 +62,4 @@ between 1992-2005 00-00-XX.
 
 ### 1.7 Other Relevant Remarks
 
-* None
+* It wasn't clear if in the input data we should insert the current KM of the car or the Km on the checkup because the client responded to the same question in two different ways.
