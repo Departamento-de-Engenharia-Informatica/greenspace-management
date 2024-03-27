@@ -69,7 +69,7 @@ meaning that one team member have 2 skills.
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD___US005.svg)
 
 #### Alternative Two
 

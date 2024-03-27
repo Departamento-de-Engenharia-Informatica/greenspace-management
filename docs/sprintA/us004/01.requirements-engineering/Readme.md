@@ -11,7 +11,7 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+> There's no pertinent information about this US in the specifications document
 
 
 
@@ -64,8 +64,6 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 ### 1.7 Other Relevant Remarks
 
-* Ensure validation of entered skills to match predefined criteria.
-* Provide informative feedback upon skill assignment, indicating any errors or successful operations.
+
+
 * Implement data integrity measures to prevent duplicate or erroneous skill assignments.
-* Consider integrating assigned skills seamlessly into collaborator profiles for comprehensive record-keeping.
-* Document the process of skill assignment for user reference and training purposes.
