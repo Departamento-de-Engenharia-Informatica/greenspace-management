@@ -26,7 +26,7 @@ The user story implies that there should be a process in place for the HRM to re
 
 > **Question:** Which information can be introduced to create a new skill?
 >
-> **Answer:** The skill name;
+> **Answer:** The skill name.
 
 > **Question:** Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?
 >

@@ -13,7 +13,7 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 >	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+
 
 **From the client clarifications:**
 
