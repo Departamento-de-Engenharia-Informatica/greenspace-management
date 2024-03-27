@@ -36,10 +36,10 @@ The user story implies that there should be a process in place for the HRM to re
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The system must allow the HRM to register skills for a collaborator.
-* **AC2:** Each skill entry must include a name and description.
-* **AC3:** The system must ensure that skills are unique for each collaborator.
-* **AC4:** The HRM should be able to view and modify the skills of each collaborator.
-* **AC5:** Special characters or algarisms should not be allowed in the skill name
+* **AC2:** Each skill entry must include a name.
+* **AC3:** The HRM can edit the skills.
+
+
 ### 1.4. Found out Dependencies
 
 * There are no Found ot Dependencies.
@@ -73,10 +73,7 @@ The user story implies that there should be a process in place for the HRM to re
 
 ### 1.7 Other Relevant Remarks
 
-* Ensure that the system validates the input data for skills entered by the HRM, including checking for any missing or incorrect information.
+
 
 * The system should provide a mechanism for the HRM to review existing skills in the database before inputting new ones, facilitating consistency and avoiding duplicates.
-
-* Implement a feedback mechanism to inform the HRM about the success or failure of the skill registration operation, helping to ensure clarity and accountability.
-
 * Design the user interface to be intuitive and user-friendly, enabling the HRM to easily navigate the skill registration process and perform actions efficiently.
