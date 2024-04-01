@@ -38,7 +38,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 ---
 
-**Places**
+**Green Spaces**
 
 * 
 
@@ -110,6 +110,35 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 ---
 
+**Agenda**
+
+*
+
+---
+**Vehicles**
+
+*
+
+---
+**Tasks**
+
+*
+
+---
+**User**
+
+*
+
+---
+**Portal**
+
+*
+
+---
+
+
+
+
 
 ## Rationale to identify associations between conceptual classes
 
@@ -124,10 +153,12 @@ An association is a relationship between instances of objects that indicates a r
 - etc.
 
 
-| Concept (A) 		|  Association   	|  Concept (B) |
-|----------	   		|:-------------:		|------:       |
-| C1  	| verb1    		 	| C2  |
-| ...  	| ...    		 	| ...  |
+| Concept (A) 		 | Association   	 | Concept (B) |
+|----------------|:---------------:|------------:|
+| C1  	          |  verb1    		 	  |          C2 |
+| ...  	         |   ...    		 	   |         ... |
+| ff             |       ff        |        ffff |
+
 
 
 
