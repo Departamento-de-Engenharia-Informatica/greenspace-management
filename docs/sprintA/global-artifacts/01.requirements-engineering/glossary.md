@@ -1,19 +1,38 @@
 # Glossary
 
-**Terms, Expressions and Acronyms (TEA) must be organized alphabetically.**
-
-_(Complete according to the provided example)_
-
-| **_TEA_** (EN) | **_Description_** (EN)                                                                    |                                       
-|:---------------|:------------------------------------------------------------------------------------------|
-| **Clerk**      | Person responsible for carrying out various business supporting activities on the system. |
-| **CLK**        | Acronym for _Clerk_.                                                                      |
-| **...**        | ...                                                                                       |
 
 
 
+**Glossary:**
 
-
-
-
-
+| **TEA**          | **Description**                                                                                                                                                                                                                         |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Collaborators** | Employees of MS responsible for various tasks related to managing green spaces, including designers, estimators, gardeners, electricians, and bricklayers, possessing specific skills necessary for their respective roles.             |
+| **Clerk**        | A person responsible for executing various administrative tasks and providing support within the system's operations.                                                                                                                   |
+| **CLK**          | An abbreviation for "Clerk," denoting the role responsible for handling administrative duties.                                                                                                                                          |
+| **Designation**  | A title or label assigned to a task, role, or position within the system, indicating its purpose or function.                                                                                                                           |
+| **Diary**        | A planning tool used by MS to schedule tasks for teams, enabling the organization to manage workload, track progress, and allocate resources efficiently across different green spaces.                                                 |
+| **Estimation**   | The process of assessing or approximating the resources, time, and costs required to complete a task or project.                                                                                                                        |
+| **Garden**       | A green space with or without trees, typically of smaller size, featuring minimal infrastructure and amenities, potentially including a basic irrigation system.                                                                        |
+| **Green Spaces** | Areas designated for collective use and enjoyment, encompassing gardens, parks, and other outdoor recreational areas.                                                                                                                   |
+| **Green Spaces Manager** | The person responsible for managing the green spaces in charge of the organization.                                                                                                                                                     |
+| **GSM**          | An abreviation for "Greens Spaces Manager"                                                                                                                                                                                              |
+| **Green Spaces User (GSU)** | A person who uses the green spaces managed by the organization and who can, through the Portal, make comments or report faults in parks and gardens on the Portal.                                                                      |
+| **Human Resources Manager (HRM)** | An individual responsible for overseeing the management of human resources within the organization, including tasks such as team allocation, skill assessment, and recruitment.                                                         |
+| **Irrigation System** | Infrastructure designed to supply water to plants or green spaces through artificial means, ensuring their proper hydration and maintenance.                                                                                            |
+| **Job**          | A specific role or occupation within the organization, typically associated with a set of responsibilities and tasks.                                                                                                                   |
+| **Large-sized Park** | A multi-functional space with diverse garden areas, woods, and extensive amenities and services, catering to a wide range of recreational activities and community needs.                                                               |
+| **Maintenance**  | The process of preserving or upkeeping the condition of green spaces, equipment, or infrastructure to ensure their functionality and longevity.                                                                                         |
+| **Medium-sized Park** | A green space of moderate dimensions, often featuring wooded areas, toilets, drinking fountains, irrigation systems, lighting, and amenities like children's playgrounds.                                                               |
+| **Municipal Master Plans** | Comprehensive urban planning documents outlining the development and management of municipal areas, including provisions for green spaces, infrastructure, and zoning regulations.                                                      |
+| **MusgoSublime (MS)** | An organization specializing in the planning, construction, and maintenance of green spaces, encompassing various dimensions including plant material, urban furniture, irrigation systems, lighting systems, and rainwater management. |
+| **Plant Material** | Living organisms such as flowers, shrubs, and trees, utilized in the design and maintenance of green spaces.                                                                                                                            |
+| **Quality of Life** | The overall well-being and satisfaction experienced by individuals or communities, influenced by factors such as access to green spaces, healthcare, education, and socioeconomic conditions.                                           |
+| **Rainwater Conduction and Drainage Systems** | Infrastructure designed to manage the flow of rainwater within green spaces, preventing flooding and soil erosion while promoting water conservation and sustainability.                                                                |
+| **Skill**        | A proficiency or capability possessed by an individual, enabling them to perform specific tasks or duties effectively.                                                                                                                  |
+| **Task**         | A specific activity or assignment to be carried out within the system, contributing to the management, maintenance, or development of green spaces.                                                                                     |
+| **Team**         | A group of individuals collaboratively working together to achieve common objectives or tasks within the context of green space management.                                                                                             |
+| **Urban Furniture** | Equipment or amenities installed within green spaces for the convenience and enjoyment of visitors, such as benches, tables, and playground equipment.                                                                                  |
+| **User Portal**  | An online platform or interface allowing users to access information, post comments, and report issues related to green spaces, enhancing community engagement and communication.                                                       |
+| **Vehicles, Machines, and Equipment** | Various types of machinery, vehicles, and tools utilized in the maintenance, construction, or operation of green spaces, including tractors, lawnmowers, and irrigation systems.                                                        |
+| **Well-being**   | The state of being comfortable, healthy, or happy, influenced by factors such as access to nature, social connections, and physical and mental health.                                                                                  |
