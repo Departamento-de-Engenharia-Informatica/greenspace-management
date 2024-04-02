@@ -25,10 +25,6 @@ As a Fleet Manager, I want to view a list of vehicles that are due for a check-u
 > 
 > **b)** 33480 (there is a difference minor than 5% of the number of kms of the checkup frequency).
 
-**Not clarified by the client:**
-> **Question:** I'm not sure if I understood everything about US08. In this US we should only list the vehicles that need a check up (surpass the check up frequency in KM) or that will shortly need a check up (5% to the check up frequency *already said in another post*), correct? If so, the information about the checkup frequency for each vehicle should be asked in US07?
->
-> **What I did:** For a vehicle to be listed for a checkup I need to have their data in US07.
 
 
 ### 1.3. Acceptance Criteria
@@ -39,7 +35,6 @@ As a Fleet Manager, I want to view a list of vehicles that are due for a check-u
 ### 1.4. Found out Dependencies
 
 * There is a dependency on "US006 - Register a Vehicle" as a vehicle must exist before being listed for a check up.
-* There is another dependency on "US007 - Register a Vehicle's check up" as there must be a vehicle check up registered before any check up list.
 ### 1.5 Input and Output Data
 
 **Input Data:**
@@ -55,7 +50,3 @@ As a Fleet Manager, I want to view a list of vehicles that are due for a check-u
 
 ![System Sequence Diagram - Alternative One](svg/us008-system-sequence-diagram.svg)
 
-
-### 1.7 Other Relevant Remarks
-
-* Some of the info was not clarified by the client.
