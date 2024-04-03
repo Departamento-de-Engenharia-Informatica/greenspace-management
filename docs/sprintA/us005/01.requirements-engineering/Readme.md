@@ -29,13 +29,12 @@ meaning that one team member have 2 skills.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:**  All required fields must be filled in.
-* **AC2:**  Task reference must have at least 5 alphanumeric chars.
-* **AC3:**  When creating a task with an existing reference, the system must reject
+
+* **AC1:**  When creating a task with an existing reference, the system must reject
   such operation.
-* **AC4:**  The maximum team size and the set of skills need to be supplied by
+* **AC2:**  The maximum team size and the set of skills need to be supplied by
   the HRM.
-* **AC5:**  The intended skill set must be provided by the HRM.
+* **AC30:**  The intended skill set must be provided by the HRM.
 
 
 
@@ -47,21 +46,18 @@ meaning that one team member have 2 skills.
 
 **Input Data:**
 
-* Typed data:
-    * a reference: Unique identification for the team proposal.
-    * a designation: Name or title of the team proposal.
-    * an informal description:  A brief and non-technical description of the team's objective.
-    * a technical description: A detailed description of the team's requirements and expectations.
-    * an estimated duration: Expected time to complete the projects assigned to the team.
-    * an estimated cost: Estimate of the financial resources required to form and maintain the team.
-	
+* Typed data: 
+    * numberColaborators 
+    * skils
+
 * Selected data:
-    * a task category: Category or area of expertise to filter team members.
+    * generate a team.
 
 **Output Data:**
 
-* List of existing 3 categories: - Lawn Mowing, Tree and Shrub Pruning, Cleanup and Debris Removal, Bed and Flower Maintenance, Equipment Maintenance, Pest and Disease Control, Installation and Maintenance of Irrigation Systems.
-* (In)Success of the operation:  Clear indication of whether the automatic team proposal generation was completed successfully or not.
+* List of teams.
+* In(Sucess) of the operation: By sending employee details, the system confirms whether the operation was successful or unsuccessful, providing feedback
+
 
 ### 1.6. System Sequence Diagram (SSD)
 
