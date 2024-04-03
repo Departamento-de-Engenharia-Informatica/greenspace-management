@@ -11,7 +11,9 @@ characteristics.
 
 **From the specifications document:**
 
-> There's no pertinent information about this US in the specifications document 
+> name, birthdate, admission date, address, contact info (mobile and
+email), ID doc type and respective number should be provided by HRM
+
 
 
 
