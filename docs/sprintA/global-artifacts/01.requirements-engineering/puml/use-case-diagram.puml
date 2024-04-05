@@ -11,7 +11,7 @@ left to right direction
 
 rectangle "System Actors" as actors {
     actor HRM as "Human Resources Manager (HRM)"
-    actor FM as "Fleet Manager (FM)"
+    actor VFM as "Vehicle Fleet Manager (VFM)"
 
 }
 
@@ -26,14 +26,15 @@ rectangle "Use Cases" as usecases{
     usecase US08 as "List Vehicles Needing Check-up"
 }
 
-HRM --> US01
-HRM --> US02
-HRM --> US03
-HRM --> US04
-HRM --> US05
 
-FM --> US06
-FM --> US07
-FM --> US08
+HRM --> US01 : US01
+HRM --> US02 : US02
+HRM --> US03 : US03
+HRM --> US04 : US04
+HRM --> US05 : US05
+
+VFM --> US06 : US06
+VFM --> US07 : US07
+VFM --> US08 : US08
 
 @enduml
