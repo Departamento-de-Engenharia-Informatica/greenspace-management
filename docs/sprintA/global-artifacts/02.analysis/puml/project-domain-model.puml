@@ -150,7 +150,7 @@ Team "1" -- "*" Skill : has
 Team "1" -- "*" Task : do
 Team "1" -- "*" Machine : utilizes
 Team "1" -- "*" Equipment : utilizes
-Team "1" -- "1" Agenda : plans
+
 
 Agenda "1" -- "*" Task : has
 
