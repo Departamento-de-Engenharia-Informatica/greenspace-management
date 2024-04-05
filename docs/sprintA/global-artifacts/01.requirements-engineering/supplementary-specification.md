@@ -10,11 +10,14 @@ Validation of business rules during data registration and update.
 
 Implementation of a class structure designed for easy maintenance and addition of new functionalities following Object-Oriented best practices.
 
+
 ## Usability
 
 _Evaluates the user interface. It has several subcategories,
 among them: error prevention; interface aesthetics and design; help and
 documentation; consistency and standards._
+
+All requested data must be filled in.
 
 Authentication requirement for users with a password of seven alphanumeric characters, including three capital letters and two digits.
 
