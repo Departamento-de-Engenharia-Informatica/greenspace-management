@@ -16,25 +16,25 @@ rectangle "System Actors" as actors {
 }
 
 rectangle "Use Cases" as usecases{
-    usecase US01 as "Register Skills"
-    usecase US02 as "Register Job"
-    usecase US03 as "Register Collaborator"
-    usecase US04 as "Assign Skills to Collaborator"
-    usecase US05 as "Generate Team Proposal"
-    usecase US06 as "Register Vehicle"
-    usecase US07 as "Register Vehicle's Check-up"
-    usecase US08 as "List Vehicles Needing Check-up"
+    usecase UC01 as "Register Skills"
+    usecase UC02 as "Register Job"
+    usecase UC03 as "Register Collaborator"
+    usecase UC04 as "Assign Skills to Collaborator"
+    usecase UC05 as "Generate Team Proposal"
+    usecase UC06 as "Register Vehicle"
+    usecase UC07 as "Register Vehicle's Check-up"
+    usecase UC08 as "List Vehicles Needing Check-up"
 }
 
 
-HRM --> US01 : US01
-HRM --> US02 : US02
-HRM --> US03 : US03
-HRM --> US04 : US04
-HRM --> US05 : US05
+HRM --> UC01 : UC01
+HRM --> UC02 : UC02
+HRM --> UC03 : UC03
+HRM --> UC04 : UC04
+HRM --> UC05 : UC05
 
-VFM --> US06 : US06
-VFM --> US07 : US07
-VFM --> US08 : US08
+VFM --> UC06 : UC06
+VFM --> UC07 : UC07
+VFM --> UC08 : UC08
 
 @enduml
