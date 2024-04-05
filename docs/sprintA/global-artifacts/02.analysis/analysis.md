@@ -110,32 +110,6 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 ---
 
-**Agenda**
-
-*
-
----
-**Vehicles**
-
-*
-
----
-**Tasks**
-
-*
-
----
-**User**
-
-*
-
----
-**Portal**
-
-*
-
----
-
 
 
 
