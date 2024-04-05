@@ -38,6 +38,7 @@ The user story implies that there should be a process in place for the HRM to re
 * **AC1:** The system must allow the HRM to register skills for a collaborator.
 * **AC2:** Each skill entry must include a name.
 * **AC3:** The HRM can edit the skills.
+* **AC4:** Special characters or algarisms should not be allowed in the skill name.
 
 
 ### 1.4. Found out Dependencies

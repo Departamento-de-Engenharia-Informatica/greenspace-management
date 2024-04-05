@@ -11,29 +11,30 @@ left to right direction
 
 rectangle "System Actors" as actors {
     actor HRM as "Human Resources Manager (HRM)"
-    actor FM as "Fleet Manager (FM)"
+    actor VFM as "Vehicle Fleet Manager (VFM)"
 
 }
 
 rectangle "Use Cases" as usecases{
-    usecase US01 as "Register Skills"
-    usecase US02 as "Register Job"
-    usecase US03 as "Register Collaborator"
-    usecase US04 as "Assign Skills to Collaborator"
-    usecase US05 as "Generate Team Proposal"
-    usecase US06 as "Register Vehicle"
-    usecase US07 as "Register Vehicle's Check-up"
-    usecase US08 as "List Vehicles Needing Check-up"
+    usecase UC01 as "Register Skills"
+    usecase UC02 as "Register Job"
+    usecase UC03 as "Register Collaborator"
+    usecase UC04 as "Assign Skills to Collaborator"
+    usecase UC05 as "Generate Team Proposal"
+    usecase UC06 as "Register Vehicle"
+    usecase UC07 as "Register Vehicle's Check-up"
+    usecase UC08 as "List Vehicles Needing Check-up"
 }
 
-HRM --> US01
-HRM --> US02
-HRM --> US03
-HRM --> US04
-HRM --> US05
 
-FM --> US06
-FM --> US07
-FM --> US08
+HRM --> UC01 : UC01
+HRM --> UC02 : UC02
+HRM --> UC03 : UC03
+HRM --> UC04 : UC04
+HRM --> UC05 : UC05
+
+VFM --> UC06 : UC06
+VFM --> UC07 : UC07
+VFM --> UC08 : UC08
 
 @enduml
