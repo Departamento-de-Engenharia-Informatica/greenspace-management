@@ -6,10 +6,29 @@ _Specifies functionalities that:
 &nbsp; &nbsp; (i) are common across several US/UC;  
 &nbsp; &nbsp; (ii) are not related to US/UC, namely: Audit, Reporting and Security._
 
+(i)
+
 Validation of business rules during data registration and update.
 
 Implementation of a class structure designed for easy maintenance and addition of new functionalities following Object-Oriented best practices.
 
+(ii)
+
+Auditing: Implement audit trails to record system execution.
+
+Licensing: Provide services for tracking, acquiring, installing, and monitoring license usage.
+
+Localization: Supports multiple human languages.
+
+Online help: Provide online help capability.
+
+Reporting: Provide reporting facilities.
+
+Security: Provide services to protect access to certain resources or information.
+
+System management: Provide services that facilitate management of applications in a distributed environment.
+
+Workflow: Provide support for moving documents and other work items, including review and approval cycles.
 
 ## Usability
 
