@@ -80,10 +80,17 @@ class Agenda {
 }
 
 class Vehicle {
-    name
-    features
-    nrOfPassengers
-    plate
+    plateID
+    model
+    type
+    tare
+        gross Weight
+        current Km
+         register Date
+         acquisition Date
+         maintenance/Checkup Frequency (in Kms)
+         last maintenance date
+         next maintenance date
 }
 
 class Machine {
@@ -102,8 +109,9 @@ class Portal {
 }
 
 class CheckUp {
-    carPlate
+    plateID
     date
+    kmAtCheckup
 }
 
 class Job {
@@ -155,12 +163,12 @@ Team "1" -- "*" Equipment : utilizes
 
 Agenda "1" -- "*" Task : has
 
-ParkUser "1" -- "0..*" Portal : writes to
+ParkUser "1" -- "0.*" Portal : writes to
 
 Parks "*" -- "*" Garden : can be
 Parks "*" -- "*" MediumSizePark : can be
 Parks "*" -- "*" LargePark : can be
-Parks "1" -- "0..*" ParkUser : has
+Parks "1" -- "0.*" ParkUser : has
 
 VFM "1" -- "*" CheckUp: register
 VFM "1" -- "*" Vehicle: manages

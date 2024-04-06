@@ -144,29 +144,29 @@ An association is a relationship between instances of objects that indicates a r
 | Concept (A) 		 |  Association   	   |    Concept (B) |
 |--------------|:------------------:|---------------:|
 | Organization   	 |      has 		 	      |        Employe |
-|     	 |    owns    		 	    |          Parks |
+|    Organization 	 |    owns    		 	    |          Parks |
 | Employe      |      creates       |           Task |
-|    		 |     can be   	     |            GSU |
-|       |       can be       |            GSM |
-|      	 |    can be 		 	     |            HRM |
-|     	 |   can be    		 	   |            VFM |
+|    Employe		 |     can be   	     |            GSU |
+|    Employe   |       can be       |            GSM |
+|    Employe  	 |    can be 		 	     |            HRM |
+|    Employe 	 |   can be    		 	   |            VFM |
 | Collaborator            |        has         |            Job |
-|   		 | is a member of   	 |           Team |
-|   |     possesses      |          Skill |
-|     	 | is assigned to	 	  |           Task |
-|  |   drives    		 	   |        Vehicle |
-|            |        uses        |        Machine |
-|       |        uses        |      Equipment |
+|   	Collaborator	 | is a member of   	 |           Team |
+|  Collaborator |     possesses      |          Skill |
+|   Collaborator  	 | is assigned to	 	  |           Task |
+| Collaborator|   drives    		 	   |        Vehicle |
+|  Collaborator          |        uses        |        Machine |
+|  Collaborator     |        uses        |      Equipment |
 | Team       	 |      has 		 	      |          Skill |
-|       	 |     do   		 	      |           Task |
-|               |      utilizes      |        Machine |
-|     	 |    utilizes   	    |      Equipment |
+|   Team    	 |     do   		 	      |           Task |
+|   Team            |      utilizes      |        Machine |
+|   Team  	 |    utilizes   	    |      Equipment |
 | Parks      	 |    can be 		 	     |         Garden |
-|    |   can be   		 	    | MediumSizePark |
-|              |       can be       |      LargePark |
-|         |        has         |       ParkUser |
+|   Parks |   can be   		 	    | MediumSizePark |
+|   Parks           |       can be       |      LargePark |
+|   Parks      |        has         |       ParkUser |
 | VFM              |      register      |        CheckUp |
-|    	 |     manages  	     |        Vehicle |
+|   VFM 	 |     manages  	     |        Vehicle |
 | Vehicle    | undergoes  |        CheckUp |
 | HRM      	 |    creates 		 	    |        Employe |
 | Agenda   |    has   		 	     |            ... |
