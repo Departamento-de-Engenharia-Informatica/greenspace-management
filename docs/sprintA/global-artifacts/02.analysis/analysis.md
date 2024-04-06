@@ -181,4 +181,4 @@ An association is a relationship between instances of objects that indicates a r
 
 **Insert below the Domain Model Diagram in a SVG format**
 
-![Domain Model](svg/project-domain-model.svg)
+![Domain Model](svg/project-domain-model-Domain_Model.svg)
