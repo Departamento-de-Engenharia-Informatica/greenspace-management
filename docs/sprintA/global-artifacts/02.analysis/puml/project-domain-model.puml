@@ -2,17 +2,13 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-'skinparam linetype ortho
-'left to right direction
 skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-'title Domain Model
+title Domain Model
 
-'class Platform {
-'  -description
-'}
+left to right direction
 
 class Organization {
     name
@@ -22,63 +18,153 @@ class Organization {
     email
 }
 
+class Employe {
+    name
+    role
+    phoneNumber
+    email
+}
+
+class HRM {
+    ...
+}
+
+class VFM {
+    ...
+}
+
+class GSM {
+    ...
+}
+
+class GSU {
+    ...
+}
+
+class Collaborator {
+    name
+    birthDate
+    admissionDate
+    address
+    phoneNumber
+    email
+    taxpayerNumber
+    BINumber
+}
+
+class Garden {
+    ...
+}
+
+class MediumSizePark {
+    ...
+}
+
+class LargePark {
+    ...
+}
+
+class Parks {
+}
+
 class Task {
-    reference
+    name
     description
-    informalDesc
-    technicalDesc
     duration
     cost
 }
 
-class Category {
+class Agenda {
+    dateOfCreation
+    state
+}
+
+class Vehicle {
+    name
+    features
+    nrOfPassengers
+    plate
+}
+
+class Machine {
+    name
     description
 }
 
-class Employee {
+class Equipment {
     name
-    email
-    position
-    phone
+    description
 }
 
-class TechnicalSkill{
-    shortDescription
-    fullDescription
+class Portal {
+    reports
+    comments
 }
 
-class ActivityArea{
-    shortDescription
-    fullDescription
+class CheckUp {
+    carPlate
+    date
 }
 
-class FeatureTS{
-    mandatory
+class Job {
+    name
+    description
 }
 
-'class User {
-'    name
-'    email
-'    password
-'}
-class PostalAddress{
-    street
-    zipCode
-    city
+class Team {
+    teamName
+    nrOfElements
 }
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
-TechnicalSkill "*" - "1" ActivityArea: regarding an >
 
-Category "*" - "*" TechnicalSkill :  : requires >
-(Category, TechnicalSkill) . FeatureTS
+class Skill {
+    name
+    description
+}
 
-Organization "1" -left "1" PostalAddress : located At >
+class ParkUser {
+    name
+    phoneNumber
+}
+
+
+Organization "1" -- "*" Employe : has
+Organization "1" -- "*" Parks : owns
+
+Employe "1" -- "*" Task : creates
+Employe "1" -- "*" GSU : can be
+Employe "1" -- "1" GSM : can be
+Employe "1" -- "1" HRM : can be
+Employe "1" -- "1" VFM : can be
+
+HRM "1" -- "*" Collaborator : creates
+HRM "1" -- "*" Job : creates
+
+Collaborator "1" -- "1" Job : has
+Collaborator "1" -- "1" Team : is a member of
+Collaborator "1" -- "*" Skill : possesses
+Collaborator "1" -- "*" Task : is assigned to
+Collaborator "1" -- "*" Vehicle : drives
+Collaborator "1" -- "*" Machine : uses
+Collaborator "1" -- "*" Equipment : uses
+
+Team "1" -- "*" Skill : has
+Team "1" -- "*" Task : do
+Team "1" -- "*" Machine : utilizes
+Team "1" -- "*" Equipment : utilizes
+
+
+Agenda "1" -- "*" Task : has
+
+ParkUser "1" -- "0..*" Portal : writes to
+
+Parks "*" -- "*" Garden : can be
+Parks "*" -- "*" MediumSizePark : can be
+Parks "*" -- "*" LargePark : can be
+Parks "1" -- "0..*" ParkUser : has
+
+VFM "1" -- "*" CheckUp: register
+VFM "1" -- "*" Vehicle: manages
+
+Vehicle "1" -- "*" CheckUp : undergoes
 
 @enduml

@@ -16,7 +16,8 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Transaction Line Itemss**
 
-* 
+* Task
+*  Job
 
 ---
 
@@ -28,61 +29,74 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Transaction Records**
 
-* 
+* Agenda 
 
 ---  
 
 **Roles of People or Organizations**
 
-* 
+* HRM
+*  GSM
+*  GSU
+* VFM
+* Employe
+* Collaborator
+* ParkUser
 
 ---
 
 **Green Spaces**
 
-* 
+* Garden
+* MediumSizePark
+ * LargePark
+  * Parks
 
 ---
 
 **Noteworthy Events**
 
-* 
+* CheckUp
 
 ---
 
 **Physical Objects**
 
-* 
+* Vehicle
+ * Machine
+ * Equipment
 
 ---
 
 **Descriptions of Things**
 
-* 
+* Skill
 
 ---
 
 **Catalogs**
 
-* 
+* Team
+
 
 ---
 
 **Containers**
 
-* 
+* Portal
 
 ---
 
 **Elements of Containers**
 
-* 
+* Reports
+ * Comments
 
 ---
 
 **Organizations**
 
-* 
+* Organization
 
 ---
 
@@ -127,11 +141,36 @@ An association is a relationship between instances of objects that indicates a r
 - etc.
 
 
-| Concept (A) 		 | Association   	 | Concept (B) |
-|----------------|:---------------:|------------:|
-| C1  	          |  verb1    		 	  |          C2 |
-| ...  	         |   ...    		 	   |         ... |
-| ff             |       ff        |        ffff |
+| Concept (A) 		 |  Association   	   |    Concept (B) |
+|--------------|:------------------:|---------------:|
+| Organization   	 |      has 		 	      |        Employe |
+|     	 |    owns    		 	    |          Parks |
+| Employe      |      creates       |           Task |
+|    		 |     can be   	     |            GSU |
+|       |       can be       |            GSM |
+|      	 |    can be 		 	     |            HRM |
+|     	 |   can be    		 	   |            VFM |
+| Collaborator            |        has         |            Job |
+|   		 | is a member of   	 |           Team |
+|   |     possesses      |          Skill |
+|     	 | is assigned to	 	  |           Task |
+|  |   drives    		 	   |        Vehicle |
+|            |        uses        |        Machine |
+|       |        uses        |      Equipment |
+| Team       	 |      has 		 	      |          Skill |
+|       	 |     do   		 	      |           Task |
+|               |      utilizes      |        Machine |
+|     	 |    utilizes   	    |      Equipment |
+| Parks      	 |    can be 		 	     |         Garden |
+|    |   can be   		 	    | MediumSizePark |
+|              |       can be       |      LargePark |
+|         |        has         |       ParkUser |
+| VFM              |      register      |        CheckUp |
+|    	 |     manages  	     |        Vehicle |
+| Vehicle    | undergoes  |        CheckUp |
+| HRM      	 |    creates 		 	    |        Employe |
+| Agenda   |    has   		 	     |            ... |
+| ParkUser            |         writes to         |         Portal |
 
 
 
