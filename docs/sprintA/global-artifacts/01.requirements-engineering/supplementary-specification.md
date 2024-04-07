@@ -32,7 +32,7 @@ documentation; consistency and standards._
 - All requested data must be filled in.
 
 
-- There must not be two employees with the same identity number. This implies that each employee registered in the system must have a unique identity number assigned to them. This number must be unique for each employee and cannot be duplicated.
+- There must not be two collaborators with the same identity number. This implies that each employee registered in the system must have a unique identity number assigned to them. This number must be unique for each employee and cannot be duplicated.
 
 
 - Dates must be represented in the format "dd-mm-yyyy". This means that all dates in the system must follow this format, where "dd" represents the day, "mm" represents the month, and "yyyy" represents the year. For example, "06-04-2024" would be April 6, 2024.
