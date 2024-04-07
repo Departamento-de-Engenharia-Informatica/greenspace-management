@@ -116,17 +116,15 @@ class CheckUp {
 
 class Job {
     name
-    description
 }
 
 class Team {
-    teamName
-    nrOfElements
+    numberColaborators
+    skils
 }
 
 class Skill {
     name
-    description
 }
 
 class ParkUser {
