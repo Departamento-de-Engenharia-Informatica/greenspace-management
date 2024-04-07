@@ -7,7 +7,7 @@ title System Sequence Diagram (SSD)- US005
 
 autonumber
 
-actor "HDM" as Employee
+actor "HRM" as Employee
 participant ":System" as System
 
 activate Employee
