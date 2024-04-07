@@ -1,4 +1,4 @@
-# US003 - Create a a collaborator with a job and fundamental characteristics.
+# US003 - Create a collaborator with a job and fundamental characteristics.
 
 ## 1. Requirements Engineering
 

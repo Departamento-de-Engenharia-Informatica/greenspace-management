@@ -46,11 +46,10 @@ meaning that one team member have 2 skills.
 
 * Typed data: 
     * numberColaborators 
-    * skils
 
 * Selected data:
-    * generate a team.
-
+    * skils
+  
 **Output Data:**
 
 * List of teams.
