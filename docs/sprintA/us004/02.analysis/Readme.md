@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US004 - Assign skills to a collaborator: 
 
 ## 2. Analysis
 
