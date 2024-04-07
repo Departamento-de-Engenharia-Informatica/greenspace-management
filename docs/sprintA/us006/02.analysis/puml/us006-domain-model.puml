@@ -28,9 +28,9 @@ class Organization {
 
 class Employe {
     name
+    role
+    phoneNumber
     email
-    position
-    phone
 }
 class VFM {
     ...
