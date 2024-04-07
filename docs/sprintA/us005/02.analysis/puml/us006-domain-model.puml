@@ -36,9 +36,13 @@ class HRM {
     ...
 }
 
+class Team {
+    teamName
+    nrOfElements
+}
+
 Organization "1" - "*" Employe : has >
 Employe "1" -- "1" HRM : can be
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
+HRM "1" -- "*" Team : generates
+
 @enduml

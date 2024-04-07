@@ -6,29 +6,22 @@ _Specifies functionalities that:
 &nbsp; &nbsp; (i) are common across several US/UC;  
 &nbsp; &nbsp; (ii) are not related to US/UC, namely: Audit, Reporting and Security._
 
-(i)
+Common Across Several US/UC:
 
-Validation of business rules during data registration and update.
+- Data Integrity: Ensure data integrity by enforcing unique identity numbers for employees and consistent date representation.
 
-Implementation of a class structure designed for easy maintenance and addition of new functionalities following Object-Oriented best practices.
+- Authentication: Implement authentication requirements for users to access the system securely.
 
-(ii)
+- Language Support: Provide language support in English for user interface and project artifacts.
 
-Auditing: Implement audit trails to record system execution.
+Not Related to US/UC (Audit, Reporting, and Security):
 
-Licensing: Provide services for tracking, acquiring, installing, and monitoring license usage.
 
-Localization: Supports multiple human languages.
+- Audit Trail: Develop functionality to track and record user actions within the system for auditing purposes.
 
-Online help: Provide online help capability.
+- Reporting: Enable the generation of reports based on system data for analysis and decision-making.
 
-Reporting: Provide reporting facilities.
-
-Security: Provide services to protect access to certain resources or information.
-
-System management: Provide services that facilitate management of applications in a distributed environment.
-
-Workflow: Provide support for moving documents and other work items, including review and approval cycles.
+- Security Measures: Implement security measures such as password policies and access controls to safeguard system integrity and user data.
 
 ## Usability
 
@@ -39,7 +32,7 @@ documentation; consistency and standards._
 - All requested data must be filled in.
 
 
-- There must not be two employees with the same identity number. This implies that each employee registered in the system must have a unique identity number assigned to them. This number must be unique for each employee and cannot be duplicated.
+- There must not be two collaborators with the same identity number. This implies that each employee registered in the system must have a unique identity number assigned to them. This number must be unique for each employee and cannot be duplicated.
 
 
 - Dates must be represented in the format "dd-mm-yyyy". This means that all dates in the system must follow this format, where "dd" represents the day, "mm" represents the month, and "yyyy" represents the year. For example, "06-04-2024" would be April 6, 2024.

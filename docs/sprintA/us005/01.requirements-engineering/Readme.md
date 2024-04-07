@@ -11,9 +11,7 @@ As a HRM, I want to generate a team proposal automatically.
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+> (HRM) manages the human resources and defines the teams according to the needs of the projects in progress and the skills of the employees.
 
 **From the client clarifications:**
 
@@ -34,13 +32,13 @@ meaning that one team member have 2 skills.
   such operation.
 * **AC2:**  The maximum team size and the set of skills need to be supplied by
   the HRM.
-* **AC30:**  The intended skill set must be provided by the HRM.
+* **AC3:**  The intended skill set must be provided by the HRM.
 
 
 
 ### 1.4. Found out Dependencies
 
-* US001, US003, US004.
+* It depends on US04 and US05, as it takes collaborator with certain professions and skills for a team to be generated.
 
 ### 1.5 Input and Output Data
 
@@ -73,4 +71,14 @@ meaning that one team member have 2 skills.
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+
+- Consideration should be given to potential future iterations where HRM may need the ability to edit generated team proposals, though this functionality is not within the scope of the current sprint.
+
+- It's essential to validate input data, including the number of collaborators and required skills, to ensure accurate team proposal generation.
+
+- Depending on system architecture, considerations should be made for scalability and performance optimization when handling large datasets or frequent team generation requests.
+
+- Any potential security considerations, such as access controls and data encryption, should be addressed to protect sensitive HRM and employee information.
+
+
+

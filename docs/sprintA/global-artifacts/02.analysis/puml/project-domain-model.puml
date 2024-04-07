@@ -145,6 +145,7 @@ Employe "1" -- "1" HRM : can be
 Employe "1" -- "1" VFM : can be
 
 HRM "1" -- "*" Collaborator : creates
+HRM "1" -- "*" Team : generate
 HRM "1" -- "*" Job : creates
 
 Collaborator "1" -- "1" Job : has
