@@ -24,18 +24,6 @@ class Organization {
     email
 }
 
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
-}
-
-class Category {
-    description
-}
 
 class Employe {
     name
@@ -44,18 +32,16 @@ class Employe {
     email
 }
 
-'class User {
-'    name
-'    email
-'    password
-'}
+class HRM {
+    ...
+}
+class Skill {
+    name
+    description
+}
 
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employe : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employe "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
+Organization "1" -- "*" Employe : has
+Employe "1" -- "1" HRM : can be
+HRM "1" -- "*" Skill : creates
+
 @enduml
