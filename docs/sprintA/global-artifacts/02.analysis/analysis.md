@@ -16,7 +16,8 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Transaction Line Itemss**
 
-* 
+* Task
+*  Job
 
 ---
 
@@ -28,61 +29,74 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Transaction Records**
 
-* 
+* Agenda 
 
 ---  
 
 **Roles of People or Organizations**
 
-* 
+* HRM
+*  GSM
+*  GSU
+* VFM
+* Employe
+* Collaborator
+* ParkUser
 
 ---
 
-**Places**
+**Green Spaces**
 
-* 
+* Garden
+* MediumSizePark
+ * LargePark
+  * Parks
 
 ---
 
 **Noteworthy Events**
 
-* 
+* CheckUp
 
 ---
 
 **Physical Objects**
 
-* 
+* Vehicle
+ * Machine
+ * Equipment
 
 ---
 
 **Descriptions of Things**
 
-* 
+* Skill
 
 ---
 
 **Catalogs**
 
-* 
+* Team
+
 
 ---
 
 **Containers**
 
-* 
+* Portal
 
 ---
 
 **Elements of Containers**
 
-* 
+* Reports
+ * Comments
 
 ---
 
 **Organizations**
 
-* 
+* Organization
 
 ---
 
@@ -111,6 +125,9 @@ To identify domain conceptual classes, start by making a list of candidate conce
 ---
 
 
+
+
+
 ## Rationale to identify associations between conceptual classes
 
 An association is a relationship between instances of objects that indicates a relevant connection and that is worth of remembering, or it is derivable from the List of Common Associations:
@@ -124,10 +141,37 @@ An association is a relationship between instances of objects that indicates a r
 - etc.
 
 
-| Concept (A) 		|  Association   	|  Concept (B) |
-|----------	   		|:-------------:		|------:       |
-| C1  	| verb1    		 	| C2  |
-| ...  	| ...    		 	| ...  |
+| Concept (A) 		 |  Association   	   |    Concept (B) |
+|--------------|:------------------:|---------------:|
+| Organization   	 |      has 		 	      |        Employe |
+|    Organization 	 |    owns    		 	    |          Parks |
+| Employe      |      creates       |           Task |
+|    Employe		 |     can be   	     |            GSU |
+|    Employe   |       can be       |            GSM |
+|    Employe  	 |    can be 		 	     |            HRM |
+|    Employe 	 |   can be    		 	   |            VFM |
+| Collaborator            |        has         |            Job |
+|   	Collaborator	 | is a member of   	 |           Team |
+|  Collaborator |     possesses      |          Skill |
+|   Collaborator  	 | is assigned to	 	  |           Task |
+| Collaborator|   drives    		 	   |        Vehicle |
+|  Collaborator          |        uses        |        Machine |
+|  Collaborator     |        uses        |      Equipment |
+| Team       	 |      has 		 	      |          Skill |
+|   Team    	 |     do   		 	      |           Task |
+|   Team            |      utilizes      |        Machine |
+|   Team  	 |    utilizes   	    |      Equipment |
+| Parks      	 |    can be 		 	     |         Garden |
+|   Parks |   can be   		 	    | MediumSizePark |
+|   Parks           |       can be       |      LargePark |
+|   Parks      |        has         |       ParkUser |
+| VFM              |      register      |        CheckUp |
+|   VFM 	 |     manages  	     |        Vehicle |
+| Vehicle    | undergoes  |        CheckUp |
+| HRM      	 |    creates 		 	    |        Employe |
+| Agenda   |    has   		 	     |            ... |
+| ParkUser            |         writes to         |         Portal |
+
 
 
 
@@ -137,4 +181,4 @@ An association is a relationship between instances of objects that indicates a r
 
 **Insert below the Domain Model Diagram in a SVG format**
 
-![Domain Model](svg/project-domain-model.svg)
+![Domain Model](svg/project-domain-model-Domain_Model.svg)

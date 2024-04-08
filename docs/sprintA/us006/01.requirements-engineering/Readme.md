@@ -1,72 +1,69 @@
-# US006 - Create a Task 
+# US006 - Register a Vehicle 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
-
+As a Fleet Manager (FM), I wish to register a vehicle including its details and maintenance schedule for efficient fleet management.
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+> Each vehicle entry should include information such as Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, and Maintenance/Checkup Frequency (in Kms).
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+> Maintenance/check-up data should be recorded for each vehicle. 
+
+> The frequency of maintenance/check-up should be specified in kilometers.
 
 **From the client clarifications:**
-
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Should the application identify a registered vehicle by a serial number or other attribute?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** By plate id.
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** For the application to work does the FM need to fill all the attributes of the vehicle?
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** yes, besides the vehicle plate that by mistake doesn't appear on the text.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** All required fields must be filled in for vehicle registration.
+* **AC2:** The vehicle registration form should allow the user to input essential details such as Brand, Model, Type, etc.
+* **AC3:** The maintenance/check-up frequency field should only accept positive integer values representing kilometers.
+* **AC4:** Upon successful registration, the system should confirm the addition of the vehicle.
+* **AC5:** The maintenance/check-up schedule should be updated automatically based on the current mileage of the vehicle.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* Found no dependencies
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
-* Selected data:
-    * a task category 
-
+    * Plate ID
+    * Model 
+    * Type
+    * Tare
+    * Gross Weight
+    * Current Km
+    * Register Date
+    * Acquisition Date
+    * Maintenance/Checkup Frequency (in Kms)
+    * Last maintenance date
+    * Next maintenance date
+  
+  
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* Confirmation message upon successful registration.
+
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
-
-#### Alternative One
-
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* None
