@@ -25,7 +25,16 @@
 
 ## Introduction <a name="introduction"></a>
 
-Brief introduction or overview of the document content.
+Welcome to the official user manual for our Green Space Management aplication. 
+This comprehensive guide is designed to assist you in maximizing the functionality and benefits of our project.
+Whether you are a new user seeking initial setup instructions or an experienced user looking 
+for advanced features, this manual provides detailed information to support you at every step.
+
+Our Green Space Management Application is a powerful tool tailored for MusgoSublime. 
+a organization responsible for the upkeep and management of parks, gardens, 
+landscapes, and other green spaces. 
+This application will streamline your tasks and enhance your efficiency in 
+maintaining beautiful and sustainable outdoor environments.
 
 ---
 
