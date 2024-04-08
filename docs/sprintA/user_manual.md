@@ -52,6 +52,44 @@ equipment, task, and schedule management, with the end goal
 of supporting more productive and successful green space 
 management.
 
+### Structure and Organization
+This application has been divided into different modules 
+responsible for different aspects of green space management. 
+These modules are interconnected and dependent on each other. 
+The modules used in the system include:
+* Employee Management – this module incorporates employee registration 
+and the aspects involved in the registration installing their
+accountabilities, skills, their assignments to both duties 
+and groups;
+* Vehicle and Equipment Management- this module include the 
+current registration of the vehicles and equipment necessary 
+proposed for a specific task;
+* Task Management- This module is used to create and assign 
+tasks that need to be done while managing greens spaces and 
+track their performance.
+
+* Scheduling and Planning- This module is used for scheduling
+activities that need to be done. Therefore, it also includes 
+scheduling work and resource management to determine the best
+course of action.
+  
+* Reporting and Analysis- This module generates reports and 
+analysis that help in improving the quality of the green 
+spaces Additionally, it helps the consumers to understand their
+performance, resource usage, and areas that need improvement.
+
+### Main Features
+The main features of the application include:
+
+* Employee Skills Registration
+* Job Registration
+* Collaborator Registration
+* Skill Assignment
+* Team Proposal Generation
+* Vehicle Registration
+* Vehicle Check-Up Registration
+* List of Vehicles Needing Check-Up
+
 ---
 
 ## Features <a name="Features"></a>
