@@ -17,7 +17,7 @@
 
 1. [Introduction](#introduction)
 2. [Section 1](#section-1)
-3. [Section 2](#section-2)
+3. [Features](Features)
 4. [Conclusion](#conclusion)
 
 ---
@@ -35,9 +35,17 @@ Detailed content of the first section.
 
 ---
 
-## Section 2 <a name="section-2"></a>
+## Features <a name="Features"></a>
 
-Detailed content of the second section.
+1. Register Skills | Human Resources Manager
+2. Register Job | Human Resources Manager
+3. Register Collaborator | Human Resources Manager
+4. Assign Skills to Collaborator | Human Resources Manager
+5. Generate Team Proposal | Human Resources Manager
+6. Register Vehicle | Vehicle and Equipment Fleet Manager
+7. Register Vehicle's Check-up | Vehicle and Equipment Fleet Manager
+8. List Vehicles Needing Check-up | Vehicle and Equipment Fleet Manager
+
 
 ---
 
