@@ -16,7 +16,7 @@
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [Section 1](#section-1)
+2. [System Overview](#systemoverview)
 3. [Features](Features)
 4. [Conclusion](#conclusion)
 
@@ -38,7 +38,7 @@ maintaining beautiful and sustainable outdoor environments.
 
 ---
 
-## System Overview <a name="section-1"></a>
+## System Overview <a name="systemoverview"></a>
 
 ### System Overall Description
 
