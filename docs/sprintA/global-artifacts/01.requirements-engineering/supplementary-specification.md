@@ -1,6 +1,6 @@
 # Supplementary Specification (FURPS+)
 
-## Functionality99
+## Functionality
 
 _Specifies functionalities that:  
 &nbsp; &nbsp; (i) are common across several US/UC;  
