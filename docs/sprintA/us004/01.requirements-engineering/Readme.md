@@ -36,11 +36,12 @@ As an HRM, I want to assign one or more skills to a collaborator.
 **Input Data:**
 
 *Typed Data:*
-- Collaborator details selected by the HRM:
-  - Collaborator name
+- none
 
 *Selected Data:*
 - Skills to be assigned to the collaborator
+- Collaborator details selected by the HRM:
+  - Collaborator name
 
 **Output Data:**
 
