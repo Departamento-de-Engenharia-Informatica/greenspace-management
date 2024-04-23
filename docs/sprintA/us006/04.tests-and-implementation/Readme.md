@@ -1,25 +1,21 @@
-# US006 - Create a Task 
+# US006 - Register a Vehicle 
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Check that it is not possible to create an instance of the Vehicle class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
+    public void ensureNullIsNotAllowed() {
+        Vehicle instance = new Vehicle(null, null, null, 0, 0, 0, null, null, 0, null, null);
+    }
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** The maintenance/check-up frequency field should only accept positive integer values representing kilometers. - AC3. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
-
-_It is also recommended to organize this content by subsections._ 
+    public void ensureMaintenanceCheckupFrequencyIsPositive() {
+        Vehicle instance = new Vehicle("Plate123", "ModelX", "TypeY", 2000, 1500, 10000, "2022-01-01", "2021-12-01", -100, "2022-03-15", "2022-05-15");
+    }
 
 
 ## 5. Construction (Implementation)
@@ -27,35 +23,30 @@ _It is also recommended to organize this content by subsections._
 ### Class CreateTaskController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
+private Vehicle createVehicle(String plateID, String model, String type, int tare, int grossWeight,
+        int currentKm, String registerDate, String acquisitionDate,
+        int checkupFrequency, String lastMaintenance, String nextMaintenance) {
 
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
+        Vehicle newVehicle = new Vehicle(plateID, model, type, tare, grossWeight, currentKm,
+        registerDate, acquisitionDate, checkupFrequency, lastMaintenance, nextMaintenance);
 
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
 
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
-    
-	return newTask;
-}
+        return newVehicle;
+        }
 ```
 
 ### Class Organization
 
 ```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
+public Optional<Vehicle> createVehicle(String plateID, String model, String type, int tare, int grossWeight,
+        int currentKm, String registerDate, String acquisitionDate,
+        int checkupFrequency, String lastMaintenance, String nextMaintenance) {
 
-    addTask(task);
-        
-    return task;
-}
+        Vehicle vehicle = new Vehicle(plateID, model, type, tare, grossWeight, currentKm,
+        registerDate, acquisitionDate, checkupFrequency, lastMaintenance, nextMaintenance);
+
+        return Optional.of(vehicle);
+        }
 ```
 
 
