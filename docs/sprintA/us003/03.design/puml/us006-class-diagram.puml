@@ -1,4 +1,5 @@
 @startuml
+
 'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
@@ -20,111 +21,63 @@ class UserSession
     + getUserEmail()
 }
 
-class Employee {
-    - name
-    - email
-    - position
-    - phone
+class Skill {
+    - skillName
+
+    + addSkill(skill: Skill)
 }
 
-class Task {
-    - String reference
-    - String description
-    - String informalDescription
-    - String technicalDescription
-    - Integer duration
-    - Double cost
+class SkillRepository{
+    - List<Skill> skills
 
-    + Task(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, createdBy, taskCategory)
+    + void addSkill(skillName: String)
+    + void removeSkill(skillName: String)
+    + void updateSkill(skillNameOld: String, skillNameNew: String)
+    + Skill getSkill(skillName: String)
 }
 
-class TaskCategory {
-    - String description
-
-    + TaskCategory(description)
+class CreateSkillController {
+    + searchForEmployee(idNumber: String): Employee
+    + getSkills(): List<Skill>
+    + addSkillToEmployee(idNumber: String, skill: Skill)
 }
 
-class Organization {
-    - String name
-    - String vatNumber
-    - String website
-    - String phone
-    - String email
-
-    - addTask(task)
-    - validateTask(task)
-    + anyEmployeeHasEmail(email)
-    + Organization(name, vatNumber, webSite, phone, email, postalAddress, manager)
-    + createTask(reference, description, informalDesccription,\ntechnicalDescription, duration, cost, taskCategoryDescription)
-    - getEmployeeByEmail(email)
-
-'  +saveTask(task)
+class RegisterSkillUI {
+    + void run();
 }
 
-class TaskCategoryRepository {
-    + getTaskCategoryByDescription(description)
+class MusgoSublime{
+    - Repositories repositories
+
+    + Repositories getInstance()
 }
 
-class OrganizationRepository {
-    + getOrganizationByEmployeeEmail(email)
+class Repositories{
+    - SkillRepository skillRepository
+
+    + SkillRepository getSkillRepository()
 }
 
-class Repositories {
-    - Repositories()
-    + getInstance() : Repositories
-    + getTaskCategoryRepository()
-    + getOrganizationRepository()
-}
-
-class CreateTaskController {
-    + CreateTaskController(organizationRepository, taskCategoryRepository)
-    + getTaskCategories()
-    + createTask(userEmail, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, categoryDescription)
-    - getTaskCategoryByDescription(taskCategoryDescription)
+class RegisterSkillToCollaboratorController{
+    + RegisterSkillToCollaboratorController(skillRepository)
+    + createSkill(userEmail, skillName)
     - getEmployeeFromSession()
 }
 
-note right of CreateTaskController
-    - userEmail is obtained
-    from the user session
-    - categoryDescription
-    is retrieved from selected data
+note right of CreateSkillController
+    - userEmail is obtained from the user session
 end note
-
-note bottom of TaskCategoryRepository
-    - used for displaying
-    the category list
-end note
-
-class CreateTaskUI {
-}
 
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
 
-CreateTaskUI .> CreateTaskController
+RegisterSkillUI .> RegisterSkillToCollaboratorController
 
-CreateTaskController .> Repositories : repositories
+RegisterSkillToCollaboratorController .> Repositories : repositories
 
-Repositories -> "1" TaskCategoryRepository
+Repositories -> "1" SkillRepository
 
-CreateTaskController ..> TaskCategory
-CreateTaskController ..> OrganizationRepository : organizationRepository
-CreateTaskController ..> TaskCategoryRepository : TaskCategoryRepository
-
-Repositories --> "1" OrganizationRepository
-
-OrganizationRepository --> "*" Organization
-ApplicationSession --> "1" UserSession : userSession
-
-CreateTaskController ..> "1" Organization : organization
-CreateTaskController ..> ApplicationSession
-CreateTaskController ..> UserSession
-Task "*" --> "1" TaskCategory : taskCategory
-TaskCategoryRepository "1" --> "*" TaskCategory : taskCategory
-Organization "1" --> "*" Task : tasks
-Task --> Employee : createdBy
-
-Organization --> "*" Employee : employs
+RegisterSkillToCollaboratorController ..> Skill
+RegisterSkillToCollaboratorController ..> SkillRepository : SkillRepository
 
 @enduml

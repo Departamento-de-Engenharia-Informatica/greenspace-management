@@ -1,4 +1,5 @@
 @startuml
+
 'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
@@ -27,104 +28,72 @@ class Employee {
     - phone
 }
 
-class Task {
-    - String reference
-    - String description
-    - String informalDescription
-    - String technicalDescription
-    - Integer duration
-    - Double cost
+class Skill {
+    - skillName
 
-    + Task(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, createdBy, taskCategory)
+    + addSkill(skill: Skill)
 }
 
-class TaskCategory {
-    - String description
+class SkillRepository{
+    - List<Skill> skills
 
-    + TaskCategory(description)
+    + void addSkill(skillName: String)
+    + void removeSkill(skillName: String)
+    + void updateSkill(skillNameOld: String, skillNameNew: String)
+    + Skill getSkill(skillName: String)
 }
 
-class Organization {
-    - String name
-    - String vatNumber
-    - String website
-    - String phone
-    - String email
 
-    - addTask(task)
-    - validateTask(task)
-    + anyEmployeeHasEmail(email)
-    + Organization(name, vatNumber, webSite, phone, email, postalAddress, manager)
-    + createTask(reference, description, informalDesccription,\ntechnicalDescription, duration, cost, taskCategoryDescription)
-    - getEmployeeByEmail(email)
 
-'  +saveTask(task)
+class RegisterSkillUI {
 }
 
-class TaskCategoryRepository {
-    + getTaskCategoryByDescription(description)
+class Repositories{
+    - EmployeeRepository employeeRepository
+    - SkillRepository skillRepository
+
+    + EmployeeRepository getEmployeeRepository()
+    + SkillRepository getSkillRepository()
 }
 
-class OrganizationRepository {
-    + getOrganizationByEmployeeEmail(email)
+class EmployeeRepository{
+    - List<Employee> employees
+
+    + void addEmployee(employee: Employee)
+    + void removeEmployee(employee: Employee)
+    + boolean addSkillToEmployee(idNumber: String, skill: Skill)
+    + Employee getEmployee(idNumber: String)
 }
 
-class Repositories {
-    - Repositories()
-    + getInstance() : Repositories
-    + getTaskCategoryRepository()
-    + getOrganizationRepository()
-}
 
-class CreateTaskController {
-    + CreateTaskController(organizationRepository, taskCategoryRepository)
-    + getTaskCategories()
-    + createTask(userEmail, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, categoryDescription)
-    - getTaskCategoryByDescription(taskCategoryDescription)
-    - getEmployeeFromSession()
-}
 
-note right of CreateTaskController
-    - userEmail is obtained
-    from the user session
-    - categoryDescription
-    is retrieved from selected data
-end note
 
-note bottom of TaskCategoryRepository
-    - used for displaying
-    the category list
-end note
 
-class CreateTaskUI {
-}
 
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
 
-CreateTaskUI .> CreateTaskController
+RegisterSkillUI .> RegisterSkillController
 
-CreateTaskController .> Repositories : repositories
+RegisterSkillController .> Repositories : repositories
 
-Repositories -> "1" TaskCategoryRepository
+Repositories -> "1" SkillRepository
 
-CreateTaskController ..> TaskCategory
-CreateTaskController ..> OrganizationRepository : organizationRepository
-CreateTaskController ..> TaskCategoryRepository : TaskCategoryRepository
+RegisterSkillController ..> Skill
+RegisterSkillController ..> EmployeeRepository : employeeRepository
+RegisterSkillController ..> SkillRepository : SkillRepository
 
-Repositories --> "1" OrganizationRepository
+Repositories --> "1" EmployeeRepository
 
-OrganizationRepository --> "*" Organization
+EmployeeRepository --> "*" Employee
 ApplicationSession --> "1" UserSession : userSession
 
-CreateTaskController ..> "1" Organization : organization
-CreateTaskController ..> ApplicationSession
-CreateTaskController ..> UserSession
-Task "*" --> "1" TaskCategory : taskCategory
-TaskCategoryRepository "1" --> "*" TaskCategory : taskCategory
-Organization "1" --> "*" Task : tasks
-Task --> Employee : createdBy
+RegisterSkillController ..> "1" Employee : employee
+RegisterSkillController ..> ApplicationSession
+RegisterSkillController ..> UserSession
+Employee "1" --> "*" Skill : skills
+Skill --> Employee : createdBy
 
-Organization --> "*" Employee : employs
+Employee --> "*" Skill : has
 
 @enduml
