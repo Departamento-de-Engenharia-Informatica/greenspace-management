@@ -2,40 +2,37 @@
 
 ## 3. Design - User Story Realization 
 
-### 3.1. Rationale
+### 3.1. Rationale 
 
 _**Note that SSD - Alternative One is adopted.**_
 
 | Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
-|:-------------  |:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
-| 			  		 |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		 | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		 |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		 |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		 |							 |                      |                                                                                                               |
-| Step 3  		 |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		 |							 |                      |                                                                                                               |              
-| Step 7  		 |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		 |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		 |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+|:--------------|:------------------------------------------|:---------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1        | ... interacting with the HRM?              | CreateTeamProposalUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|               | ... coordinating the US?                   | TeamProposalController | Controller                                                                                                    |
+|               | ... instantiating a new TeamProposal?      | TeamProposal         | Creator (Rule 1): in the Domain Model, a TeamProposal represents the entity being created.                    |
+|               | ... knowing the user using the system?      | UserSession          | IE: cf. Authentication and Authorization (A&A) component documentation.                                      |
+|               | ... accessing employee data?                | EmployeeRepository   | IE: Manages access to employee information based on required skills for the team proposal.                    |
+|               | ... accessing team proposal data?           | TeamProposalRepository | IE: Manages persistence of team proposal data.                                                                 |
+| Step 2        | ... displaying team size and required skills? | System              | IE: HRM specifies the maximum and minimum team size and required skills.                                       |
+| Step 3        | ... saving the generated team proposal?     | TeamProposalRepository | IE: Persists the created team proposal object.                                                                 |
+| Step 4        | ... validating inputted data?               | TeamProposal         | IE: Performs local validation on team size and required skills.                                               |
+| Step 5        | ... informing operation success?            | CreateTeamProposalUI | IE: Responsible for user interactions and displaying operation success.                                        |
 
-### Systematization ##
+### Systematization
 
-According to the taken rationale, the conceptual classes promoted to software classes are: 
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* Organization
-* Task
+- `TeamProposal`
+- `EmployeeRepository`
+- `TeamProposalRepository`
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e., Pure Fabrication) identified:
 
-* CreateTaskUI  
-* CreateTaskController
+- `CreateTeamProposalUI`
+- `TeamProposalController`
 
+This systematization aligns with the responsibilities and interactions required to fulfill User Story US05, focusing on the creation and management of team proposals by the HRM. The software classes identified represent key components responsible for handling user interactions, coordinating business logic, and accessing data from the system's domain model. Each class contributes to the overall functionality required to generate team proposals automatically based on specified criteria.
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -45,7 +42,7 @@ _**Note that SSD - Alternative Two is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us005-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -73,4 +70,4 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us005-class-diagram.svg)

@@ -1,0 +1,109 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+' Actors
+actor "HR Manager" as HRM
+participant ":TeamProposalUI" as UI
+participant ":TeamProposalController" as Controller
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "teamRepository:\nTeamRepository" as TeamRepository
+participant "employeeRepository:\nEmployeeRepository" as EmployeeRepository
+participant "skillRepository:\nSkillRepository" as SkillRepository
+
+activate HRM
+
+HRM -> UI : requests team proposal generation
+
+activate UI
+
+    ' UI requests necessary data from HRM
+    UI --> HRM : requests data (max team size, min team size, required skills)
+
+    ' Create controller to handle team proposal generation
+    UI -> Controller** : create
+
+    ' UI retrieves available skills from repositories
+    UI -> Controller : getAvailableSkills()
+    activate Controller
+
+        Controller -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
+
+            RepositorySingleton --> Controller: repositories
+        deactivate RepositorySingleton
+
+        Controller -> PLAT : getSkillRepository()
+        activate PLAT
+
+            PLAT --> Controller: skillRepository
+        deactivate PLAT
+
+        Controller -> SkillRepository : getAvailableSkills()
+        activate SkillRepository
+
+            SkillRepository --> Controller : availableSkills
+        deactivate SkillRepository
+
+        Controller --> UI : availableSkills
+    deactivate Controller
+
+    ' UI displays available skills and prompts HRM to select
+    UI --> HRM : shows available skills and prompts selection
+deactivate UI
+
+HRM -> UI : selects required skills and team size
+activate UI
+
+    UI --> HRM : requests data
+deactivate UI
+
+HRM -> UI : enters required data (max team size, min team size, selected skills)
+activate UI
+
+    UI --> HRM : shows selected data
+deactivate UI
+
+HRM -> UI : submits data
+activate UI
+
+    ' Controller creates the team proposal based on input data
+    UI -> Controller : generateTeamProposal(maxTeamSize, minTeamSize, selectedSkills)
+    activate Controller
+
+        ' Controller interacts with repositories to fetch necessary data
+        |||
+        Controller -> EmployeeRepository : getEmployeesWithSkills(selectedSkills)
+        activate EmployeeRepository
+
+            EmployeeRepository -> TeamRepository : findAvailableTeams(maxTeamSize, minTeamSize)
+            activate TeamRepository
+
+                TeamRepository --> EmployeeRepository : availableTeams
+            deactivate TeamRepository
+
+            EmployeeRepository --> Controller : employeesWithSkills
+        deactivate EmployeeRepository
+        |||
+
+        ' Controller creates the team proposal
+        Controller -> Controller : createTeamProposal(employeesWithSkills, maxTeamSize)
+        activate Controller
+
+            Controller --> Controller : teamProposal
+        deactivate Controller
+
+        ' Controller returns the team proposal to UI
+        Controller --> UI : teamProposal
+    deactivate Controller
+
+    ' UI displays the generated team proposal
+    UI --> HRM : displays team proposal
+deactivate UI
+
+deactivate HRM
+@enduml
