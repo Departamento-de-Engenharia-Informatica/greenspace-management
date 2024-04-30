@@ -1,0 +1,91 @@
+@startuml
+
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Human Resources Manager" as ADM
+participant ":AssignSkillUI" as UI
+participant ":AssignSkillController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "EmployeeRepository:\nEmployeeRepository" as EmployeeRepository
+participant "SkillRepository:\nSkillRepository" as SkillRepository
+participant "collaborator\n:Employee" as COLLABORATOR
+
+activate ADM
+
+    ADM -> UI : requests to manage skills
+    activate UI
+        UI -> CTRL** : manageSkills
+        UI -> CTRL : getCollaborators()
+        ref over CTRL
+            Get Collaborators
+        end ref
+        activate CTRL
+
+            CTRL --> UI : collaboratorList
+        deactivate CTRL
+        UI --> ADM : displays list of collaborators
+    deactivate UI
+
+    ADM -> UI : selects a collaborator
+    activate UI
+        UI --> ADM : requests action (add skill, remove skill)
+    deactivate UI
+    ADM -> UI : confirms action
+    activate UI
+        UI -> CTRL : getCollaboratorSkills(collaboratorId)
+        ref over CTRL
+            Get Collaborator Skills
+        end ref
+        activate CTRL
+
+            CTRL --> UI : collaboratorSkills
+        deactivate CTRL
+        UI -> CTRL : getSkills()
+        ref over CTRL
+            Get Skills
+        end ref
+        activate CTRL
+
+            CTRL --> UI : skillList
+        deactivate CTRL
+        UI --> ADM : displays list of collaborator's skills with options to add or remove skills
+    deactivate UI
+
+    ADM -> UI : selects to add a skill
+    activate UI
+        UI --> ADM : requests skill to add
+    deactivate UI
+    ADM -> UI : types skill to add
+    activate UI
+        UI --> ADM : confirms skill to add
+    deactivate UI
+    ADM -> UI : confirms to add skill
+    activate UI
+        UI -> CTRL : addSkillToCollaborator(collaboratorId, skillName)
+        ref over CTRL
+            Add Skill To Collaborator
+        end ref
+        activate CTRL
+
+            CTRL --> UI : result
+        deactivate CTRL
+        UI -> CTRL : getCollaboratorSkills(collaboratorId)
+        ref over CTRL
+            Get Updated Collaborator Skills
+        end ref
+        activate CTRL
+
+            CTRL --> UI : updatedCollaboratorSkills
+        deactivate CTRL
+        UI --> ADM : displays updated list of collaborator's skills
+    deactivate UI
+
+deactivate ADM
+
+@enduml
