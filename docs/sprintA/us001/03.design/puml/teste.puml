@@ -1,0 +1,36 @@
+@startuml
+
+class HumanResourcesManager {
+}
+
+class RegisterSkillUI {
+}
+
+class RegisterSkillController {
+    + manageSkills()
+    + addSkill(skillName: String)
+    + performAction(skillName: String, action: String)
+    + getSkills(): List<Skill>
+}
+
+class Repositories {
+}
+
+class SkillRepository {
+    - skills: List<Skill>
+    + getSkills(): List<Skill>
+    + addSkill(skillName: String)
+    + removeSkill(skillName: String)
+    + updateSkill(skillNameOld: String, skillNameNew: String)
+}
+
+class Skill {
+    - skillName: String
+}
+
+HumanResourcesManager --> RegisterSkillUI : uses
+RegisterSkillUI --> RegisterSkillController : sends requests
+RegisterSkillController --> Repositories : uses
+Repositories --> SkillRepository : uses
+
+@enduml
