@@ -1,5 +1,6 @@
 @startuml
-skinparam monochrome true
+
+'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
@@ -7,172 +8,106 @@ autonumber
 
 'hide footbox
 actor "Organization Employee" as ADM
-participant ":CreateTaskUI" as UI
-participant ":CreateTaskController" as CTRL
+participant ":RegisterSkillUI" as UI
+participant ":RegisterSkillController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "taskCategoryRepository:\nTaskCategoryRepository" as TaskCategoryRepository
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
-participant "organization\n:Organization" as ORG
-participant "task\n:Task" as TAREFA
+participant "SkillRepository:\nSkillRepository" as SkillRepository
+participant "skill\n:Skill" as SKILL
 
 activate ADM
 
-        ADM -> UI : asks to create a new task
+    ADM -> UI : requests to manage skills
 
-        activate UI
-
-'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
-            'create CTRL
-            UI -> CTRL** : create
-
-            UI -> CTRL : getTaskCategories()
-            activate CTRL
-
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
-
-                CTRL -> PLAT : getTaskCategoryRepository()
-                activate PLAT
-
-                    PLAT --> CTRL: taskCategoryRepository
-                deactivate PLAT
-
-                CTRL -> TaskCategoryRepository : getTaskCategories()
-                activate TaskCategoryRepository
-
-                    TaskCategoryRepository --> CTRL : taskCategoryList
-                deactivate TaskCategoryRepository
-
-                CTRL --> UI : taskCategoryList
-            deactivate CTRL
-
-            UI --> ADM : shows task category list\n and asks to sleect one
-        deactivate UI
-
-    ADM -> UI : selects a task category
     activate UI
 
-        UI --> ADM : requests data
-    deactivate UI
+        UI -> CTRL** : manageSkills
 
-    ADM -> UI : types requested data (reference, description, \ninformal description, technical description,\nduration, cost)
-    activate UI
-
-        UI --> ADM : shows selected category and requested data
-    deactivate UI
-
-    ADM -> UI : submits data
-    activate UI
-
-        UI -> CTRL : createTask(reference,\ndescription,\ninformalDescription,\ntechnicalDescription,\nduration, cost,\ntaskCategoryDescription)
+        UI -> CTRL : getSkills()
         activate CTRL
 
-            CTRL -> CTRL : getTaskCategoryByDescription(taskCategoryDescription)
-            activate CTRL
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
 
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
 
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
 
-                CTRL -> PLAT : getTaskCategoryRepository()
-                activate PLAT
+                PLAT --> CTRL : skillRepository
+            deactivate PLAT
 
-                    PLAT -> CTRL : taskCategoryRepository
-                deactivate PLAT
+            CTRL -> SkillRepository : getSkills()
+            activate SkillRepository
 
-                CTRL -> TaskCategoryRepository : getTaskCategoryByDescription(taskCategoryDescription)
-                activate TaskCategoryRepository
+                SkillRepository --> CTRL : skillList
+            deactivate SkillRepository
 
-                    TaskCategoryRepository --> CTRL : taskCategory
-                deactivate TaskCategoryRepository
-                    CTRL --> CTRL : taskCategory
-            deactivate CTRL
+            CTRL --> UI : skillList
+        deactivate CTRL
 
-            |||
-            CTRL -> CTRL : getEmployeeFromSession()
-            activate CTRL
+        UI --> ADM : displays skill list with "Add Skill" option
+    deactivate UI
 
-                CTRL -> _APP: getInstance()
-                activate _APP
-                    _APP -> CTRL: appSession
-                deactivate _APP
+    ADM -> UI : selects a skill
+    activate UI
 
+        UI --> ADM : requests action (edit, remove)
+    deactivate UI
 
-                CTRL -> APP: getCurrentSession()
-                activate APP
+    ADM -> UI : confirms skill action
+    activate UI
 
-                    APP --> CTRL: currentSession
-                deactivate APP
+        UI -> CTRL : performAction(skillName, action)
+        activate CTRL
 
-                CTRL -> SESSAO: email = getUserEmail()
-                activate SESSAO
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
 
-                    SESSAO --> CTRL: email
-                deactivate SESSAO
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
 
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
 
-                CTRL -> PLAT: getOrganizationRepository(email)
-                activate PLAT
+                PLAT --> CTRL : skillRepository
+            deactivate PLAT
 
-                    PLAT --> CTRL: organizationRepository
-                deactivate PLAT
+            CTRL -> SkillRepository : performAction(skillName, action)
+            activate SkillRepository
 
+                SkillRepository --> CTRL : result
+            deactivate SkillRepository
 
-                CTRL -> OrganizationRepository: getOrganizationByEmployeeEmail(email)
-                activate OrganizationRepository
+            CTRL --> CTRL : result
+        deactivate CTRL
 
-                    loop [for each organization
-                        OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
-                        activate ORG
+        UI -> CTRL : getSkills()
+        activate CTRL
 
-                             ORG --> OrganizationRepository : true/false
-                        deactivate ORG
-                    end
-                    OrganizationRepository --> CTRL : organization
-                deactivate OrganizationRepository
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
 
-                CTRL -> ORG: getEmployeeByEmail(email)
-                activate ORG
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
 
-                    ORG --> CTRL : employee
-                deactivate ORG
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
 
-                CTRL --> CTRL : employee
-            deactivate CTRL
+                PLAT --> CTRL : skillRepository
+            deactivate PLAT
 
-            |||
-            CTRL -> ORG: createTask(employee, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, , taskCategory, employee)
-            activate ORG
+            CTRL -> SkillRepository : getSkills()
+            activate SkillRepository
 
-                ORG -> TAREFA**: create(employee, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee)
-                ORG -> ORG: addTask (task)
+                SkillRepository --> CTRL : updatedSkillList
+            deactivate SkillRepository
 
+            CTRL --> UI : updatedSkillList
+        deactivate CTRL
 
-                activate ORG
-                    ORG -> ORG: validateTask(task)
-                    activate ORG
-                        ORG --> ORG
-                    deactivate ORG
-
-                    ORG --> ORG
-                deactivate ORG
-
-                ORG --> CTRL : task
-
-            deactivate ORG
-
-            CTRL --> UI: task
-            deactivate CTRL
-            UI --> ADM: displays operation success
+        UI --> ADM : displays updated skill list with "Add Skill" option
     deactivate UI
 
 deactivate ADM
