@@ -21,13 +21,6 @@ class UserSession
     + getUserEmail()
 }
 
-class Employee {
-    - name
-    - email
-    - position
-    - phone
-}
-
 class Skill {
     - skillName
 
@@ -43,38 +36,30 @@ class SkillRepository{
     + Skill getSkill(skillName: String)
 }
 
-
-
 class RegisterSkillUI {
 }
 
 class Repositories{
-    - EmployeeRepository employeeRepository
     - SkillRepository skillRepository
 
-    + EmployeeRepository getEmployeeRepository()
     + SkillRepository getSkillRepository()
 }
 
-class EmployeeRepository{
-    - List<Employee> employees
-
-    + void addEmployee(employee: Employee)
-    + void removeEmployee(employee: Employee)
-    + boolean addSkillToEmployee(idNumber: String, skill: Skill)
-    + Employee getEmployee(idNumber: String)
-}
-
-
 class RegisterSkillController {
-    + RegisterSkillController(employeeRepository, skillRepository)
+    + RegisterSkillController(skillRepository)
     + updateSkill(skillNameOld: String, skillNameNew: String)
     + removeSkill(skillName: String)
 }
 
-
+class Employee {
+    - name
+    - email
+    - position
+    - phone
+}
 
 Repositories -> Repositories : instance
+
 ApplicationSession -> ApplicationSession : instance
 
 RegisterSkillUI .> RegisterSkillController
@@ -83,21 +68,8 @@ RegisterSkillController .> Repositories : repositories
 
 Repositories -> "1" SkillRepository
 
-RegisterSkillController ..> Skill
-RegisterSkillController ..> EmployeeRepository : employeeRepository
 RegisterSkillController ..> SkillRepository : SkillRepository
 
-Repositories --> "1" EmployeeRepository
-
-EmployeeRepository --> "*" Employee
-ApplicationSession --> "1" UserSession : userSession
-
-RegisterSkillController ..> "1" Employee : employee
-RegisterSkillController ..> ApplicationSession
-RegisterSkillController ..> UserSession
-Employee "1" --> "*" Skill : skills
 Skill --> Employee : createdBy
-
-Employee --> "*" Skill : has
 
 @enduml
