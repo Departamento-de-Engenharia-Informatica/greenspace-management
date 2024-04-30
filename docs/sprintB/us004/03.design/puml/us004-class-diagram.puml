@@ -1,26 +1,30 @@
-@startuml US004 - As an HRM i want to assign one or more skills to a collaborator
+@startuml
 
-class MusgoSublime{
-    - Repositories repositories
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
 
-    + Repositories getInstance()
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class ApplicationSession
+{
+    + static getInstance()
+    + getCurrentSession()
 }
 
-class Repositories{
-    - EmployeeRepository employeeRepository
-    - SkillRepository skillRepository
-
-    + EmployeeRepository getEmployeeRepository()
-    + SkillRepository getSkillRepository()
+class UserSession
+{
+    + getUserEmail()
 }
 
-class EmployeeRepository{
-    - List<Employee> employees
+class Skill {
+    - skillName
 
-    + void addEmployee(employee: Employee)
-    + void removeEmployee(employee: Employee)
-    + boolean addSkillToEmployee(idNumber: String, skill: Skill)
-    + Employee getEmployee(idNumber: String)
+    + addSkill(skill: Skill)
 }
 
 class SkillRepository{
@@ -32,49 +36,48 @@ class SkillRepository{
     + Skill getSkill(skillName: String)
 }
 
-class RegisterSkillToCollaboratorUI{
-    + void run();
-}
-
-class RegisterSkillToCollaboratorController{
+class CreateSkillController {
     + searchForEmployee(idNumber: String): Employee
     + getSkills(): List<Skill>
     + addSkillToEmployee(idNumber: String, skill: Skill)
-    }
-
-
-
-class Employee{
-    - String Name
-    - Date birthDate
-    - Date admissionDate
-    - PhoneNumber phoneNumber
-    - Email email
-    - String idNumber
-    - IdCard idCard
-    - List<Skill> employeeSkills
-
-    + boolean addSkill(skill: Skill)
 }
 
-class Skill{
-    - String skillName
+class RegisterSkillUI {
+    + void run();
 }
 
-RegisterSkillToCollaboratorUI --> RegisterSkillToCollaboratorController
-RegisterSkillToCollaboratorController --> MusgoSublime
-RegisterSkillToCollaboratorController --> EmployeeRepository
-RegisterSkillToCollaboratorController --> SkillRepository
+class MusgoSublime{
+    - Repositories repositories
 
+    + Repositories getInstance()
+}
 
-MusgoSublime  --> Repositories
-Repositories --> EmployeeRepository
-Repositories --> SkillRepository
-EmployeeRepository --> Employee
-SkillRepository --> Skill
+class Repositories{
+    - SkillRepository skillRepository
 
-Employee --> Skill
+    + SkillRepository getSkillRepository()
+}
 
+class RegisterSkillToCollaboratorController{
+    + RegisterSkillToCollaboratorController(skillRepository)
+    + createSkill(userEmail, skillName)
+    - getEmployeeFromSession()
+}
 
+note right of CreateSkillController
+    - userEmail is obtained from the user session
+end note
+
+Repositories -> Repositories : instance
+ApplicationSession -> ApplicationSession : instance
+
+RegisterSkillUI .> RegisterSkillToCollaboratorController
+
+RegisterSkillToCollaboratorController .> Repositories : repositories
+
+Repositories -> "1" SkillRepository
+
+RegisterSkillToCollaboratorController ..> Skill
+RegisterSkillToCollaboratorController ..> SkillRepository : SkillRepository
 
 @enduml
