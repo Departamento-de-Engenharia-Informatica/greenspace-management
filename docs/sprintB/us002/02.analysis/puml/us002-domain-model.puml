@@ -1,0 +1,46 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+'title Domain Model
+
+'class Platform {
+'  -description
+'}
+
+class Organization {
+    name
+    vatNumber
+    website
+    phoneNumber
+    email
+}
+
+class Employe {
+    name
+    role
+    phoneNumber
+    email
+}
+class HRM {
+    ...
+}
+class Job {
+    name
+    description
+}
+
+
+Employe "1" -- "1" HRM : can be
+Organization "1" -- "*" Employe : has >
+
+HRM "1" -- "*" Job : creates
+@enduml

@@ -1,0 +1,80 @@
+@startuml US004 - As an HRM i want to assign one or more skills to a collaborator
+
+class MusgoSublime{
+    - Repositories repositories
+
+    + Repositories getInstance()
+}
+
+class Repositories{
+    - EmployeeRepository employeeRepository
+    - SkillRepository skillRepository
+
+    + EmployeeRepository getEmployeeRepository()
+    + SkillRepository getSkillRepository()
+}
+
+class EmployeeRepository{
+    - List<Employee> employees
+
+    + void addEmployee(employee: Employee)
+    + void removeEmployee(employee: Employee)
+    + boolean addSkillToEmployee(idNumber: String, skill: Skill)
+    + Employee getEmployee(idNumber: String)
+}
+
+class SkillRepository{
+    - List<Skill> skills
+
+    + void addSkill(skillName: String)
+    + void removeSkill(skillName: String)
+    + void updateSkill(skillNameOld: String, skillNameNew: String)
+    + Skill getSkill(skillName: String)
+}
+
+class RegisterSkillToCollaboratorUI{
+    + void run();
+}
+
+class RegisterSkillToCollaboratorController{
+    + searchForEmployee(idNumber: String): Employee
+    + getSkills(): List<Skill>
+    + addSkillToEmployee(idNumber: String, skill: Skill)
+    }
+
+
+
+class Employee{
+    - String Name
+    - Date birthDate
+    - Date admissionDate
+    - PhoneNumber phoneNumber
+    - Email email
+    - String idNumber
+    - IdCard idCard
+    - List<Skill> employeeSkills
+
+    + boolean addSkill(skill: Skill)
+}
+
+class Skill{
+    - String skillName
+}
+
+RegisterSkillToCollaboratorUI --> RegisterSkillToCollaboratorController
+RegisterSkillToCollaboratorController --> MusgoSublime
+RegisterSkillToCollaboratorController --> EmployeeRepository
+RegisterSkillToCollaboratorController --> SkillRepository
+
+
+MusgoSublime  --> Repositories
+Repositories --> EmployeeRepository
+Repositories --> SkillRepository
+EmployeeRepository --> Employee
+SkillRepository --> Skill
+
+Employee --> Skill
+
+
+
+@enduml

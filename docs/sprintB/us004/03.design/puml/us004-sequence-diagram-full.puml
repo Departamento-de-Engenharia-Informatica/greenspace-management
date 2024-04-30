@@ -1,0 +1,105 @@
+@startuml US004 - As an HRM i want to assign one or more skills to a collaborator
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Human Resources Manager" as HRM
+participant ":RegisterSkillToCollaboratorUI" as UI
+participant ":RegisterSkillToCollaboratorController" as CTRL
+participant ":MusgoSublime" as MusgoDublime
+participant "repositories\n:Repositories" as PLAT
+participant "employeeRepository\n:EmployeeRepository" as EmployeeRepository
+participant "skillRepository\n:SkillRepository" as SkillRepository
+participant "employee\n:Employee" as EMPLOYEE
+
+activate HRM
+
+        HRM -> UI : wants to assign one or more skills to a colaborator
+
+        activate UI
+            UI -> CTRL** : create
+
+            UI -> HRM : requests colaborator identification number
+            deactivate UI
+
+            HRM -> UI : types colaborator identification number
+            activate UI
+
+                UI --> CTRL : searchForEmployee(employeeId)
+                activate CTRL
+
+                    CTRL -> MusgoDublime : getInstance()
+                    activate MusgoDublime
+
+                        MusgoDublime --> CTRL: repositories
+                    deactivate MusgoDublime
+
+                    CTRL -> PLAT : getEmployeeRepository()
+                    activate PLAT
+
+                        PLAT --> CTRL: employeeRepository
+                    deactivate PLAT
+
+                    CTRL -> EmployeeRepository : getEmployee(employeeId)
+                    activate EmployeeRepository
+
+                        EmployeeRepository --> CTRL : employee
+                    deactivate EmployeeRepository
+
+                    CTRL --> UI : employee
+                deactivate CTRL
+
+                UI -> CTRL : getSkills()
+                activate CTRL
+
+                   CTRL -> PLAT : getSkillRepository()
+                    activate PLAT
+
+                        PLAT --> CTRL : skillRepository
+                    deactivate PLAT
+
+                    CTRL -> SkillRepository : getSkills()
+                    activate SkillRepository
+
+                        SkillRepository --> CTRL : skills
+                    deactivate SkillRepository
+
+                    CTRL --> UI : skills
+                deactivate CTRL
+
+            loop [ while user wants to register more skills ]
+
+                UI -> HRM : shows available skills to register
+                deactivate UI
+
+                HRM -> UI : selects skill
+                activate UI
+
+                    UI -> CTRL : addSkillToEmployee(employeeId, skill)
+                    activate CTRL
+
+                        CTRL -> EmployeeRepository : addSkillToEmployee(employeeId, skill)
+                        activate EmployeeRepository
+
+                            EmployeeRepository -> EMPLOYEE : addSkill(skill)
+                            activate EMPLOYEE
+
+                                EMPLOYEE --> EmployeeRepository : boolean
+                            deactivate EMPLOYEE
+
+                            EmployeeRepository --> CTRL : boolean
+                        deactivate EmployeeRepository
+
+                        CTRL --> UI : boolean
+                    deactivate CTRL
+                end
+        UI --> HRM : shows colaborator id and registered skills
+        deactivate UI
+
+        deactivate HRM
+
+
+@enduml
