@@ -1,0 +1,86 @@
+@startuml
+
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class ApplicationSession
+{
+    + static getInstance()
+    + getCurrentSession()
+}
+
+class UserSession
+{
+    + getUserEmail()
+}
+
+class Employee {
+    - name
+    - email
+    - position
+    - phone
+}
+
+class Job {
+    - jobName
+}
+
+class Collaborator {
+    - name: String
+    - birthdayDate: String
+    - admissionDate: String
+    - address: String
+    - phoneNumber: int
+    - email: String
+    - taxpayerNumber: int
+    - BINumber: int
+}
+
+class JobRepository{
+    - List<Job> job
+    + Job getJob(jobName: String)
+    + boolean addCollaboratorToJob(jobName: String, collaborator: Collaborator)
+}
+
+class CreateCollaboratorUI {
+}
+
+class Repositories{
+    - jobRepository: JobRepository
+
+    + JobRepository getJobRepository()
+}
+
+class CreateCollaboratorController {
+    + CreateCollaborator(name: String, birthdayDate: String, admissionDate: String, address: String, phoneNumber: int, email: String, taxpayerNumber: int, BINumber: int)
+    + RemoveCollaborator(BINumber: int)
+}
+
+Repositories -> Repositories : instance
+ApplicationSession -> ApplicationSession : instance
+
+CreateCollaboratorUI .> CreateCollaboratorController
+
+CreateCollaboratorController .> Repositories : repositories
+
+Repositories -> "1" JobRepository
+
+CreateCollaboratorController ..> JobRepository : JobRepository
+
+' Legenda
+JobRepository --> Job : Job
+Job --> Collaborator : collaborator
+
+ApplicationSession --> "1" UserSession : userSession
+
+' Adding collaborator functionality
+Employee --> "1" Collaborator : hrm
+
+@enduml

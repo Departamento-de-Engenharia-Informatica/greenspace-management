@@ -1,0 +1,36 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+actor "Human Resource Manager" as HM
+participant "CreateCollaboratorUI" as UI
+participant "CreateCollaboratorController" as Controller
+participant "Repositories" as Repos
+participant "JobRepository" as JobRepo
+participant "Job" as Job
+participant "Collaborator" as Collaborator
+participant "Employee" as Emp
+
+HM -> UI: initiates collaborator creation
+activate UI
+UI -> Controller: CreateCollaborator(name, birthdayDate, admissionDate, address, phoneNumber, email, taxpayerNumber, BINumber)
+activate Controller
+Controller -> Repos: getJobRepository()
+activate Repos
+Repos -> JobRepo: getJob(jobName)
+activate JobRepo
+JobRepo -> Job: getJob(jobName)
+activate Job
+Controller -> JobRepo: addCollaboratorToJob(jobName, collaborator)
+JobRepo -> Collaborator: check if collaborator exists
+activate Collaborator
+JobRepo --> Controller: collaboratorExists (true/false)
+deactivate Collaborator
+Controller --> UI: collaborator added successfully
+deactivate Job
+deactivate JobRepo
+deactivate Repos
+deactivate Controller
+UI --> HM: displays success message
+deactivate UI
+@enduml

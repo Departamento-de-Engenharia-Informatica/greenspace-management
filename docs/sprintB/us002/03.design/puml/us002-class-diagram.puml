@@ -1,0 +1,84 @@
+@startuml
+
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class ApplicationSession
+{
+    + static getInstance()
+    + getCurrentSession()
+}
+
+class UserSession
+{
+    + getUserEmail()
+}
+
+class Employee {
+    - name
+    - email
+    - position
+    - phone
+}
+
+class Job {
+    - jobName
+
+    + addJob(job: Job)
+}
+
+class JobRepository{
+    - List<Job> job
+
+    + void addJob(jobName: String)
+    + void removeJob(JobName: String)
+    + Job getJob(jobName: String)
+}
+
+class CreateJobUI {
+}
+
+class Repositories{
+    - jobRepository
+
+    + JobRepository getJobRepository()
+}
+
+class CreateJobController {
+    + CreateJobController(jobName: String)
+    + RemoveJob(jobName: String)
+}
+
+Repositories -> Repositories : instance
+ApplicationSession -> ApplicationSession : instance
+
+CreateJobUI .> CreateJobController
+
+CreateJobController .> Repositories : repositories
+
+Repositories -> "1" JobRepository
+
+CreateJobController ..> job : job
+CreateJobController ..> JobRepository : JobRepository
+
+' Legenda
+JobRepository --> Job : Job
+
+ApplicationSession --> "1" UserSession : userSession
+
+CreateJobController ..> "1" Employee : employee
+CreateJobController ..> ApplicationSession
+CreateJobController ..> UserSession
+
+Employee --> Job : createdBy
+
+
+
+@enduml
