@@ -4,7 +4,7 @@
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
-'skinparam linetype orto
+skinparam linetype orto
 
 skinparam classAttributeIconSize 0
 
@@ -19,6 +19,13 @@ class ApplicationSession
 class UserSession
 {
     + getUserEmail()
+}
+
+class Employee {
+    - name
+    - email
+    - position
+    - phone
 }
 
 class Skill {
@@ -36,48 +43,55 @@ class SkillRepository{
     + Skill getSkill(skillName: String)
 }
 
-class CreateSkillController {
-    + searchForEmployee(idNumber: String): Employee
-    + getSkills(): List<Skill>
-    + addSkillToEmployee(idNumber: String, skill: Skill)
-}
-
-class RegisterSkillUI {
-    + void run();
-}
-
-class MusgoSublime{
-    - Repositories repositories
-
-    + Repositories getInstance()
+class AssignSkillUI {
 }
 
 class Repositories{
     - SkillRepository skillRepository
+    - EmployeeRepository employeeRepository
 
     + SkillRepository getSkillRepository()
+    + EmployeeRepository getEmployeeRepository()
 }
 
-class RegisterSkillToCollaboratorController{
-    + RegisterSkillToCollaboratorController(skillRepository)
-    + createSkill(userEmail, skillName)
-    - getEmployeeFromSession()
+class AssignSkillController {
+    + AssignSkillController(employeeRepository, skillRepository)
+    + assignSkill(employeeId: String, skill: Skill)
 }
 
-note right of CreateSkillController
-    - userEmail is obtained from the user session
-end note
+class EmployeeRepository {
+    - List<Employee> employees
+
+    + void addEmployee(employee: Employee)
+    + void removeEmployee(employee: Employee)
+    + boolean addSkillToEmployee(employeeId: String, skill: Skill)
+    + Employee getEmployee(employeeId: String)
+    + void assignSkill(employeeId: String, skill: Skill)
+}
 
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
 
-RegisterSkillUI .> RegisterSkillToCollaboratorController
+AssignSkillUI .> AssignSkillController
 
-RegisterSkillToCollaboratorController .> Repositories : repositories
+AssignSkillController .> Repositories : repositories
 
 Repositories -> "1" SkillRepository
+Repositories -> "1" EmployeeRepository
 
-RegisterSkillToCollaboratorController ..> Skill
-RegisterSkillToCollaboratorController ..> SkillRepository : SkillRepository
+AssignSkillController ..> Skill : skill
+AssignSkillController ..> SkillRepository : SkillRepository
+
+ApplicationSession --> "1" UserSession : userSession
+
+AssignSkillController ..> "1" Employee : employee
+AssignSkillController ..> ApplicationSession
+AssignSkillController ..> UserSession
+
+Employee --> "*" Skill : has
+EmployeeRepository --> "*" Employee : employees
+EmployeeRepository --> "1" Employee : getEmployee(employeeId: String)
+EmployeeRepository --> "*" Skill : addSkillToEmployee(employeeId: String, skill: Skill)
+EmployeeRepository --> "*" Skill : assignSkill(employeeId: String, skill: Skill)
 
 @enduml

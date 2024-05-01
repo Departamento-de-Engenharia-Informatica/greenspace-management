@@ -1,105 +1,182 @@
-@startuml US004 - As an HRM i want to assign one or more skills to a collaborator
-skinparam monochrome true
+@startuml
+
+'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
 autonumber
 
 'hide footbox
-actor "Human Resources Manager" as HRM
-participant ":RegisterSkillToCollaboratorUI" as UI
-participant ":RegisterSkillToCollaboratorController" as CTRL
-participant ":MusgoSublime" as MusgoDublime
+actor "Human Resources Manager" as ADM
+participant ":AssignSkillUI" as UI
+participant ":AssignSkillController" as CTRL
+participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "employeeRepository\n:EmployeeRepository" as EmployeeRepository
-participant "skillRepository\n:SkillRepository" as SkillRepository
-participant "employee\n:Employee" as EMPLOYEE
+participant "SkillRepository:\nSkillRepository" as SkillRepository
+participant "EmployeeRepository:\nEmployeeRepository" as EmployeeRepository
+participant "collaborator\n:Employee" as COLLABORATOR
 
-activate HRM
+activate ADM
 
-        HRM -> UI : wants to assign one or more skills to a colaborator
+    ADM -> UI : requests to assign skills to collaborator
 
-        activate UI
-            UI -> CTRL** : create
+    activate UI
 
-            UI -> HRM : requests colaborator identification number
-            deactivate UI
+        UI -> CTRL** : assignSkillsToCollaborator
 
-            HRM -> UI : types colaborator identification number
-            activate UI
+        UI -> CTRL : getCollaborators()
+        activate CTRL
 
-                UI --> CTRL : searchForEmployee(employeeId)
-                activate CTRL
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
 
-                    CTRL -> MusgoDublime : getInstance()
-                    activate MusgoDublime
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
 
-                        MusgoDublime --> CTRL: repositories
-                    deactivate MusgoDublime
+            CTRL -> PLAT : getEmployeeRepository()
+            activate PLAT
 
-                    CTRL -> PLAT : getEmployeeRepository()
-                    activate PLAT
+                PLAT --> CTRL : employeeRepository
+            deactivate PLAT
 
-                        PLAT --> CTRL: employeeRepository
-                    deactivate PLAT
+            CTRL -> EmployeeRepository : getCollaborators()
+            activate EmployeeRepository
 
-                    CTRL -> EmployeeRepository : getEmployee(employeeId)
-                    activate EmployeeRepository
+                EmployeeRepository --> CTRL : collaboratorList
+            deactivate EmployeeRepository
 
-                        EmployeeRepository --> CTRL : employee
-                    deactivate EmployeeRepository
+            CTRL --> UI : collaboratorList
+        deactivate CTRL
 
-                    CTRL --> UI : employee
-                deactivate CTRL
+        UI --> ADM : displays list of collaborators
+    deactivate UI
 
-                UI -> CTRL : getSkills()
-                activate CTRL
+    ADM -> UI : selects a collaborator
+    activate UI
 
-                   CTRL -> PLAT : getSkillRepository()
-                    activate PLAT
+        UI --> ADM : requests action (add skill, remove skill)
+    deactivate UI
 
-                        PLAT --> CTRL : skillRepository
-                    deactivate PLAT
+    ADM -> UI : confirms action
+    activate UI
 
-                    CTRL -> SkillRepository : getSkills()
-                    activate SkillRepository
+        UI -> CTRL : getCollaboratorSkills(collaboratorId)
+        activate CTRL
 
-                        SkillRepository --> CTRL : skills
-                    deactivate SkillRepository
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
 
-                    CTRL --> UI : skills
-                deactivate CTRL
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
 
-            loop [ while user wants to register more skills ]
+            CTRL -> PLAT : getEmployeeRepository()
+            activate PLAT
 
-                UI -> HRM : shows available skills to register
-                deactivate UI
+                PLAT --> CTRL : employeeRepository
+            deactivate PLAT
 
-                HRM -> UI : selects skill
-                activate UI
+            CTRL -> EmployeeRepository : getCollaboratorSkills(collaboratorId)
+            activate EmployeeRepository
 
-                    UI -> CTRL : addSkillToEmployee(employeeId, skill)
-                    activate CTRL
+                EmployeeRepository --> CTRL : collaboratorSkills
+            deactivate EmployeeRepository
 
-                        CTRL -> EmployeeRepository : addSkillToEmployee(employeeId, skill)
-                        activate EmployeeRepository
+            CTRL --> UI : collaboratorSkills
+        deactivate CTRL
 
-                            EmployeeRepository -> EMPLOYEE : addSkill(skill)
-                            activate EMPLOYEE
+        UI -> CTRL : getSkills()
+        activate CTRL
 
-                                EMPLOYEE --> EmployeeRepository : boolean
-                            deactivate EMPLOYEE
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
 
-                            EmployeeRepository --> CTRL : boolean
-                        deactivate EmployeeRepository
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
 
-                        CTRL --> UI : boolean
-                    deactivate CTRL
-                end
-        UI --> HRM : shows colaborator id and registered skills
-        deactivate UI
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
 
-        deactivate HRM
+                PLAT --> CTRL : skillRepository
+            deactivate PLAT
 
+            CTRL -> SkillRepository : getSkills()
+            activate SkillRepository
+
+                SkillRepository --> CTRL : skillList
+            deactivate SkillRepository
+
+            CTRL --> UI : skillList
+        deactivate CTRL
+
+        UI --> ADM : displays list of collaborator's skills with options to add or remove skills
+    deactivate UI
+
+    ADM -> UI : selects to add a skill
+    activate UI
+
+        UI --> ADM : requests skill to add
+    deactivate UI
+
+    ADM -> UI : select skill to add
+    activate UI
+
+        UI --> ADM : confirms skill to add
+    deactivate UI
+
+    ADM -> UI : confirms to add skill
+    activate UI
+
+        UI -> CTRL : addSkillToCollaborator(collaboratorId, skillName)
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getEmployeeRepository()
+            activate PLAT
+
+                PLAT --> CTRL : employeeRepository
+            deactivate PLAT
+
+            CTRL -> EmployeeRepository : addSkillToCollaborator(collaboratorId, skillName)
+            activate EmployeeRepository
+
+                EmployeeRepository --> CTRL : result
+            deactivate EmployeeRepository
+
+            CTRL --> UI : result
+        deactivate CTRL
+
+        UI -> CTRL : getCollaboratorSkills(collaboratorId)
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getEmployeeRepository()
+            activate PLAT
+
+                PLAT --> CTRL : employeeRepository
+            deactivate PLAT
+
+            CTRL -> EmployeeRepository : getCollaboratorSkills(collaboratorId)
+            activate EmployeeRepository
+
+                EmployeeRepository --> CTRL : collaboratorSkills
+            deactivate EmployeeRepository
+
+            CTRL --> UI : collaboratorSkills
+        deactivate CTRL
+
+        UI --> ADM : displays updated list of collaborator's skills
+    deactivate UI
+
+deactivate ADM
 
 @enduml
