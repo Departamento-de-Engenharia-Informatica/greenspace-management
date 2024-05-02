@@ -11,6 +11,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 
 public class Main {
 
@@ -22,8 +24,15 @@ public class Main {
         List<Route> routes2 = importRoutesFromCSV("src/main/java/MDISC/US13_JardimEspeciesNucleoRural.csv");
         displayGraphStatistics("Example 2", routes2);
 
-        Tester tester = new Tester();
-        tester.runTimeTests(30);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter path to folder containing CSV files: ");
+        String folderPath = scanner.nextLine();
+
+        InputProcessor inputProcessor = new InputProcessor(folderPath);
+
+        inputProcessor.processInputFiles();
+
+        scanner.close();
     }
 
     public static List<Route> importRoutesFromCSV(String filename) {
