@@ -4,37 +4,39 @@
 
 ### 3.1. Rationale
 
-_**Note that SSD - Alternative One is adopted.**_
+
+
+**Rationale for User Story 1:**
 
 | Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
 |:-------------  |:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
-| 			  		 |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		 | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		 |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		 |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
+| Step 1  		 |	... interacting with the actor? | RegisterSkillUI      | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		 |	... coordinating the US? | RegisterSkillController | Controller                                                                                                    |
+| 			  		 |	... instantiating a new Skill? | SkillRepository     | Creator (Rule 1): in the DM, SkillRepository is responsible for managing Skills.                                |
+| 			  		 | ... knowing the user using the system?  | UserSession          | Infrastructure Entity: manages user sessions and authentication.                                              |
+| 			  		 |							 | SkillRepository      | Entity: represents the skills and their management.                                                           |
 | Step 2  		 |							 |                      |                                                                                                               |
-| Step 3  		 |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
+| Step 3  		 |	... saving the inputted skill? | SkillRepository     | Entity: manages the storage and retrieval of skills.                                                          |
+| Step 4  		 |	... retrieving the list of skills to display? | SkillRepository     | Entity: provides access to the list of skills.                                                                |
+| Step 5  		 |	... removing the selected skill? | SkillRepository     | Entity: responsible for deleting skills from the repository.                                                  |
 | Step 6  		 |							 |                      |                                                                                                               |              
-| Step 7  		 |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		 |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		 |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+| Step 7  		 |	... validating the new skill (format validation)? | SkillRepository     | Entity: validates the format of the skill name according to business rules.                                    | 
+| 			  		 |	... validating the new skill (uniqueness validation)? | SkillRepository     | Entity: ensures that the skill name is unique within the repository.                                           | 
+| 			  		 |	... saving the new skill? | SkillRepository     | Entity: adds the new skill to the repository.                                                                 | 
+| Step 8  		 |	... informing operation success?| RegisterSkillUI      | Interface Entity: responsible for user interaction and feedback.                                                | 
+
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* Employee
+* Skill
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* RegisterSkillUI
+* RegisterSkillController
 
 
 ## 3.2. Sequence Diagram (SD)
