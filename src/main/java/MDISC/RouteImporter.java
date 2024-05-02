@@ -13,13 +13,18 @@ public class RouteImporter {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
+                String[] parts = line.split(";");
                 if (parts.length == 3) {
-                    int waterPointX = Integer.parseInt(parts[0]);
-                    int waterPointY = Integer.parseInt(parts[1]);
-                    double distance = Double.parseDouble(parts[2]);
-                    Route route = new Route(waterPointX, waterPointY, distance);
-                    routes.add(route);
+                    try {
+                        int waterPointX = Integer.parseInt(parts[0].trim());
+                        int waterPointY = Integer.parseInt(parts[1].trim());
+                        double distance = Double.parseDouble(parts[2].trim());
+                        Route route = new Route(waterPointX, waterPointY, distance);
+                        routes.add(route);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error parsing line: " + line);
+                        e.printStackTrace();
+                    }
                 } else {
                     System.out.println("Invalid line: " + line);
                 }
@@ -29,5 +34,19 @@ public class RouteImporter {
         }
 
         return routes;
+    }
+
+    public static void main(String[] args) {
+        // Example usage
+        RouteImporter importer = new RouteImporter();
+        List<Route> routes = importer.importRoutes("path/to/your/file.csv");
+
+        // Display imported data
+        for (Route route : routes) {
+            System.out.println("Water Point X: " + route.getWaterPointX());
+            System.out.println("Water Point Y: " + route.getWaterPointY());
+            System.out.println("Distance: " + route.getDistance());
+            System.out.println("---------------------");
+        }
     }
 }
