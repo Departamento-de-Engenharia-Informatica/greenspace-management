@@ -1,42 +1,38 @@
 package MDISC;
 
 public class Route {
-    private int waterPointX;
-    private int waterPointY;
-    private double distance;
+    private Vertex startPoint;
+    private Vertex endPoint;
+    private int distance;
 
-    public Route(int waterPointX, int waterPointY, double distance) {
-        this.waterPointX = waterPointX;
-        this.waterPointY = waterPointY;
+    public Route(Vertex startPoint, Vertex endPoint, int distance) {
+        this.startPoint = startPoint;
+        this.endPoint = endPoint;
         this.distance = distance;
     }
 
-    public int getWaterPointX() {
-        return waterPointX;
+    public Route(String startPoint, String endPoint, int distance) {
+        this.startPoint = new Vertex(startPoint);
+        this.endPoint = new Vertex(endPoint);
+        this.distance = distance;
     }
 
-    public void setWaterPointX(int waterPointX) {
-        this.waterPointX = waterPointX;
+    public Vertex getStartPoint() {
+        return startPoint;
     }
 
-    public int getWaterPointY() {
-        return waterPointY;
+    public Vertex getEndPoint() {
+        return endPoint;
     }
 
-    public void setWaterPointY(int waterPointY) {
-        this.waterPointY = waterPointY;
-    }
-
-    public double getDistance() {
+    public int getDistance() {
         return distance;
     }
 
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
     @Override
     public String toString() {
-        return waterPointX + " -> " + waterPointY + ": " + distance;
+        return startPoint + " -> " + endPoint + ": " + distance;
     }
 }
+
 

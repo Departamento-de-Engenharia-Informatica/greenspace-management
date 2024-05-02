@@ -6,17 +6,22 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
         // Input data for example 1
-        List<Route> routes1 = importRoutesFromCSV("US12/src/main/java/org/example/US13_JardimDosSentimentos.csv");
+        List<Route> routes1 = importRoutesFromCSV("src/main/java/MDISC/US13_JardimDosSentimentos.csv");
         displayGraphStatistics("Example 1", routes1);
 
 
         // Input data for example 2
-        List<Route> routes2 = importRoutesFromCSV("US12/src/main/java/org/example/US13_JardimEspeciesNucleoRural.csv");
+        List<Route> routes2 = importRoutesFromCSV("src/main/java/MDISC/US13_JardimEspeciesNucleoRural.csv");
         displayGraphStatistics("Example 2", routes2);
     }
 
@@ -26,7 +31,6 @@ public class Main {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println("Line read from file: " + line); // Debugging statement
                 String[] parts = line.split(";");
                 if (parts.length != 3) {
                     System.err.println("Invalid input format: " + line);
@@ -37,7 +41,7 @@ public class Main {
                 int distance = Integer.parseInt(parts[2]);
 
                 // Create route and add it to the list
-                routes.add(new Route(waterPointX, waterPointY, distance));
+                routes.add(new Route(startPoint, endPoint, distance));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,7 +61,7 @@ public class Main {
         Graph graph = createGraph(vertices, routes);
 
         // Applying Kruskal's algorithm
-        List<Route> minimumSpanningTree = Kruskal.kruskal(graph);
+        List<Route> minimumSpanningTree = KruskalAlgorithm.kruskal(graph);
 
         // Calculate total cost of the minimum spanning tree
         int totalCost = calculateTotalCost(minimumSpanningTree);
@@ -71,8 +75,8 @@ public class Main {
     public static List<Vertex> createVertices(List<Route> routes) {
         List<Vertex> vertices = new ArrayList<>();
         for (Route route : routes) {
-            Vertex startVertex = route.getWaterPointX();
-            Vertex endVertex = route.getWaterPointY();
+            Vertex startVertex = route.getStartPoint();
+            Vertex endVertex = route.getEndPoint();
             if (!vertices.contains(startVertex)) {
                 vertices.add(startVertex);
             }

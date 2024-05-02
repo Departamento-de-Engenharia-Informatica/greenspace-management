@@ -20,9 +20,9 @@ public class Graph {
     }
 
     public void addEdge(Route route) {
-        Vertex waterPointX = route.getWaterPointX();
-        Vertex waterPointY = route.getWaterPointY();
-        adjacencyMap.get(waterPointX).add(route);
+        Vertex startPoint = route.getStartPoint();
+        Vertex endPoint = route.getEndPoint();
+        adjacencyMap.get(startPoint).add(route);
         // Uncomment the line below if the graph is undirected
         // adjacencyMap.get(endPoint).add(route);
     }
