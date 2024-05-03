@@ -24,7 +24,7 @@ public class JobRepository {
     public Job getJobByName(String jobName) {
         Job foundJob = null;
         for (Job job : jobList) {
-            if (job.getDescription().equals(jobName)) {
+            if (job.getJobName().equals(jobName)) {
                 foundJob = job;
                 break;
             }

@@ -26,6 +26,11 @@ public class Bootstrap implements Runnable {
         organization.addEmployee(new Employee("admin@this.app"));
         organization.addEmployee(new Employee("employee@this.app"));
         organization.addEmployee(new Employee("vfm@this.app"));
+        organization.addEmployee(new Employee("hrm@this.app"));
+        organization.addEmployee(new Employee("gsu@this.app"));
+        organization.addEmployee(new Employee("gsm@this.app"));
+        organization.addEmployee(new Employee("qam@this.app"));
+
         organizationRepository.add(organization);
     }
 
@@ -58,5 +63,17 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("VFM", "vfm@this.app", "pwd",
                 AuthenticationController.ROLE_VFM);
+
+        authenticationRepository.addUserWithRole("HRM", "hrm@this.app", "pwd",
+                AuthenticationController.ROLE_HRM);
+
+        authenticationRepository.addUserWithRole("GSM", "gsm@this.app", "pwd",
+                AuthenticationController.ROLE_GSM);
+
+        authenticationRepository.addUserWithRole("GSU", "gsu@this.app", "pwd",
+                AuthenticationController.ROLE_GSU);
+
+        authenticationRepository.addUserWithRole("QAM", "qam@this.app", "pwd",
+                AuthenticationController.ROLE_QAM);
     }
 }
