@@ -1,51 +1,54 @@
-# US006 - Create a Task 
+# US001 - Register a Skill 
 
 ## 3. Design - User Story Realization 
 
 ### 3.1. Rationale
 
-_**Note that SSD - Alternative One is adopted.**_
+
+
+**Rationale for User Story 1:**
+
 
 | Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
 |:-------------  |:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
-| 			  		 |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		 | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		 |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		 |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
+| Step 1  		 |	... interacting with the actor? | RegisterSkillUI      | Pure Fabrication: RegisterSkillUI is a UI component responsible for interacting with the user. There is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		 |	... coordinating the US? | RegisterSkillController | Controller: RegisterSkillController coordinates the use case by handling user inputs, invoking necessary operations, and updating the UI.                                                                                                    |
+| 			  		 |	... instantiating a new Skill? | SkillRepository     | Creator (Rule 1): SkillRepository is responsible for managing Skills in the Domain Model, making it suitable for creating new instances of Skill objects.                                |
+| 			  		 | ... knowing the user using the system?  | UserSession          | Information Expert: UserSession manages user sessions and authentication, making it the expert in knowing the user using the system. Infrastructure Entity: It's an infrastructure component.                                              |
+| 			  		 |							 | SkillRepository      | Information Expert: SkillRepository is responsible for managing skills and their persistence, making it the expert in the domain of skills.                                                           |
 | Step 2  		 |							 |                      |                                                                                                               |
-| Step 3  		 |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
+| Step 3  		 |	... saving the inputted skill? | SkillRepository     | High Cohesion, Low Coupling: SkillRepository is responsible for managing the storage and retrieval of skills, demonstrating high cohesion by focusing on a single responsibility. It also exhibits low coupling by encapsulating its own logic and data, reducing dependencies on other classes.                                                          |
+| Step 4  		 |	... retrieving the list of skills to display? | SkillRepository     | High Cohesion, Low Coupling: SkillRepository provides access to the list of skills, showing high cohesion by focusing on skill management. Its low coupling ensures that changes in how skills are retrieved do not affect other parts of the system.                                                                |
+| Step 5  		 |	... removing the selected skill? | SkillRepository     | High Cohesion, Low Coupling: SkillRepository is responsible for deleting skills from the repository, demonstrating high cohesion by grouping related operations. Its low coupling ensures that changes in how skills are removed do not impact other components.                                                  |
 | Step 6  		 |							 |                      |                                                                                                               |              
-| Step 7  		 |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		 |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		 |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+| Step 7  		 |	... validating the new skill (format validation)? | SkillRepository     | High Cohesion, Low Coupling: SkillRepository validates the format of the skill name according to business rules, showcasing high cohesion by focusing on a specific validation task. Its low coupling ensures that validation logic is encapsulated within the repository, minimizing dependencies on external components.                                    | 
+| 			  		 |	... validating the new skill (uniqueness validation)? | SkillRepository     | High Cohesion, Low Coupling: SkillRepository ensures that the skill name is unique within the repository, demonstrating high cohesion by handling a related validation concern. Its low coupling ensures that uniqueness validation is encapsulated within the repository, reducing dependencies on external modules.                                           | 
+| 			  		 |	... saving the new skill? | SkillRepository     | High Cohesion, Low Coupling: SkillRepository adds the new skill to the repository, showcasing high cohesion by grouping related persistence operations. Its low coupling ensures that the saving process is encapsulated within the repository, minimizing dependencies on external components.                                                               | 
+| Step 8  		 |	... informing operation success?| RegisterSkillUI      | High Cohesion, Low Coupling: RegisterSkillUI is responsible for providing feedback to the user, demonstrating high cohesion by handling user interactions and feedback. Its low coupling ensures that changes in the UI do not affect other parts of the system.                                                | 
+
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* Employee
+* Skill
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* RegisterSkillUI
+* RegisterSkillController
 
 
 ## 3.2. Sequence Diagram (SD)
 
-_**Note that SSD - Alternative Two is adopted.**_
+
 
 ### Full Diagram
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us001-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -53,24 +56,24 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
+![Sequence Diagram - split](svg/us001-sequence-diagram-split.svg)
 
-**Get Task Category List Partial SD**
+**Add Skill**
 
-![Sequence Diagram - Partial - Get Task Category List](svg/us006-sequence-diagram-partial-get-task-category-list.svg)
+![](svg/us001-sequence-diagram-addskill.svg)
 
-**Get Task Category Object**
+**Get Skill List**
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
+![](svg/us001-sequence-diagram-getskilllist.svg)
 
-**Get Employee**
+**Get Updated Skill List**
 
-![Sequence Diagram - Partial - Get Employee](svg/us006-sequence-diagram-partial-get-employee.svg)
+![](svg/us001-sequence-diagram-getupdatedskill-list.svg)
 
-**Create Task**
+**Diagram Performaction**
 
-![Sequence Diagram - Partial - Create Task](svg/us006-sequence-diagram-partial-create-task.svg)
+![](svg/us001-sequence-diagram-performaction.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us001-class-diagram.svg)
