@@ -22,6 +22,10 @@ class Skill {
     + getName(): String
 }
 
+class Repositories{
+}
+
+
 class TeamProposal {
     - maxTeamSize: int
     - minTeamSize: int
@@ -36,13 +40,24 @@ class EmployeeRepository {
     + getEmployeesBySkills(requiredSkills: Set<Skill>): List<Employee>
 }
 
-class TeamProposalGenerator {
+class TeamProposalController {
     + generateTeamProposal(maxTeamSize: int, minTeamSize: int, requiredSkills: Set<Skill>): TeamProposal
 }
+class SkillRepositories{
+    + getAvailableSkills() : List <Skill>
+}
 
-Employee --* Skill : possesses
-TeamProposal "1" --* Skill : requires
-EmployeeRepository --> Employee : retrieves
-TeamProposalGenerator --> EmployeeRepository : uses
+class TeamProposalUI{
+}
+
+Employee "1" --> "*" TeamProposal : creates
+SkillRepositories "1" --> "*" Skill : retrieves
+Repositories "1" --> "1" SkillRepositories : uses
+TeamProposalUI "1" --> "1" TeamProposalController
+TeamProposalController "1" --> "1" Repositories
+Employee "1" --> "*" Skill : possesses
+TeamProposal "1" --> "*" Skill : requires
+EmployeeRepository "1" --> "*" Employee : retrieves
+Repositories "1" --> "1" EmployeeRepository : uses
 
 @enduml
