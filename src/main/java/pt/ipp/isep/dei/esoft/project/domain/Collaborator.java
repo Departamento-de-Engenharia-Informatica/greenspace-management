@@ -1,22 +1,23 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Collaborator {
     private String name;
-    private String birthdayDate;
-    private String admissionDate;
+    private LocalDate birthdayDate;
+    private LocalDate admissionDate;
     private String address;
     private String phoneNumber;
     private String email;
-    private String taxpayerNumber;
-    private String BINumber;
+    private int taxpayerNumber;
+    private long BINumber;
     private String job;
 
-    public Collaborator(String name, String birthdayDate, String admissionDate,
+    public Collaborator(String name, LocalDate birthdayDate, LocalDate admissionDate,
                         String address, String phoneNumber, String email,
-                        String taxpayerNumber, String BINumber, String job) {
-        validateInputs(name, birthdayDate, admissionDate, address, phoneNumber, email, taxpayerNumber, BINumber,job);
+                        int taxpayerNumber, long BINumber, String job) throws IllegalArgumentException {
+        validateInputs(name, birthdayDate, admissionDate, address, phoneNumber, email, taxpayerNumber, BINumber, job);
         this.name = name;
         this.birthdayDate = birthdayDate;
         this.admissionDate = admissionDate;
@@ -28,47 +29,75 @@ public class Collaborator {
         this.job = job;
     }
 
-    private void validateInputs(String name, String birthdayDate, String admissionDate,
+    private void validateInputs(String name, LocalDate birthdayDate, LocalDate admissionDate,
                                 String address, String phoneNumber, String email,
-                                String taxpayerNumber, String BINumber, String job) {
-        // Validate inputs here, for example, ensure none are null or empty
-        // Add more validation rules as needed
-        if  (
-                name == null || name.isEmpty() ||
-                birthdayDate == null || birthdayDate.isEmpty() ||
-                admissionDate == null || admissionDate.isEmpty() ||
-                address == null || address.isEmpty() ||
-                phoneNumber == null || phoneNumber.length() != 9 || !phoneNumber.matches("\\d+") ||
-                email == null ||  !email.contains("@") || // Check if email contains '@'
-                taxpayerNumber == null ||  taxpayerNumber.length() != 9 || !taxpayerNumber.matches("\\d+") ||
-                BINumber == null ||  BINumber.length() != 8 || !BINumber.matches("\\d+") ||
-                job == null || job.isEmpty()
-            )
-        {
-            throw new IllegalArgumentException("All fields must be provided.");
+                                int taxpayerNumber, long BINumber, String job) {
+        if (name == null || name.trim().isEmpty()) {
+            System.out.println("Name must be provided.");
+            return; // Exit method, allowing the user to correct the input
+        }
+
+        if (birthdayDate == null) {
+            System.out.println("Birthday date must be provided.");
+            return;
+        }
+
+        if (admissionDate == null) {
+            System.out.println("Admission date must be provided.");
+            return;
+        }
+
+        if (address == null || address.trim().isEmpty()) {
+            System.out.println("Address must be provided.");
+            return;
+        }
+
+        if (phoneNumber == null || !phoneNumber.matches("\\d{9}")) {
+            System.out.println("Phone number must be 9 digits.");
+            return;
+        }
+
+        if (email == null || !email.contains("@")) {
+            System.out.println("Email must be provided and contain '@'.");
+            return;
+        }
+
+        if (taxpayerNumber <= 0 || String.valueOf(taxpayerNumber).length() != 9) {
+            System.out.println("Taxpayer number must be a positive integer of 9 digits.");
+            return;
+        }
+
+        if (String.valueOf(BINumber).length() != 8) {
+            System.out.println("BI number must be an integer of 8 digits.");
+            return;
+        }
+
+        if (job == null || job.trim().isEmpty()) {
+            System.out.println("Job must be provided.");
+            return;
         }
     }
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Collaborator that = (Collaborator) o;
-        return Objects.equals(name, that.name) &&
+        return taxpayerNumber == that.taxpayerNumber &&
+                BINumber == that.BINumber &&
+                Objects.equals(name, that.name) &&
                 Objects.equals(birthdayDate, that.birthdayDate) &&
                 Objects.equals(admissionDate, that.admissionDate) &&
                 Objects.equals(address, that.address) &&
                 Objects.equals(phoneNumber, that.phoneNumber) &&
                 Objects.equals(email, that.email) &&
-                Objects.equals(taxpayerNumber, that.taxpayerNumber) &&
-                Objects.equals(BINumber, that.BINumber) &&
                 Objects.equals(job, that.job);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(name, birthdayDate, admissionDate, address, phoneNumber, email, taxpayerNumber, BINumber,job);
-    }
+
 
     public Collaborator clone() {
         return new Collaborator(name, birthdayDate, admissionDate, address, phoneNumber, email, taxpayerNumber, BINumber,job);
@@ -78,11 +107,11 @@ public class Collaborator {
         return name;
     }
 
-    public String getBirthdayDate() {
+    public LocalDate getBirthdayDate() {
         return birthdayDate;
     }
 
-    public String getAdmissionDate() {
+    public LocalDate getAdmissionDate() {
         return admissionDate;
     }
 
@@ -98,15 +127,16 @@ public class Collaborator {
         return email;
     }
 
-    public String getTaxpayerNumber() {
+    public int getTaxpayerNumber() {
         return taxpayerNumber;
     }
 
-    public String getBINumber() {
+    public long getBINumber() {
         return BINumber;
     }
 
     public String getJob() {
         return job;
     }
+
 }
