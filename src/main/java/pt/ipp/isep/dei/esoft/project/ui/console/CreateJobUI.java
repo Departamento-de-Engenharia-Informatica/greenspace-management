@@ -1,7 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateJobController;
+import pt.ipp.isep.dei.esoft.project.domain.Job;
+import pt.ipp.isep.dei.esoft.project.application.controller.*;
 
+
+import java.util.List;
 import java.util.Scanner;
 
 public class CreateJobUI implements Runnable {
@@ -39,6 +43,9 @@ public class CreateJobUI implements Runnable {
             System.out.println("Failed to create job. Please try again.");
         }
     }
+
+
+
 
     public static void main(String[] args) {
         CreateJobUI createJobUI = new CreateJobUI();

@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Organization;
 import pt.ipp.isep.dei.esoft.project.domain.Task;
 import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
 import pt.ipp.isep.dei.esoft.project.repository.*;
+import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 
@@ -15,7 +16,7 @@ public class CreateJobController {
     private OrganizationRepository organizationRepository;
     private TaskCategoryRepository taskCategoryRepository;
     private AuthenticationRepository authenticationRepository;
-    private JobRepository jobRepository;
+    private static JobRepository jobRepository;
 
 
     //Repository instances are obtained from the Repositories class
@@ -26,13 +27,42 @@ public class CreateJobController {
         getJobRepository();
     }
 
-    private void getAuthenticationRepository() {
+    private TaskCategoryRepository getTaskCategoryRepository() {
+        if (taskCategoryRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+
+            //Get the TaskCategoryRepository
+            taskCategoryRepository = repositories.getTaskCategoryRepository();
+        }
+        return taskCategoryRepository;
     }
 
-    private void getTaskCategoryRepository() {
+    private OrganizationRepository getOrganizationRepository() {
+        if (organizationRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            organizationRepository = repositories.getOrganizationRepository();
+        }
+        return organizationRepository;
+
     }
 
-    private void getOrganizationRepository() {
+    private AuthenticationRepository getAuthenticationRepository() {
+        if (authenticationRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+
+            //Get the AuthenticationRepository
+            authenticationRepository = repositories.getAuthenticationRepository();
+        }
+        return authenticationRepository;
+    }
+    private JobRepository getJobListRepository() {
+        if (jobRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+
+            //Get the jobRepository
+            jobRepository = repositories.getJobRepository();
+        }
+        return jobRepository;
     }
 
 
@@ -67,5 +97,11 @@ public class CreateJobController {
         Optional<Job> newJob = jobRepository.add(job);
 
         return newJob.isPresent(); // Returns true if job creation was successful, false otherwise
+    }
+
+    public static List<Job> getJobList() {
+        // Assuming jobRepository is an instance variable of the class
+        // You need to access the jobRepository instance to retrieve the job list
+        return jobRepository.getJobList();
     }
 }

@@ -32,6 +32,10 @@ public class Job {
         return Objects.equals(jobName, job.jobName);
     }
 
+    public Job clone() {
+        return new Job(this.jobName);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(jobName);
