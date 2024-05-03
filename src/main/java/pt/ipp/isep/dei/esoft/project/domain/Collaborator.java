@@ -3,7 +3,12 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * The {@code Collaborator} class represents a collaborator entity in the system.
+ * It contains information about a collaborator such as name, birth date, admission date, contact details, and job.
+ */
 public class Collaborator {
+
     private String name;
     private LocalDate birthdayDate;
     private LocalDate admissionDate;
@@ -14,6 +19,20 @@ public class Collaborator {
     private long BINumber;
     private String job;
 
+    /**
+     * Constructs a new {@code Collaborator} object with the specified attributes.
+     *
+     * @param name           The name of the collaborator.
+     * @param birthdayDate   The birthdate of the collaborator.
+     * @param admissionDate  The admission date of the collaborator.
+     * @param address        The address of the collaborator.
+     * @param phoneNumber    The phone number of the collaborator.
+     * @param email          The email address of the collaborator.
+     * @param taxpayerNumber The taxpayer number of the collaborator.
+     * @param BINumber       The BI (Identity Card) number of the collaborator.
+     * @param job            The job position of the collaborator.
+     * @throws IllegalArgumentException If any of the input parameters are invalid.
+     */
     public Collaborator(String name, LocalDate birthdayDate, LocalDate admissionDate,
                         String address, String phoneNumber, String email,
                         int taxpayerNumber, long BINumber, String job) throws IllegalArgumentException {
@@ -29,9 +48,13 @@ public class Collaborator {
         this.job = job;
     }
 
+    /**
+     * Validates the input parameters for creating a collaborator.
+     * Throws an exception if any parameter is invalid.
+     */
     private void validateInputs(String name, LocalDate birthdayDate, LocalDate admissionDate,
                                 String address, String phoneNumber, String email,
-                                int taxpayerNumber, long BINumber, String job) {
+                                int taxpayerNumber, long BINumber, String job) throws IllegalArgumentException {
         if (name == null || name.trim().isEmpty()) {
             System.out.println("Name must be provided.");
             return; // Exit method, allowing the user to correct the input
@@ -79,7 +102,13 @@ public class Collaborator {
     }
 
 
-
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o The object to compare this instance with.
+     * @return {@code true} if the specified object is equal to this collaborator;
+     *         {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,45 +125,98 @@ public class Collaborator {
                 Objects.equals(job, that.job);
     }
 
+
+
+
+
+    /**
+     * Creates and returns a new instance of the Collaborator class with the same attribute values as this instance.
+     *
+     * @return A new Collaborator object with the same attribute values as this instance.
+     */
     @Override
-
-
     public Collaborator clone() {
         return new Collaborator(name, birthdayDate, admissionDate, address, phoneNumber, email, taxpayerNumber, BINumber,job);
     }
 
+
+    /**
+     * Returns the name of the collaborator.
+     *
+     * @return The name of the collaborator.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the birth date of the collaborator.
+     *
+     * @return The birth date of the collaborator.
+     */
     public LocalDate getBirthdayDate() {
         return birthdayDate;
     }
 
+    /**
+     * Returns the admission date of the collaborator.
+     *
+     * @return The admission date of the collaborator.
+     */
     public LocalDate getAdmissionDate() {
         return admissionDate;
     }
 
+    /**
+     * Returns the address of the collaborator.
+     *
+     * @return The address of the collaborator.
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Returns the phone number of the collaborator.
+     *
+     * @return The phone number of the collaborator.
+     */
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    /**
+     * Returns the email address of the collaborator.
+     *
+     * @return The email address of the collaborator.
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Returns the taxpayer number of the collaborator.
+     *
+     * @return The taxpayer number of the collaborator.
+     */
     public int getTaxpayerNumber() {
         return taxpayerNumber;
     }
 
+    /**
+     * Returns the BI (Identity Card) number of the collaborator.
+     *
+     * @return The BI (Identity Card) number of the collaborator.
+     */
     public long getBINumber() {
         return BINumber;
     }
 
+    /**
+     * Returns the job position of the collaborator.
+     *
+     * @return The job position of the collaborator.
+     */
     public String getJob() {
         return job;
     }
