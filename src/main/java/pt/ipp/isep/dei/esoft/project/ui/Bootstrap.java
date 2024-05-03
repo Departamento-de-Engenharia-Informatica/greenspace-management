@@ -6,9 +6,17 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.time.LocalDate;
 
+/**
+ * The {@code Bootstrap} class initializes the application by adding initial data to repositories.
+ * It adds task categories, organizations, users, jobs, and collaborators.
+ */
 public class Bootstrap implements Runnable {
 
-    //Add some task categories to the repository as bootstrap
+    /**
+     * Runs the bootstrap process to initialize the application.
+     * Adds task categories, organizations, users, jobs, and collaborators.
+     */
+    @Override
     public void run() {
         addTaskCategories();
         addOrganization();
@@ -17,9 +25,10 @@ public class Bootstrap implements Runnable {
         addCollaborators();
     }
 
+    /**
+     * Adds an organization to the repository.
+     */
     private void addOrganization() {
-        //TODO: add organizations bootstrap here
-        //get organization repository
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
         Organization organization = new Organization("This Company");
         organization.addEmployee(new Employee("admin@this.app"));
@@ -33,10 +42,10 @@ public class Bootstrap implements Runnable {
         organizationRepository.add(organization);
     }
 
+    /**
+     * Adds task categories to the repository.
+     */
     private void addTaskCategories() {
-        //TODO: add bootstrap Task Categories here
-
-        //get task category repository
         TaskCategoryRepository taskCategoryRepository = Repositories.getInstance().getTaskCategoryRepository();
         taskCategoryRepository.add(new TaskCategory("Analysis"));
         taskCategoryRepository.add(new TaskCategory("Design"));
@@ -46,19 +55,22 @@ public class Bootstrap implements Runnable {
         taskCategoryRepository.add(new TaskCategory("Deployment"));
         taskCategoryRepository.add(new TaskCategory("Maintenance"));
     }
+
+    /**
+     * Adds jobs to the repository.
+     */
     private void addJobs() {
-        //TODO: add bootstrap Jobs here
-        //get task category repository
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
         jobRepository.add(new Job("Gardener"));
         jobRepository.add(new Job("Arborist"));
         jobRepository.add(new Job("Park Ranger"));
         jobRepository.add(new Job("Urban Planner"));
     }
-    private void addCollaborators() {
-        //TODO: add bootstrap collaborators here
-        //get task category repository
 
+    /**
+     * Adds collaborators to the repository.
+     */
+    private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         collaboratorRepository.add(new Collaborator("João Silva", LocalDate.of(1985, 3, 15), LocalDate.of(2010, 7, 10), "Rua da Praia, nº 123, 4400-001 Porto", "912345678", "joao.silva@gmail.com", 123456789, 12345678L, "Gardener"));
         collaboratorRepository.add(new Collaborator("Ana Santos", LocalDate.of(1978, 1, 25), LocalDate.of(2005, 9, 5), "Avenida Central, nº 456, 1000-200 Lisboa", "934567890", "ana.santos@outlook.com", 987654321, 78901234L, "Arborist"));
@@ -67,9 +79,10 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.add(new Collaborator("Sofia Rodrigues", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, nº 567, 2000-300 Santarém", "925432109", "sofia.rodrigues@live.com.pt", 582037469, 87654321L, "Park Ranger"));
     }
 
-
+    /**
+     * Adds users to the repository.
+     */
     private void addUsers() {
-        //TODO: add Authentication users here: should be created for each user in the organization
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
         authenticationRepository.addUserRole(AuthenticationController.ROLE_ADMIN, AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE, AuthenticationController.ROLE_EMPLOYEE);
