@@ -45,7 +45,9 @@ public class CollaboratorRepository {
      * @return {@code true} if the collaborator is valid (i.e., not a duplicate), {@code false} otherwise.
      */
     private boolean validateCollaborator(Collaborator collaborator) {
-        return !collaborators.contains(collaborator);
+        // Check for duplicates based on taxpayer number or BI number
+        return !isTaxpayerNumberDuplicate(collaborator.getTaxpayerNumber()) &&
+                !isBINumberDuplicate(collaborator.getBINumber());
     }
 
     /**
@@ -81,4 +83,3 @@ public class CollaboratorRepository {
     }
 
 }
-
