@@ -3,100 +3,35 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-autonumber
-
-'hide footbox
 actor "Human Resource Manager" as HRM
 participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
-participant "organization\n:Organization" as ORG
 participant "job\n:Job" as JOB
 
 activate HRM
 
-        HRM -> UI : asks to create a new job
+HRM -> UI : asks to create a new job
 
-        activate UI
+activate UI
 
-            UI -> CTRL** : createJob
+UI -> CTRL** : createJob
 
-            UI -> CTRL : getEmployeeFromSession()
-            activate CTRL
+activate CTRL
 
-                CTRL -> _APP: getInstance()
-                activate _APP
-                    _APP -> CTRL: appSession
-                deactivate _APP
+CTRL -> PLAT: getJobRepository()
+PLAT --> CTRL: jobRepository
 
+CTRL -> JOB: createJob(jobName)
+JOB -> JOB: create(jobName)
+JOB -> JOB: addJob(job)
 
-                CTRL -> APP: getCurrentSession()
-                activate APP
+JOB --> CTRL : job
 
-                    APP --> CTRL: currentSession
-                deactivate APP
-
-                CTRL -> SESSAO: email = getUserEmail()
-                activate SESSAO
-
-                    SESSAO --> CTRL: email
-                deactivate SESSAO
-
-
-                CTRL -> PLAT: getOrganizationRepository(email)
-                activate PLAT
-
-                    PLAT --> CTRL: organizationRepository
-                deactivate PLAT
-
-
-                CTRL -> OrganizationRepository: getOrganizationByEmployeeEmail(email)
-                activate OrganizationRepository
-
-
-                    OrganizationRepository --> CTRL : organization
-                deactivate OrganizationRepository
-
-                CTRL -> ORG: getEmployeeByEmail(email)
-                activate ORG
-
-                    ORG --> CTRL : employee
-                deactivate ORG
-
-                CTRL --> CTRL : employee
-            deactivate CTRL
-
-            |||
-            CTRL -> ORG: createJob(jobName)
-            activate ORG
-
-                ORG -> JOB**: create(jobName)
-                ORG -> ORG: addJob (job)
-
-
-                activate ORG
-                    ORG -> ORG: validateJob(job)
-                    activate ORG
-                        ORG --> ORG
-                    deactivate ORG
-
-                    ORG --> ORG
-                deactivate ORG
-
-                ORG --> CTRL : job
-
-            deactivate ORG
-
-            CTRL --> UI: job
-            deactivate CTRL
-            UI --> HRM: displays operation success
-    deactivate UI
-
+CTRL --> UI: job
+deactivate CTRL
+UI --> HRM: displays operation success
+deactivate UI
 deactivate HRM
-
 @enduml

@@ -1,86 +1,82 @@
 @startuml
-
 'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
-skinparam linetype orto
+skinparam linetype ortho
 
-skinparam classAttributeIconSize 0
-
-'left to right direction
-
-class ApplicationSession
-{
-    + static getInstance()
-    + getCurrentSession()
-}
-
-class UserSession
-{
-    + getUserEmail()
-}
-
-class Employee {
-    - name
-    - email
-    - position
-    - phone
-}
-
-class Job {
-    - jobName
-}
-
-class Collaborator {
-    - name: String
-    - birthdayDate: String
-    - admissionDate: String
-    - address: String
-    - phoneNumber: int
-    - email: String
-    - taxpayerNumber: int
-    - BINumber: int
-}
-
-class JobRepository{
-    - List<Job> job
-    + Job getJob(jobName: String)
-    + boolean addCollaboratorToJob(jobName: String, collaborator: Collaborator)
+class CreateCollaboratorController {
+    - collaboratorRepository: CollaboratorRepository
+    - authenticationRepository: AuthenticationRepository
+    + CreateCollaboratorController()
+    + createCollaborator(name: String, birthdayDate: LocalDate, admissionDate: LocalDate, address: String, phoneNumber: String, email: String, taxpayerNumber: int, BINumber: long, job: String): Optional<Collaborator>
+    + getAvailableJobs(): List<Job>
+    + isTaxpayerNumberDuplicate(taxpayerNumber: int): boolean
+    + isBINumberDuplicate(biNumber: long): boolean
 }
 
 class CreateCollaboratorUI {
+    - controller: CreateCollaboratorController
+    - scanner: Scanner
+    + CreateCollaboratorUI()
+    + run(): void
+    + requestData(): void
+    + requestCollaboratorName(): String
+    + requestCollaboratorBirthdayDate(): LocalDate
+    + requestCollaboratorAdmissionDate(): LocalDate
+    + requestCollaboratorAddress(): String
+    + requestCollaboratorPhoneNumber(): String
+    + requestCollaboratorEmail(): String
+    + requestCollaboratorTaxpayerNumber(): int
+    + requestCollaboratorBINumber(): long
+    + requestCollaboratorJob(): String
 }
 
-class Repositories{
-    - jobRepository: JobRepository
-
-    + JobRepository getJobRepository()
+class JobRepository {
+    - jobList: List<Job>
+    + getJob(jobName: String): Job
+    + addCollaboratorToJob(jobName: String, collaborator: Collaborator): boolean
 }
 
-class CreateCollaboratorController {
-    + CreateCollaborator(name: String, birthdayDate: String, admissionDate: String, address: String, phoneNumber: int, email: String, taxpayerNumber: int, BINumber: int)
-    + RemoveCollaborator(BINumber: int)
+
+
+class Collaborator {
+    - name: String
+    - birthdayDate: LocalDate
+    - admissionDate: LocalDate
+    - address: String
+    - phoneNumber: String
+    - email: String
+    - taxpayerNumber: int
+    - BINumber: long
+    - job: String
+    + Collaborator(name: String, birthdayDate: LocalDate, admissionDate: LocalDate, address: String, phoneNumber: String, email: String, taxpayerNumber: int, BINumber: long, job: String)
+    + equals(o: Object): boolean
+    + clone(): Collaborator
+    + getName(): String
+    + getBirthdayDate(): LocalDate
+    + getAdmissionDate(): LocalDate
+    + getAddress(): String
+    + getPhoneNumber(): String
+    + getEmail(): String
+    + getTaxpayerNumber(): int
+    + getBINumber(): long
+    + getJob(): String
+    + addJob(job: Job): void
 }
 
-Repositories -> Repositories : instance
-ApplicationSession -> ApplicationSession : instance
+class CollaboratorRepository {
+    - collaborators: List<Collaborator>
+    + CollaboratorRepository()
+    + add(collaborator: Collaborator): Optional<Collaborator>
+    + getCollaborators(): List<Collaborator>
+    + isTaxpayerNumberDuplicate(taxpayerNumber: int): boolean
+    + isBINumberDuplicate(biNumber: long): boolean
+}
 
-CreateCollaboratorUI .> CreateCollaboratorController
-
-CreateCollaboratorController .> Repositories : repositories
-
-Repositories -> "1" JobRepository
-
-CreateCollaboratorController ..> JobRepository : JobRepository
-
-' Legenda
-JobRepository --> Job : Job
-Job --> Collaborator : collaborator
-
-ApplicationSession --> "1" UserSession : userSession
-
-' Adding collaborator functionality
-Employee --> "1" Collaborator : hrm
+CreateCollaboratorController --> CollaboratorRepository : collaboratorRepository
+CreateCollaboratorUI --> CreateCollaboratorController : controller
+CreateCollaboratorController --> JobRepository : jobRepository
+CollaboratorRepository --> Collaborator : collaborator
 
 @enduml

@@ -1,36 +1,69 @@
 @startuml
-skinparam monochrome true
-skinparam shadowing false
+title Create Collaborator Sequence Diagram
 
-actor "Human Resource Manager" as HM
+actor "Human Resource Manager" as HRM
 participant "CreateCollaboratorUI" as UI
 participant "CreateCollaboratorController" as Controller
-participant "Repositories" as Repos
+participant "JobController" as JobController
 participant "JobRepository" as JobRepo
+participant "CollaboratorRepository" as CollaboratorRepo
 participant "Job" as Job
 participant "Collaborator" as Collaborator
-participant "Employee" as Emp
 
-HM -> UI: initiates collaborator creation
+HRM -> UI: initiates collaborator creation
 activate UI
-UI -> Controller: CreateCollaborator(name, birthdayDate, admissionDate, address, phoneNumber, email, taxpayerNumber, BINumber)
-activate Controller
-Controller -> Repos: getJobRepository()
-activate Repos
-Repos -> JobRepo: getJob(jobName)
+UI -> JobController: requestAvailableJobs()
+activate JobController
+JobController -> JobRepo: retrieveAvailableJobs()
 activate JobRepo
-JobRepo -> Job: getJob(jobName)
-activate Job
-Controller -> JobRepo: addCollaboratorToJob(jobName, collaborator)
-JobRepo -> Collaborator: check if collaborator exists
-activate Collaborator
-JobRepo --> Controller: collaboratorExists (true/false)
-deactivate Collaborator
-Controller --> UI: collaborator added successfully
-deactivate Job
+JobRepo --> JobController: List<Job>
 deactivate JobRepo
-deactivate Repos
+JobController --> UI: jobList
+deactivate JobController
+
+UI -> Controller: requestCollaboratorName()
+activate Controller
+Controller -> UI: Enter collaborator name
 deactivate Controller
-UI --> HM: displays success message
+UI -> Controller: requestCollaboratorBirthdayDate()
+activate Controller
+Controller -> UI: Enter collaborator birthday date
+deactivate Controller
+UI -> Controller: requestCollaboratorAdmissionDate()
+activate Controller
+Controller -> UI: Enter collaborator admission date
+deactivate Controller
+UI -> Controller: requestCollaboratorAddress()
+activate Controller
+Controller -> UI: Enter collaborator address
+deactivate Controller
+UI -> Controller: requestCollaboratorPhoneNumber()
+activate Controller
+Controller -> UI: Enter collaborator phone number
+deactivate Controller
+UI -> Controller: requestCollaboratorEmail()
+activate Controller
+Controller -> UI: Enter collaborator email
+deactivate Controller
+UI -> Controller: requestCollaboratorTaxpayerNumber()
+activate Controller
+Controller -> UI: Enter collaborator taxpayer number
+deactivate Controller
+UI -> Controller: requestCollaboratorBINumber()
+activate Controller
+Controller -> UI: Enter collaborator BI number
+deactivate Controller
+UI -> CollaboratorRepo: isBINumberDuplicate()
+activate CollaboratorRepo
+CollaboratorRepo --> UI: isBINumberDuplicate (true/false)
+deactivate CollaboratorRepo
+UI -> Controller: requestData()
+activate Controller
+Controller -> Collaborator: createCollaborator()
+activate Collaborator
+Collaborator --> Controller: Optional<Collaborator>
+deactivate Collaborator
+Controller --> UI: Creates collaborator
+deactivate Controller
 deactivate UI
 @enduml
