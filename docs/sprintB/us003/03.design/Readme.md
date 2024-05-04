@@ -11,15 +11,14 @@
 | Step 1         | ... interacting with the actor?              | CreateCollaboratorUI | Pure Fabrication: UI components typically handle interactions with actors.                                            |
 |                | ... coordinating the US?                    | CreateCollaboratorController | Controller                                                                                                      |
 |                | ... instantiating a new Collaborator?       | Collaborator    | Creator (Rule 1): The Collaborator class is responsible for representing and creating new collaborator instances. |
-|                | ... knowing the user using the system?      | UserSession     | Information Expert: The UserSession class encapsulates user-related information, such as email.                   |
-|                |                                               | Employee        | Information Expert: The Employee class holds details about employees, including their email.                       |
 | Step 3         | ... saving the inputted data?               | Collaborator    | Information Expert: The Collaborator object holds the inputted data.                                                |
-| Step 4         | ... knowing the job categories to show?     | System          | Creator (Rule 1): The System is responsible for defining and managing task categories.                             |
-| Step 5         | ... saving the selected category?           | JobRepository   | Controller: The JobRepository interacts with the data layer to save the selected category for the job.             |
-| Step 7         | ... validating all data (local validation)?| Collaborator    | Information Expert: The Collaborator class performs validation on its own data.                                      |
-|                | ... validating all data (global validation)?| JobRepository | Controller: The JobRepository may perform global validation on the job before saving it.                             |
-|                | ... saving the created job?                 | JobRepository   | Controller: The JobRepository handles the persistence of job data.                                                  |
-| Step 8         | ... informing operation success?            | CreateCollaboratorUI | Controller: The UI component is responsible for displaying operation success to the user.                            |
+| Step 4         | ... retrieving the available job categories? | JobRepository | Controller: The JobRepository retrieves job categories from the data layer.                                         |
+|                | ... displaying the job categories?          | CreateCollaboratorUI | View: The UI component displays the available job categories to the user.                                           |
+| Step 5         | ... validating the selected job category?  | JobRepository   | Controller: The JobRepository validates the selected job category.                                                 |
+| Step 6         | ... informing operation success?            | CreateCollaboratorUI | Controller: The UI component informs the user about the success of the operation.                                    |
+| Step 7         | ... validating the collaborator data?       | Collaborator    | Information Expert: The Collaborator class performs validation on its own data.                                      |
+|                | ... validating the BI number?               | CollaboratorRepository | Controller: The CollaboratorRepository validates the uniqueness of the BI number.                                    |
+| Step 8         | ... informing operation success?            | CreateCollaboratorUI | Controller: The UI component informs the user about the success of the operation.                                    |
 
 
 ### Systematization ##
