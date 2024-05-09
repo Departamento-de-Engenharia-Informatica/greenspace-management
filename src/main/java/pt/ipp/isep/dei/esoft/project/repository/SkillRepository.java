@@ -1,39 +1,46 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SkillRepository {
-    private List<String> skills;
+    private List<Skill> skills;
+
     public SkillRepository() {
         this.skills = new ArrayList<>();
     }
 
     public void addSkill(String skillName) {
-        if (!skills.contains(skillName)) {
-            skills.add(skillName);
+        Skill skill = new Skill(skillName);
+        skills.add(skill);
+    }
+
+    public void removeSkill(int skillId) {
+        Skill skillToRemove = findSkillById(skillId);
+        if (skillToRemove != null) {
+            skills.remove(skillToRemove);
         }
     }
 
-    public void removeSkill(String skillName) {
-        skills.remove(skillName);
-    }
-
-    public void updateSkill(String skillNameOld, String skillNameNew) {
-        if (skills.contains(skillNameOld)) {
-            int index = skills.indexOf(skillNameOld);
-            skills.set(index, skillNameNew);
+    public void updateSkill(int skillId, String newSkillName) {
+        Skill skillToUpdate = findSkillById(skillId);
+        if (skillToUpdate != null) {
+            skillToUpdate.setSkillName(newSkillName);
         }
     }
 
-    public boolean hasSkill(String skillName) {
-        return skills.contains(skillName);
-    }
-
-    public List<String> getAllSkills() {
+    public List<Skill> getAllSkills() {
         return new ArrayList<>(skills);
     }
 
-    // Other methods
+    private Skill findSkillById(int skillId) {
+        for (Skill skill : skills) {
+            if (skill.getId() == skillId) {
+                return skill;
+            }
+        }
+        return null;
+    }
 }
