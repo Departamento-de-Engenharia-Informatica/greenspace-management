@@ -482,7 +482,7 @@ public class JobRepository {
 
 * A new option on the HRM menu options was added.
 
-* For demo purposes some collaborators are bootstrapped while system starts.
+* For demo purposes some jobs are bootstrapped while system starts.
 
 
 ## 7. Observations
