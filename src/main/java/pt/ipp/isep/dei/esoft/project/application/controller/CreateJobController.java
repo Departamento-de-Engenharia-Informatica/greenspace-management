@@ -126,6 +126,6 @@ public class CreateJobController {
         return jobRepository.getJobList();
     }
 
-    // Other methods...
+
 }
 
