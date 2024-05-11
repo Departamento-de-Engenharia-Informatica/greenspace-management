@@ -1,6 +1,6 @@
 // HOX! 11 May 2024: I placed all of the code I've done in here for now, for convenience.
 // Other Vehicle classes or controllers didn't exist yet.	-Justus
-
+/*
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateVehicleController; // doesn't exist yet
@@ -14,13 +14,14 @@ import java.util.List;
  * It retrieves the list of vehicles from the controller and displays them to the user.
  * The class implements the {@code Runnable} interface, allowing it to be executed as a thread.
  */
+/*
 public class DisplayVehiclesNeedingCheckupUI implements Runnable {
 
     /**
      * Runs the UI for displaying the list of vehicles needing checkup.
      * Retrieves the list of corresponding vehicles from the controller and displays them to the user.
      */
-    @Override
+ /*   @Override
     public void run() {
         displayVehiclesNeedingCheckupList();
     }
@@ -36,7 +37,7 @@ public class DisplayVehiclesNeedingCheckupUI implements Runnable {
 	// Also some of the functions should be placed in other classes. They are just here for now.
 	 
     // Printing the vehicles needing checkup
-    public void displayVehiclesNeedingCheckupList() {
+ /*   public void displayVehiclesNeedingCheckupList() {
         List<Vehicle> vehiclesNeedingCheckup = getVehiclesNeedingCheckup();
         if (vehiclesNeedingCheckup.isEmpty()) {
             System.out.println("No vehicles needing check-up at the moment.");
@@ -80,4 +81,4 @@ public class DisplayVehiclesNeedingCheckupUI implements Runnable {
         return vehiclesNeedingCheckup;
     }
 }
-
+*/

@@ -11,11 +11,17 @@ public class RegisterSkillUI implements Runnable{
     private final Scanner scanner;
     private final SkillRepository skillRepository;
 
+    /**
+     * Constructs a new RegisterSkillUI.
+     */
     public RegisterSkillUI() {
         this.scanner = new Scanner(System.in);
         this.skillRepository = Repositories.getInstance().getSkillRepository();
     }
 
+    /**
+     * Runs the user interface for skill registration.
+     */
     public void run() {
         while (true) {
             System.out.println("\n--- Skill Management System ---");
@@ -101,3 +107,5 @@ public class RegisterSkillUI implements Runnable{
         registerSkillUI.run();
     }
 }
+
+
