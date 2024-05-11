@@ -7,7 +7,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import java.util.List;
 import java.util.Scanner;
 
-public class RegisterSkillUI {
+public class RegisterSkillUI implements Runnable{
     private final Scanner scanner;
     private final SkillRepository skillRepository;
 

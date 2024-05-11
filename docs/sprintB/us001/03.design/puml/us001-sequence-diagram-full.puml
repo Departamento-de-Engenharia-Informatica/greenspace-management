@@ -47,7 +47,7 @@ activate ADM
             CTRL --> UI : skillList
         deactivate CTRL
 
-        UI --> ADM : displays skill list with "Add Skill" option
+        UI --> ADM : displays skill list with Add, Remove and Update Skill options
     deactivate UI
 
     ADM -> UI : selects to add a new skill
@@ -113,16 +113,10 @@ activate ADM
             CTRL --> UI : updatedSkillList
         deactivate CTRL
 
-        UI --> ADM : displays updated skill list with "Add Skill" option
+        UI --> ADM : displays updated skill list with Add, Remove and Update Skill options
     deactivate UI
 
     ADM -> UI : selects a skill to edit or remove
-    activate UI
-
-        UI --> ADM : requests action (edit, remove)
-    deactivate UI
-
-    ADM -> UI : confirms skill action
     activate UI
 
         UI -> CTRL : performAction(skillName, action)
@@ -173,7 +167,7 @@ activate ADM
             CTRL --> UI : updatedSkillList
         deactivate CTRL
 
-        UI --> ADM : displays updated skill list with "Add Skill" option
+        UI --> ADM : displays updated skill list with Add, Remove and Update Skill options
     deactivate UI
 
 deactivate ADM
