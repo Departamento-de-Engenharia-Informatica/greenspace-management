@@ -14,14 +14,22 @@ public class SkillRepository {
 
     public void addSkill(String skillName) {
         if (skillName == null || !skillName.matches("[a-zA-Z ]+")) {
-            System.out.println("Special characters or algarisms aren´t allowed in the skill name.");
-        }
-        else{
+            System.out.println("Special characters or digits are not allowed in the skill name.");
+        } else if (skillExists(skillName)) {
+            System.out.println("Skill already exists in the system.");
+        } else {
             Skill skill = new Skill(skillName);
             skills.add(skill);
         }
+    }
 
-
+    private boolean skillExists(String skillName) {
+        for (Skill skill : skills) {
+            if (skill.getSkillName().equalsIgnoreCase(skillName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
