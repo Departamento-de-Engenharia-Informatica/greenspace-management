@@ -13,9 +13,17 @@ public class SkillRepository {
     }
 
     public void addSkill(String skillName) {
-        Skill skill = new Skill(skillName);
-        skills.add(skill);
+        if (skillName == null || !skillName.matches("[a-zA-Z ]+")) {
+            System.out.println("Special characters or algarisms aren´t allowed in the skill name.");
+        }
+        else{
+            Skill skill = new Skill(skillName);
+            skills.add(skill);
+        }
+
+
     }
+
 
     public void removeSkill(int skillId) {
         Skill skillToRemove = findSkillById(skillId);

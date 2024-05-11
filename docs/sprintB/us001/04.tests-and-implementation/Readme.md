@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US001 - Register a SKill
 
 ## 4. Tests 
 
