@@ -11,9 +11,9 @@ public class RegisterSkillUI implements Runnable{
     private final Scanner scanner;
     private final SkillRepository skillRepository;
 
-    public RegisterSkillUI(SkillRepository skillRepository) {
+    public RegisterSkillUI() {
         this.scanner = new Scanner(System.in);
-        this.skillRepository = skillRepository;
+        this.skillRepository = Repositories.getInstance().getSkillRepository();
     }
 
     public void run() {
@@ -97,8 +97,7 @@ public class RegisterSkillUI implements Runnable{
     }
 
     public static void main(String[] args) {
-        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
-        RegisterSkillUI registerSkillUI = new RegisterSkillUI(skillRepository);
+        RegisterSkillUI registerSkillUI = new RegisterSkillUI();
         registerSkillUI.run();
     }
 }
