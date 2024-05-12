@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US006 - Generate a Team
 
 ## 3. Design - User Story Realization 
 
@@ -6,25 +6,32 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
-|:--------------|:------------------------------------------|:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1        | ... interacting with the HRM?              | CreateTeamProposalUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|               | ... coordinating the US?                   | TeamProposalController | Controller                                                                                                    |
-|               | ... instantiating a new TeamProposal?      | TeamProposal         | Creator (Rule 1): in the Domain Model, a TeamProposal represents the entity being created.                    |
-|               | ... knowing the user using the system?      | UserSession          | IE: cf. Authentication and Authorization (A&A) component documentation.                                      |
-|               | ... accessing employee data?                | EmployeeRepository   | IE: Manages access to employee information based on required skills for the team proposal.                    |
-|               | ... accessing team proposal data?           | TeamProposalRepository | IE: Manages persistence of team proposal data.                                                                 |
-| Step 2        | ... displaying team size and required skills? | System              | IE: HRM specifies the maximum and minimum team size and required skills.                                       |
-| Step 3        | ... saving the generated team proposal?     | TeamProposalRepository | IE: Persists the created team proposal object.                                                                 |
-| Step 4        | ... validating inputted data?               | TeamProposal         | IE: Performs local validation on team size and required skills.                                               |
-| Step 5        | ... informing operation success?            | CreateTeamProposalUI | IE: Responsible for user interactions and displaying operation success.                                        |
+| Interaction ID                                                                | Question: Which class is responsible for...                                     | Answer               | Justification (with patterns) |
+|:------------------------------------------------------------------------------|:--------------------------------------------------------------------------------|:---------------------|:------------------------------|
+| Step 1 : asks to create a new team                                            | ... interacting with the user?                                                  | TeamProposalUI       | Pure Fabrication              |
+|                                                                          | ... coordinating the US?                                                        | TeamProposalController | Controller                    |
+| Step 2 : requests data(team name, min team size, max team size, description  | ... displaying the UI for the user to input data?                               | TeamProposalUI         | Information Expert            |
+| Step 3 : types requested data.                                                | ... keeping the inputted data?                                                  | TeamProposalUI         | Information Expert            |
+| Step 4 : shows skill category list and asks to select one or more           | ...displaying the list of skills registered for the user to select one or more? | TeamProposalUI         | Information Expert            |
+| Step 5 : selects one or more skill(s)                                       | ... temporarily keeping the selected data?                                      | TeamProposalUI         | Information Expert            |
+| Step 6 : shows all data and requests confirmation.                            | ... displaying all information before submitting?                               | TeamProposalUI         | Information Expert            |    
+|                                                                               | ... displaying the form for the user to confirm?                                | TeamProposalUI         | Information Expert            |
+| Step 7 : confirms data.                                                       | ... generate a team proposal?                                                   | TeamProposalController | Pure Fabrication              |
+|                                                                          | ... saving the team proposal?                                                   | TeamProposalUI         | Information Expert            | 
+| Step 8 : shows team proposal and asks to confirm                            | ... displaying the team proposal before creating a team?                        | TeamProposalUI         | Information Experts           | 
+| Step 9 : confirms team proposal.                                              | ... instantiating a new team?                                                   | TeamProposalRepository       | Pure Fabrication              |
+|                                                                               | ... saving the team data?                                                       | TeamProposal                 | Information Expert            |
+|                                                                               | ... validating the data locally (mandatory data)?                               | TeamProposal                 | Information Expert            |
+|                                                                               | ... validating the data globally (duplicate data)?                              | TeamProposalRepository       | Information Expert            |
+|                                                                               | ... saving the created team?                                                    | TeamProposalRepository       | Information Expert            |
+| Step 10 : displays operation success.                                         | ... informing operation success?                                                | TeamProposalUI         | Information Expert            |
 
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
 - `TeamProposal`
-- `EmployeeRepository`
+- `CollaboratorRepository`
 - `TeamProposalRepository`
 
 Other software classes (i.e., Pure Fabrication) identified:
