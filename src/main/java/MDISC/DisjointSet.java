@@ -1,6 +1,5 @@
 package MDISC;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,4 +27,3 @@ public class DisjointSet {
         parentMap.put(root1, root2);
     }
 }
-

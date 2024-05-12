@@ -11,9 +11,9 @@ public class Route {
         this.distance = distance;
     }
 
-    public Route(String startPoint, String endPoint, int distance) {
-        this.startPoint = new Vertex(startPoint);
-        this.endPoint = new Vertex(endPoint);
+    public Route(String startPointId, String endPointId, int distance) {
+        this.startPoint = new Vertex(startPointId);
+        this.endPoint = new Vertex(endPointId);
         this.distance = distance;
     }
 
@@ -34,5 +34,3 @@ public class Route {
         return startPoint + " -> " + endPoint + ": " + distance;
     }
 }
-
-

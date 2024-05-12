@@ -1,17 +1,16 @@
 package MDISC;
 
-
 import java.util.Objects;
 
 public class Vertex {
-    private String id;
+    private String vertexId;
 
-    public Vertex(String id) {
-        this.id = id;
+    public Vertex(String vertexId) {
+        this.vertexId = vertexId;
     }
 
-    public String getId() {
-        return id;
+    public String getVertexId() {
+        return vertexId;
     }
 
     @Override
@@ -19,16 +18,16 @@ public class Vertex {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Vertex vertex = (Vertex) obj;
-        return Objects.equals(id, vertex.id);
+        return Objects.equals(vertexId, vertex.vertexId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(vertexId);
     }
 
     @Override
     public String toString() {
-        return id;
+        return vertexId;
     }
 }
