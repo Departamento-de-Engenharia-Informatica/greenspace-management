@@ -51,27 +51,8 @@ public class SkillRepositoryTest {
         assertEquals(0, skillRepository.getAllSkills().size());
     }
 
-    @Test
-    public void testRemoveSkill() {
-        // Add some skills to the repository
-        skillRepository.addSkill("Java");
-        skillRepository.addSkill("Python");
 
-        // Get the list of skills before removal
-        List<Skill> beforeRemoval = skillRepository.getAllSkills();
 
-        // Remove a skill from the repository
-        skillRepository.removeSkill(1); // Removing the skill at index 1 (Python)
-
-        // Get the list of skills after removal
-        List<Skill> afterRemoval = skillRepository.getAllSkills();
-
-        // Ensure the size of the list decreases by 1 after removal
-        assertEquals(beforeRemoval.size() - 1, afterRemoval.size());
-
-        // Ensure the removed skill is no longer present in the list
-        assertFalse(afterRemoval.contains(new Skill("Python")));
-    }
 
 
 
@@ -86,6 +67,26 @@ public class SkillRepositoryTest {
 
         // Ensure the skill is updated successfully
         assertEquals("JavaScript", skillRepository.getAllSkills().get(0).getSkillName());
+    }
+
+    @Test
+    public void testRemoveSkill() {
+        // Add some skills to the repository
+        skillRepository.addSkill("Java");
+        skillRepository.addSkill("Python");
+        // Get the list of skills before removal
+        List<Skill> beforeRemoval = skillRepository.getAllSkills();
+        // Remove a skill from the repository
+        skillRepository.removeSkill(2); // Removing the skill at index 2 (Python)
+
+        // Get the list of skills after removal
+        List<Skill> afterRemoval = skillRepository.getAllSkills();
+
+        // Ensure the size of the list decreases by 1 after removal
+        assertEquals(beforeRemoval.size() - 1, afterRemoval.size());
+
+        // Ensure the removed skill is no longer present in the list
+        assertFalse(afterRemoval.contains(new Skill("Python")));
     }
 
 
