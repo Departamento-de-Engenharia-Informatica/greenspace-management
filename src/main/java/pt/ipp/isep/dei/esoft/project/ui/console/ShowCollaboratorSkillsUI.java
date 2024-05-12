@@ -9,16 +9,25 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * User interface for displaying collaborator skills.
+ */
 public class ShowCollaboratorSkillsUI implements Runnable {
     private final ShowCollaboratorSkillsController controller;
     private final Scanner scanner;
 
+    /**
+     * Constructs an instance of {@code ShowCollaboratorSkillsUI}.
+     */
     public ShowCollaboratorSkillsUI() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         this.controller = new ShowCollaboratorSkillsController(collaboratorRepository);
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Runs the ShowCollaboratorSkillsUI, allowing users to view collaborator skills.
+     */
     @Override
     public void run() {
         System.out.println("--- Show Collaborator Skills ---");
@@ -31,7 +40,6 @@ public class ShowCollaboratorSkillsUI implements Runnable {
             }
         }
     }
-
 
     private Collaborator selectCollaborator() {
         List<Collaborator> collaborators = controller.getAllCollaborators();

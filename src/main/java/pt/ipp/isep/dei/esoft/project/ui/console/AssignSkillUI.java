@@ -1,4 +1,3 @@
-// AssignSkillUI.java
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillController;
@@ -11,10 +10,17 @@ import pt.ipp.isep.dei.esoft.project.repository.SkillRepository;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * User interface for assigning skills to collaborators.
+ */
 public class AssignSkillUI implements Runnable {
     private final AssignSkillController controller;
     private final Scanner scanner;
     private Collaborator selectedCollaborator;
+
+    /**
+     * Constructs an instance of {@code AssignSkillUI}.
+     */
     public AssignSkillUI() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
@@ -22,22 +28,26 @@ public class AssignSkillUI implements Runnable {
         this.scanner = new Scanner(System.in);
     }
 
-        @Override
-        public void run() {
-            System.out.println("--- Assign Skill to Collaborator ---");
-            Collaborator collaborator = selectCollaborator();
-            if (collaborator != null) {
-                chooseAction(collaborator);
-            } else {
-                addSkillToSelectedCollaborator();
-            }
+    /**
+     * Runs the AssignSkillUI, allowing users to assign skills to collaborators.
+     */
+    @Override
+    public void run() {
+        System.out.println("--- Assign Skill to Collaborator ---");
+        Collaborator collaborator = selectCollaborator();
+        if (collaborator != null) {
+            chooseAction(collaborator);
+        } else {
+            addSkillToSelectedCollaborator();
         }
+    }
+
     private void addSkillToSelectedCollaborator() {
         System.out.println("You haven't selected a collaborator yet. Do you want to add a skill without selecting a collaborator?");
         System.out.print("Enter 'Y' for Yes or 'N' for No: ");
         String choice = scanner.nextLine().trim().toUpperCase();
         if (choice.equals("Y")) {
-            Collaborator collaborator = selectedCollaborator; // Use o colaborador selecionado anteriormente
+            Collaborator collaborator = selectedCollaborator;
             Skill skill = selectSkill();
             if (skill != null) {
                 if (controller.assignSkillToCollaborator(collaborator, skill)) {
@@ -49,8 +59,6 @@ public class AssignSkillUI implements Runnable {
         }
     }
 
-
-
     private Collaborator selectCollaborator() {
         List<Collaborator> collaborators = controller.getAllCollaborators();
         System.out.println("Select a collaborator:");
@@ -61,7 +69,7 @@ public class AssignSkillUI implements Runnable {
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume newline character
         if (choice >= 1 && choice <= collaborators.size()) {
-            selectedCollaborator = collaborators.get(choice - 1); // Armazena o colaborador selecionado
+            selectedCollaborator = collaborators.get(choice - 1);
             return selectedCollaborator;
         } else {
             System.out.println("Invalid choice.");
@@ -128,5 +136,4 @@ public class AssignSkillUI implements Runnable {
                 System.out.println("Invalid action.");
         }
     }
-
 }
