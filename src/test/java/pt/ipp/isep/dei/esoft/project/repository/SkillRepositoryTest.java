@@ -61,7 +61,7 @@ public class SkillRepositoryTest {
         List<Skill> beforeRemoval = skillRepository.getAllSkills();
 
         // Remove a skill from the repository
-        skillRepository.removeSkill(2); // Removing the skill at index 2 (Python)
+        skillRepository.removeSkill(1); // Removing the skill at index 1 (Python)
 
         // Get the list of skills after removal
         List<Skill> afterRemoval = skillRepository.getAllSkills();
@@ -72,6 +72,8 @@ public class SkillRepositoryTest {
         // Ensure the removed skill is no longer present in the list
         assertFalse(afterRemoval.contains(new Skill("Python")));
     }
+
+
 
 
     @Test

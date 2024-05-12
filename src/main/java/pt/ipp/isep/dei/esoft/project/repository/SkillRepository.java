@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,10 +56,15 @@ public class SkillRepository {
      * @param skillId The ID of the skill to be removed.
      */
     public void removeSkill(int skillId) {
-        Skill skillToRemove = findSkillById(skillId);
-        if (skillToRemove != null) {
-            skills.remove(skillToRemove);
+        for (Skill skill : this.skills) {
+            if (skill.getId() == skillId) {
+                this.skills.remove(skill);
+                break;
+            }
         }
+    }
+    public List<Skill> getSkills() {
+        return new ArrayList<>(skills);
     }
 
     /**
@@ -97,4 +103,6 @@ public class SkillRepository {
         }
         return null;
     }
+
+
 }

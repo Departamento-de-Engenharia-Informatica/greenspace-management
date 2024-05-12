@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
+import pt.ipp.isep.dei.esoft.project.application.controller.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
@@ -23,6 +23,7 @@ public class Bootstrap implements Runnable {
         addUsers();
         addJobs();
         addCollaborators();
+        addSkills();
     }
 
     /**
@@ -78,6 +79,18 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.add(new Collaborator("Pedro Ferreira", LocalDate.of(1980, 9, 5), LocalDate.of(2012, 3, 15), "Rua dos Bosques, nº 234, 5000-600 Vila Real", "917654321", "pedro.ferreira@outlook.pt", 369258147, 21098765L, "Park Ranger"));
         collaboratorRepository.add(new Collaborator("Sofia Rodrigues", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, nº 567, 2000-300 Santarém", "925432109", "sofia.rodrigues@live.com.pt", 582037469, 87654321L, "Park Ranger"));
     }
+    /**
+     * Adds skills to the repository.
+     */
+    private void addSkills() {
+        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
+        skillRepository.addSkill("Java Programming");
+        skillRepository.addSkill("Web Development");
+        skillRepository.addSkill("Database Management");
+        skillRepository.addSkill("Project Management");
+        skillRepository.addSkill("Communication Skills");
+    }
+
 
     /**
      * Adds users to the repository.

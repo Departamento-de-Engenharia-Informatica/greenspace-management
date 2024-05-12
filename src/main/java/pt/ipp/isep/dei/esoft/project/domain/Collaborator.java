@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -18,6 +20,7 @@ public class Collaborator {
     private int taxpayerNumber;
     private long BINumber;
     private String job;
+    private List<Skill> skills;
 
     /**
      * Constructs a new {@code Collaborator} object with the specified attributes.
@@ -46,6 +49,15 @@ public class Collaborator {
         this.taxpayerNumber = taxpayerNumber;
         this.BINumber = BINumber;
         this.job = job;
+        this.skills = new ArrayList<>();
+    }
+
+    public void addSkill(Skill skill) {
+        skills.add(skill);
+    }
+
+    public List<Skill> getSkills() {
+        return new ArrayList<>(skills);
     }
 
     /**
@@ -219,6 +231,13 @@ public class Collaborator {
      */
     public String getJob() {
         return job;
+    }
+
+    public boolean hasSkill(Skill skill) {
+        return skills.contains(skill);
+    }
+    public void removeSkill(Skill skill) {
+        skills.remove(skill);
     }
 
 }

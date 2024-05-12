@@ -82,4 +82,8 @@ public class CollaboratorRepository {
                 .anyMatch(collaborator -> collaborator.getBINumber() == biNumber);
     }
 
+    public List<Collaborator> getAll() {
+        return new ArrayList<>(collaborators);
+    }
+
 }
