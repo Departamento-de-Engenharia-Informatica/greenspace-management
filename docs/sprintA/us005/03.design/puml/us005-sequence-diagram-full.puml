@@ -11,8 +11,8 @@ participant ":TeamProposalUI" as UI
 participant ":TeamProposalController" as Controller
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "teamRepository:\nTeamRepository" as TeamRepository
-participant "employeeRepository:\nEmployeeRepository" as EmployeeRepository
+participant "teamProposalRepository:\nTeamProposalRepository" as TeamProposalRepository
+participant "collaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
 participant "skillRepository:\nSkillRepository" as SkillRepository
 
 activate HRM
@@ -25,7 +25,7 @@ activate UI
     UI --> HRM : requests data (max team size, min team size, required skills)
 
     ' Create controller to handle team proposal generation
-    UI -> Controller** : create
+    UI -> Controller : createTeamProposalController()
 
     ' UI retrieves available skills from repositories
     UI -> Controller : getAvailableSkills()
@@ -43,7 +43,7 @@ activate UI
             PLAT --> Controller: skillRepository
         deactivate PLAT
 
-        Controller -> SkillRepository : getAvailableSkills()
+        Controller -> SkillRepository : getAllSkills()
         activate SkillRepository
 
             SkillRepository --> Controller : availableSkills
@@ -77,22 +77,22 @@ activate UI
 
         ' Controller interacts with repositories to fetch necessary data
         |||
-        Controller -> EmployeeRepository : getEmployeesWithSkills(selectedSkills)
-        activate EmployeeRepository
+        Controller -> CollaboratorRepository : getAllCollaborators()
+        activate CollaboratorRepository
 
-            EmployeeRepository -> TeamRepository : findAvailableTeams(maxTeamSize, minTeamSize)
-            activate TeamRepository
-
-                TeamRepository --> EmployeeRepository : availableTeams
-            deactivate TeamRepository
-
-            EmployeeRepository --> Controller : employeesWithSkills
-        deactivate EmployeeRepository
+            CollaboratorRepository --> Controller : allCollaborators
+        deactivate CollaboratorRepository
         |||
 
         ' Controller creates the team proposal
-        Controller -> Controller : createTeamProposal(employeesWithSkills, maxTeamSize)
+        Controller -> Controller : createTeamProposal(allCollaborators, selectedSkills, maxTeamSize)
         activate Controller
+
+            Controller -> TeamProposalRepository : addTeamProposal(teamProposal)
+            activate TeamProposalRepository
+
+                TeamProposalRepository --> Controller : teamProposal
+            deactivate TeamProposalRepository
 
             Controller --> Controller : teamProposal
         deactivate Controller
@@ -107,3 +107,4 @@ deactivate UI
 
 deactivate HRM
 @enduml
+

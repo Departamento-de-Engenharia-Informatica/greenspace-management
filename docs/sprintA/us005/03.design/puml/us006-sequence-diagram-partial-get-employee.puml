@@ -3,70 +3,47 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
+actor "HR Manager" as HRM
+participant ":TeamProposalUI" as UI
+participant ":TeamProposalController" as Controller
+participant ":CollaboratorRepository" as CollaboratorRepo
+participant ":TeamProposalRepository" as TeamProposalRepo
 
+activate HRM
 
-'hide footbox
-participant ":CreateTaskController" as CTRL
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
-participant "organization\n:Organization" as ORG
+HRM -> UI : submits data
+activate UI
 
-autonumber 14
--> CTRL : getEmployeeFromSession()
-autonumber 14.1
-activate CTRL
+UI -> UI : parseInputData(inputData)
+UI --> UI : maxTeamSize, minTeamSize, skillNames
 
-    group Get Employee
-        CTRL -> _APP: getInstance()
-        activate _APP
-            _APP -> CTRL: appSession
-        deactivate _APP
+UI -> UI : convertSkillNamesToSkills(skillNames)
+UI --> UI : requiredSkills
 
-        CTRL -> APP: getCurrentSession()
-        activate APP
+UI -> UI : confirmData(maxTeamSize, minTeamSize, requiredSkills)
+UI --> UI : confirmed
 
-            APP --> CTRL: currentSession
-        deactivate APP
+UI -> Controller : generateTeamProposal(maxTeamSize, minTeamSize, requiredSkills)
+activate Controller
 
-        CTRL -> SESSAO: email = getUserEmail()
-        activate SESSAO
+Controller -> CollaboratorRepo : getAllCollaborators()
+activate CollaboratorRepo
 
-            SESSAO --> CTRL: email
-        deactivate SESSAO
+CollaboratorRepo --> Controller : allCollaborators
+deactivate CollaboratorRepo
 
-        CTRL -> PLAT: getOrganizationRepository()
-        activate PLAT
+Controller -> Controller : createTeamProposal(allCollaborators, requiredSkills, maxTeamSize)
 
-            PLAT --> CTRL: organizationRepository
-        deactivate PLAT
+Controller -> TeamProposalRepo : addTeamProposal(teamProposal)
+activate TeamProposalRepo
 
-        CTRL -> OrganizationRepository: getOrganizationByUserEmail(email)
-        activate OrganizationRepository
+TeamProposalRepo --> Controller : teamProposal
+deactivate TeamProposalRepo
 
-            loop [for each organization
-                OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
-                activate ORG
+Controller --> UI : teamProposal
+deactivate Controller
 
-                     ORG --> OrganizationRepository : true/false
-                deactivate ORG
-            end
-
-            OrganizationRepository --> CTRL : organization
-
-        deactivate OrganizationRepository
-
-        CTRL -> ORG: getEmployeeByEmail(email)
-        activate ORG
-
-            ORG --> CTRL : employee
-        deactivate ORG
-    end
-    autonumber 15
-    <-- CTRL : employee
-deactivate CTRL
-
+UI --> HRM : displays team proposal
+deactivate UI
+deactivate HRM
 @enduml
