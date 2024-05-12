@@ -6,16 +6,17 @@
 
 **The rationale grounds on the SSD interactions and the identified input/output data.**
 
+### 3.1. Rationale
+
 | Interaction ID | Question: Which class is responsible for...      | Answer                                | Justification (with patterns)                       |
 | :------------- | :----------------------------------------------- | :------------------------------------ | :-------------------------------------------------- |
 | Step 1         | Interacting with the HRM?                        | RegisterSkillToCollaboratorUI         | UI, interacts with user.                            |
 | Step 2         | Knowing all skills in the system?                | SkillRepository                       | Pure Fabrication, IE.                               |
 | Step 2         | Knowing all collaborators in the system          | EmployeeRepository                    | Pure Fabrication, IE.                               |
-| Step 3         | interacting with the provided collaborator id    | RegisterSkillToCollaboratorController | Controller, mediates input from user to the system. |
-| Step 4         | showing available skills to the HRM              | RegisterSkillToCollaboratorUI         | UI, interacts with user.                            |
-| Step 5         | registering the skill                            | Colaborator                           | IE, has its own skills.                             |
-| Step 6         | Show HRM the collaborator and registered skills | registerSkillUI                       | UI, interacts with user                             |
-|                |                                                  |                                       |                                                     |
+| Step 3         | Interacting with the provided collaborator id    | RegisterSkillToCollaboratorController | Controller, mediates input from user to the system. |
+| Step 4         | Showing available skills to the HRM              | RegisterSkillToCollaboratorUI         | UI, interacts with user.                            |
+| Step 5         | Registering the skill                            | Collaborator                          | IE, has its own skills.                            |
+| Step 6         | Show HRM the collaborator and registered skills | RegisterSkillUI                       | UI, interacts with user.                            |
 
 ### Systematization
 
@@ -26,19 +27,46 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-* RegisterSkillToCollaboratorUI
-* RegisterSkillToCollaboratorController
+* AssignSkillController
+* SkillAssignment
+* SkillAssignmentRepository.java
+* CollaboratorRepository
 * SkillRepository
-* EmployeeRepository
+* AssignSkillUI
 
 ## 3.2. Sequence Diagram (SD)
 
-_In this section, it is suggested to present an UML dynamic view representing the sequence of interactions between software objects that allows to fulfill the requirements._
+his diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![US04-SD](docs/sprintA/us004/03.design/svg/us004-sequence-diagram.svg)
+![US04-SD](svg/us004-sequence-diagram-full.svg)
+
+### Split Diagrams
+
+The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
+
+It uses Interaction Occurrence (a.k.a. Interaction Use).
+
+**Split Diagram**
+![US04-SD](svg/us004-sequence-diagram-split.svg)
+
+**Add SKill to a Collaborator**
+![US04-SD](svg/us004-sequence-diagram-add-skill-to-collaborator.svg)
+
+**Get Collaborator Skills**
+
+![US04-SD](svg/us004-sequence-diagram-get-collaborator-skills.svg)
+
+**Get Collaboratores**
+
+![US04-SD](svg/us004-sequence-diagram-get-collaborators.svg)
+
+**Get SKills**
+![US04-SD](svg/us004-sequence-diagram-get-skills.svg)
+**Remove SKills**
+![US04-SD](svg/us004-sequence-diagram-remove-skills.svg)
 
 ## 3.3. Class Diagram (CD)
 
-_In this section, it is suggested to present an UML static view representing the main related software classes that are involved in fulfilling the requirements as well as their relations, attributes and methods._
 
-![US004-CD](us004-sequence-diagram.svg)
+
+![US004-CD](svg/us004-class-diagram.svg)
