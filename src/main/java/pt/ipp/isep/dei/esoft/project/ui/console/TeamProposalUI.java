@@ -9,7 +9,7 @@ import pt.ipp.isep.dei.esoft.project.repository.SkillRepository;
 
 import java.util.*;
 
-public class TeamProposalUI {
+public class TeamProposalUI implements Runnable{
 
     private final TeamProposalController teamProposalController;
     private final SkillRepository skillRepository;
@@ -20,7 +20,10 @@ public class TeamProposalUI {
         this.skillRepository = new SkillRepository();
         this.collaboratorRepository = new CollaboratorRepository();
     }
-
+    @Override
+    public void run() {
+        displayTeamProposalForm();
+    }
     public void displayTeamProposalForm() {
         System.out.println("Enter maximum team size, minimum team size, and required skills:");
         Scanner scanner = new Scanner(System.in);
