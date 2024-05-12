@@ -22,5 +22,4 @@ public class TeamProposalRepository {
         this.teamProposals.add(teamProposal);
     }
 
-    // Additional methods for repository operations
 }

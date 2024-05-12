@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.SkillAssignment;
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +35,17 @@ public class SkillAssignmentRepository {
      */
     public List<SkillAssignment> getAllSkillAssignments() {
         return new ArrayList<>(skillAssignments);
+    }
+
+    public List<SkillAssignment> getSkillAssignmentsBySkill(Skill skill) {
+        List<SkillAssignment> matchingAssignments = new ArrayList<>();
+        List<SkillAssignment> allAssignments = getAllSkillAssignments();
+
+        for (SkillAssignment assignment : allAssignments) {
+            if (assignment.getSkill().equals(skill)) {
+                matchingAssignments.add(assignment);
+            }
+        }
+        return matchingAssignments;
     }
 }

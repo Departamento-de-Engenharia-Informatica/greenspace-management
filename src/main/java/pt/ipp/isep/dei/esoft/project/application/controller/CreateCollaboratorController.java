@@ -8,6 +8,7 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.application.controller.*;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
