@@ -3,42 +3,29 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant ":CreateTaskController" as CTRL
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "taskCategoryRepository:\nTaskCategoryRepository" as TaskCategoryRepository
+actor "HR Manager" as HRM
+participant ":TeamProposalController" as Controller
+participant ":CollaboratorRepository" as CollaboratorRepo
+participant ":SkillRepository" as SkillRepo
 
-autonumber 12
--> CTRL : getTaskCategoryByDescription(taskCategoryDescription)
+activate HRM
 
-autonumber 12.1
+HRM -> Controller : submits data
+activate Controller
 
-activate CTRL
-    group Get Task Category
-        CTRL -> RepositorySingleton : getInstance()
-        activate RepositorySingleton
+Controller -> CollaboratorRepo : getAllCollaborators()
+activate CollaboratorRepo
 
-            RepositorySingleton --> CTRL: repositories
-        deactivate RepositorySingleton
+CollaboratorRepo --> Controller : allCollaborators
+deactivate CollaboratorRepo
 
-        CTRL -> PLAT : getTaskCategoryRepository()
-        activate PLAT
+Controller -> Controller : filterCollaboratorsWithSkills(allCollaborators, requiredSkills)
 
-            PLAT -> CTRL : taskCategoryRepository
-        deactivate PLAT
+Controller -> Controller : createTeamProposal(filteredCollaborators, requiredSkills, maxTeamSize)
 
-        CTRL -> TaskCategoryRepository : getTaskCategoryByDescription(taskCategoryDescription)
-        activate TaskCategoryRepository
+Controller --> HRM : teamProposal
+deactivate Controller
 
-            TaskCategoryRepository --> CTRL : taskCategory
-        deactivate TaskCategoryRepository
-
-    end group
-
-    autonumber 13
-    <-- CTRL : taskCategory
-
-deactivate CTRL
-
-
+HRM --> HRM : displays team proposal
+deactivate HRM
 @enduml

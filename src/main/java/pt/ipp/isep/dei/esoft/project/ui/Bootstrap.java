@@ -24,6 +24,7 @@ public class Bootstrap implements Runnable {
         addJobs();
         addCollaborators();
         addSkills();
+
     }
 
     /**
@@ -90,7 +91,6 @@ public class Bootstrap implements Runnable {
         skillRepository.addSkill("Project Management");
         skillRepository.addSkill("Communication Skills");
     }
-
 
     /**
      * Adds users to the repository.

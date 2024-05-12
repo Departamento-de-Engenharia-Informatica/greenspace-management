@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
+
 import java.util.List;
 
 public class VehicleRegistrationController {
@@ -27,5 +28,17 @@ public class VehicleRegistrationController {
     public Vehicle findVehicleByPlate(String plate) {
         return vehicleRepository.findVehicleByPlateID(plate);
     }
-}
 
+    public void updateCurrentKilometers(Vehicle vehicle, int newCurrentKm) {
+        if (vehicle == null) {
+            throw new IllegalArgumentException("Vehicle cannot be null.");
+        }
+        if (newCurrentKm < 0) {
+            throw new IllegalArgumentException("New current kilometers must be non-negative.");
+        }
+        // Update the vehicle's current kilometers
+        vehicle.setCurrentKm(newCurrentKm);
+        // Save the updated vehicle in the repository (if necessary)
+        vehicleRepository.updateVehicle(vehicle);
+    }
+}

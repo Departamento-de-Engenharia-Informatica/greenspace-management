@@ -3,32 +3,35 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant "organization\n:Organization" as ORG
-participant "task\n:Task" as TAREFA
+actor "HR Manager" as HRM
+participant ":TeamProposalUI" as UI
+participant ":TeamProposalController" as Controller
 
-autonumber 16
--> ORG: createTask(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee )
+activate HRM
 
-autonumber 16.1
-activate ORG
-    group Create Task
+HRM -> UI : requests team proposal generation
+activate UI
 
-        ORG -> TAREFA**: create(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee)
-        ORG -> ORG: addTask (task)
+UI --> HRM : requests data (max team size, min team size, required skills)
+deactivate UI
 
-        activate ORG
-            ORG -> ORG: validateTask(task)
-            activate ORG
-                ORG --> ORG
-            deactivate ORG
+HRM -> UI : enters required data (max team size, min team size, selected skills)
+activate UI
 
-            ORG --> ORG
-        deactivate ORG
-    end
+UI -> UI : parseInputData(inputData)
+UI --> UI : maxTeamSize, minTeamSize, skillNames
 
-    autonumber 17
-    <-- ORG : task
-deactivate ORG
+UI -> UI : convertSkillNamesToSkills(skillNames)
+UI --> UI : requiredSkills
 
+UI -> UI : confirmData(maxTeamSize, minTeamSize, requiredSkills)
+UI --> UI : confirmed
 
+UI -> UI : createTeamProposalController()
+UI --> UI : Controller instance
+deactivate UI
+
+HRM -> UI : submits data
+deactivate HRM
 @enduml
+

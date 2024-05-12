@@ -32,4 +32,14 @@ public class VehicleRepository {
         }
         return null;
     }
+
+    public void updateVehicle(Vehicle updatedVehicle) {
+        // Find the existing vehicle by plateID and update its details
+        for (int i = 0; i < vehicles.size(); i++) {
+            if (vehicles.get(i).getPlateID().equals(updatedVehicle.getPlateID())) {
+                vehicles.set(i, updatedVehicle);
+                break;
+            }
+        }
+    }
 }

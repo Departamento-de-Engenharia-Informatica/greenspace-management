@@ -25,15 +25,14 @@ public class MaintenanceRepository {
         return new ArrayList<>(maintenanceList);
     }
 
-    public List<Maintenance> getMaintenanceByVehiclePlateID(String plateID) {
-        List<Maintenance> result = new ArrayList<>();
+    public List<String> getMaintenanceByVehiclePlateID(String plateID) {
+        List<String> maintenanceHistory = new ArrayList<>();
         for (Maintenance maintenance : maintenanceList) {
-            // Check if the associated vehicle's plate ID matches the given plateID
             Vehicle vehicle = maintenance.getVehicle();
             if (vehicle != null && vehicle.getPlateID().equals(plateID)) {
-                result.add(maintenance);
+                maintenanceHistory.add("Maintenance KM: " + maintenance.getMaintenanceKm());
             }
         }
-        return result;
+        return maintenanceHistory;
     }
 }
