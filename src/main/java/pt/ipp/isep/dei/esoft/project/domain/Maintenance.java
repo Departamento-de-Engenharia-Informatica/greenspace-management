@@ -1,10 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-
-public class Maintenence {
+public class Maintenance {
     private int maintenanceKm;
+    private Vehicle vehicle; // Add a reference to Vehicle
 
-    public Maintenence(int maintenanceKm) {
+    public Maintenance(int maintenanceKm) {
         if (maintenanceKm < 0) {
             throw new IllegalArgumentException("Maintenance km must be non-negative");
         }
@@ -21,5 +21,12 @@ public class Maintenence {
         }
         this.maintenanceKm = maintenanceKm;
     }
-}
 
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+}

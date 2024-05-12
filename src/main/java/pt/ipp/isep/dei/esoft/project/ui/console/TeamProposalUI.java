@@ -25,13 +25,24 @@ public class TeamProposalUI implements Runnable{
         displayTeamProposalForm();
     }
     public void displayTeamProposalForm() {
-        System.out.println("Enter maximum team size, minimum team size, and required skills:");
+        System.out.println("Enter maximum team size; minimum team size; <required skills>:");
         Scanner scanner = new Scanner(System.in);
-        int maxTeamSize = scanner.nextInt();
-        int minTeamSize = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-        String skillsInput = scanner.nextLine();
+        String input = scanner.nextLine().trim();
 
+        // Split the input based on semicolons
+        String[] parts = input.split(";");
+
+        if (parts.length < 3) {
+            System.out.println("Invalid input format. Please provide maximum team size, minimum team size, and required skills.");
+            return;
+        }
+
+        // Extract max team size and min team size
+        int maxTeamSize = Integer.parseInt(parts[0].trim());
+        int minTeamSize = Integer.parseInt(parts[1].trim());
+
+        // Extract required skills
+        String skillsInput = parts[2].trim();
         Set<String> skillNames = parseSkillNames(skillsInput);
         Set<Skill> requiredSkills = convertSkillNamesToSkills(skillNames);
 
@@ -51,9 +62,16 @@ public class TeamProposalUI implements Runnable{
     }
 
     private Set<String> parseSkillNames(String skillsInput) {
-        skillsInput = skillsInput.trim();
-        skillsInput = skillsInput.substring(1, skillsInput.length() - 1); // Remove <>
-        return new HashSet<>(Arrays.asList(skillsInput.split(";")));
+        // Remove '<' and '>'
+        skillsInput = skillsInput.substring(1, skillsInput.length() - 1);
+        // Split skill names based on semicolons
+        String[] skillArray = skillsInput.split(";");
+        // Trim and add to set
+        Set<String> skillNames = new HashSet<>();
+        for (String skill : skillArray) {
+            skillNames.add(skill.trim());
+        }
+        return skillNames;
     }
 
     private Set<Skill> convertSkillNamesToSkills(Set<String> skillNames) {
