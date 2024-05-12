@@ -14,6 +14,9 @@ public class Repositories {
     private final SkillRepository skillRepository;
     private final SkillAssignmentRepository skillAssignmentRepository;
     private final TeamProposalRepository teamProposalRepository;
+    private final VehicleRepository vehicleRepository;
+    private final MaintenanceRepository maintenanceRepository;
+
 
 
     private Repositories() {
@@ -25,6 +28,8 @@ public class Repositories {
         skillRepository = new SkillRepository();
         skillAssignmentRepository = new SkillAssignmentRepository();
         teamProposalRepository = new TeamProposalRepository();
+        vehicleRepository = new VehicleRepository();
+        maintenanceRepository = new MaintenanceRepository();
     }
 
     public static Repositories getInstance() {
@@ -65,5 +70,12 @@ public class Repositories {
     public TeamProposalRepository getTeamProposalRepository() {
         return teamProposalRepository;
     }
+    public VehicleRepository getVehicleRepository() {
+        return vehicleRepository;
+    }
+    public MaintenanceRepository getMaintenanceRepository() {
+        return maintenanceRepository;
+    }
+
 
 }
