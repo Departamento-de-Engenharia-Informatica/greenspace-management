@@ -4,7 +4,7 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
 
-class Employee {
+class Collaborator {
     - name: String
     - email: String
     - position: String
@@ -36,28 +36,28 @@ class TeamProposal {
     + getRequiredSkills(): Set<Skill>
 }
 
-class EmployeeRepository {
+class CollaboratorRepository {
     + getEmployeesBySkills(requiredSkills: Set<Skill>): List<Employee>
 }
 
 class TeamProposalController {
     + generateTeamProposal(maxTeamSize: int, minTeamSize: int, requiredSkills: Set<Skill>): TeamProposal
 }
-class SkillRepositories{
+class SkillRepository{
     + getAvailableSkills() : List <Skill>
 }
 
 class TeamProposalUI{
 }
 
-Employee "1" --> "*" TeamProposal : creates
-SkillRepositories "1" --> "*" Skill : retrieves
-Repositories "1" --> "1" SkillRepositories : uses
+Collaborator "1" --> "*" TeamProposal : creates
+SkillRepository "1" --> "*" Skill : retrieves
+Repositories "1" --> "1" SkillRepository : uses
 TeamProposalUI "1" --> "1" TeamProposalController
 TeamProposalController "1" --> "1" Repositories
-Employee "1" --> "*" Skill : possesses
+Collaborator "1" --> "*" Skill : possesses
 TeamProposal "1" --> "*" Skill : requires
-EmployeeRepository "1" --> "*" Employee : retrieves
-Repositories "1" --> "1" EmployeeRepository : uses
+CollaboratorRepository "1" --> "*" Collaborator : retrieves
+Repositories "1" --> "1" CollaboratorRepository : uses
 
 @enduml

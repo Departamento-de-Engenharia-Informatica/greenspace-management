@@ -103,6 +103,14 @@ public class SkillRepository {
         }
         return null;
     }
+    public Skill getSkillByName(String skillName) {
+        for (Skill skill : skills) {
+            if (skill.getSkillName().equalsIgnoreCase(skillName)) {
+                return skill;
+            }
+        }
+        return null; // Skill not found
+    }
 
 
 }
