@@ -9,15 +9,24 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for JobRepository.
+ */
 public class JobRepositoryTest {
 
     private JobRepository jobRepository;
 
+    /**
+     * Sets up the test environment before each test method runs.
+     */
     @BeforeEach
     public void setUp() {
         jobRepository = new JobRepository();
     }
 
+    /**
+     * Tests adding a job to the repository and retrieving it by name.
+     */
     @Test
     public void testAddAndGetJobByName() {
         // Add a job to the repository
@@ -34,6 +43,9 @@ public class JobRepositoryTest {
         assertEquals(job, retrievedJob);
     }
 
+    /**
+     * Tests adding a duplicate job to the repository.
+     */
     @Test
     public void testAddDuplicateJob() {
         // Add a job to the repository
@@ -50,12 +62,18 @@ public class JobRepositoryTest {
         assertTrue(addedJob2.isEmpty());
     }
 
+    /**
+     * Tests attempting to retrieve a job by name that doesn't exist in the repository.
+     */
     @Test
     public void testGetJobByNameNonExistent() {
         // Attempt to retrieve a job that doesn't exist in the repository
         assertThrows(IllegalArgumentException.class, () -> jobRepository.getJobByName("Nonexistent Job"));
     }
 
+    /**
+     * Tests retrieving the list of jobs from the repository.
+     */
     @Test
     public void testGetJobList() {
         // Add some jobs to the repository
