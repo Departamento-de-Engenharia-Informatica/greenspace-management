@@ -52,11 +52,88 @@ public class VehicleRegistrationUI implements Runnable {
             }
         }
     }
+    private void registerNewVehicle(Scanner scanner) {
+        System.out.println("\nRegister a New Vehicle");
+
+        String plateID = null;
+        String model = null;
+        String type = null;
+        int tare = 0;
+        int grossWeight = 0;
+        int currentKm = 0;
+        String registerDate = null;
+        String acquisitionDate = null;
+        int checkupFrequencyKm = 0;
+        int lastMaintenanceKm = 0;
+
+        while (true) {
+            try {
+                System.out.print("Enter Plate ID: ");
+                plateID = scanner.nextLine();
+
+                System.out.print("Enter Model: ");
+                model = scanner.nextLine();
+
+                System.out.print("Enter Type: ");
+                type = scanner.nextLine();
+
+                System.out.print("Enter Tare Weight: ");
+                tare = readIntegerInput(scanner);
+                validateNonNegative(tare, "Tare Weight");
+
+                System.out.print("Enter Gross Weight: ");
+                grossWeight = readIntegerInput(scanner);
+                validatePositive(grossWeight, "Gross Weight");
+
+                System.out.print("Enter Current Kilometers: ");
+                currentKm = readIntegerInput(scanner);
+                validateNonNegative(currentKm, "Current Kilometers");
+
+                System.out.print("Enter Registration Date: ");
+                registerDate = scanner.nextLine();
+
+                System.out.print("Enter Acquisition Date: ");
+                acquisitionDate = scanner.nextLine();
+
+                System.out.print("Enter Checkup Frequency Kilometers: ");
+                checkupFrequencyKm = readIntegerInput(scanner);
+                validatePositive(checkupFrequencyKm, "Checkup Frequency Kilometers");
+
+                System.out.print("Enter Last Maintenance Kilometers: ");
+                lastMaintenanceKm = readIntegerInput(scanner);
+                validateNonNegative(lastMaintenanceKm, "Last Maintenance Kilometers");
+
+                // If all inputs are valid, break out of the loop
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid input: " + e.getMessage());
+                System.out.println("Please try again.");
+            }
+        }
+
+        // Register the vehicle using the controller with validated inputs
+        registrationController.registerVehicle(plateID, model, type, tare, grossWeight,
+                currentKm, registerDate, acquisitionDate, checkupFrequencyKm, lastMaintenanceKm);
+
+        System.out.println("Vehicle registered successfully.");
+    }
+    private void validateNonNegative(int value, String fieldName) {
+        if (value < 0) {
+            throw new IllegalArgumentException(fieldName + " must be non-negative.");
+        }
+    }
+
+    private void validatePositive(int value, String fieldName) {
+        if (value <= 0) {
+            throw new IllegalArgumentException(fieldName + " must be positive.");
+        }
+    }
 
     private void startVehicleRegistration(Scanner scanner) {
-        VehicleRegistrationUI vehicleRegistrationUI = new VehicleRegistrationUI();
-        vehicleRegistrationUI.startVehicleRegistration(scanner);
+        // Directly call registerNewVehicle method
+        registerNewVehicle(scanner);
     }
+
 
     private void updateCurrentKilometers(Scanner scanner) {
         try {
