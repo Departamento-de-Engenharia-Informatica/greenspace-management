@@ -17,6 +17,8 @@ public class VehicleRegistrationUI implements Runnable {
         this.registrationController = new VehicleRegistrationController(vehicleRepository);
     }
 
+    //FAZER VEHICULOS COMO COLABORATORS
+
     @Override
     public void run() {
         Scanner scanner = new Scanner(System.in);
