@@ -33,27 +33,37 @@ public class TeamProposalUI implements Runnable {
             System.out.println("Enter maximum team size; minimum team size; <required skills>:");
             String input = scanner.nextLine().trim();
 
-            // Split the input based on semicolons
-            String[] parts = input.split(";");
+            String[] parts = input.split("<");
 
-            if (parts.length < 3) {
-                System.out.println("Invalid input format. Please provide maximum team size, minimum team size, and required skills.");
-                continue; // Restart the loop to get valid input
+            String[] teamSize = parts[0].trim().split(";");
+            String skills = parts[1].trim();
+
+            int maxTeamSize = Integer.parseInt(teamSize[0]);
+            int minTeamSize = Integer.parseInt(teamSize[1]);
+
+            //trim the max and min
+
+            System.out.println(maxTeamSize+" "+minTeamSize);
+
+            if (teamSize.length < 2) {
+                System.out.println("Invalid input format. Please provide maximum team size, minimum team size.");
+                continue;
             }
 
-            // Extract max team size and min team size
-            int maxTeamSize = Integer.parseInt(parts[0].trim());
-            int minTeamSize = Integer.parseInt(parts[1].trim());
-
-            // Validate that max team size is greater than min team size
             if (maxTeamSize <= minTeamSize) {
                 System.out.println("Maximum team size must be greater than minimum team size. Please provide valid sizes.");
-                continue; // Restart the loop to get valid input
+                continue;
             }
 
-            // Extract required skills
-            String skillsInput = parts[2].trim();
-            Set<String> skillNames = parseRequiredSkills(skillsInput);
+            String[] modifiedString = formatString(skills);
+
+            for (int i = 0; i < modifiedString.length; i++) {
+                System.out.println(modifiedString[i]);
+            }
+            String[] stringArray = new String[999];
+
+            Set<String> skillNames = setRequiredSkills(stringArray);
+
             Set<Skill> requiredSkills = convertSkillNamesToSkills(skillNames);
 
             boolean confirmed = confirmData(maxTeamSize, minTeamSize, requiredSkills);
@@ -74,23 +84,40 @@ public class TeamProposalUI implements Runnable {
         }
     }
 
+    public static String[] formatString(String str){
+        char i = '<';
+        char f = '>';
 
-    private Set<String> parseRequiredSkills(String skillsInput) {
-        // Remove enclosing '<' and '>'
-        skillsInput = skillsInput.substring(1, skillsInput.length() - 1).trim();
-
-        // Split skills based on semicolons within the required skills section
-        String[] skillArray = skillsInput.split(";");
-
-        // Create a set to hold the extracted skill names
-        Set<String> skillNames = new HashSet<>();
-
-        for (String skill : skillArray) {
-            // Trim and add each skill name to the set
-            skillNames.add(skill.trim());
+        if (!str.isEmpty() && str.charAt(0) == i) {
+            str = str.substring(1);
         }
 
-        return skillNames;
+        // Remove specified character from the end
+        int lastIndex = str.length() - 1;
+        if (lastIndex >= 0 && str.charAt(lastIndex) == f) {
+            str = str.substring(0, lastIndex);
+        }
+
+        String[] strparts = str.split(";");
+
+        return strparts;
+    }
+
+
+    public static Set<String> setRequiredSkills(String[] stringArray) {
+        Set<String> skillSet = new HashSet<>();
+
+        // Iterate over the string array
+        for (String str : stringArray) {
+            // Add trimmed skill to the set (automatically handles duplicates)
+            skillSet.add(str.trim());
+        }
+
+        // Print the set of unique skills (optional)
+        System.out.println("Unique Skills:");
+        System.out.println(skillSet);
+
+        return skillSet;
     }
 
     private Set<Skill> convertSkillNamesToSkills(Set<String> skillNames) {
