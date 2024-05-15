@@ -1,0 +1,23 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":AssignSkillController" as CTRL
+
+autonumber 15
+-> CTRL : getCollaboratorSkills(collaboratorId)
+
+autonumber 15.1
+activate CTRL
+    group Get Collaborator Skills
+        CTRL -> EmployeeRepository : getCollaboratorSkills(collaboratorId)
+        activate EmployeeRepository
+            EmployeeRepository --> CTRL : collaboratorSkills
+        deactivate EmployeeRepository
+    end
+
+    autonumber 16
+    <-- CTRL : collaboratorSkills
+deactivate CTRL
+@enduml

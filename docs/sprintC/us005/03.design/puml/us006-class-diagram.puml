@@ -1,0 +1,63 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+class Collaborator {
+    - name: String
+    - email: String
+    - position: String
+    - skills: Set<Skill>
+    + Employee(name, email, position, skills)
+    + getName(): String
+    + getEmail(): String
+    + getPosition(): String
+    + getSkills(): Set<Skill>
+}
+
+class Skill {
+    - name: String
+    + Skill(name)
+    + getName(): String
+}
+
+class Repositories{
+}
+
+
+class TeamProposal {
+    - maxTeamSize: int
+    - minTeamSize: int
+    - requiredSkills: Set<Skill>
+    + TeamProposal(maxTeamSize, minTeamSize, requiredSkills)
+    + getMaxTeamSize(): int
+    + getMinTeamSize(): int
+    + getRequiredSkills(): Set<Skill>
+}
+
+class CollaboratorRepository {
+    + getEmployeesBySkills(requiredSkills: Set<Skill>): List<Employee>
+}
+
+class TeamProposalController {
+    + generateTeamProposal(maxTeamSize: int, minTeamSize: int, requiredSkills: Set<Skill>): TeamProposal
+}
+class SkillRepository{
+    + getAvailableSkills() : List <Skill>
+}
+
+class TeamProposalUI{
+}
+
+Collaborator "1" --> "*" TeamProposal : creates
+SkillRepository "1" --> "*" Skill : retrieves
+Repositories "1" --> "1" SkillRepository : uses
+TeamProposalUI "1" --> "1" TeamProposalController
+TeamProposalController "1" --> "1" Repositories
+Collaborator "1" --> "*" Skill : possesses
+TeamProposal "1" --> "*" Skill : requires
+CollaboratorRepository "1" --> "*" Collaborator : retrieves
+Repositories "1" --> "1" CollaboratorRepository : uses
+
+@enduml

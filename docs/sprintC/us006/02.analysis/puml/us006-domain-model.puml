@@ -1,0 +1,61 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+'title Domain Model
+
+'class Platform {
+'  -description
+'}
+
+class Organization {
+    name
+    vatNumber
+    website
+    phoneNumber
+    email
+}
+
+
+
+class Employe {
+    name
+    role
+    phoneNumber
+    email
+}
+class VFM {
+    ...
+}
+class Vehicle {
+    plateID
+    model
+    type
+    tare
+        gross Weight
+        current Km
+         register Date
+         acquisition Date
+         maintenance/Checkup Frequency (in Kms)
+         last maintenance date
+         next maintenance date
+}
+'class User {
+'    name
+'    email
+'    password
+'}
+
+Organization "1" - "0.*" Employe : has >
+Employe "1" -- "1" VFM : can be
+VFM "1" -- "*" Vehicle: manages
+
+@enduml
