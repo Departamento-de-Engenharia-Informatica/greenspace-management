@@ -1,0 +1,12 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+actor "Human Resource Manager" as HM
+participant "CreateCollaboratorUI" as UI
+
+HM -> UI: initiates collaborator creation
+activate UI
+UI --> HM: displays collaborator creation form
+deactivate UI
+@enduml

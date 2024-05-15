@@ -1,0 +1,49 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "HR Manager" as HRM
+participant ":TeamProposalUI" as UI
+participant ":TeamProposalController" as Controller
+participant ":CollaboratorRepository" as CollaboratorRepo
+participant ":TeamProposalRepository" as TeamProposalRepo
+
+activate HRM
+
+HRM -> UI : submits data
+activate UI
+
+UI -> UI : parseInputData(inputData)
+UI --> UI : maxTeamSize, minTeamSize, skillNames
+
+UI -> UI : convertSkillNamesToSkills(skillNames)
+UI --> UI : requiredSkills
+
+UI -> UI : confirmData(maxTeamSize, minTeamSize, requiredSkills)
+UI --> UI : confirmed
+
+UI -> Controller : generateTeamProposal(maxTeamSize, minTeamSize, requiredSkills)
+activate Controller
+
+Controller -> CollaboratorRepo : getAllCollaborators()
+activate CollaboratorRepo
+
+CollaboratorRepo --> Controller : allCollaborators
+deactivate CollaboratorRepo
+
+Controller -> Controller : createTeamProposal(allCollaborators, requiredSkills, maxTeamSize)
+
+Controller -> TeamProposalRepo : addTeamProposal(teamProposal)
+activate TeamProposalRepo
+
+TeamProposalRepo --> Controller : teamProposal
+deactivate TeamProposalRepo
+
+Controller --> UI : teamProposal
+deactivate Controller
+
+UI --> HRM : displays team proposal
+deactivate UI
+deactivate HRM
+@enduml
