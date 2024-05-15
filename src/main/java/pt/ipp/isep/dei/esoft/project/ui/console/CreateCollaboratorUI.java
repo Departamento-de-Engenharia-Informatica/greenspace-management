@@ -67,7 +67,7 @@ public class CreateCollaboratorUI implements Runnable {
     private void requestData() {
         collaboratorName = requestCollaboratorName();
         collaboratorBirthdayDate = requestCollaboratorBirthdayDate();
-        collaboratorAdmissionDate = requestCollaboratorAdmissionDate();
+        collaboratorAdmissionDate = requestCollaboratorAdmissionDate(collaboratorBirthdayDate);
         collaboratorAddress = requestCollaboratorAddress();
         collaboratorPhoneNumber = requestCollaboratorPhoneNumber();
         collaboratorEmail = requestCollaboratorEmail();
@@ -145,8 +145,8 @@ public class CreateCollaboratorUI implements Runnable {
         while (true) {
             System.out.print("Collaborator Email: ");
             email = scanner.nextLine();
-            if (email == null || !email.contains("@")) {
-                System.out.println("Email must contain '@'.");
+            if (email == null || !email.matches("\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b")) {
+                System.out.println("Email must be provided and in a valid format (something@something.something).");
             } else {
                 // Valid input, exit loop
                 break;
@@ -154,6 +154,7 @@ public class CreateCollaboratorUI implements Runnable {
         }
         return email;
     }
+
 
     /**
      * Requests the collaborator's phone number from the user.
@@ -206,14 +207,18 @@ public class CreateCollaboratorUI implements Runnable {
      * @return The admission date entered by the user.
      */
 
-    private LocalDate requestCollaboratorAdmissionDate() {
+    private LocalDate requestCollaboratorAdmissionDate(LocalDate birthdayDate) {
         LocalDate date;
         while (true) {
             System.out.print("Collaborator Admission Date (dd-mm-yyyy): ");
             String input = scanner.nextLine();
             try {
                 date = LocalDate.parse(input, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                break; // If parsing succeeds, exit loop
+                if (date.isBefore(birthdayDate)) {
+                    System.out.println("Admission date cannot be before the birthday date.");
+                    continue; // If admission date is before birthday date, prompt user again
+                }
+                break; // If parsing succeeds and admission date is valid, exit loop
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid date format. Please enter date in dd-mm-yyyy format.");
             }

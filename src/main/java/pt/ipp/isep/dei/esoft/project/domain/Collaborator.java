@@ -92,8 +92,8 @@ public class Collaborator {
             return;
         }
 
-        if (email == null || !email.contains("@")) {
-            System.out.println("Email must be provided and contain '@'.");
+        if (email == null || !email.matches("\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b")) {
+            System.out.println("Email must be provided and in a valid format (something@something.something).");
             return;
         }
 

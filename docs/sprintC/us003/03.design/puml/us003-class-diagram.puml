@@ -1,0 +1,82 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam linetype ortho
+
+class CreateCollaboratorController {
+    - collaboratorRepository: CollaboratorRepository
+    - authenticationRepository: AuthenticationRepository
+    + CreateCollaboratorController()
+    + createCollaborator(name: String, birthdayDate: LocalDate, admissionDate: LocalDate, address: String, phoneNumber: String, email: String, taxpayerNumber: int, BINumber: long, job: String): Optional<Collaborator>
+    + getAvailableJobs(): List<Job>
+    + isTaxpayerNumberDuplicate(taxpayerNumber: int): boolean
+    + isBINumberDuplicate(biNumber: long): boolean
+}
+
+class CreateCollaboratorUI {
+    - controller: CreateCollaboratorController
+    - scanner: Scanner
+    + CreateCollaboratorUI()
+    + run(): void
+    + requestData(): void
+    + requestCollaboratorName(): String
+    + requestCollaboratorBirthdayDate(): LocalDate
+    + requestCollaboratorAdmissionDate(): LocalDate
+    + requestCollaboratorAddress(): String
+    + requestCollaboratorPhoneNumber(): String
+    + requestCollaboratorEmail(): String
+    + requestCollaboratorTaxpayerNumber(): int
+    + requestCollaboratorBINumber(): long
+    + requestCollaboratorJob(): String
+}
+
+class JobRepository {
+    - jobList: List<Job>
+    + getJob(jobName: String): Job
+    + addCollaboratorToJob(jobName: String, collaborator: Collaborator): boolean
+}
+
+
+
+class Collaborator {
+    - name: String
+    - birthdayDate: LocalDate
+    - admissionDate: LocalDate
+    - address: String
+    - phoneNumber: String
+    - email: String
+    - taxpayerNumber: int
+    - BINumber: long
+    - job: String
+    + Collaborator(name: String, birthdayDate: LocalDate, admissionDate: LocalDate, address: String, phoneNumber: String, email: String, taxpayerNumber: int, BINumber: long, job: String)
+    + equals(o: Object): boolean
+    + clone(): Collaborator
+    + getName(): String
+    + getBirthdayDate(): LocalDate
+    + getAdmissionDate(): LocalDate
+    + getAddress(): String
+    + getPhoneNumber(): String
+    + getEmail(): String
+    + getTaxpayerNumber(): int
+    + getBINumber(): long
+    + getJob(): String
+    + addJob(job: Job): void
+}
+
+class CollaboratorRepository {
+    - collaborators: List<Collaborator>
+    + CollaboratorRepository()
+    + add(collaborator: Collaborator): Optional<Collaborator>
+    + getCollaborators(): List<Collaborator>
+    + isTaxpayerNumberDuplicate(taxpayerNumber: int): boolean
+    + isBINumberDuplicate(biNumber: long): boolean
+}
+
+CreateCollaboratorController --> CollaboratorRepository : collaboratorRepository
+CreateCollaboratorUI --> CreateCollaboratorController : controller
+CreateCollaboratorController --> JobRepository : jobRepository
+CollaboratorRepository --> Collaborator : collaborator
+
+@enduml

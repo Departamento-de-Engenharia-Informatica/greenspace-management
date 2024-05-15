@@ -22,8 +22,8 @@ public class Bootstrap implements Runnable {
         addOrganization();
         addUsers();
         addJobs();
-        addCollaborators();
         addSkills();
+        addCollaborators();
 
     }
 
