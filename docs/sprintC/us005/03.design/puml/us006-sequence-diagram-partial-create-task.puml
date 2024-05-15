@@ -1,0 +1,37 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "HR Manager" as HRM
+participant ":TeamProposalUI" as UI
+participant ":TeamProposalController" as Controller
+
+activate HRM
+
+HRM -> UI : requests team proposal generation
+activate UI
+
+UI --> HRM : requests data (max team size, min team size, required skills)
+deactivate UI
+
+HRM -> UI : enters required data (max team size, min team size, selected skills)
+activate UI
+
+UI -> UI : parseInputData(inputData)
+UI --> UI : maxTeamSize, minTeamSize, skillNames
+
+UI -> UI : convertSkillNamesToSkills(skillNames)
+UI --> UI : requiredSkills
+
+UI -> UI : confirmData(maxTeamSize, minTeamSize, requiredSkills)
+UI --> UI : confirmed
+
+UI -> UI : createTeamProposalController()
+UI --> UI : Controller instance
+deactivate UI
+
+HRM -> UI : submits data
+deactivate HRM
+@enduml
+

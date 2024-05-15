@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "HR Manager" as HRM
+participant ":TeamProposalController" as Controller
+participant ":CollaboratorRepository" as CollaboratorRepo
+participant ":SkillRepository" as SkillRepo
+
+activate HRM
+
+HRM -> Controller : submits data
+activate Controller
+
+Controller -> CollaboratorRepo : getAllCollaborators()
+activate CollaboratorRepo
+
+CollaboratorRepo --> Controller : allCollaborators
+deactivate CollaboratorRepo
+
+Controller -> Controller : filterCollaboratorsWithSkills(allCollaborators, requiredSkills)
+
+Controller -> Controller : createTeamProposal(filteredCollaborators, requiredSkills, maxTeamSize)
+
+Controller --> HRM : teamProposal
+deactivate Controller
+
+HRM --> HRM : displays team proposal
+deactivate HRM
+@enduml

@@ -57,9 +57,7 @@ public class Repositories {
         return jobRepository;
     }
 
-    public CollaboratorRepository getCollaboratorRepository() {
-        return collaboratorRepository;
-    }
+    public CollaboratorRepository getCollaboratorRepository() { return collaboratorRepository; }
 
     public SkillRepository getSkillRepository() {
         return skillRepository;
