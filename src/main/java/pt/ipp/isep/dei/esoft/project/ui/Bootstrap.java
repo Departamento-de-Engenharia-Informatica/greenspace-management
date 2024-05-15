@@ -25,6 +25,8 @@ public class Bootstrap implements Runnable {
         addSkills();
         addCollaborators();
         addColaboratorsWithSkills();
+        addVehicles();
+        addMaintenance();
 
     }
 
@@ -133,6 +135,29 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserWithRole("QAM", "qam@this.app", "pwd",
                 AuthenticationController.ROLE_QAM);
     }
+
+    private void addVehicles(){
+        VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
+        vehicleRepository.addVehicle(new Vehicle("20-AA-BB", "BMW", "Sedan", 0, 3000, 30000, "12-03-2019", "19-08-2020", 50000, 0));
+        vehicleRepository.addVehicle(new Vehicle("77-AO-KP", "Mercedes", "Truck", 5000, 6000, 100000, "19-10-2007", "13-10-2020", 70000, 50000));
+        vehicleRepository.addVehicle(new Vehicle("LL-99-BS", "BMW", "Sedan", 0, 2800, 70000, "11-01-2020", "25-09-2022", 50000, 20000));
+        vehicleRepository.addVehicle(new Vehicle("MR-AD-81", "Volvo", "Coupe", 0, 2200, 65000, "21-12-2015", "09-07-2017", 30000, 40000));
+        vehicleRepository.addVehicle(new Vehicle("ZZ-99-00", "Porsche", "SUV", 0, 1800, 15000, "09-12-2022", "01-01-2024", 20000, 0));
+    }
+
+    private void addMaintenance(){
+        MaintenanceRepository maintenanceRepository = Repositories.getInstance().getMaintenanceRepository();
+        maintenanceRepository.addMaintenance(new Maintenance(0, "12-07-2019", "20-AA-BB"));
+        maintenanceRepository.addMaintenance(new Maintenance(0, "20-07-2010", "77-AO-KP"));
+        maintenanceRepository.addMaintenance(new Maintenance(50000, "12-07-2015", "77-AO-KP"));
+        maintenanceRepository.addMaintenance(new Maintenance(0, "12-01-2020", "LL-99-BS"));
+        maintenanceRepository.addMaintenance(new Maintenance(20000, "29-10-2021", "LL-99-BS"));
+        maintenanceRepository.addMaintenance(new Maintenance(10000, "01-04-2016", "MR-AD-81"));
+        maintenanceRepository.addMaintenance(new Maintenance(40000, "12-07-2019", "MR-AD-81"));
+        maintenanceRepository.addMaintenance(new Maintenance(0, "10-12-2022", "ZZ-99-00"));
+
+    }
+
     private void addColaboratorsWithSkills() {
         SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
