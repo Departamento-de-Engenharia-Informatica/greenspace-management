@@ -1,0 +1,35 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD)- US005
+
+autonumber
+
+actor "HRM" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : asks to generate a new team
+    activate System
+
+        System --> Employee : requests data (i.e. number of employes, skills needed))
+    deactivate System
+
+    Employee -> System : types requested data
+    activate System
+
+        System --> Employee : shows the data and asks to confirm
+    deactivate System
+
+    Employee -> System : confirms data
+    activate System
+
+
+
+        System --> Employee : generate a team
+    deactivate System
+
+@enduml

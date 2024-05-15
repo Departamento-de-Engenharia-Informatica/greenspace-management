@@ -1,0 +1,27 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Fleet\nManager" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : requests to register a new vehicle
+    activate System
+
+        System --> Employee : requests data (e.g. Brand, Model, Type...)
+    deactivate System
+
+    Employee -> System : types requested data
+    activate System
+
+        System --> Employee : confirms successful vehicle creation
+    deactivate System
+
+@enduml

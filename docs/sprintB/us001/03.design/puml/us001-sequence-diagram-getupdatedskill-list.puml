@@ -1,0 +1,34 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":RegisterSkillController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "SkillRepository:\nSkillRepository" as SkillRepository
+
+autonumber 17
+-> CTRL : getSkills()
+
+autonumber 17.1
+activate CTRL
+    group Get Updated Skill List
+        CTRL -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
+            RepositorySingleton --> CTRL: repositories
+        deactivate RepositorySingleton
+        CTRL -> PLAT : getSkillRepository()
+        activate PLAT
+            PLAT --> CTRL : skillRepository
+        deactivate PLAT
+        CTRL -> SkillRepository : getSkills()
+        activate SkillRepository
+            SkillRepository --> CTRL : updatedSkillList
+        deactivate SkillRepository
+    end
+
+    autonumber 18
+    <-- CTRL : updatedSkillList
+deactivate CTRL
+@enduml

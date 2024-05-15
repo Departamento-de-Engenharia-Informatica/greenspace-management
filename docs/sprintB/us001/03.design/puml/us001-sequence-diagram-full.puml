@@ -1,0 +1,175 @@
+@startuml
+
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Human Resources Manager" as ADM
+participant ":RegisterSkillUI" as UI
+participant ":RegisterSkillController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "SkillRepository:\nSkillRepository" as SkillRepository
+participant "skill\n:Skill" as SKILL
+
+activate ADM
+
+    ADM -> UI : requests to manage skills
+
+    activate UI
+
+        UI -> CTRL** : manageSkills
+
+        UI -> CTRL : getSkills()
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
+
+                PLAT --> CTRL : skillRepository
+            deactivate PLAT
+
+            CTRL -> SkillRepository : getSkills()
+            activate SkillRepository
+
+                SkillRepository --> CTRL : skillList
+            deactivate SkillRepository
+
+            CTRL --> UI : skillList
+        deactivate CTRL
+
+        UI --> ADM : displays skill list with Add, Remove and Update Skill options
+    deactivate UI
+
+    ADM -> UI : selects to add a new skill
+    activate UI
+
+        UI --> ADM : requests new skill name
+    deactivate UI
+
+    ADM -> UI : types new skill name
+    activate UI
+
+        UI --> ADM : confirms new skill name
+    deactivate UI
+
+    ADM -> UI : confirms to add new skill
+    activate UI
+
+        UI -> CTRL : addSkill(skillName)
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
+
+                PLAT --> CTRL : skillRepository
+            deactivate PLAT
+
+            CTRL -> SkillRepository : addSkill(skillName)
+            activate SkillRepository
+
+                SkillRepository --> CTRL : result
+            deactivate SkillRepository
+
+            CTRL --> UI : result
+        deactivate CTRL
+
+        UI -> CTRL : getSkills()
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
+
+                PLAT --> CTRL : skillRepository
+            deactivate PLAT
+
+            CTRL -> SkillRepository : getSkills()
+            activate SkillRepository
+
+                SkillRepository --> CTRL : updatedSkillList
+            deactivate SkillRepository
+
+            CTRL --> UI : updatedSkillList
+        deactivate CTRL
+
+        UI --> ADM : displays updated skill list with Add, Remove and Update Skill options
+    deactivate UI
+
+    ADM -> UI : selects a skill to edit or remove
+    activate UI
+
+        UI -> CTRL : performAction(skillName, action)
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
+
+                PLAT --> CTRL : skillRepository
+            deactivate PLAT
+
+            CTRL -> SkillRepository : performAction(skillName, action)
+            activate SkillRepository
+
+                SkillRepository --> CTRL : result
+            deactivate SkillRepository
+
+            CTRL --> UI : result
+        deactivate CTRL
+
+        UI -> CTRL : getSkills()
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
+
+                PLAT --> CTRL : skillRepository
+            deactivate PLAT
+
+            CTRL -> SkillRepository : getSkills()
+            activate SkillRepository
+
+                SkillRepository --> CTRL : updatedSkillList
+            deactivate SkillRepository
+
+            CTRL --> UI : updatedSkillList
+        deactivate CTRL
+
+        UI --> ADM : displays updated skill list with Add, Remove and Update Skill options
+    deactivate UI
+
+deactivate ADM
+
+@enduml
