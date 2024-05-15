@@ -1,11 +1,12 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.Maintenance;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.MaintenanceRepository;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
 import java.util.List;
+import java.util.ArrayList;
+
 
 public class MaintenanceRegistrationController {
     private final MaintenanceRepository maintenanceRepository;
@@ -16,17 +17,18 @@ public class MaintenanceRegistrationController {
         this.vehicleRepository = vehicleRepository;
     }
 
-    public void registerMaintenance(Vehicle vehicle, int maintenanceKm) {
-        Maintenance maintenance = new Maintenance(maintenanceKm);
-        maintenance.setVehicle(vehicle);
+    public void registerMaintenance(String plateID, int maintenanceKm, String maintenanceDate) {
+        Maintenance maintenance = new Maintenance(maintenanceKm, maintenanceDate, plateID);
         maintenanceRepository.addMaintenance(maintenance);
     }
 
     public List<String> getMaintenanceHistoryByVehicle(String plateID) {
-        Vehicle vehicle = vehicleRepository.findVehicleByPlateID(plateID);
-        if (vehicle == null) {
-            return List.of(); // Return empty list if vehicle not found
+        List<Maintenance> maintenanceList = maintenanceRepository.getMaintenanceByVehiclePlateID(plateID);
+        List<String> maintenanceHistory = new ArrayList<>();
+        for (Maintenance maintenance : maintenanceList) {
+            maintenanceHistory.add("Maintenance KM: " + maintenance.getMaintenanceKm() +
+                    ", Date: " + maintenance.getMaintenanceDate());
         }
-        return maintenanceRepository.getMaintenanceByVehiclePlateID(plateID);
+        return maintenanceHistory;
     }
 }

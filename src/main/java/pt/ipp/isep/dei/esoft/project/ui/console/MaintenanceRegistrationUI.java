@@ -1,8 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.MaintenanceRegistrationController;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
 import java.util.List;
@@ -13,14 +13,10 @@ public class MaintenanceRegistrationUI implements Runnable {
     private final MaintenanceRegistrationController maintenanceRegistrationController;
 
     public MaintenanceRegistrationUI() {
-        try {
-            VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
-            maintenanceRegistrationController = new MaintenanceRegistrationController(
-                    Repositories.getInstance().getMaintenanceRepository(), vehicleRepository);
-        } catch (Exception e) {
-            System.err.println("Error initializing MaintenanceRegistrationUI: " + e.getMessage());
-            throw e;
-        }
+        this.maintenanceRegistrationController = new MaintenanceRegistrationController(
+                Repositories.getInstance().getMaintenanceRepository(),
+                Repositories.getInstance().getVehicleRepository()
+        );
     }
 
     @Override
@@ -39,10 +35,10 @@ public class MaintenanceRegistrationUI implements Runnable {
 
             switch (choice) {
                 case 1:
-                    registerMaintenance(scanner);
+                    displayVehicleListAndRegisterMaintenance(scanner);
                     break;
                 case 2:
-                    showPreviousMaintenances(scanner);
+                    displayVehicleListAndShowPreviousMaintenances(scanner);
                     break;
                 case 0:
                     continueMaintenance = false;
@@ -54,78 +50,84 @@ public class MaintenanceRegistrationUI implements Runnable {
         }
     }
 
-    private void registerMaintenance(Scanner scanner) {
-        try {
-            VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
-            List<Vehicle> vehicles = vehicleRepository.getAllVehicles();
-            if (vehicles.isEmpty()) {
-                System.out.println("No vehicles available. Please register a vehicle first.");
-                return;
-            }
+    private void displayVehicleListAndRegisterMaintenance(Scanner scanner) {
+        VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
+        List<Vehicle> vehicles = vehicleRepository.getAllVehicles();
 
-            System.out.println("\nRegister Maintenance");
-            System.out.println("Select a vehicle:");
-            displayVehicleList(vehicles);
-
-            System.out.print("Enter the index of the vehicle: ");
-            int vehicleIndex = readIntegerInput(scanner);
-            if (vehicleIndex < 0 || vehicleIndex >= vehicles.size()) {
-                System.out.println("Invalid vehicle index.");
-                return;
-            }
-
-            Vehicle selectedVehicle = vehicles.get(vehicleIndex);
-
-            System.out.print("Enter maintenance kilometers: ");
-            int maintenanceKm = readIntegerInput(scanner);
-
-            maintenanceRegistrationController.registerMaintenance(selectedVehicle, maintenanceKm);
-            System.out.println("Maintenance successfully registered.");
-        } catch (Exception e) {
-            System.err.println("Error registering maintenance: " + e.getMessage());
+        if (vehicles.isEmpty()) {
+            System.out.println("No vehicles available. Please register a vehicle first.");
+            return;
         }
+
+        System.out.println("\nSelect a Vehicle to Register Maintenance:");
+        displayVehicleList(vehicles);
+
+        System.out.print("Enter the index of the vehicle: ");
+        int vehicleIndex = readIntegerInput(scanner);
+
+        if (vehicleIndex < 0 || vehicleIndex >= vehicles.size()) {
+            System.out.println("Invalid vehicle index.");
+            return;
+        }
+
+        if(vehicleIndex == 0){
+            run();
+        }
+
+        Vehicle selectedVehicle = vehicles.get(vehicleIndex-1);
+
+        System.out.print("Enter maintenance kilometers: ");
+        int maintenanceKm = readIntegerInput(scanner);
+
+        System.out.print("Enter maintenance date (dd-MM-yyyy): ");
+        String maintenanceDate = scanner.nextLine();
+
+        maintenanceRegistrationController.registerMaintenance(selectedVehicle.getPlateID(), maintenanceKm, maintenanceDate);
+        System.out.println("Maintenance successfully registered for vehicle: " + selectedVehicle.getPlateID());
     }
 
-    private void showPreviousMaintenances(Scanner scanner) {
-        try {
-            VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
-            List<Vehicle> vehicles = vehicleRepository.getAllVehicles();
-            if (vehicles.isEmpty()) {
-                System.out.println("No vehicles available. Please register a vehicle first.");
-                return;
+    private void displayVehicleListAndShowPreviousMaintenances(Scanner scanner) {
+        VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
+        List<Vehicle> vehicles = vehicleRepository.getAllVehicles();
+
+        if (vehicles.isEmpty()) {
+            System.out.println("No vehicles available. Please register a vehicle first.");
+            return;
+        }
+
+        System.out.println("\nSelect a Vehicle to Show Previous Maintenances:");
+        displayVehicleList(vehicles);
+
+        System.out.print("Enter the index of the vehicle: ");
+        int vehicleIndex = readIntegerInput(scanner);
+
+        if (vehicleIndex < 1 || vehicleIndex >= vehicles.size() +1) {
+            System.out.println("Invalid vehicle index.");
+            return;
+        }
+
+        if(vehicleIndex == vehicles.size()+1){
+            run();
+        }
+
+        Vehicle selectedVehicle = vehicles.get(vehicleIndex-1);
+
+        List<String> maintenanceHistory = maintenanceRegistrationController.getMaintenanceHistoryByVehicle(selectedVehicle.getPlateID());
+        if (maintenanceHistory.isEmpty()) {
+            System.out.println("No maintenance history available for vehicle: " + selectedVehicle.getPlateID());
+        } else {
+            System.out.println("Maintenance History for Vehicle: " + selectedVehicle.getPlateID());
+            for (String maintenanceInfo : maintenanceHistory) {
+                System.out.println("- " + maintenanceInfo);
             }
-
-            System.out.println("\nShow Previous Maintenances");
-            System.out.println("Select a vehicle:");
-            displayVehicleList(vehicles);
-
-            System.out.print("Enter the index of the vehicle: ");
-            int vehicleIndex = readIntegerInput(scanner);
-            if (vehicleIndex < 0 || vehicleIndex >= vehicles.size()) {
-                System.out.println("Invalid vehicle index.");
-                return;
-            }
-
-            Vehicle selectedVehicle = vehicles.get(vehicleIndex);
-
-            List<String> maintenanceHistory = maintenanceRegistrationController.getMaintenanceHistoryByVehicle(selectedVehicle.getPlateID());
-            if (maintenanceHistory.isEmpty()) {
-                System.out.println("No maintenance history available for this vehicle.");
-            } else {
-                System.out.println("Maintenance History for Vehicle: " + selectedVehicle.getPlateID());
-                for (String maintenanceInfo : maintenanceHistory) {
-                    System.out.println("- " + maintenanceInfo);
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("Error showing previous maintenances: " + e.getMessage());
         }
     }
 
     private void displayVehicleList(List<Vehicle> vehicles) {
-        for (int i = 0; i < vehicles.size(); i++) {
-            System.out.println(i + ". " + vehicles.get(i).getPlateID());
+        for (int i = 1; i <= vehicles.size(); i++) {
+            System.out.println(i + ". " + vehicles.get(i-1).getPlateID());
         }
+        System.out.println("0. Exit");
     }
 
     private int readIntegerInput(Scanner scanner) {
@@ -137,5 +139,10 @@ public class MaintenanceRegistrationUI implements Runnable {
                 System.out.println("Invalid input. Please enter a valid integer value:");
             }
         }
+    }
+
+    public static void main(String[] args) {
+        MaintenanceRegistrationUI ui = new MaintenanceRegistrationUI();
+        ui.run();
     }
 }
