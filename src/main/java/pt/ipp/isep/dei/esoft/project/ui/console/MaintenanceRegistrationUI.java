@@ -123,6 +123,7 @@ public class MaintenanceRegistrationUI implements Runnable {
         }
     }
 
+
     private void displayVehicleList(List<Vehicle> vehicles) {
         for (int i = 1; i <= vehicles.size()+1; i++) {
             System.out.println(i + ". " + vehicles.get(i-1).getPlateID());

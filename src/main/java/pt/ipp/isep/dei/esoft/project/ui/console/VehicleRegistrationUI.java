@@ -127,6 +127,7 @@ public class VehicleRegistrationUI implements Runnable {
                     registeringAnother = false;
                 }
 
+
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input: " + e.getMessage());
