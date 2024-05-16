@@ -20,8 +20,8 @@ public class VFMUI implements Runnable {
         VehicleRegistrationUI vehicleRegistrationUI = new VehicleRegistrationUI();
         MaintenanceRegistrationUI maintenanceRegistrationUI = new MaintenanceRegistrationUI();
 
-        options.add(new MenuItem("Register a new vehicle", vehicleRegistrationUI));
-        options.add(new MenuItem("Register a new maintenance", maintenanceRegistrationUI));
+        options.add(new MenuItem("Vehicle Management", vehicleRegistrationUI));
+        options.add(new MenuItem("Maintenance Management", maintenanceRegistrationUI));
 
         int option;
         do {

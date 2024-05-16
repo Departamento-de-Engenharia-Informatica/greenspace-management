@@ -42,4 +42,13 @@ public class VehicleRepository {
             }
         }
     }
+
+    public boolean vehicleExists(String plate){
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.getPlateID().equals(plate)) {
+                return true; // Vehicle with specified plate ID exists
+            }
+        }
+        return false;
+    }
 }

@@ -5,7 +5,9 @@ import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.TeamProposal;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
+import pt.ipp.isep.dei.esoft.project.repository.SkillAssignmentRepository;
 import pt.ipp.isep.dei.esoft.project.repository.SkillRepository;
+import pt.ipp.isep.dei.esoft.project.domain.SkillAssignment;
 
 import java.util.*;
 
@@ -14,11 +16,13 @@ public class TeamProposalUI implements Runnable {
     private final TeamProposalController teamProposalController;
     private final SkillRepository skillRepository;
     private final CollaboratorRepository collaboratorRepository;
+    private final SkillAssignmentRepository skillAssignmentRepository;
 
     public TeamProposalUI() {
         this.teamProposalController = new TeamProposalController();
         this.skillRepository = new SkillRepository();
         this.collaboratorRepository = new CollaboratorRepository();
+        this.skillAssignmentRepository = new SkillAssignmentRepository(); // Inject SkillAssignmentRepository
     }
 
     @Override
@@ -33,30 +37,34 @@ public class TeamProposalUI implements Runnable {
             System.out.println("Enter maximum team size; minimum team size; <required skills>:");
             String input = scanner.nextLine().trim();
 
-            // Split the input based on semicolons
-            String[] parts = input.split(";");
+            String[] parts = input.split("<");
 
-            if (parts.length < 3) {
-                System.out.println("Invalid input format. Please provide maximum team size, minimum team size, and required skills.");
-                continue; // Restart the loop to get valid input
+            String[] teamSize = parts[0].trim().split(";");
+            String skills = parts[1].trim();
+
+            teamSize[0] = teamSize[0].trim();
+            teamSize[1] = teamSize[1].trim();
+
+            int maxTeamSize = Integer.parseInt(teamSize[0]);
+            int minTeamSize = Integer.parseInt(teamSize[1]);
+
+            if (teamSize.length < 2) {
+                System.out.println("Invalid input format. Please provide maximum team size, minimum team size.");
+                continue;
             }
 
-            // Extract max team size and min team size
-            int maxTeamSize = Integer.parseInt(parts[0].trim());
-            int minTeamSize = Integer.parseInt(parts[1].trim());
-
-            // Validate that max team size is greater than min team size
             if (maxTeamSize <= minTeamSize) {
                 System.out.println("Maximum team size must be greater than minimum team size. Please provide valid sizes.");
-                continue; // Restart the loop to get valid input
+                continue;
             }
 
-            // Extract required skills
-            String skillsInput = parts[2].trim();
-            Set<String> skillNames = parseRequiredSkills(skillsInput);
+            String[] modifiedString = formatString(skills);
+
+            Set<String> skillNames = setRequiredSkills(modifiedString);
+
             Set<Skill> requiredSkills = convertSkillNamesToSkills(skillNames);
 
-            boolean confirmed = confirmData(maxTeamSize, minTeamSize, requiredSkills);
+            boolean confirmed = confirmData(maxTeamSize, minTeamSize, skillNames);
 
             if (confirmed) {
                 TeamProposal teamProposal = teamProposalController.generateTeamProposal(maxTeamSize, minTeamSize, requiredSkills);
@@ -74,47 +82,82 @@ public class TeamProposalUI implements Runnable {
         }
     }
 
-
-    private Set<String> parseRequiredSkills(String skillsInput) {
-        // Remove enclosing '<' and '>'
-        skillsInput = skillsInput.substring(1, skillsInput.length() - 1).trim();
-
-        // Split skills based on semicolons within the required skills section
-        String[] skillArray = skillsInput.split(";");
-
-        // Create a set to hold the extracted skill names
-        Set<String> skillNames = new HashSet<>();
-
-        for (String skill : skillArray) {
-            // Trim and add each skill name to the set
-            skillNames.add(skill.trim());
+    public static String[] formatString(String str){
+        char f = '>';
+        // Remove specified character from the end
+        int lastIndex = str.length() - 1;
+        if (lastIndex >= 0 && str.charAt(lastIndex) == f) {
+            str = str.substring(0, lastIndex);
         }
 
-        return skillNames;
+        String[] strparts = str.split(";");
+
+        for (int i = 0; i < strparts.length; i++) {
+            strparts[i] = strparts[i].trim();
+        }
+
+        return strparts;
+    }
+
+    public static Set<String> setRequiredSkills(String[] stringArray) {
+        Set<String> skillSet = new HashSet<>();
+
+        // Iterate over the string array
+        for (String str : stringArray) {
+            // Add trimmed skill to the set (automatically handles duplicates)
+            skillSet.add(str.trim());
+        }
+
+        return skillSet;
     }
 
     private Set<Skill> convertSkillNamesToSkills(Set<String> skillNames) {
         Set<Skill> selectedSkills = new HashSet<>();
         for (String name : skillNames) {
-            // Retrieve skill from repository (adjust for case-insensitive matching)
-            Skill skill = skillRepository.getSkillByName(name.trim());
+            // Retrieve skill assignments by skill name from repository
+            Skill skill = getSkillFromAssignments(name.trim());
             if (skill != null) {
                 selectedSkills.add(skill);
             } else {
-                System.out.println("Skill not found: " + name);
+                System.out.println("Skill not found in assignments: " + name);
             }
         }
         return selectedSkills;
     }
 
-    private boolean confirmData(int maxTeamSize, int minTeamSize, Set<Skill> requiredSkills) {
+    private Skill getSkillFromAssignments(String skillName) {
+        List<SkillAssignment> assignments = skillAssignmentRepository.getSkillAssignmentsBySkillName(skillName);
+        if (!assignments.isEmpty()) {
+            // Return the skill from the first assignment (assuming one skill per assignment)
+            return assignments.get(0).getSkill();
+        }
+        return null;
+    }
+
+    private boolean confirmData(int maxTeamSize, int minTeamSize, Set<String> requiredSkills) {
         System.out.println("Confirm data:");
         System.out.println("Maximum Team Size: " + maxTeamSize);
         System.out.println("Minimum Team Size: " + minTeamSize);
         System.out.println("Required Skills:");
-        for (Skill skill : requiredSkills) {
-            System.out.println("- " + skill.getSkillName());
+
+        boolean allSkillsValid = true;
+
+        for (String skillName : requiredSkills) {
+            // Check if the skill exists in the repository
+            Skill skill = skillRepository.getSkillByName(skillName.trim());
+            if (skill == null) {
+                System.out.println("- Skill not found: " + skillName);
+                allSkillsValid = false;
+            } else {
+                System.out.println("- " + skill.getSkillName());
+            }
         }
+
+        if (!allSkillsValid) {
+            System.out.println("Some required skills are not found in the repository.");
+            return false;
+        }
+
         System.out.println("Proceed with team proposal generation? (yes/no)");
 
         Scanner scanner = new Scanner(System.in);
@@ -127,34 +170,41 @@ public class TeamProposalUI implements Runnable {
         System.out.println("Maximum Team Size: " + maxTeamSize);
         System.out.println("Minimum Team Size: " + minTeamSize);
         System.out.println("Required Skills:");
+
         for (Skill skill : requiredSkills) {
             System.out.println("- " + skill.getSkillName());
-        }
-        System.out.println("Proposed Team Members:");
 
-        List<String> teamMemberNames = new ArrayList<>();
-        for (Collaborator collaborator : collaboratorRepository.getAll()) {
-            if (collaboratorPossessesRequiredSkills(collaborator, requiredSkills)) {
-                teamMemberNames.add(collaborator.getName());
+            // Get all collaborators with this skill
+            List<Collaborator> collaboratorsWithSkill = getCollaboratorsWithSkill(skill);
+
+            if (collaboratorsWithSkill.isEmpty()) {
+                System.out.println("No collaborators assigned with this skill.");
+            } else {
+                System.out.println("Collaborators with this skill:");
+                for (Collaborator collaborator : collaboratorsWithSkill) {
+                    System.out.println("- " + collaborator.getName());
+                }
             }
         }
 
-        if (teamMemberNames.isEmpty()) {
-            System.out.println("No suitable collaborators found with required skills.");
-        } else {
-            System.out.println("Selected Team Members:");
-            for (String name : teamMemberNames) {
-                System.out.println("- " + name);
-            }
-            System.out.println("Total Team Members: " + teamMemberNames.size());
-        }
-    }
-
-    private boolean collaboratorPossessesRequiredSkills(Collaborator collaborator, Set<Skill> requiredSkills) {
-        return collaborator.getSkills().containsAll(requiredSkills);
+        // Proceed with displaying other details of the team proposal
     }
 
     private void displayOperationSuccess() {
         System.out.println("Team proposal created successfully!");
+    }
+
+    private List<Collaborator> getCollaboratorsWithSkill(Skill skill) {
+        List<SkillAssignment> assignments = skillAssignmentRepository.getSkillAssignmentsBySkill(skill);
+        List<Collaborator> collaboratorsWithSkill = new ArrayList<>();
+
+        for (SkillAssignment assignment : assignments) {
+            Collaborator collaborator = assignment.getCollaborator();
+            if (collaborator != null) {
+                collaboratorsWithSkill.add(collaborator);
+            }
+        }
+
+        return collaboratorsWithSkill;
     }
 }

@@ -38,6 +38,8 @@ public class CollaboratorRepository {
         return newCollaborator;
     }
 
+
+
     /**
      * Validates a collaborator to ensure it does not already exist in the repository.
      *
@@ -80,6 +82,17 @@ public class CollaboratorRepository {
     public boolean isBINumberDuplicate(long biNumber) {
         return collaborators.stream()
                 .anyMatch(collaborator -> collaborator.getBINumber() == biNumber);
+    }
+    /**
+     * Retrieves a collaborator by name from the repository.
+     *
+     * @param name The name of the collaborator to retrieve.
+     * @return An optional containing the collaborator if found, or empty if not found.
+     */
+    public Optional<Collaborator> getCollaboratorByName(String name) {
+        return collaborators.stream()
+                .filter(collaborator -> collaborator.getName().equalsIgnoreCase(name))
+                .findFirst();
     }
 
     public List<Collaborator> getAll() {
