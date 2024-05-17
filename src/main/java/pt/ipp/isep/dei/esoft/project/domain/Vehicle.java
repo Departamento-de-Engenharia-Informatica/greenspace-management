@@ -137,9 +137,9 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "plateID='" + plateID + '\'' +
-                ", model='" + model + '\'' +
+        return plateID +
+                "{'" +
+                "model='" + model + '\'' +
                 ", type='" + type + '\'' +
                 ", tare=" + tare +
                 ", grossWeight=" + grossWeight +

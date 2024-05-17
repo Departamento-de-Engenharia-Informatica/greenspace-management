@@ -36,7 +36,6 @@ public class VehicleRegistrationUI implements Runnable {
             System.out.println("\nVehicle Fleet Management Menu");
             System.out.println("1. Register Vehicle");
             System.out.println("2. Update Current Kilometers");
-            System.out.println("3. View All Vehicles");
             System.out.println("0. Exit");
 
             int choice = readIntegerInput(scanner);
@@ -48,10 +47,6 @@ public class VehicleRegistrationUI implements Runnable {
                 case 2:
                     updateCurrentKilometers(scanner);
                     break;
-                case 3:
-                    displayAllVehicles();
-                    break;
-
                 case 0:
                     continueRegistration = false;
                     break;
@@ -252,20 +247,6 @@ public class VehicleRegistrationUI implements Runnable {
             System.out.println("Current KM must be higher than last maintenance KM");
         }
     }
-    public static String checkStringType(String str) {
-        char firstChar = str.charAt(0);
-        char secondChar = str.charAt(1);
-
-        boolean isNumeric = Character.isDigit(firstChar) && Character.isDigit(secondChar);
-        boolean isAlphabetic = Character.isLetter(firstChar) && Character.isLetter(secondChar);
-
-        if (isNumeric) {
-            return "N";
-        } else if (isAlphabetic) {
-            return "A";
-        }
-        return "X";
-    }
 
     private void validateNonNegative(int value, String fieldName) {
         if (value < 0) {
@@ -310,18 +291,6 @@ public class VehicleRegistrationUI implements Runnable {
             System.out.println("Current kilometers updated successfully.");
         } catch (Exception e) {
             System.err.println("Error updating current kilometers: " + e.getMessage());
-        }
-    }
-
-    private void displayAllVehicles() {
-        List<Vehicle> vehicles = registrationController.getAllVehicles();
-        if (vehicles.isEmpty()) {
-            System.out.println("No vehicles registered.");
-        } else {
-            System.out.println("\nAll Vehicles:");
-            for (Vehicle vehicle : vehicles) {
-                System.out.println(vehicle);
-            }
         }
     }
 

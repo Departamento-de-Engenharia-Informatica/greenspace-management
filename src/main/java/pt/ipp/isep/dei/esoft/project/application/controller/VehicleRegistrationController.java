@@ -6,7 +6,7 @@ import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import java.util.List;
 
 public class VehicleRegistrationController {
-    private final VehicleRepository vehicleRepository;
+    private static VehicleRepository vehicleRepository;
 
     public VehicleRegistrationController(VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
@@ -21,7 +21,7 @@ public class VehicleRegistrationController {
         vehicleRepository.addVehicle(vehicle);
     }
 
-    public List<Vehicle> getAllVehicles() {
+    public static List<Vehicle> getAllVehicles() {
         return vehicleRepository.getAllVehicles();
     }
 
