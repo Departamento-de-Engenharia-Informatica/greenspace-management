@@ -1,61 +1,33 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.SkillAssignment;
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.SkillAssignment;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
+import java.util.ArrayList;
 
-/**
- * Repository for managing skill assignments.
- */
+
 public class SkillAssignmentRepository {
-    private List<SkillAssignment> skillAssignments;
 
-    /**
-     * Constructs a new SkillAssignmentRepository.
-     */
-    public SkillAssignmentRepository() {
-        this.skillAssignments = new ArrayList<>();
+    private Set<SkillAssignment> skillAssignments = new HashSet<>();
+
+    public void addSkillAssignment(SkillAssignment skillAssignment) {
+        skillAssignments.add(skillAssignment);
     }
 
-    /**
-     * Adds a skill assignment to the repository.
-     *
-     * @param assignment the skill assignment to be added
-     */
-    public void addSkillAssignment(SkillAssignment assignment) {
-        skillAssignments.add(assignment);
-    }
-
-    /**
-     * Retrieves all skill assignments from the repository.
-     *
-     * @return a list of all skill assignments
-     */
-    public List<SkillAssignment> getAllSkillAssignments() {
-        return new ArrayList<>(skillAssignments);
-    }
-
-    public List<SkillAssignment> getSkillAssignmentsBySkill(Skill skill) {
-        List<SkillAssignment> matchingAssignments = new ArrayList<>();
+    public Set<Collaborator> getCollaboratorsWithSkill(Skill skill) {
+        Set<Collaborator> collaborators = new HashSet<>();
         for (SkillAssignment assignment : skillAssignments) {
             if (assignment.getSkill().equals(skill)) {
-                matchingAssignments.add(assignment);
+                collaborators.add(assignment.getCollaborator());
             }
         }
-        return matchingAssignments;
+        return collaborators;
     }
-    public List<SkillAssignment> getSkillAssignmentsBySkillName(String skillName) {
-        List<SkillAssignment> matchingAssignments = new ArrayList<>();
-        for (SkillAssignment assignment : skillAssignments) {
-            Skill skill = assignment.getSkill();
-            if (skill != null && skill.getSkillName().equalsIgnoreCase(skillName)) {
-                matchingAssignments.add(assignment);
-            }
-        }
-        return matchingAssignments;
+    public List<SkillAssignment> getAllSkillAssignments() {
+        return new ArrayList<>(this.skillAssignments); // Return a copy of the list to prevent direct modification
     }
-
-
 }

@@ -1,11 +1,14 @@
 package pt.ipp.isep.dei.esoft.project.domain;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Represents an assignment of a skill to a collaborator.
  */
 public class SkillAssignment {
     private Collaborator collaborator;
     private Skill skill;
+    private static List<SkillAssignment> skillAssignments = new ArrayList<>();
+
 
     /**
      * Constructs a new SkillAssignment with the specified collaborator and skill.
@@ -16,6 +19,8 @@ public class SkillAssignment {
     public SkillAssignment(Collaborator collaborator, Skill skill) {
         this.collaborator = collaborator;
         this.skill = skill;
+        skillAssignments.add(this);
+
     }
 
     /**
@@ -35,4 +40,21 @@ public class SkillAssignment {
     public Skill getSkill() {
         return skill;
     }
+    public static List<Collaborator> getCollaboratorsWithSkill(Skill skill) {
+        List<Collaborator> collaboratorsWithSkill = new ArrayList<>();
+        for (SkillAssignment assignment : skillAssignments) {
+            if (assignment.getSkill().equals(skill)) {
+                collaboratorsWithSkill.add(assignment.getCollaborator());
+            }
+        }
+        return collaboratorsWithSkill;
+    }
+    /*public static Collaborator getCollaboratorWithSkill(Skill skill) {
+        for (SkillAssignment assignment : skillAssignments) {
+            if (assignment.getSkill().equals(skill)) {
+                return assignment.getCollaborator();
+            }
+        }
+        return null; // Skill not found, return null
+    }*/
 }

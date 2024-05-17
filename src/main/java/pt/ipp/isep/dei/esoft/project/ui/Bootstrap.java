@@ -27,8 +27,9 @@ public class Bootstrap implements Runnable {
         addColaboratorsWithSkills();
         addVehicles();
         addMaintenance();
-
+        addTeamProposals();
     }
+
 
     /**
      * Adds an organization to the repository.
@@ -82,6 +83,10 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.add(new Collaborator("Marta Oliveira", LocalDate.of(1992, 11, 10), LocalDate.of(2017, 4, 20), "Travessa das Flores, n 789, 3000-400 Coimbra", "920987654", "marta.oliveira@gmail.com", 246810753, 45678901, "Urban Planner"));
         collaboratorRepository.add(new Collaborator("Pedro Ferreira", LocalDate.of(1980, 9, 5), LocalDate.of(2012, 3, 15), "Rua dos Bosques, n 234, 5000-600 Vila Real", "917654321", "pedro.ferreira@outlook.pt", 369258147, 21098765, "Park Ranger"));
         collaboratorRepository.add(new Collaborator("Sofia Rodrigues", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432109", "sofia.rodrigues@live.com.pt", 582037469, 87654321, "Park Ranger"));
+        collaboratorRepository.add(new Collaborator("Sofia pedro", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432108", "sofia.rodrigues@live.com.pt", 582037468, 87654322, "Park Ranger"));
+        collaboratorRepository.add(new Collaborator("Sofia gomes", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432107", "sofia.rodrigues@live.com.pt", 582037467, 87654323, "Park Ranger"));
+        collaboratorRepository.add(new Collaborator("Sofia ribeiro", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432106", "sofia.rodrigues@live.com.pt", 582037466, 87654324, "Park Ranger"));
+
     }
 
 
@@ -98,6 +103,8 @@ public class Bootstrap implements Runnable {
         skillRepository.addSkill("Project Management");
         skillRepository.addSkill("Communication Skills");
         skillRepository.addSkill("tree pruner");
+        skillRepository.addSkill("license");
+
 
     }
 
@@ -166,11 +173,16 @@ public class Bootstrap implements Runnable {
         Skill javaProgramming = skillRepository.getSkillByName("Java Programming");
         Skill webDevelopment = skillRepository.getSkillByName("Web Development");
         Skill treePruner = skillRepository.getSkillByName("tree pruner");
+        Skill license = skillRepository.getSkillByName("license");
+
 
         Collaborator joaoSilva = collaboratorRepository.getCollaboratorByName("João Silva").orElse(null);
         Collaborator anaSantos = collaboratorRepository.getCollaboratorByName("Ana Santos").orElse(null);
         Collaborator pedroFerreira = collaboratorRepository.getCollaboratorByName("Pedro Ferreira").orElse(null);
         Collaborator sofiaRodrigues = collaboratorRepository.getCollaboratorByName("Sofia Rodrigues").orElse(null);
+        Collaborator sofiaPedro = collaboratorRepository.getCollaboratorByName("Sofia pedro").orElse(null);
+        Collaborator sofiaGomes = collaboratorRepository.getCollaboratorByName("Sofia gomes").orElse(null);
+
 
         if (javaProgramming != null && anaSantos != null) {
             SkillAssignment javaAssignment = new SkillAssignment(anaSantos, javaProgramming);
@@ -188,6 +200,15 @@ public class Bootstrap implements Runnable {
 
             SkillAssignment treePrunerAssignment2 = new SkillAssignment(sofiaRodrigues, treePruner);
             skillAssignmentRepository.addSkillAssignment(treePrunerAssignment2);
+
+            SkillAssignment treePrunerAssignment3 = new SkillAssignment(sofiaPedro, treePruner);
+            skillAssignmentRepository.addSkillAssignment(treePrunerAssignment3);
+
+            SkillAssignment treePrunerAssignment4 = new SkillAssignment(sofiaGomes, license);
+            skillAssignmentRepository.addSkillAssignment(treePrunerAssignment4);
         }
+    }
+    private void addTeamProposals(){
+        TeamProposalRepository teamProposalRepository = Repositories.getInstance().getTeamProposalRepository();
     }
 }

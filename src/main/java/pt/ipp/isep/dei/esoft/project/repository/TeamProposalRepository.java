@@ -22,4 +22,9 @@ public class TeamProposalRepository {
         this.teamProposals.add(teamProposal);
     }
 
+    public List<TeamProposal> getAllTeamProposals(){
+        return new ArrayList<>(teamProposals);
+    }
+
+
 }
