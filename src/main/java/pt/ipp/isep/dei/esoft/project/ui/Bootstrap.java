@@ -5,6 +5,11 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
 
 /**
  * The {@code Bootstrap} class initializes the application by adding initial data to repositories.
@@ -208,7 +213,37 @@ public class Bootstrap implements Runnable {
             skillAssignmentRepository.addSkillAssignment(treePrunerAssignment4);
         }
     }
-    private void addTeamProposals(){
+    private void addTeamProposals() {
         TeamProposalRepository teamProposalRepository = Repositories.getInstance().getTeamProposalRepository();
+        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
+        CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
+
+        // Fetch required skills
+        Skill skillJava = skillRepository.getSkillByName("Java Programming");
+        Skill skillWebDev = skillRepository.getSkillByName("Web Development");
+        Skill skilltreepruner = skillRepository.getSkillByName("tree pruner");
+
+        // Fetch some collaborators
+        Collaborator joaoSilva = collaboratorRepository.getCollaboratorByName("João Silva").orElse(null);
+        Collaborator anaSantos = collaboratorRepository.getCollaboratorByName("Ana Santos").orElse(null);
+        Collaborator martaOliveira = collaboratorRepository.getCollaboratorByName("Marta Oliveira").orElse(null);
+        Collaborator pedroFerreira = collaboratorRepository.getCollaboratorByName("Pedro Ferreira").orElse(null);
+
+        // Create sets of required skills for team proposals
+        Set<Skill> requiredSkills1 = new HashSet<>(Arrays.asList(skillJava, skillWebDev));
+        Set<Skill> requiredSkills2 = new HashSet<>(Arrays.asList(skilltreepruner));
+
+        // Create lists of selected collaborators for team proposals
+        List<Collaborator> selectedCollaborators1 = Arrays.asList(joaoSilva, anaSantos);
+        List<Collaborator> selectedCollaborators2 = Arrays.asList(martaOliveira, pedroFerreira);
+
+        // Create team proposal instances
+        TeamProposal teamProposal1 = new TeamProposal(3, 2, requiredSkills1, selectedCollaborators1);
+        TeamProposal teamProposal2 = new TeamProposal(4, 3, requiredSkills2, selectedCollaborators2);
+
+        // Add team proposals to the repository
+        teamProposalRepository.addTeamProposal(teamProposal1);
+        teamProposalRepository.addTeamProposal(teamProposal2);
     }
+
 }
