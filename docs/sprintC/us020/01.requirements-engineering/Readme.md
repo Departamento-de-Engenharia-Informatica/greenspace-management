@@ -37,7 +37,7 @@ area.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US020 - Register a GreenSpace" as a vehicle must exist before being listed for a check up.
+* There isn´t a dependencies on "US020 - Register a GreenSpace". 
 * 
 ### 1.5 Input and Output Data
 
