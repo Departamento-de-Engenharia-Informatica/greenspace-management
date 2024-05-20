@@ -21,6 +21,12 @@ on a specific date. Comparatively analyzing the Agenda entries and the
 pending tasks (to-do list) allows you to evaluate the work still to be done,
 the busyness of the week, and the work performed by a team in a green space
 at a determined time interval and on a specific date.
+> 
+> The Agenda is made
+up of entries that relate to a task (which was previously in the To-Do List),
+the team that will carry out the task, the vehicles/equipment assigned to
+the task, expected duration, and the status (Planned, Postponed, Canceled,
+Done).
 
 
 **From the client clarifications:**
@@ -45,11 +51,10 @@ Yes.
 >
 
 > **Question:**
-When it comes to To-Do List entries, we identified a state (planned, postponed, completed, canceled), a green space, a title, and a description as inputs for a To-Do List entry. But are there any more?
+Regarding the US022, when we are registering an entry to the agenda, are the three inputs (selecting an existing task from the to-do list, starting date, and finishing date) sufficient?
 > 
 
-> **Answer:**
-In the text you can find: the degree of urgency (High, Medium,and Low), and the approximate expected duration.
+> **Answer:** The starting date will be enough because the task already has the predicted duration.
 >
 
 > **Question:**
@@ -58,11 +63,25 @@ We also know that an Agenda entry has a target date, but is this target date sup
 > **Answer:**
 To-do list entries doesn't have dates!
 
+> **Question:** Can I add an entry that has a time period that already have an existing entry in the Agenda?
+
+> **Answer:** Yes, because:
+a) there are many parks to manage
+b) different tasks can be executed at same time in the same park.
+
 > **Question:**
-Finally, during the last client meeting, we became aware that some tasks are meant to be reoccurring rather than occasional. Is this something that should be asked on creating the task in the to-do list? If so, what inputs should we expect from the user? The task's frequency in days?
+When the GSM plans a task (that was previously in To-Do) into the Agenda, what aditional data/information does he need to input when planning?
 
 > **Answer:**
-For the current proof-of-concept there is no need to distinguish between recurring and occasional tasks.
+The starting date for the task.
+Later the GSM will be able to add the Team and vehicles (if required).
+
+
+> **Question:**
+We also know that an Agenda entry has a target date, but is this target date supposed to be inputted upon transferring a task from the to-do list to the agenda, or is it supposed to be inputted upon creating the task in the to-do list?
+
+> **Answer:**
+To-do list entries doesn't have dates!
 
 ### 1.3. Acceptance Criteria
 
@@ -70,11 +89,15 @@ For the current proof-of-concept there is no need to distinguish between recurri
 
  **AC2:** As a GSM i should be able to add a new entry in the agenda.
 
- **AC3:** ---
+ **AC3:** The new entry must be associated with a green space managed by the GSM.
+
+ **AC4:** The new entry must exist in the To-Do list.
 
 ### 1.4. Found out Dependencies
 
---
+• US20 - To choose the greenspace.
+
+• US21 - The entry for the agenda needs to be in the To-Do List.
 
 ### 1.5 Input and Output Data
 
