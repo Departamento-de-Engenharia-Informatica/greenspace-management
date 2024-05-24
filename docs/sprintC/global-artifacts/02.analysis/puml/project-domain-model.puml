@@ -171,6 +171,7 @@ VFM "1" -- "*" CheckUp: register
 VFM "1" -- "*" Vehicle: manages
 
 GSM "1" -- "1" Portal: manages and reads
+GSM "1" -- "*" Parks: creats
 
 Vehicle "1" -- "*" CheckUp : undergoes
 
