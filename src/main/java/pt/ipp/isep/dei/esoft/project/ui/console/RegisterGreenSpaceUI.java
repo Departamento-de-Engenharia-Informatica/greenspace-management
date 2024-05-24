@@ -49,7 +49,7 @@ public class RegisterGreenSpaceUI implements Runnable {
                 return;
         }
 
-        controller.registerGreenSpace(name, area, type);
+        controller.registerGreenSpace(name, area, type, userEmail);
         System.out.println("Green space registered successfully.");
 
         // Display all registered green spaces

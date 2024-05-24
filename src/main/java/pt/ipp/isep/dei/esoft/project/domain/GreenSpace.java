@@ -5,11 +5,13 @@ public abstract class GreenSpace {
         private String name;
         private double area;
         private GreenSpaceType type;
+        private String email;
 
-        public GreenSpace(String name, double area, GreenSpaceType type) {
+        public GreenSpace(String name, double area, GreenSpaceType type, String email) {
             this.name = name;
             this.area = area;
             this.type = type;
+            this.email = email;
         }
 
         public String getName() {
@@ -23,6 +25,9 @@ public abstract class GreenSpace {
         public GreenSpaceType getType() {
             return type;
         }
+        public String getEmail() {
+        return email;
+    }
 
         public abstract void displayDetails();
 }

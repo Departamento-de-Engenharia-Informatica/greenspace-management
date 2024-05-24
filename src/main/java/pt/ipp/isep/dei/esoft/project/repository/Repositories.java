@@ -16,6 +16,7 @@ public class Repositories {
     private final TeamProposalRepository teamProposalRepository;
     private final VehicleRepository vehicleRepository;
     private final MaintenanceRepository maintenanceRepository;
+    private final GreenSpaceRepository greenSpaceRepository;
 
 
 
@@ -30,6 +31,7 @@ public class Repositories {
         teamProposalRepository = new TeamProposalRepository();
         vehicleRepository = new VehicleRepository();
         maintenanceRepository = new MaintenanceRepository();
+        greenSpaceRepository = new GreenSpaceRepository();
     }
 
     public static Repositories getInstance() {
@@ -73,6 +75,9 @@ public class Repositories {
     }
     public MaintenanceRepository getMaintenanceRepository() {
         return maintenanceRepository;
+    }
+    public GreenSpaceRepository getGreenSpaceRepository() {
+        return greenSpaceRepository;
     }
 
 

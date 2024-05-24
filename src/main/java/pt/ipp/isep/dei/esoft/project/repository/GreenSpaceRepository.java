@@ -9,7 +9,9 @@ public class GreenSpaceRepository {
     private List<GreenSpace> greenSpaces = new ArrayList<>();
 
     public void addGreenSpace(GreenSpace greenSpace) {
+
         greenSpaces.add(greenSpace);
+
     }
 
     public List<GreenSpace> getGreenSpaces() {

@@ -33,6 +33,7 @@ public class Bootstrap implements Runnable {
         addVehicles();
         addMaintenance();
         addTeamProposals();
+        addGreenspaces();
     }
 
 
@@ -248,6 +249,17 @@ public class Bootstrap implements Runnable {
         // Add team proposals to the repository
         teamProposalRepository.addTeamProposal(teamProposal1);
         teamProposalRepository.addTeamProposal(teamProposal2);
+    }
+
+    private void addGreenspaces() {
+        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
+
+
+        greenSpaceRepository.addGreenSpace(new Garden("Jardim do Covelo", 1000, "Davidgsm@this.app"));
+        greenSpaceRepository.addGreenSpace(new MediumSizedPark("Parque Urbano de ermesinde", 1000, "gsm@this.app"));
+
+
+
     }
 
 }
