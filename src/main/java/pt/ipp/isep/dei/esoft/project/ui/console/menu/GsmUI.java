@@ -31,6 +31,7 @@ public class GsmUI implements Runnable {
         List<MenuItem> options = new ArrayList<>();
         options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI(userEmail)));
         options.add(new MenuItem("List all Green Spaces", new ListGreenSpacesUI(userEmail)));
+        options.add(new MenuItem("To-Do List", new ToDoListUI(userEmail)));
         // Add other menu options here as needed
 
         int option;
