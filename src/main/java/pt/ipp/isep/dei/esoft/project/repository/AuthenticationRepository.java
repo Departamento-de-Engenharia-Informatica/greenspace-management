@@ -29,4 +29,11 @@ public class AuthenticationRepository {
     public boolean addUserWithRole(String name, String email, String pwd, String roleId) {
         return authenticationFacade.addUserWithRole(name, email, pwd, roleId);
     }
+    public String getCurrentUserEmail() {
+        UserSession session = authenticationFacade.getCurrentUserSession();
+        if (session.isLoggedIn()) {
+            return session.getUserId().getEmail();
+        }
+        return null;
+    }
 }

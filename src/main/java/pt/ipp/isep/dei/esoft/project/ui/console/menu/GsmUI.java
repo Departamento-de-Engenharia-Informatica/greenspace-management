@@ -1,26 +1,25 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
-
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterGreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GsmUI implements Runnable {
 
-    private GreenSpaceRepository greenSpaceRepository;
-    private RegisterGreenSpaceController registerGreenSpaceController;
+    private final RegisterGreenSpaceController registerGreenSpaceController;
+    private final String userEmail;
 
     /**
      * Constructs a new {@code GsmUI} object.
      */
-    public GsmUI() {
-        greenSpaceRepository = new GreenSpaceRepository();
-        registerGreenSpaceController = new RegisterGreenSpaceController(greenSpaceRepository);
+    public GsmUI(String userEmail) {
+        GreenSpaceRepository greenSpaceRepository = new GreenSpaceRepository();
+        this.registerGreenSpaceController = new RegisterGreenSpaceController(greenSpaceRepository);
+        this.userEmail = userEmail;
     }
 
     /**
@@ -29,12 +28,12 @@ public class GsmUI implements Runnable {
      */
     @Override
     public void run() {
-        List<MenuItem> options = new ArrayList<MenuItem>();
-        options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI(registerGreenSpaceController)));
-        options.add(new MenuItem("List all Green Space", new ListGreenSpacesUI(registerGreenSpaceController)));
-        // Adicione outras opções de menu aqui, conforme necessário
+        List<MenuItem> options = new ArrayList<>();
+        options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI(registerGreenSpaceController, userEmail)));
+        options.add(new MenuItem("List all Green Spaces", new ListGreenSpacesUI(registerGreenSpaceController)));
+        // Add other menu options here as needed
 
-        int option = 0;
+        int option;
         do {
             option = Utils.showAndSelectIndex(options, "\n\n--- Green Space Manager Menu -------------------------");
 
@@ -45,8 +44,8 @@ public class GsmUI implements Runnable {
     }
 
     public static void main(String[] args) {
-        GsmUI gsmUI = new GsmUI();
+        // For testing purposes, provide a sample email
+        GsmUI gsmUI = new GsmUI("sample@example.com");
         gsmUI.run();
     }
 }
-

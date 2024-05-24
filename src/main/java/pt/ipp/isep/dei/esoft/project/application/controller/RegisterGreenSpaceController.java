@@ -7,10 +7,10 @@ import pt.ipp.isep.dei.esoft.project.domain.LargeSizedPark;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaceType;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 
-import java.util.List; // Adicionar a importação correta
+import java.util.List;
 
 public class RegisterGreenSpaceController {
-    private GreenSpaceRepository greenSpaceRepository;
+    private final GreenSpaceRepository greenSpaceRepository;
 
     public RegisterGreenSpaceController(GreenSpaceRepository greenSpaceRepository) {
         this.greenSpaceRepository = greenSpaceRepository;
@@ -34,8 +34,7 @@ public class RegisterGreenSpaceController {
         greenSpaceRepository.addGreenSpace(greenSpace);
     }
 
-    public List<GreenSpace> getAllGreenSpaces() { // Corrigir a importação
+    public List<GreenSpace> getAllGreenSpaces() {
         return greenSpaceRepository.getGreenSpaces();
     }
 }
-
