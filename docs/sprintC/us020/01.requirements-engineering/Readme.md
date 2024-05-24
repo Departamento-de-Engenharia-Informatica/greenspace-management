@@ -63,4 +63,3 @@ area.
 
 * The ability to list all registered green spaces, along with their details, is essential for effective management of green spaces.
 * The system should provide appropriate feedback to the user after successful registration of a green space, ensuring a positive user experience.
-* 
