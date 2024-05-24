@@ -7,6 +7,6 @@ public class LargeSizedPark extends GreenSpace {
 
     @Override
     public void displayDetails() {
-        System.out.println("Large-Sized Park: " + getName() + ", Area: " + getArea() + " sqm" + "Email" + getEmail());
+        System.out.println("Large-Sized Park: " + getName() + ", Area: " + getArea() + " sqm");
     }
 }

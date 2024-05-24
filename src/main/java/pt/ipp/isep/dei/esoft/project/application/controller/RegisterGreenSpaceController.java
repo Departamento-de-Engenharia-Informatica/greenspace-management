@@ -10,13 +10,13 @@ import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import java.util.List;
 
 public class RegisterGreenSpaceController {
-    private final GreenSpaceRepository greenSpaceRepository;
 
-    public RegisterGreenSpaceController(GreenSpaceRepository greenSpaceRepository) {
-        this.greenSpaceRepository = greenSpaceRepository;
+
+    public RegisterGreenSpaceController() {
+
     }
 
-    public void registerGreenSpace(String name, double area, GreenSpaceType type,String email) {
+    public static void registerGreenSpace(String name, double area, GreenSpaceType type, String email) {
         GreenSpace greenSpace;
         switch (type) {
             case GARDEN:
@@ -31,10 +31,10 @@ public class RegisterGreenSpaceController {
             default:
                 throw new IllegalArgumentException("Invalid Green Space Type");
         }
-        greenSpaceRepository.addGreenSpace(greenSpace);
+        GreenSpaceRepository.addGreenSpace(greenSpace);
     }
 
-    public List<GreenSpace> getAllGreenSpaces() {
-        return greenSpaceRepository.getGreenSpaces();
+    public static List<GreenSpace> getAllGreenSpaces() {
+        return GreenSpaceRepository.getGreenSpaces();
     }
 }

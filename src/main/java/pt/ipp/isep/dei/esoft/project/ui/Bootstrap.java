@@ -93,6 +93,9 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.add(new Collaborator("Sofia gomes", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432107", "sofia.rodrigues@live.com.pt", 582037467, 87654323, "Park Ranger"));
         collaboratorRepository.add(new Collaborator("Sofia ribeiro", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432106", "sofia.rodrigues@live.com.pt", 582037466, 87654324, "Park Ranger"));
 
+
+
+
     }
 
 
@@ -255,8 +258,19 @@ public class Bootstrap implements Runnable {
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
 
 
-        greenSpaceRepository.addGreenSpace(new Garden("Jardim do Covelo", 1000, "Davidgsm@this.app"));
-        greenSpaceRepository.addGreenSpace(new MediumSizedPark("Parque Urbano de ermesinde", 1000, "gsm@this.app"));
+        GreenSpaceRepository.addGreenSpace(new Garden("Jardim do Covelo", 1000, "Davidgsm@this.app"));
+        GreenSpaceRepository.addGreenSpace(new MediumSizedPark("Parque das Planicies", 10313200, "Davidgsm@this.app"));
+        GreenSpaceRepository.addGreenSpace(new LargeSizedPark("Parque das virtudes", 123100, "Davidgsm@this.app"));
+
+        GreenSpaceRepository.addGreenSpace(new Garden("Exposende", 103200, "gsm@this.app"));
+        GreenSpaceRepository.addGreenSpace(new MediumSizedPark("Parque Urbano de ermesinde", 1000, "gsm@this.app"));
+        GreenSpaceRepository.addGreenSpace(new LargeSizedPark("parque gigante", 324242, "gsm@this.app"));
+
+//        // Check the contents of the repository
+//        List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpaces();
+//        System.out.println("Contents of the GreenSpace repository:");
+//        for (GreenSpace gs : greenSpaces) {
+//        System.out.println(gs.getName() + ", " + gs.getType() + ", " + gs.getEmail());
 
 
 

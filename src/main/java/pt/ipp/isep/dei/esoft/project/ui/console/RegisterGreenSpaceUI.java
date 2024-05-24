@@ -8,12 +8,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class RegisterGreenSpaceUI implements Runnable {
-    private final RegisterGreenSpaceController controller;
+
     private final Scanner scanner;
     private final String userEmail;
 
-    public RegisterGreenSpaceUI(RegisterGreenSpaceController controller, String userEmail) {
-        this.controller = controller;
+    public RegisterGreenSpaceUI(String userEmail) {
         this.scanner = new Scanner(System.in);
         this.userEmail = userEmail;
     }
@@ -49,12 +48,12 @@ public class RegisterGreenSpaceUI implements Runnable {
                 return;
         }
 
-        controller.registerGreenSpace(name, area, type, userEmail);
+        RegisterGreenSpaceController.registerGreenSpace(name, area, type, userEmail);
         System.out.println("Green space registered successfully.");
 
         // Display all registered green spaces
         System.out.println("\n--- Registered Green Spaces ---");
-        List<GreenSpace> greenSpaces = controller.getAllGreenSpaces();
+        List<GreenSpace> greenSpaces = RegisterGreenSpaceController.getAllGreenSpaces();
         for (GreenSpace greenSpace : greenSpaces) {
             greenSpace.displayDetails();
         }

@@ -7,7 +7,7 @@ public class Garden extends GreenSpace {
 
     @Override
     public void displayDetails() {
-        System.out.println("Garden: " + getName() + ", Area: " + getArea() + " sqm" + "Email" + getEmail());
+        System.out.println("Garden: " + getName() + ", Area: " + getArea() + " sqm" );
     }
 }
 

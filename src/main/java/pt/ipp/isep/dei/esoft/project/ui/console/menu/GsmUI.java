@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GsmUI implements Runnable {
 
-    private final RegisterGreenSpaceController registerGreenSpaceController;
+
     private final String userEmail;
 
     /**
@@ -18,7 +18,7 @@ public class GsmUI implements Runnable {
      */
     public GsmUI(String userEmail) {
         GreenSpaceRepository greenSpaceRepository = new GreenSpaceRepository();
-        this.registerGreenSpaceController = new RegisterGreenSpaceController(greenSpaceRepository);
+
         this.userEmail = userEmail;
     }
 
@@ -29,8 +29,8 @@ public class GsmUI implements Runnable {
     @Override
     public void run() {
         List<MenuItem> options = new ArrayList<>();
-        options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI(registerGreenSpaceController, userEmail)));
-        options.add(new MenuItem("List all Green Spaces", new ListGreenSpacesUI(registerGreenSpaceController, userEmail)));
+        options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI(userEmail)));
+        options.add(new MenuItem("List all Green Spaces", new ListGreenSpacesUI(userEmail)));
         // Add other menu options here as needed
 
         int option;
