@@ -5,6 +5,13 @@ import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
+import pt.ipp.isep.dei.esoft.project.application.controller.AuthenticationController;
+import pt.ipp.isep.dei.esoft.project.application.controller.RegisterGreenSpaceController;
+import pt.ipp.isep.dei.esoft.project.ui.console.RegisterGreenSpaceUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
+import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,14 +32,15 @@ public class AuthenticationUI implements Runnable {
         boolean success = doLogin();
 
         if (success) {
+            String userEmail = ctrl.getCurrentUserEmail(); // Get the logged-in user's email
             List<UserRoleDTO> roles = this.ctrl.getUserRoles();
             if ((roles == null) || (roles.isEmpty())) {
                 System.out.println("No role assigned to user.");
             } else {
                 UserRoleDTO role = selectsRole(roles);
                 if (!Objects.isNull(role)) {
-                    List<MenuItem> rolesUI = getMenuItemForRoles();
-                    this.redirectToRoleUI(rolesUI, role);
+                    List<MenuItem> rolesUI = getMenuItemForRoles(userEmail);
+                    this.redirectToRoleUI(rolesUI, role); // Pass the userEmail to redirectToRoleUI
                 } else {
                     System.out.println("No role selected.");
                 }
@@ -41,14 +49,14 @@ public class AuthenticationUI implements Runnable {
         this.logout();
     }
 
-    private List<MenuItem> getMenuItemForRoles() {
+    private List<MenuItem> getMenuItemForRoles(String userEmail) {
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VFMUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI(userEmail)));
 
-        //TODO: Complete with other user roles and related RoleUI
+        // TODO: Complete with other user roles and related RoleUI
         return rolesUI;
     }
 

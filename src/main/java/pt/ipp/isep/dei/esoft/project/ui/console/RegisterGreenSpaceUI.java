@@ -1,25 +1,26 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterGreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaceType;
-
 
 import java.util.List;
 import java.util.Scanner;
 
 public class RegisterGreenSpaceUI implements Runnable {
-    private RegisterGreenSpaceController controller;
-    private Scanner scanner;
+    private final RegisterGreenSpaceController controller;
+    private final Scanner scanner;
+    private final String userEmail;
 
-    public RegisterGreenSpaceUI(RegisterGreenSpaceController controller) {
+    public RegisterGreenSpaceUI(RegisterGreenSpaceController controller, String userEmail) {
         this.controller = controller;
         this.scanner = new Scanner(System.in);
+        this.userEmail = userEmail;
     }
 
     public void run() {
         System.out.println("\n--- Green Space Management ---");
+        System.out.println("Logged in as: " + userEmail); // Print the logged-in user's email
         System.out.print("Enter name of the green space: ");
         String name = scanner.nextLine();
 

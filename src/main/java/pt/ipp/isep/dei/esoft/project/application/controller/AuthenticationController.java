@@ -44,4 +44,7 @@ public class AuthenticationController {
     public void doLogout() {
         authenticationRepository.doLogout();
     }
+    public String getCurrentUserEmail() {
+        return authenticationRepository.getCurrentUserEmail();
+    }
 }
