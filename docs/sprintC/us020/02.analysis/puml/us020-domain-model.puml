@@ -55,5 +55,6 @@ Employe "1" -- "1" GSM : can be
 Parks "*" -- "*" Garden : can be
 Parks "*" -- "*" MediumSizePark : can be
 Parks "*" -- "*" LargePark : can be
+GSM "1" -- "*" Parks : creates
 
 @enduml
