@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 import pt.ipp.isep.dei.esoft.project.ui.console.DisplayVehiclesUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.MaintenanceRegistrationUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.VehicleRegistrationUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.ListVehiclesNeedingCheckupUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 
@@ -21,10 +22,12 @@ public class VFMUI implements Runnable {
         VehicleRegistrationUI vehicleRegistrationUI = new VehicleRegistrationUI();
         MaintenanceRegistrationUI maintenanceRegistrationUI = new MaintenanceRegistrationUI();
         DisplayVehiclesUI displayVehiclesUI = new DisplayVehiclesUI();
+        ListVehiclesNeedingCheckupUI listVehiclesNeedingCheckupUI = new ListVehiclesNeedingCheckupUI();
 
         options.add(new MenuItem("Register Vehicle", vehicleRegistrationUI));
         options.add(new MenuItem("List Vehicles", displayVehiclesUI));
         options.add(new MenuItem("Maintenance Management", maintenanceRegistrationUI));
+        options.add(new MenuItem("List vehicles needing check-up", listVehiclesNeedingCheckupUI));
 
         int option;
         do {
