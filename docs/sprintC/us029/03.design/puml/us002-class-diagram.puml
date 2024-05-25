@@ -1,0 +1,41 @@
+@startuml
+
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam linetype ortho
+
+class CreateJobController {
+    + CreateJobController()
+    + createJob(jobName: String): boolean
+    + getJobList(): List<Job>
+}
+
+class Job {
+    - jobName: String
+    + Job(jobName: String)
+    + getJobName(): String
+}
+
+class JobRepository {
+    - jobList: List<Job>
+    + add(job: Job): Optional<Job>
+    + getJobList(): List<Job>
+}
+
+class CreateJobUI {
+    + CreateJobUI()
+    + run(): void
+}
+
+class Repositories {
+    + getJobRepository(): JobRepository
+}
+
+CreateJobUI --> CreateJobController
+CreateJobController --> JobRepository
+CreateJobController --> Repositories
+JobRepository --> Job
+
+@enduml
