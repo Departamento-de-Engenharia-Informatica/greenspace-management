@@ -17,6 +17,7 @@ public class Repositories {
     private final VehicleRepository vehicleRepository;
     private final MaintenanceRepository maintenanceRepository;
     private final GreenSpaceRepository greenSpaceRepository;
+    private final ToDoListRepository toDoListRepository;
 
 
 
@@ -32,6 +33,7 @@ public class Repositories {
         vehicleRepository = new VehicleRepository();
         maintenanceRepository = new MaintenanceRepository();
         greenSpaceRepository = new GreenSpaceRepository();
+        toDoListRepository = new ToDoListRepository();
     }
 
     public static Repositories getInstance() {
@@ -78,6 +80,9 @@ public class Repositories {
     }
     public GreenSpaceRepository getGreenSpaceRepository() {
         return greenSpaceRepository;
+    }
+    public ToDoListRepository getToDoListRepository() {
+        return toDoListRepository;
     }
 
 
