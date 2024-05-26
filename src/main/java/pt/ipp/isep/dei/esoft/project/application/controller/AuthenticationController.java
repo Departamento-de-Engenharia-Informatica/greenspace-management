@@ -18,6 +18,7 @@ public class AuthenticationController {
     public static final String ROLE_GSM = "Green Space Manager";
     public static final String ROLE_GSU = "Green Space User";
     public static final String ROLE_QAM = "Software Quality Assessment Team Manager";
+    public static final String ROLE_COLLABORATOR = "Collaborator";
 
     //private final ApplicationSession applicationSession;
     private final AuthenticationRepository authenticationRepository;
