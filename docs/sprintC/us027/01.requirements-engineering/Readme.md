@@ -1,19 +1,19 @@
-# US002 - Register a job
+# US027 - List all green spaces managed by me
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an user resources manager, I want to register new jobs.
+As a GSM, I need to list all green spaces managed by me.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	MS has a wide range of employees who carry out the most varied tasks in the context
-    of managing green spaces. Some job examples are designer, estimator, gardener, electrician or bricklayer
-
+>	The list of green spaces must be sorted by size in descending order. The sorting algorithm to be used by the application
+must be defined through a configuration file. At least two sorting
+algorithms should be available.
 
 **From the client clarifications:**
 
@@ -46,26 +46,24 @@ condutor
 
 ### 1.3. Acceptance Criteria
 
- **AC1:** All required fields must be filled in.
- **AC2:** As a HRM i should be able to create a new job
- **AC3:** When creating a job that already exist, the system must reject such operation.
+* **AC1:** The list of green spaces must be sorted by size in descending order.
+* **AC2:** The sorting algorithm to be used by the application must be defined through a configuration file.
+* **AC3:** At least two sorting algorithms should be available.
+* **AC4:** The system should determine which green spaces are assigned to the logged GSM and list them. 
 
 ### 1.4. Found out Dependencies
 
-No found out dependencies
+There is a dependency in US20 as if there isn't Green Spaces a list can't be made.
 
 ### 1.5 Input and Output Data
 
-**Input Data:**
-     jobName
-
 **Output Data:**
-(In)Success of the operation
+List of the managed Green Spaces and their data.
 
 ### 1.6. System Sequence Diagram (SSD)
 
 
-![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram.svg)
+![System Sequence Diagram - Alternative One](svg/us027-system-sequence-diagram-System_Sequence_Diagram__SSD_.svg)
 
 
 
