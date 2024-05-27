@@ -82,6 +82,7 @@ public class ToDoListUI implements Runnable {
      * Adds a new ToDoList entry.
      */
     private void addNewToDoListEntry() {
+        String status = "Pending";
         System.out.println("--- Add New ToDoList Entry ---");
 
         // Request and validate task description
@@ -134,7 +135,7 @@ public class ToDoListUI implements Runnable {
             String selectedGreenSpaceName = userGreenSpaces.get(selectedIndex - 1).getName();
 
             // Call controller to create ToDoList entry with selected green space name
-            controller.createToDoListEntry(taskDescription, urgency, expectedDuration, selectedGreenSpaceName);
+            controller.createToDoListEntry(taskDescription, urgency, expectedDuration, selectedGreenSpaceName, status);
             System.out.println("ToDoList entry added successfully!");
         }
     }
@@ -160,6 +161,50 @@ public class ToDoListUI implements Runnable {
         int selectedIndex;
         while (true) {
             System.out.print("Select a green space by number: ");
+            try {
+                selectedIndex = Integer.parseInt(scanner.nextLine());
+                if (selectedIndex >= 1 && selectedIndex <= maxIndex) {
+                    break;
+                } else {
+                    System.out.println("Invalid selection. Please select a number between 1 and " + maxIndex + ".");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
+        return selectedIndex;
+    }
+
+    private void changeToDoListEntryStatus() {
+        System.out.println("--- Change Status of ToDoList Entry ---");
+        List<ToDoList> toDoListEntries = controller.getAllToDoListEntries();
+        if (toDoListEntries.isEmpty()) {
+            System.out.println("No ToDoList entries found.");
+            return;
+        }
+        System.out.println("Available ToDoList Entries:");
+        for (int i = 0; i < toDoListEntries.size(); i++) {
+            System.out.println((i + 1) + ". " + toDoListEntries.get(i). getTaskDescription());
+        }
+
+        int selectedIndex = requestToDoListSelection(toDoListEntries.size());
+        ToDoList selectedEntry = toDoListEntries.get(selectedIndex - 1);
+
+        // Request and validate new status
+        String newStatus;
+        do {
+            System.out.print("Enter new status (Not Started/In Progress/Completed): ");
+            newStatus = scanner.nextLine().trim();
+        } while (!newStatus.equalsIgnoreCase("Not Started") && !newStatus.equalsIgnoreCase("In Progress") && !newStatus.equalsIgnoreCase("Completed"));
+
+        controller.updateToDoListStatus(selectedEntry, newStatus);
+        System.out.println("Status updated successfully!");
+    }
+
+    private int requestToDoListSelection(int maxIndex) {
+        int selectedIndex;
+        while (true) {
+            System.out.print("Select a ToDoList entry by number: ");
             try {
                 selectedIndex = Integer.parseInt(scanner.nextLine());
                 if (selectedIndex >= 1 && selectedIndex <= maxIndex) {

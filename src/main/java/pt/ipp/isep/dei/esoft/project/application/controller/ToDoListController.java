@@ -36,8 +36,8 @@ public class ToDoListController {
      * @param expectedDuration The expected duration of the task.
      * @return An optional containing the newly created to-do list entry, if successful.
      */
-    public Optional<ToDoList> createToDoListEntry(String taskDescription, String urgency, int expectedDuration, String greenspaceName) {
-        ToDoList toDoList = new ToDoList(taskDescription, urgency, expectedDuration, greenspaceName);
+    public Optional<ToDoList> createToDoListEntry(String taskDescription, String urgency, int expectedDuration, String greenspaceName, String status) {
+        ToDoList toDoList = new ToDoList(taskDescription, urgency, expectedDuration, greenspaceName, status);
         return toDoListRepository.add(toDoList);
     }
 
@@ -48,6 +48,16 @@ public class ToDoListController {
      */
     public List<ToDoList> getAllToDoListEntries() {
         return ToDoListRepository.getAllToDoLists();
+    }
+    public void updateToDoListStatus(String taskDescription, String newStatus) {
+        List<ToDoList> toDoListEntries = ToDoListRepository.getAll();
+        for (ToDoList toDoListEntry : toDoListEntries) {
+            if (toDoListEntry.getTaskDescription().equals(taskDescription)) {
+                toDoListEntry.setStatus(newStatus);
+                ToDoListRepository.updateToDoListEntry(toDoListEntry);
+                break;
+            }
+        }
     }
 
 }

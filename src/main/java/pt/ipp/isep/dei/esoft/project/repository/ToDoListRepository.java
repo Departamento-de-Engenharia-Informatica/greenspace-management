@@ -52,7 +52,9 @@ public class ToDoListRepository {
      *
      * @return A list of to-do list entries.
      */
-    public List<ToDoList> getAll() {
+    public static List<ToDoList> getAll() {
         return new ArrayList<>(toDoLists);
     }
+
+
 }

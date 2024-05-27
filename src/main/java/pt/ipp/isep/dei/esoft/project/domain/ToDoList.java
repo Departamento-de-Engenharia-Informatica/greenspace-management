@@ -14,6 +14,7 @@ public class ToDoList {
     private String urgency;
     private int expectedDuration; // in minutes
     private String greenspaceName;
+    private String status;
 
     /**
      * Constructs a new {@code ToDoList} object with the specified attributes.
@@ -23,19 +24,20 @@ public class ToDoList {
      * @param expectedDuration The expected duration of the task in minutes.
      * @throws IllegalArgumentException If any of the input parameters are invalid.
      */
-    public ToDoList(String taskDescription, String urgency, int expectedDuration, String greenspaceName) throws IllegalArgumentException {
-        validateInputs(taskDescription, urgency, expectedDuration);
+    public ToDoList(String taskDescription, String urgency, int expectedDuration, String greenspaceName, String status) throws IllegalArgumentException {
+        validateInputs(taskDescription, urgency, expectedDuration,status);
         this.taskDescription = taskDescription;
         this.urgency = urgency;
         this.expectedDuration = expectedDuration;
         this.greenspaceName = greenspaceName;
+        this.status = status;
     }
 
     /**
      * Validates the input parameters for creating a to-do list entry.
      * Throws an exception if any parameter is invalid.
      */
-    private void validateInputs(String taskDescription, String urgency, int expectedDuration) throws IllegalArgumentException {
+    private void validateInputs(String taskDescription, String urgency, int expectedDuration, String status) throws IllegalArgumentException {
         if (taskDescription == null || taskDescription.trim().isEmpty()) {
             System.out.println("Task description must be provided.");
             throw new IllegalArgumentException("Task description must be provided.");
@@ -80,7 +82,7 @@ public class ToDoList {
      */
     @Override
     public ToDoList clone() {
-        return new ToDoList(taskDescription, urgency, expectedDuration,greenspaceName);
+        return new ToDoList(taskDescription, urgency, expectedDuration,greenspaceName,status);
     }
 
     /**
@@ -112,11 +114,15 @@ public class ToDoList {
     public String getGreenspaceName() {
         return greenspaceName;
     }
+    public String getStatus() {
+        return status;
+    }
     @Override
     public String toString() {
         return "Task Description: " + taskDescription +
                 ", Urgency: " + urgency +
                 ", Expected Duration: " + expectedDuration + " minutes," +
-                " Greenspace: " + greenspaceName;
+                " Greenspace: " + greenspaceName +
+                ", Status: " + status;
     }
 }
