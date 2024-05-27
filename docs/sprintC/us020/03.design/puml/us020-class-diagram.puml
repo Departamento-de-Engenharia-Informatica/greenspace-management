@@ -1,0 +1,98 @@
+@startuml
+
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class ApplicationSession
+{
+    + static getInstance()
+    + getCurrentSession()
+}
+
+class UserSession
+{
+    + getUserEmail()
+}
+
+class GreenSpace {
+    - name: String
+    - area: double
+    - type: GreenSpaceType
+
+    + GreenSpace(name: String, area: double, type: GreenSpaceType)
+    + registerGreenSpace(greenSpaceRepository: GreenSpaceRepository): void
+    + getName(): String
+    + getArea(): double
+    + getType(): GreenSpaceType
+    {abstract} + displayDetails(): void
+}
+
+class Garden {
+    + Garden(name: String, area: double)
+    + displayDetails(): void
+}
+
+class MediumSizedPark {
+    + MediumSizedPark(name: String, area: double)
+    + displayDetails(): void
+}
+
+class LargeSizedPark {
+    + LargeSizedPark(name: String, area: double)
+    + displayDetails(): void
+}
+
+class GreenSpaceRepository {
+    - greenSpaces: List<GreenSpace>
+
+    + addGreenSpace(greenSpace: GreenSpace): void
+    + getGreenSpaces(): List<GreenSpace>
+}
+
+class RegisterGreenSpaceController {
+    - greenSpaceRepository: GreenSpaceRepository
+
+    + RegisterGreenSpaceController(greenSpaceRepository: GreenSpaceRepository)
+    + registerGreenSpace(greenSpace: GreenSpace): void
+    + getAllGreenSpaces(): List<GreenSpace>
+}
+
+enum GreenSpaceType {
+    GARDEN
+    MEDIUM_SIZED_PARK
+    LARGE_SIZED_PARK
+}
+
+ApplicationSession --> "1" UserSession : userSession
+
+RegisterGreenSpaceController ..> ApplicationSession
+RegisterGreenSpaceController ..> UserSession
+
+Repositories -> Repositories : instance
+
+RegisterGreenSpaceUI .> RegisterGreenSpaceController
+
+RegisterGreenSpaceController .> Repositories : repositories
+
+Repositories -> "1" GreenSpaceRepository
+
+RegisterGreenSpaceController ..> GreenSpaceRepository : GreenSpaceRepository
+
+' Ligação dos tipos de parques com a classe GreenSpace
+GreenSpaceType --> Garden : can be
+GreenSpaceType --> MediumSizedPark : can be
+GreenSpaceType --> LargeSizedPark : can be
+
+GreenSpace --> "1" GreenSpaceType : has
+
+' Legenda
+GreenSpaceRepository "1" --> "*" GreenSpace : GreenSpaces
+
+@enduml
