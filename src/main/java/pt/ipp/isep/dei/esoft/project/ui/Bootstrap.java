@@ -89,9 +89,9 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.add(new Collaborator("Marta Oliveira", LocalDate.of(1992, 11, 10), LocalDate.of(2017, 4, 20), "Travessa das Flores, n 789, 3000-400 Coimbra", "920987654", "marta.oliveira@gmail.com", 246810753, 45678901, "Urban Planner"));
         collaboratorRepository.add(new Collaborator("Pedro Ferreira", LocalDate.of(1980, 9, 5), LocalDate.of(2012, 3, 15), "Rua dos Bosques, n 234, 5000-600 Vila Real", "917654321", "pedro.ferreira@outlook.pt", 369258147, 21098765, "Park Ranger"));
         collaboratorRepository.add(new Collaborator("Sofia Rodrigues", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432109", "sofia.rodrigues@live.com.pt", 582037469, 87654321, "Park Ranger"));
-        collaboratorRepository.add(new Collaborator("Sofia pedro", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432108", "sofia.rodrigues@live.com.pt", 582037468, 87654322, "Park Ranger"));
-        collaboratorRepository.add(new Collaborator("Sofia gomes", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432107", "sofia.rodrigues@live.com.pt", 582037467, 87654323, "Park Ranger"));
-        collaboratorRepository.add(new Collaborator("Sofia ribeiro", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432106", "sofia.rodrigues@live.com.pt", 582037466, 87654324, "Park Ranger"));
+        collaboratorRepository.add(new Collaborator("Sofia pedro", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432108", "sofia.rodrigues1@live.com.pt", 582037468, 87654322, "Park Ranger"));
+        collaboratorRepository.add(new Collaborator("Sofia gomes", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432107", "sofia.rodrigues2@live.com.pt", 582037467, 87654323, "Park Ranger"));
+        collaboratorRepository.add(new Collaborator("Sofia ribeiro", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432106", "sofia.rodrigues3@live.com.pt", 582037466, 87654324, "Park Ranger"));
 
 
 

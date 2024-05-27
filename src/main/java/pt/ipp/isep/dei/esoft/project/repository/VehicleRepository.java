@@ -51,4 +51,15 @@ public class VehicleRepository {
         }
         return false;
     }
+
+    // Check if vehicles are due for a checkup
+    public List<Vehicle> getVehiclesNeedingCheckup() {
+        List<Vehicle> vehiclesNeedingCheckup = new ArrayList<>();
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.isCheckupDue()) {
+                vehiclesNeedingCheckup.add(vehicle);
+            }
+        }
+        return vehiclesNeedingCheckup;
+    }
 }

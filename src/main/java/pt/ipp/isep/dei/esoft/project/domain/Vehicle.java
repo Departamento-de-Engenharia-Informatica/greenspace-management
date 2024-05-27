@@ -122,7 +122,7 @@ public class Vehicle {
     }
 
     public boolean isCheckupDue() {
-        return (this.currentKm - this.lastMaintenanceKm >= this.checkupFrequencyKm);
+        return (this.currentKm - this.lastMaintenanceKm >= this.checkupFrequencyKm  * 0.95);
     }
 
     public void displayLastMaintenanceDetails() {
@@ -149,5 +149,11 @@ public class Vehicle {
                 ", checkupFrequencyKm=" + checkupFrequencyKm +
                 ", lastMaintenanceKm=" + lastMaintenanceKm +
                 '}';
+    }
+
+    // For formatting the information when listing vehicles needing checkup
+    public String formatVehicleDetails() {
+        return String.format("Plate: %s, Model: %s, Type: %s, Current KM: %d, Check-up frequency KM: %d",
+                plateID, model, type, currentKm, checkupFrequencyKm);
     }
 }
