@@ -110,15 +110,23 @@ Should the GSM define the skills needed for a To-Do entry?
 ### 1.5 Input and Output Data
 
 **Input Data:**
-     --
+
+* Typed data:
+    * Task description.
+    * Urgency level (High, Medium, Low).
+    * Expected duration of the task in minutes.
+* Selected data:
+    * Green space for the new entry from the available list.
 
 **Output Data:**
---
+
+* Confirmation message of successful addition of the new entry to the To-Do List.
+* Updated list of all To-Do List entries with details (task description, urgency, expected duration, greenspace name, status).
 
 ### 1.6. System Sequence Diagram (SSD)
 
 
-![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram.svg)
+![System Sequence Diagram - Alternative One](svg/us021-system-sequence-diagram.svg)
 
 
 
