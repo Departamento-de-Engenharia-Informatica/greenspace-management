@@ -2,9 +2,6 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.DisplayTasksUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.ListGreenSpacesUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.RegisterGreenSpaceUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.ToDoListUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
