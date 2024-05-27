@@ -52,6 +52,16 @@ public class ToDoListRepository {
      *
      * @return A list of to-do list entries.
      */
+
+
+    public static void updateToDoListEntry(ToDoList updatedEntry) {
+        for (int i = 0; i < toDoLists.size(); i++) {
+            if (toDoLists.get(i).getTaskDescription().equals(updatedEntry.getTaskDescription())) {
+                toDoLists.set(i, updatedEntry);
+                break;
+            }
+        }
+    }
     public static List<ToDoList> getAll() {
         return new ArrayList<>(toDoLists);
     }

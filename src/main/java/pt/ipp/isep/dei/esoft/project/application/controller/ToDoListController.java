@@ -46,9 +46,7 @@ public class ToDoListController {
      *
      * @return A list of to-do list entries.
      */
-    public List<ToDoList> getAllToDoListEntries() {
-        return ToDoListRepository.getAllToDoLists();
-    }
+
     public void updateToDoListStatus(String taskDescription, String newStatus) {
         List<ToDoList> toDoListEntries = ToDoListRepository.getAll();
         for (ToDoList toDoListEntry : toDoListEntries) {
@@ -58,6 +56,10 @@ public class ToDoListController {
                 break;
             }
         }
+    }
+
+    public List<ToDoList> getAllToDoListEntries() {
+        return ToDoListRepository.getAllToDoLists();
     }
 
 }
