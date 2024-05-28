@@ -36,8 +36,8 @@ public class ToDoListController {
      * @param expectedDuration The expected duration of the task.
      * @return An optional containing the newly created to-do list entry, if successful.
      */
-    public Optional<ToDoList> createToDoListEntry(String taskDescription, String urgency, int expectedDuration, String greenspaceName, String status) {
-        ToDoList toDoList = new ToDoList(taskDescription, urgency, expectedDuration, greenspaceName, status);
+    public Optional<ToDoList> createToDoListEntry(String taskDescription, String urgency, int expectedDuration, String greenspaceName, String status, String email) {
+        ToDoList toDoList = new ToDoList(taskDescription, urgency, expectedDuration, greenspaceName, status, email);
         return toDoListRepository.add(toDoList);
     }
 

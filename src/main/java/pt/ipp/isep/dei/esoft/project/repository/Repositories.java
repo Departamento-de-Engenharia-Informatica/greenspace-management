@@ -18,7 +18,7 @@ public class Repositories {
     private final MaintenanceRepository maintenanceRepository;
     private final GreenSpaceRepository greenSpaceRepository;
     private final ToDoListRepository toDoListRepository;
-
+    private final AgendaRepository agendaRepository;
 
 
     private Repositories() {
@@ -34,6 +34,7 @@ public class Repositories {
         maintenanceRepository = new MaintenanceRepository();
         greenSpaceRepository = new GreenSpaceRepository();
         toDoListRepository = new ToDoListRepository();
+        agendaRepository = new AgendaRepository();
     }
 
     public static Repositories getInstance() {
@@ -84,6 +85,7 @@ public class Repositories {
     public ToDoListRepository getToDoListRepository() {
         return toDoListRepository;
     }
+    public AgendaRepository getAgendaRepository() {return agendaRepository;}
 
 
 }

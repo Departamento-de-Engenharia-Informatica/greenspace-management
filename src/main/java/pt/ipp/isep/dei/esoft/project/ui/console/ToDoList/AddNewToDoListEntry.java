@@ -90,7 +90,7 @@ public class AddNewToDoListEntry {
             String selectedGreenSpaceName = userGreenSpaces.get(selectedIndex - 1).getName();
 
             // Call controller to create ToDoList entry with selected green space name
-            controller.createToDoListEntry(taskDescription, urgency, expectedDuration, selectedGreenSpaceName, status);
+            controller.createToDoListEntry(taskDescription, urgency, expectedDuration, selectedGreenSpaceName, status, email);
             System.out.println("ToDoList entry added successfully!");
         }
     }

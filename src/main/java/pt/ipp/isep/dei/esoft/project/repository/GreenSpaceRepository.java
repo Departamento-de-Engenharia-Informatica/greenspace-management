@@ -45,4 +45,20 @@ public class GreenSpaceRepository {
     public static List<GreenSpace> getGreenSpaces() {
         return new ArrayList<>(greenSpaces);
     }
+
+    /**
+     * Retrieves a list of GreenSpace objects managed by the specified user.
+     *
+     * @param userEmail the user's email
+     * @return a list of GreenSpace objects managed by the user
+     */
+    public List<GreenSpace> findByUserEmail(String userEmail) {
+        List<GreenSpace> userGreenSpaces = new ArrayList<>();
+        for (GreenSpace greenSpace : greenSpaces) {
+            if (greenSpace.getEmail().equals(userEmail)) {
+                userGreenSpaces.add(greenSpace);
+            }
+        }
+        return userGreenSpaces;
+    }
 }
