@@ -8,8 +8,7 @@ import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class GreenSpaceRepositoryTest {
 
@@ -36,5 +35,37 @@ public class GreenSpaceRepositoryTest {
     public void testGetGreenSpaces_EmptyList() {
         List<GreenSpace> greenSpaces = GreenSpaceRepository.getGreenSpaces();
         assertTrue(greenSpaces.isEmpty());
+    }
+
+    @Test
+    public void testAddGreenSpace_Null() {
+        GreenSpace greenSpace = null;
+        assertThrows(IllegalArgumentException.class, () -> {
+            GreenSpaceRepository.addGreenSpace(greenSpace);
+        });
+    }
+
+    @Test
+    public void testAddGreenSpace_Duplicate() {
+        // Create and add the first GreenSpace
+        GreenSpace greenSpace1 = new Garden("Central Park", 500.0, "user1@example.com");
+        GreenSpaceRepository.addGreenSpace(greenSpace1);
+
+        // Attempt to add a second GreenSpace with the same name and email
+        GreenSpace greenSpace2 = new Garden("Central Park", 500.0, "user1@example.com");
+        assertThrows(IllegalArgumentException.class, () -> {
+            GreenSpaceRepository.addGreenSpace(greenSpace2);
+        });
+    }
+
+
+
+
+    @Test
+    public void testAddGreenSpace_InvalidGreenSpace() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            GreenSpace greenSpace = new Garden("", -500.0, "invalid-email");
+            GreenSpaceRepository.addGreenSpace(greenSpace);
+        });
     }
 }

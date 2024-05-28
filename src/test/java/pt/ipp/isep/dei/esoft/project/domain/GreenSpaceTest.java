@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class GreenSpaceTest {
 
@@ -32,6 +33,53 @@ public class GreenSpaceTest {
         GreenSpace greenSpace = new TestGreenSpace("Test", 100.0, GreenSpaceType.GARDEN, "test@example.com");
         String email = greenSpace.getEmail();
         assertEquals("test@example.com", email);
+    }
+
+    @Test
+    public void testNegativeArea() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("Test", -100.0, GreenSpaceType.GARDEN, "test@example.com");
+        });
+    }
+
+    @Test
+    public void testZeroArea() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("Test", 0.0, GreenSpaceType.GARDEN, "test@example.com");
+        });
+    }
+
+    @Test
+    public void testEmptyName() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("", 100.0, GreenSpaceType.GARDEN, "test@example.com");
+        });
+    }
+    @Test
+    public void testNullName() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace(null, 100.0, GreenSpaceType.GARDEN, "test@example.com");
+        });
+    }
+
+    @Test
+    public void testInvalidEmail() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("Test", 100.0, GreenSpaceType.GARDEN, "invalid-email");
+        });
+    }
+    @Test
+    public void testNullEmail() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("Test", 100.0, GreenSpaceType.GARDEN, null);
+        });
+    }
+
+    @Test
+    public void testNullType() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("Test", 100.0, null, "test@example.com");
+        });
     }
 
     private class TestGreenSpace extends GreenSpace {
