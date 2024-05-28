@@ -24,9 +24,35 @@ public class AddNewToDoListEntry {
         // Request and validate urgency
         String urgency;
         do {
-            System.out.print("Enter urgency (High/Medium/Low): ");
-            urgency = scanner.nextLine().trim();
-        } while (!urgency.equalsIgnoreCase("High") && !urgency.equalsIgnoreCase("Medium") && !urgency.equalsIgnoreCase("Low"));
+            System.out.println("Select urgency:");
+            System.out.println("1. High");
+            System.out.println("2. Medium");
+            System.out.println("3. Low");
+
+            int urgencyChoice;
+            do {
+                System.out.print("Enter urgency choice (1/2/3): ");
+                while (!scanner.hasNextInt()) {
+                    System.out.print("Invalid input. Please enter a number (1/2/3): ");
+                    scanner.next();
+                }
+                urgencyChoice = scanner.nextInt();
+            } while (urgencyChoice < 1 || urgencyChoice > 3);
+
+            switch (urgencyChoice) {
+                case 1:
+                    urgency = "High";
+                    break;
+                case 2:
+                    urgency = "Medium";
+                    break;
+                case 3:
+                    urgency = "Low";
+                    break;
+                default:
+                    urgency = "Invalid";
+            }
+        } while (urgency.equals("Invalid"));
 
         // Request and validate expected duration
         int expectedDuration;

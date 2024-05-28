@@ -23,9 +23,35 @@ public class ChangeToDoListEntryStatus {
 
             String newStatus;
             do {
-                System.out.print("Enter new status (Not Started/In Progress/Completed): ");
-                newStatus = scanner.nextLine().trim();
-            } while (!newStatus.equalsIgnoreCase("Not Started") && !newStatus.equalsIgnoreCase("In Progress") && !newStatus.equalsIgnoreCase("Completed"));
+                System.out.println("Select new status:");
+                System.out.println("1. Not Started");
+                System.out.println("2. In Progress");
+                System.out.println("3. Completed");
+
+                int statusChoice;
+                do {
+                    System.out.print("Enter status choice (1/2/3): ");
+                    while (!scanner.hasNextInt()) {
+                        System.out.print("Invalid input. Please enter a number (1/2/3): ");
+                        scanner.next();
+                    }
+                    statusChoice = scanner.nextInt();
+                } while (statusChoice < 1 || statusChoice > 3);
+
+                switch (statusChoice) {
+                    case 1:
+                        newStatus = "Not Started";
+                        break;
+                    case 2:
+                        newStatus = "In Progress";
+                        break;
+                    case 3:
+                        newStatus = "Completed";
+                        break;
+                    default:
+                        newStatus = "Invalid";
+                }
+            } while (newStatus.equals("Invalid"));
 
             controller.updateToDoListStatus(selectedEntry.getTaskDescription(), newStatus);
             System.out.println("ToDoList entry status updated successfully!");
