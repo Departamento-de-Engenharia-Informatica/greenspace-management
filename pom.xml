@@ -12,7 +12,7 @@
     <properties>
         <!-- Java Version Configuration -->
         <java.version>11</java.version>
-
+        <javafx.version>22</javafx.version>
         <!-- Maven Version Configuration -->
         <maven-compiler-plugin>3.10.1</maven-compiler-plugin>
 
@@ -42,6 +42,16 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>22</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>22</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
