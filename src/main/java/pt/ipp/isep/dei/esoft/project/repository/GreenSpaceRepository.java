@@ -15,6 +15,7 @@ public class GreenSpaceRepository {
      * Adds a GreenSpace object to the repository.
      *
      * @param greenSpace the GreenSpace object to add
+     * @throws IllegalArgumentException if the provided GreenSpace is null or if a duplicate GreenSpace is being added
      */
     public static void addGreenSpace(GreenSpace greenSpace) {
         if (greenSpace == null) {
@@ -26,6 +27,12 @@ public class GreenSpaceRepository {
         greenSpaces.add(greenSpace);
     }
 
+    /**
+     * Checks if the repository contains a duplicate of the provided GreenSpace.
+     *
+     * @param greenSpace the GreenSpace object to check for duplication
+     * @return true if the repository contains a duplicate of the provided GreenSpace, false otherwise
+     */
     private static boolean containsGreenSpace(GreenSpace greenSpace) {
         for (GreenSpace gs : greenSpaces) {
             if (gs.getName().equals(greenSpace.getName()) && gs.getEmail().equals(greenSpace.getEmail())) {
@@ -34,8 +41,6 @@ public class GreenSpaceRepository {
         }
         return false;
     }
-
-
 
     /**
      * Retrieves a list of all GreenSpace objects stored in the repository.

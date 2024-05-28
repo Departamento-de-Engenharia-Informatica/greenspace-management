@@ -47,18 +47,14 @@ public class GreenSpaceRepositoryTest {
 
     @Test
     public void testAddGreenSpace_Duplicate() {
-        // Create and add the first GreenSpace
         GreenSpace greenSpace1 = new Garden("Central Park", 500.0, "user1@example.com");
         GreenSpaceRepository.addGreenSpace(greenSpace1);
 
-        // Attempt to add a second GreenSpace with the same name and email
         GreenSpace greenSpace2 = new Garden("Central Park", 500.0, "user1@example.com");
         assertThrows(IllegalArgumentException.class, () -> {
             GreenSpaceRepository.addGreenSpace(greenSpace2);
         });
     }
-
-
 
 
     @Test
