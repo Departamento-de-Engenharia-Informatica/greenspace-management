@@ -7,16 +7,27 @@ import pt.ipp.isep.dei.esoft.project.domain.GreenSpaceType;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * User interface for registering green spaces.
+ */
 public class RegisterGreenSpaceUI implements Runnable {
 
     private final Scanner scanner;
     private final String userEmail;
 
+    /**
+     * Constructs a RegisterGreenSpaceUI object with the specified user email.
+     *
+     * @param userEmail the email of the logged-in user
+     */
     public RegisterGreenSpaceUI(String userEmail) {
         this.scanner = new Scanner(System.in);
         this.userEmail = userEmail;
     }
 
+    /**
+     * Runs the green space registration user interface.
+     */
     public void run() {
         System.out.println("\n--- Green Space Management ---");
         System.out.println("Logged in as: " + userEmail); // Print the logged-in user's email
