@@ -15,7 +15,7 @@ public class ToDoList {
     private int expectedDuration; // in minutes
     private String greenspaceName;
     private String status;
-
+    private String userEmail; // Add user email field
     /**
      * Constructs a new {@code ToDoList} object with the specified attributes.
      *
@@ -24,20 +24,22 @@ public class ToDoList {
      * @param expectedDuration The expected duration of the task in minutes.
      * @throws IllegalArgumentException If any of the input parameters are invalid.
      */
-    public ToDoList(String taskDescription, String urgency, int expectedDuration, String greenspaceName, String status) throws IllegalArgumentException {
-        validateInputs(taskDescription, urgency, expectedDuration,status);
+    public ToDoList(String taskDescription, String urgency, int expectedDuration, String greenspaceName, String status, String userEmail) throws IllegalArgumentException {
+        validateInputs(taskDescription, urgency, expectedDuration,status,userEmail);
         this.taskDescription = taskDescription;
         this.urgency = urgency;
         this.expectedDuration = expectedDuration;
         this.greenspaceName = greenspaceName;
         this.status = status;
+        this.userEmail = userEmail;
+
     }
 
     /**
      * Validates the input parameters for creating a to-do list entry.
      * Throws an exception if any parameter is invalid.
      */
-    private void validateInputs(String taskDescription, String urgency, int expectedDuration, String status) throws IllegalArgumentException {
+    private void validateInputs(String taskDescription, String urgency, int expectedDuration, String status, String userEmail) throws IllegalArgumentException {
         if (taskDescription == null || taskDescription.trim().isEmpty()) {
             System.out.println("Task description must be provided.");
             throw new IllegalArgumentException("Task description must be provided.");
@@ -82,7 +84,7 @@ public class ToDoList {
      */
     @Override
     public ToDoList clone() {
-        return new ToDoList(taskDescription, urgency, expectedDuration,greenspaceName,status);
+        return new ToDoList(taskDescription, urgency, expectedDuration,greenspaceName,status, userEmail);
     }
 
     /**
@@ -116,6 +118,9 @@ public class ToDoList {
     }
     public String getStatus() {
         return status;
+    }
+    public String getUserEmail() {
+        return userEmail;
     }
     public void setStatus(String status) {
         this.status = status;
