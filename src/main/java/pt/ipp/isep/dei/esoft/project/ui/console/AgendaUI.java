@@ -60,8 +60,11 @@ public class AgendaUI implements Runnable {
         System.out.print("Expected Duration (in hours): ");
         int expectedDuration = scanner.nextInt();
         scanner.nextLine(); // Consume newline
-        System.out.print("Status: ");
-        String status = scanner.nextLine();
+        String status;
+        do {
+            System.out.print("Enter status (Planned/Postponed/Canceled/Done): ");
+            status = scanner.nextLine().trim();
+        } while (!status.equalsIgnoreCase("Planned") && !status.equalsIgnoreCase("Postponed") && !status.equalsIgnoreCase("Canceled") && !status.equalsIgnoreCase("Done"));
 
         // Create the agenda entry
         Optional<Agenda> agendaEntry = agendaController.createAgendaEntry(

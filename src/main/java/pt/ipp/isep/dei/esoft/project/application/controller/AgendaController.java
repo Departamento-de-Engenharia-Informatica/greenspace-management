@@ -33,4 +33,8 @@ public class AgendaController {
         }
         return Optional.empty();
     }
+
+    public static List<Agenda> getAllAgendaEntries() {
+        return repositories.getAgendaRepository().getAll();
+    }
 }
