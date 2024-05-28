@@ -21,6 +21,15 @@ public class Bootstrap implements Runnable {
      * Runs the bootstrap process to initialize the application.
      * Adds task categories, organizations, users, jobs, and collaborators.
      */
+
+
+
+    /**
+     * Constructs a new {@code Bootstrap} object with the user's email.
+     */
+    public Bootstrap() {
+
+    }
     @Override
     public void run() {
         addTaskCategories();
@@ -34,6 +43,7 @@ public class Bootstrap implements Runnable {
         addMaintenance();
         addTeamProposals();
         addGreenspaces();
+//        addToDoListEntries();
     }
 
 
@@ -266,14 +276,32 @@ public class Bootstrap implements Runnable {
         GreenSpaceRepository.addGreenSpace(new MediumSizedPark("Parque Urbano de ermesinde", 1000, "gsm@this.app"));
         GreenSpaceRepository.addGreenSpace(new LargeSizedPark("parque gigante", 324242, "gsm@this.app"));
 
-//        // Check the contents of the repository
-//        List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpaces();
-//        System.out.println("Contents of the GreenSpace repository:");
-//        for (GreenSpace gs : greenSpaces) {
-//        System.out.println(gs.getName() + ", " + gs.getType() + ", " + gs.getEmail());
-
-
-
     }
+//    private void addToDoListEntries() {
+//        ToDoListRepository toDoListRepository = Repositories.getInstance().getToDoListRepository();
+//        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
+//
+//        // ToDoList entries for Davidgsm's parks
+//        addToDoListEntriesForGSM(toDoListRepository, greenSpaceRepository, "Davidgsm@this.app");
+//
+//        // ToDoList entries for gsm's parks
+//        addToDoListEntriesForGSM(toDoListRepository, greenSpaceRepository, "gsm@this.app");
+//    }
+//
+//    private void addToDoListEntriesForGSM(ToDoListRepository toDoListRepository, GreenSpaceRepository greenSpaceRepository, String gsmEmail) {
+//        List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpacesByEmail(gsmEmail);
+//        System.out.println(gsmEmail);
+//
+//        for (GreenSpace greenSpace : greenSpaces) {
+//            if (greenSpace.getEmail().equals(gsmEmail)) {
+//                toDoListRepository.add(new ToDoList("Plant trees in " + greenSpace.getName(), "High", 120, greenSpace.getName(), "Not Started"));
+//                toDoListRepository.add(new ToDoList("Water plants in " + greenSpace.getName(), "Medium", 60, greenSpace.getName(), "In Progress"));
+//                toDoListRepository.add(new ToDoList("Prune shrubs in " + greenSpace.getName(), "Low", 90, greenSpace.getName(), "Completed"));
+//                toDoListRepository.add(new ToDoList("Clean park in " + greenSpace.getName(), "High", 180, greenSpace.getName(), "Not Started"));
+//                toDoListRepository.add(new ToDoList("Install benches in " + greenSpace.getName(), "Medium", 240, greenSpace.getName(), "In Progress"));
+//                toDoListRepository.add(new ToDoList("Repair fountain in " + greenSpace.getName(), "High", 120, greenSpace.getName(), "Completed"));
+//            }
+//        }
+//    }
 
 }
