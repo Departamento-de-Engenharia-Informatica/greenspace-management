@@ -1,477 +1,313 @@
-# US002 - Create a job
+# US027 - List all green spaces managed by me
 
-## 4.1 Tests 
+## 4.1 Domain Tests
+**GreenSpace**
 
-**Test 1:** Tests the creation of a valid job.
+**Test 1:** This test verifies that the getName() method of the GreenSpace class returns the correct name.
 
 	 @Test
-    void createValidJob() {
-        // Arrange
-        String jobName = "Software Engineer";
-
-        // Act
-        Job job = new Job(jobName);
-
-        // Assert
-        assertEquals(jobName, job.getJobName());
+    public void testGetName() {
+        GreenSpace greenSpace = new TestGreenSpace("Test", 100.0, GreenSpaceType.GARDEN, "test@example.com");
+        String name = greenSpace.getName();
+        assertEquals("Test", name);
     }
 
 
 
-**Test 2:** Tests creating a job with a null name, which should throw an IllegalArgumentException.
+**Test 2:** Verifies that the getArea() method returns the correct area.
 
     @Test
-    void createJobWithNullName() {
-        assertThrows(IllegalArgumentException.class, () -> new Job(null));
+    public void testGetArea() {
+        GreenSpace greenSpace = new TestGreenSpace("Test", 100.0, GreenSpaceType.GARDEN, "test@example.com");
+        double area = greenSpace.getArea();
+        assertEquals(100.0, area, 0.001);
     }
 
 
-**Test 3:** Tests creating a job with an invalid name containing digits, which should throw an IllegalArgumentException.
+**Test 3:** Verifies that the getType() method returns the correct type.
   
     @Test
-    void createJobWithInvalidNameContainingDigits() {
-        assertThrows(IllegalArgumentException.class, () -> new Job("Software Engineer 2"));
+    public void testGetType() {
+        GreenSpace greenSpace = new TestGreenSpace("Test", 100.0, GreenSpaceType.GARDEN, "test@example.com");
+        GreenSpaceType type = greenSpace.getType();
+        assertEquals(GreenSpaceType.GARDEN, type);
     }
 
-**Test 4:** Tests creating a job with an invalid name containing special characters, which should throw an IllegalArgumentException.
+**Test 4:** Verifies that the getEmail() method returns the correct email.
 
     @Test
-    void createJobWithInvalidNameContainingSpecialCharacters() {
-        assertThrows(IllegalArgumentException.class, () -> new Job("Software@Engineer"));
-    }
-
-    
-**Test 5:** Tests if equals method returns true when comparing the same instance.
-    
-    @Test
-    void equals_sameInstance_returnsTrue() {
-        // Arrange
-        Job job = new Job("Software Engineer");
-
-        // Act & Assert
-        assertEquals(job, job);
-    }
-
-**Test 6:** Tests if equals method returns true when comparing equal jobs.
-
-    @Test
-    void equals_equalJobs_returnsTrue() {
-    // Arrange
-    Job job1 = new Job("Software Engineer");
-    Job job2 = new Job("Software Engineer");
-
-        // Act & Assert
-        assertEquals(job1, job2);
+    public void testGetEmail() {
+        GreenSpace greenSpace = new TestGreenSpace("Test", 100.0, GreenSpaceType.GARDEN, "test@example.com");
+        String email = greenSpace.getEmail();
+        assertEquals("test@example.com", email);
     }
 
     
-**Test 7:**  Tests if equals method returns false when comparing different jobs.
-     
+**Test 5:** Ensures that a GreenSpace object cannot be created with a negative area.
+    
     @Test
-    void equals_differentJobs_returnsFalse() {
-        // Arrange
-        Job job1 = new Job("Software Engineer");
-        Job job2 = new Job("Data Analyst");
-
-        // Act & Assert
-        assertNotEquals(job1, job2);
+    public void testNegativeArea() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("Test", -100.0, GreenSpaceType.GARDEN, "test@example.com");
+        });
     }
 
-    
-**Test 8:**   Tests the clone method to ensure it returns a new instance with the same attributes.
-     
+**Test 6:** Ensures that a GreenSpace object cannot be created with an area of zero.
+
     @Test
-    void clone_returnsNewInstanceWithSameAttributes() {
-        // Arrange
-        Job originalJob = new Job("Software Engineer");
-
-        // Act
-        Job clonedJob = originalJob.clone();
-
-        // Assert
-        assertNotSame(originalJob, clonedJob);
-        assertEquals(originalJob, clonedJob);
+    public void testZeroArea() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("Test", 0.0, GreenSpaceType.GARDEN, "test@example.com");
+        });
     }
 
-    
-**Test 9:** Tests adding a duplicate job to the repository, which should fail.
-     
+**Test 6:** Ensures that a GreenSpace object cannot be created with an empty name.
+
     @Test
-    void addingDuplicateJobFails() {
-        // Arrange
-        JobRepository jobRepository = new JobRepository();
-        Job job1 = new Job("Software Engineer");
-        Job job2 = new Job("Software Engineer");
+    public void testEmptyName() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("", 100.0, GreenSpaceType.GARDEN, "test@example.com");
+        });
+    }
 
-        // Act
-        jobRepository.add(job1);
-        Optional<Job> result = jobRepository.add(job2);
+**Test 7:** Ensures that a GreenSpace object cannot be created with a null name.
 
-        // Assert
-        assertTrue(result.isEmpty(), "Adding duplicate job should fail");
+    @Test
+    public void testNullName() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace(null, 100.0, GreenSpaceType.GARDEN, "test@example.com");
+        });
+    }
+
+**Test 8:** Ensures that a GreenSpace object cannot be created with an invalid email address.
+
+
+    @Test
+    public void testInvalidEmail() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("Test", 100.0, GreenSpaceType.GARDEN, "invalid-email");
+        });
+    }
+
+**Test 9:** Ensures that a GreenSpace object cannot be created with a null email.
+
+    @Test
+    public void testNullEmail() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("Test", 100.0, GreenSpaceType.GARDEN, null);
+        });
+    }
+
+**Test 10:** Ensures that a GreenSpace object cannot be created with a null type.
+
+    @Test
+    public void testNullType() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new TestGreenSpace("Test", 100.0, null, "test@example.com");
+        });
     }
 
 ## 4.2 Repository tests
+**GreenSpaceRepository**
 
-
-**Test 1:** Tests adding a job to the repository and retrieving it by name.
+**Test 1:** This test is checking the functionality of adding a GreenSpace object to the repository and then retrieving it.
 
     @Test
-    public void testAddAndGetJobByName() {
-    // Add a job to the repository
-    Job job = new Job("Software Developer");
-    Optional<Job> addedJob = jobRepository.add(job);
-
-        // Ensure the job was added successfully
-        assertTrue(addedJob.isPresent());
-
-        // Retrieve the added job by name
-        Job retrievedJob = jobRepository.getJobByName("Software Developer");
-
-        // Check if the retrieved job matches the added job
-        assertEquals(job, retrievedJob);
+    public void testAddAndGetGreenSpaces() {
+        GreenSpace greenSpace = new Garden("Central Park", 500.0, "user@example.com");
+        GreenSpaceRepository.addGreenSpace(greenSpace);
+        List<GreenSpace> greenSpaces = GreenSpaceRepository.getGreenSpaces();
+        assertEquals(1, greenSpaces.size());
+        assertEquals(greenSpace, greenSpaces.get(0));
     }
 
 
-**Test 2:** Tests adding a duplicate job to the repository.
+**Test 2:** This test ensures that when the repository is empty, calling getGreenSpaces() returns an empty list.
      
     @Test
-    public void testAddDuplicateJob() {
-        // Add a job to the repository
-        Job job = new Job("Software Developer");
-        Optional<Job> addedJob1 = jobRepository.add(job);
-
-        // Ensure the job was added successfully
-        assertTrue(addedJob1.isPresent());
-
-        // Attempt to add the same job again
-        Optional<Job> addedJob2 = jobRepository.add(job);
-
-        // Ensure the second addition fails and returns empty optional
-        assertTrue(addedJob2.isEmpty());
+    public void testGetGreenSpaces_EmptyList() {
+        List<GreenSpace> greenSpaces = GreenSpaceRepository.getGreenSpaces();
+        assertTrue(greenSpaces.isEmpty());
     }
 
     
-**Test 3:** Tests attempting to retrieve a job by name that doesn't exist in the repository.
+**Test 3:** This test verifies that the repository throws an IllegalArgumentException when attempting to add a null GreenSpace object.
      
     @Test
-    public void testGetJobByNameNonExistent() {
-        // Attempt to retrieve a job that doesn't exist in the repository
-        assertThrows(IllegalArgumentException.class, () -> jobRepository.getJobByName("Nonexistent Job"));
+    public void testAddGreenSpace_Null() {
+        GreenSpace greenSpace = null;
+        assertThrows(IllegalArgumentException.class, () -> {
+            GreenSpaceRepository.addGreenSpace(greenSpace);
+        });
     }
 
     
-**Test 4:** Tests retrieving the list of jobs from the repository.
-     
+**Test 4:** This test checks the repository's behavior when attempting to add a duplicate GreenSpace object, throwing an IllegalArgumentException.
+
     @Test
-    public void testGetJobList() {
-        // Add some jobs to the repository
-        jobRepository.add(new Job("Software Developer"));
-        jobRepository.add(new Job("Data Analyst"));
-        jobRepository.add(new Job("Project Manager"));
+    public void testAddGreenSpace_Duplicate() {
+        GreenSpace greenSpace1 = new Garden("Central Park", 500.0, "user1@example.com");
+        GreenSpaceRepository.addGreenSpace(greenSpace1);
 
-        // Retrieve the list of jobs from the repository
-        List<Job> jobList = jobRepository.getJobList();
-
-        // Ensure the size of the retrieved list matches the number of added jobs
-        assertEquals(3, jobList.size());
-
-        // Ensure each added job is present in the retrieved list
-        assertTrue(jobList.contains(new Job("Software Developer")));
-        assertTrue(jobList.contains(new Job("Data Analyst")));
-        assertTrue(jobList.contains(new Job("Project Manager")));
+        GreenSpace greenSpace2 = new Garden("Central Park", 500.0, "user1@example.com");
+        assertThrows(IllegalArgumentException.class, () -> {
+            GreenSpaceRepository.addGreenSpace(greenSpace2);
+        });
     }
 
+**Test 5:** This test checks the repository's behavior when attempting to add an invalid GreenSpace object. It expects the repository to throw an IllegalArgumentException for each case of invalid input.
 
-
-
+    @Test
+    public void testAddGreenSpace_InvalidGreenSpace() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            GreenSpace greenSpace = new Garden("", -500.0, "invalid-email");
+            GreenSpaceRepository.addGreenSpace(greenSpace);
+        });
+    }
 
 ## 5. Construction (Implementation)
 
-### Class CreateCollaboratorController 
+### Class GreenSpace 
 
 ```java
-public class CreateJobController {
+package pt.ipp.isep.dei.esoft.project.domain;
 
-    // Instance variables
-    private OrganizationRepository organizationRepository;
-    private TaskCategoryRepository taskCategoryRepository;
-    private AuthenticationRepository authenticationRepository;
-    private static JobRepository jobRepository;
+/**
+ * Represents a type of green space.
+ */
+public abstract class GreenSpace {
+    private String name;
+    private double area;
+    private GreenSpaceType type;
+    private String email;
 
     /**
-     * Constructs a new {@code CreateJobController} object.
-     * Initializes repositories obtained from the Repositories class.
-     */
-    public CreateJobController() {
-            getOrganizationRepository();
-            getTaskCategoryRepository();
-            getAuthenticationRepository();
-            getJobRepository();
-            }
-    
-    /**
-     * Constructs a new {@code CreateJobController} object with specified repositories.
+     * Constructs a GreenSpace object with the specified name, area, type, and email.
      *
-     * @param organizationRepository    The organization repository.
-     * @param taskCategoryRepository    The task category repository.
-     * @param authenticationRepository  The authentication repository.
-     * @param jobRepository             The job repository.
+     * @param name  the name of the green space
+     * @param area  the area of the green space in square meters
+     * @param type  the type of the green space
+     * @param email the email associated with the green space
      */
-    public CreateJobController(OrganizationRepository organizationRepository,
-            TaskCategoryRepository taskCategoryRepository,
-            AuthenticationRepository authenticationRepository,
-            JobRepository jobRepository) {
-            this.organizationRepository = organizationRepository;
-            this.taskCategoryRepository = taskCategoryRepository;
-            this.authenticationRepository = authenticationRepository;
-            this.jobRepository = jobRepository;
-            }
-    
+    public GreenSpace(String name, double area, GreenSpaceType type, String email) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
+        }
+        if (area <= 0) {
+            throw new IllegalArgumentException("Area must be positive");
+        }
+        if (type == null) {
+            throw new IllegalArgumentException("Type cannot be null");
+        }
+        if (email == null || !email.contains("@")) {
+            throw new IllegalArgumentException("Invalid email address");
+        }
+
+        this.name = name;
+        this.area = area;
+        this.type = type;
+        this.email = email;
+    }
+
+
     /**
-     * Obtains the task category repository instance.
+     * Gets the name of the green space.
      *
-     * @return The task category repository instance.
+     * @return the name of the green space
      */
-    private TaskCategoryRepository getTaskCategoryRepository() {
-            if (taskCategoryRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            taskCategoryRepository = repositories.getTaskCategoryRepository();
-            }
-            return taskCategoryRepository;
-            }
-    
+    public String getName() {
+        return name;
+    }
+
     /**
-     * Obtains the organization repository instance.
+     * Gets the area of the green space.
      *
-     * @return The organization repository instance.
+     * @return the area of the green space in square meters
      */
-    private OrganizationRepository getOrganizationRepository() {
-            if (organizationRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            organizationRepository = repositories.getOrganizationRepository();
-            }
-            return organizationRepository;
-            }
-    
+    public double getArea() {
+        return area;
+    }
+
     /**
-     * Obtains the authentication repository instance.
+     * Gets the type of the green space.
      *
-     * @return The authentication repository instance.
+     * @return the type of the green space
      */
-    private AuthenticationRepository getAuthenticationRepository() {
-            if (authenticationRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            authenticationRepository = repositories.getAuthenticationRepository();
-            }
-            return authenticationRepository;
-            }
-    
+    public GreenSpaceType getType() {
+        return type;
+    }
+
     /**
-     * Obtains the job repository instance.
+     * Gets the email associated with the green space.
      *
-     * @return The job repository instance.
+     * @return the email associated with the green space
      */
-    private JobRepository getJobRepository() {
-            if (jobRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            jobRepository = repositories.getJobRepository();
-            }
-            return jobRepository;
-            }
-    
+    public String getEmail() {
+        return email;
+    }
+
     /**
-     * Creates a new job with the given name.
-     *
-     * @param jobName The name of the job.
-     * @return {@code true} if the job creation was successful, {@code false} otherwise.
+     * Displays the details of the green space.
      */
-    public boolean createJob(String jobName) {
-            Job job = new Job(jobName);
-            Optional<Job> newJob = jobRepository.add(job);
-            return newJob.isPresent();
-            }
-    
-    /**
-     * Retrieves the list of available jobs.
-     *
-     * @return A list of Job objects representing the available jobs.
-     */
-    public static List<Job> getJobList() {
-            return jobRepository.getJobList();
-            }
+    public abstract void displayDetails();
 }
+
 ```
 
-### Class Job
+### Class GreenSpaceRepository
 
 ```java
-public class Job {
+package pt.ipp.isep.dei.esoft.project.repository;
 
-    // Instance variable
-    private final String jobName;
+import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 
-    /**
-     * Constructs a new {@code Job} object with the specified name.
-     *
-     * @param jobName The name of the job.
-     * @throws IllegalArgumentException If the job name is null, empty, contains digits, or special characters.
-     */
-    public Job(String jobName) throws IllegalArgumentException {
-        validateJobName(jobName);
-        this.jobName = jobName;
-    }
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Repository class for managing GreenSpace objects.
+ */
+public class GreenSpaceRepository {
+    private static List<GreenSpace> greenSpaces = new ArrayList<>();
 
     /**
-     * Validates the job name to ensure it meets the required criteria.
+     * Adds a GreenSpace object to the repository.
      *
-     * @param jobName The name of the job to be validated.
-     * @throws IllegalArgumentException If the job name is null, empty, contains digits, or special characters.
+     * @param greenSpace the GreenSpace object to add
+     * @throws IllegalArgumentException if the provided GreenSpace is null or if a duplicate GreenSpace is being added
      */
-    private void validateJobName(String jobName) throws IllegalArgumentException {
-        if (jobName == null || jobName.isEmpty()) {
-            throw new IllegalArgumentException("Job name cannot be null or empty.");
+    public static void addGreenSpace(GreenSpace greenSpace) {
+        if (greenSpace == null) {
+            throw new IllegalArgumentException("GreenSpace cannot be null");
         }
-        // Check if job name contains any digits or special characters
-        if (jobName.matches(".*\\d.*") || !jobName.matches("[a-zA-Z\\s]+")) {
-            throw new IllegalArgumentException("Job name cannot contain numbers or special characters.");
+        if (containsGreenSpace(greenSpace)) {
+            throw new IllegalArgumentException("Duplicate GreenSpace cannot be added");
         }
+        greenSpaces.add(greenSpace);
     }
 
     /**
-     * Retrieves the name of the job.
+     * Checks if the repository contains a duplicate of the provided GreenSpace.
      *
-     * @return The name of the job.
+     * @param greenSpace the GreenSpace object to check for duplication
+     * @return true if the repository contains a duplicate of the provided GreenSpace, false otherwise
      */
-    public String getJobName() {
-        return jobName;
-    }
-
-    /**
-     * Checks if this job is equal to another object.
-     *
-     * @param o The object to compare with this job.
-     * @return {@code true} if the objects are equal, {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Job)) return false;
-        Job job = (Job) o;
-        return Objects.equals(jobName, job.jobName);
-    }
-
-    /**
-     * Creates a clone of this job.
-     *
-     * @return A new {@code Job} object with the same name as this job.
-     */
-    public Job clone() {
-        return new Job(this.jobName);
-    }
-
-    /**
-     * Generates a hash code value for this job.
-     *
-     * @return The hash code value for this job.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(jobName);
-    }
-
-    /**
-     * Returns a string representation of the job.
-     *
-     * @return A string representation of the job, including its name.
-     */
-    @Override
-    public String toString() {
-        return "Job{" +
-                "jobName='" + jobName + '\'' +
-                '}';
-    }
-}
-```
-
-### Class JobRepository
-
-```java
-public class JobRepository {
-
-    private final List<Job> jobList;
-
-    /**
-     * Constructs a new {@code JobRepository} object.
-     * Initializes the list of jobs.
-     */
-    public JobRepository() {
-        jobList = new ArrayList<>();
-    }
-
-    /**
-     * Retrieves an existing job by its description.
-     *
-     * @param jobName The description of the job to be retrieved.
-     * @return The job with the specified description.
-     * @throws IllegalArgumentException if the job does not exist.
-     */
-    public Job getJobByName(String jobName) {
-        Job foundJob = null;
-        for (Job job : jobList) {
-            if (job.getJobName().equals(jobName)) {
-                foundJob = job;
-                break;
+    private static boolean containsGreenSpace(GreenSpace greenSpace) {
+        for (GreenSpace gs : greenSpaces) {
+            if (gs.getName().equals(greenSpace.getName()) && gs.getEmail().equals(greenSpace.getEmail())) {
+                return true;
             }
         }
-        if (foundJob == null) {
-            throw new IllegalArgumentException(
-                    "Job requested for [" + jobName + "] does not exist.");
-        }
-        return foundJob;
+        return false;
     }
 
     /**
-     * Adds a new job to the repository.
+     * Retrieves a list of all GreenSpace objects stored in the repository.
      *
-     * @param job The job to be added.
-     * @return An optional containing the newly added job if successful, empty otherwise.
+     * @return a list of GreenSpace objects
      */
-    public Optional<Job> add(Job job) {
-        Optional<Job> newJob = Optional.empty();
-        boolean operationSuccess = false;
-
-        if (validateJob(job)) {
-            newJob = Optional.of(job.clone());
-            operationSuccess = jobList.add(newJob.get());
-        }
-
-        if (!operationSuccess) {
-            newJob = Optional.empty();
-        }
-
-        return newJob;
-    }
-
-    /**
-     * Validates whether a job can be added to the repository.
-     * Checks if the job already exists in the repository.
-     *
-     * @param job The job to be validated.
-     * @return True if the job is valid (not already in the repository), false otherwise.
-     */
-    private boolean validateJob(Job job) {
-        return !jobList.contains(job);
-    }
-
-    /**
-     * Returns a defensive (immutable) copy of the list of jobs.
-     *
-     * @return The list of jobs.
-     */
-    public List<Job> getJobList() {
-        // This is a defensive copy, so that the repository cannot be modified from the outside.
-        return List.copyOf(jobList);
+    public static List<GreenSpace> getGreenSpaces() {
+        return new ArrayList<>(greenSpaces);
     }
 }
 
@@ -480,7 +316,7 @@ public class JobRepository {
 
 ## 6. Integration and Demo 
 
-* A new option on the HRM menu options was added.
+* A new option on the GSM menu options was added.
 
 * For demo purposes some jobs are bootstrapped while system starts.
 

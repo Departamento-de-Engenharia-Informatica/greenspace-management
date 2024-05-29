@@ -10,18 +10,30 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test class for GreenSpaceRepository.
+ */
 public class GreenSpaceRepositoryTest {
 
+    /**
+     * Clears the list of GreenSpace objects in the repository before each test.
+     */
     @Before
     public void setUp() {
         GreenSpaceRepository.getGreenSpaces().clear();
     }
 
+    /**
+     * Clears the list of GreenSpace objects in the repository after each test.
+     */
     @After
     public void tearDown() {
         GreenSpaceRepository.getGreenSpaces().clear();
     }
 
+    /**
+     * Tests the addition of a GreenSpace object to the repository and its retrieval.
+     */
     @Test
     public void testAddAndGetGreenSpaces() {
         GreenSpace greenSpace = new Garden("Central Park", 500.0, "user@example.com");
@@ -31,12 +43,18 @@ public class GreenSpaceRepositoryTest {
         assertEquals(greenSpace, greenSpaces.get(0));
     }
 
+    /**
+     * Tests the retrieval of GreenSpace objects when the repository is empty.
+     */
     @Test
     public void testGetGreenSpaces_EmptyList() {
         List<GreenSpace> greenSpaces = GreenSpaceRepository.getGreenSpaces();
         assertTrue(greenSpaces.isEmpty());
     }
 
+    /**
+     * Tests adding a null GreenSpace object to the repository.
+     */
     @Test
     public void testAddGreenSpace_Null() {
         GreenSpace greenSpace = null;
@@ -45,22 +63,23 @@ public class GreenSpaceRepositoryTest {
         });
     }
 
+    /**
+     * Tests adding a duplicate GreenSpace object to the repository.
+     */
     @Test
     public void testAddGreenSpace_Duplicate() {
-        // Create and add the first GreenSpace
         GreenSpace greenSpace1 = new Garden("Central Park", 500.0, "user1@example.com");
         GreenSpaceRepository.addGreenSpace(greenSpace1);
 
-        // Attempt to add a second GreenSpace with the same name and email
         GreenSpace greenSpace2 = new Garden("Central Park", 500.0, "user1@example.com");
         assertThrows(IllegalArgumentException.class, () -> {
             GreenSpaceRepository.addGreenSpace(greenSpace2);
         });
     }
 
-
-
-
+    /**
+     * Tests adding an invalid GreenSpace object to the repository.
+     */
     @Test
     public void testAddGreenSpace_InvalidGreenSpace() {
         assertThrows(IllegalArgumentException.class, () -> {
