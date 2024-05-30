@@ -1,58 +1,46 @@
-# US002 - Register a job
+# US002 - Assign a team to entry in Agenda
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an user resources manager, I want to register new jobs.
+As a GSM, I want to assign a Team to an entry in the Agenda.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	MS has a wide range of employees who carry out the most varied tasks in the context
-    of managing green spaces. Some job examples are designer, estimator, gardener, electrician or bricklayer
+>	ver melhor
 
 
 **From the client clarifications:**
 
 > **Question:**
-> "Bom dia, Para a US02, gostaria de esclarecer o seguinte:
-É relevante associar uma área ou setor específico a cada Job? (Por exemplo, "Jardineiro" seria inserido no setor de "Manutenção")
-Deve-se incluir informações como salário, tipo de contratação (full-time ou part-time), e modalidade de trabalho (presencial, remoto ou híbrido) no Job? Ou essas informações encaixam-se melhor no âmbito do colaborador, ou talvez nem sejam necessárias?
-Que outras informações acha necessárias associar ao Job?
-Agradeço a atenção dispensada."
+> "Can an Agenda entry have more than one team assigned to it?"
 
 
 > **Answer:** 
-"Bom dia,
- não é necessário na medida que não existem US que sugiram que isso possa vir a ser necessário;
- idem;
- para já nenhumas;
-> De nada."
+"
+No."
 
 > **Question:** 
- "Quais são os dados de entrada para a criação de uma profissão?"
+ "Can a Team be assigned to multiple entrys?"
 
 > **Answer:**
-"o Nome da profissão:
-jardineiro
-calceteiro
-electricista
-condutor
-...
+"Yes
 "
 
 ### 1.3. Acceptance Criteria
 
- **AC1:** All required fields must be filled in.
- **AC2:** As a HRM i should be able to create a new job
- **AC3:** When creating a job that already exist, the system must reject such operation.
+ **AC1:**  A message must be sent to all team members informing
+ them about the assignment.
+ **AC2:** : Different email services can send the message. These services must be defined through a configuration file to allow the use
+ of different platforms (e.g. Gmail, DEI’s email service, etc.).
 
 ### 1.4. Found out Dependencies
 
-No found out dependencies
+US022 and US005 Because we have to have the agenda and the team created.
 
 ### 1.5 Input and Output Data
 
