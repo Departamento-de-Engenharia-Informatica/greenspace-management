@@ -5,9 +5,9 @@ import pt.ipp.isep.dei.esoft.project.domain.Agenda;
 
 import java.util.List;
 
-public class ListAgendaEntries {
+public class ListAgendaEntries implements Runnable {
 
-    public static void ListAllAgendaEntries() {
+    public ListAgendaEntries() {
         System.out.println("--- All Agenda Entries ---");
         List<Agenda> agendaEntries = AgendaController.getAllAgendaEntries();
         if (agendaEntries.isEmpty()) {
@@ -17,5 +17,11 @@ public class ListAgendaEntries {
                 System.out.println(entry);
             }
         }
+    }
+
+
+    @Override
+    public void run() {
+        new ListAgendaEntries();
     }
 }

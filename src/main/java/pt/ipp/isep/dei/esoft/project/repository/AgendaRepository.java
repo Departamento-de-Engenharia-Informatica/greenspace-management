@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class AgendaRepository {
-    private final List<Agenda> agendaEntries = new ArrayList<>();
+    private static final List<Agenda> agendaEntries = new ArrayList<>();
 
     public Optional<Agenda> add(Agenda agenda) {
         agendaEntries.add(agenda);
         return Optional.of(agenda);
     }
 
-    public List<Agenda> getAll() {
+    public static List<Agenda> getAll() {
         return new ArrayList<>(agendaEntries);
     }
 

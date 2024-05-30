@@ -6,6 +6,9 @@ import pt.ipp.isep.dei.esoft.project.domain.ToDoList;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -55,11 +58,20 @@ public class AgendaUI implements Runnable {
         }
         int toDoIndex = requestSelection(scanner, toDoListEntries.size(), "To-Do List Entry");
         ToDoList selectedToDo = toDoListEntries.get(toDoIndex - 1);
-
-        // Additional input for creating the agenda entry
-        System.out.print("Expected Duration (in hours): ");
-        int expectedDuration = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        
+        LocalDate expectedDate = null;
+        
+        System.out.print("Expectad date ");
+        String input = scanner.nextLine();
+        try {
+            expectedDate = LocalDate.parse(input, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            
+            } 
+        catch (DateTimeParseException e) {
+            System.out.println("Invalid date format. Please enter date in dd-mm-yyyy format.");
+        }
+        
+       
         String status;
         do {
             System.out.print("Enter status (Planned/Postponed/Canceled/Done): ");
@@ -70,7 +82,7 @@ public class AgendaUI implements Runnable {
         Optional<Agenda> agendaEntry = agendaController.createAgendaEntry(
                 selectedToDo.getTaskDescription(),
                 selectedGreenSpace.getName(),
-                expectedDuration,
+                expectedDate,
                 status
         );
 
