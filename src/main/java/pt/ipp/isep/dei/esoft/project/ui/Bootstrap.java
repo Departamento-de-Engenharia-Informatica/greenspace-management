@@ -114,8 +114,12 @@ public class Bootstrap implements Runnable {
     private void addAgendaEntries() {
         AgendaRepository agendaRepository = Repositories.getInstance().getAgendaRepository();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate date = LocalDate.parse("10-10-2020", formatter);
-        agendaRepository.add(new Agenda("Give water to the plants", "Jardim do Covelo", date, "Planned"));
+        agendaRepository.add(new Agenda("Give water to the plants", "Jardim do Covelo", LocalDate.parse("10-10-2020", formatter), "Planned"));
+        agendaRepository.add(new Agenda("Load the vehicles", "Jardim do Covelo", LocalDate.parse("10-12-2020", formatter), "Planned"));
+        agendaRepository.add(new Agenda("Fill the tank of the vehicles", "Jardim do Covelo", LocalDate.parse("10-01-2021", formatter), "Canceled"));
+
+
+
     }
 
 
