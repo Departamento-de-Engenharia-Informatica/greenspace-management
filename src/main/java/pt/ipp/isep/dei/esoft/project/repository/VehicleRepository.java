@@ -4,6 +4,8 @@ import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 public class VehicleRepository {
     private List<Vehicle> vehicles;
@@ -52,7 +54,14 @@ public class VehicleRepository {
         return false;
     }
 
-    // Check if vehicles are due for a checkup
+    /**
+     * Retrieves a list of vehicles that are due for a checkup.
+     *
+     * This method iterates over the list of vehicles and checks each one to determine if it is due for a checkup.
+     * Vehicles that are due for a checkup are added to the list of vehicles needing checkup.
+     *
+     * @return a list of vehicles that are due for a checkup.
+     */
     public List<Vehicle> getVehiclesNeedingCheckup() {
         List<Vehicle> vehiclesNeedingCheckup = new ArrayList<>();
         for (Vehicle vehicle : vehicles) {
@@ -62,4 +71,11 @@ public class VehicleRepository {
         }
         return vehiclesNeedingCheckup;
     }
+
+    public List<Vehicle> findAvailableVehicles(LocalDateTime startTime, LocalDateTime endTime) {
+        return vehicles.stream()
+                .filter(vehicle -> vehicle.isAvailable(startTime, endTime))
+                .collect(Collectors.toList());
+    }
+
 }

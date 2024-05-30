@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Agenda;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AgendaRepository {
     private static final List<Agenda> agendaEntries = new ArrayList<>();
@@ -25,5 +26,9 @@ public class AgendaRepository {
                 break;
             }
         }
+    }
+
+    public void save(Agenda entry) {
+        updateAgendaEntry(entry);
     }
 }
