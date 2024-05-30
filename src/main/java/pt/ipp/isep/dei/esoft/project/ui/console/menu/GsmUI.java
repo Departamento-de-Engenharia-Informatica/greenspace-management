@@ -34,6 +34,7 @@ public class GsmUI implements Runnable {
         options.add(new MenuItem("To-Do List", new ToDoListUI(userEmail)));
         options.add(new MenuItem("Agenda", new AgendaUI(userEmail)));
         options.add(new MenuItem("List Agenda Entries", new ListAgendaEntries()));
+        options.add(new MenuItem("Change Agenda Status", new ChangeStatusAgendaEntriesUI()));
         // Add other menu options here as needed
 
         int option;
