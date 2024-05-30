@@ -59,8 +59,7 @@ public class ChangeStatusAgendaEntriesUI implements Runnable {
             return;
         }
         if (!"Postponed".equals(currentStatus) && choice == optionNumber++) {
-            entry.setStatus("Postponed");
-            System.out.println("Status updated to Postponed");
+            new PostponedAgendaEntriesUI(entry).run();
             return;
         }
         if (!"Canceled".equals(currentStatus) && choice == optionNumber++) {
