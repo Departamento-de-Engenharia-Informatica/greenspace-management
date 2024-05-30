@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.time.format.DateTimeFormatter;
+
 
 
 /**
@@ -44,6 +46,7 @@ public class Bootstrap implements Runnable {
         addTeamProposals();
         addGreenspaces();
 //        addToDoListEntries();
+        addAgendaEntries();
     }
 
 
@@ -103,9 +106,16 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.add(new Collaborator("Sofia gomes", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432107", "sofia.rodrigues2@live.com.pt", 582037467, 87654323, "Park Ranger"));
         collaboratorRepository.add(new Collaborator("Sofia ribeiro", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432106", "sofia.rodrigues3@live.com.pt", 582037466, 87654324, "Park Ranger"));
 
+    }
 
-
-
+    /**
+     * Adds Agenda Entries to the repository.
+     */
+    private void addAgendaEntries() {
+        AgendaRepository agendaRepository = Repositories.getInstance().getAgendaRepository();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate date = LocalDate.parse("10-10-2020", formatter);
+        agendaRepository.add(new Agenda("Give water to the plants", "Jardim do Covelo", date, "Planned"));
     }
 
 
