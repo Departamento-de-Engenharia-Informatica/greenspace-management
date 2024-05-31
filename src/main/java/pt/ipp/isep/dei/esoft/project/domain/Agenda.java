@@ -10,7 +10,7 @@ public class Agenda {
     private String greenspaceName;
     private LocalDate expectedDate;
     private String status;
-//    private List<String> team;
+    private TeamProposal teamProposal;
     private List<Vehicle> vehicles;
 
     public Agenda(String taskDescription, String greenspaceName, LocalDate expectedDate, String status) {
