@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
+import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
 import pt.ipp.isep.dei.esoft.project.domain.ToDoList;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
@@ -96,6 +97,7 @@ public class AgendaUI implements Runnable {
 
         if (agendaEntry.isPresent()) {
             System.out.println("Agenda entry created successfully.");
+            ToDoListController.updateToDoListStatus(selectedToDo.getTaskDescription(), "Processed");
         } else {
             System.out.println("Failed to create agenda entry. Ensure the task exists in the To-Do list and the green space is managed by you.");
         }
