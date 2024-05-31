@@ -1,0 +1,79 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "User" as USER
+participant "ToDoListUI" as UI
+participant "ToDoListController" as CTRL
+participant "Repositories" as RepositorySingleton
+participant "repositories : Repositories" as PLAT
+participant "toDoListRepository : ToDoListRepository" as ToDoListRepository
+participant "ApplicationSession" as _APP
+participant "appSession : ApplicationSession" as APP
+participant "currentSession : UserSession" as SESSAO
+participant "toDoList : ToDoList" as TODOLIST
+participant "collaborator : Collaborator" as COLLABORATOR
+
+activate USER
+
+    USER -> UI : requests to add new to-do list entry
+    activate UI
+
+        UI --> USER : prompts for required fields (e.g., taskDescription, urgency, expectedDuration, greenspaceName, status)
+    deactivate UI
+
+    USER -> UI : provides to-do list details (taskDescription, urgency, expectedDuration, greenspaceName, status)
+    activate UI
+
+        UI -> CTRL : createToDoListEntry(taskDescription, urgency, expectedDuration, greenspaceName, status, email)
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL : repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getToDoListRepository()
+            activate PLAT
+
+                PLAT --> CTRL : toDoListRepository
+            deactivate PLAT
+
+            CTRL -> _APP: getInstance()
+            activate _APP
+                _APP -> CTRL: appSession
+            deactivate _APP
+
+            CTRL -> APP: getCurrentSession()
+            activate APP
+
+                APP --> CTRL: currentSession
+            deactivate APP
+
+            CTRL -> SESSAO: email = getUserEmail()
+            activate SESSAO
+
+                SESSAO --> CTRL: email
+            deactivate SESSAO
+
+            CTRL -> TODOLIST : new ToDoList(taskDescription, urgency, expectedDuration, greenspaceName, status, email)
+            activate TODOLIST
+
+                TODOLIST -> TODOLIST : validate details
+                TODOLIST -> toDoListRepository : add(TODOLIST)
+                deactivate TODOLIST
+
+            deactivate CTRL
+
+            CTRL --> UI : confirms successful to-do list entry creation
+    deactivate UI
+
+    UI --> USER : confirms successful to-do list entry creation
+
+deactivate USER
+
+@enduml
