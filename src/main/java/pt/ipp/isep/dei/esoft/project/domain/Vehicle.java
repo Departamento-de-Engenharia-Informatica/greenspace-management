@@ -1,5 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Vehicle {
     private String plateID;
     private String model;
@@ -11,6 +15,7 @@ public class Vehicle {
     private String acquisitionDate;
     private int checkupFrequencyKm;
     private int lastMaintenanceKm;
+    private List<Task> assignedTasks;
 
     public Vehicle(String plateID, String model, String type, int tare, int grossWeight, int currentKm,
                    String registerDate, String acquisitionDate, int checkupFrequencyKm, int lastMaintenanceKm) {
@@ -31,6 +36,7 @@ public class Vehicle {
         this.acquisitionDate = acquisitionDate;
         this.checkupFrequencyKm = checkupFrequencyKm;
         this.lastMaintenanceKm = lastMaintenanceKm;
+        this.assignedTasks = new ArrayList<>();
     }
 
     public String getPlateID() {
@@ -151,9 +157,25 @@ public class Vehicle {
                 '}';
     }
 
-    // For formatting the information when listing vehicles needing checkup
+    /**
+     * Formats the information of the vehicle for display, including the plate ID, model, type, current kilometers,
+     * check-up frequency, last maintenance kilometers, and next checkup kilometers. Used for vehicles needing checkup.
+     *
+     * @return a formatted string containing the vehicle's information.
+     */
     public String formatVehicleDetails() {
-        return String.format("Plate: %s, Model: %s, Type: %s, Current KM: %d, Check-up frequency KM: %d",
-                plateID, model, type, currentKm, checkupFrequencyKm);
+        int nextCheckupKm = this.lastMaintenanceKm + this.checkupFrequencyKm;
+
+        return String.format("Plate: %s, Model: %s, Type: %s, Current KM: %d, Check-up frequency KM: %d, Last Maintenance KM: %d, Next Checkup KM: %d",
+                plateID, model, type, currentKm, checkupFrequencyKm, lastMaintenanceKm, nextCheckupKm);
+    }
+
+    public boolean isAvailable(LocalDateTime startTime, LocalDateTime endTime) {
+        for (Task task : assignedTasks) {
+            if (task.getStartTime().isBefore(endTime) && task.getEndTime().isAfter(startTime)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

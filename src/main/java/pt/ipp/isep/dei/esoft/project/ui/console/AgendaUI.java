@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
+import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
 import pt.ipp.isep.dei.esoft.project.domain.ToDoList;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
@@ -58,18 +59,26 @@ public class AgendaUI implements Runnable {
         }
         int toDoIndex = requestSelection(scanner, toDoListEntries.size(), "To-Do List Entry");
         ToDoList selectedToDo = toDoListEntries.get(toDoIndex - 1);
-        
+
         LocalDate expectedDate = null;
-        
-        System.out.print("Expectad date ");
-        String input = scanner.nextLine();
-        try {
-            expectedDate = LocalDate.parse(input, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            
-            } 
-        catch (DateTimeParseException e) {
-            System.out.println("Invalid date format. Please enter date in dd-mm-yyyy format.");
+        LocalDate today = LocalDate.now();
+
+        while (true) {
+            System.out.print("Expected date (dd-MM-yyyy): ");
+            String input = scanner.nextLine();
+            try {
+                expectedDate = LocalDate.parse(input, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                if (expectedDate.isBefore(today)) {
+                    System.out.println("The date cannot be before today. Please enter a valid date.");
+                    continue; // Prompt user again if the date is before today
+                }
+                break; // If parsing succeeds and the date is not before today, exit loop
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format. Please enter date in dd-MM-yyyy format.");
+            }
         }
+
+
         
        
         String status;
@@ -88,6 +97,7 @@ public class AgendaUI implements Runnable {
 
         if (agendaEntry.isPresent()) {
             System.out.println("Agenda entry created successfully.");
+            ToDoListController.updateToDoListStatus(selectedToDo.getTaskDescription(), "Processed");
         } else {
             System.out.println("Failed to create agenda entry. Ensure the task exists in the To-Do list and the green space is managed by you.");
         }

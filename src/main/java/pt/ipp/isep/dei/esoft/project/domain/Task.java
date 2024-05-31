@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
+import java.time.LocalDateTime;
 
 public class Task {
     private final String reference;
@@ -13,6 +14,10 @@ public class Task {
     private TaskCategory taskCategory;
 
     private Employee employee;
+
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+
 
     public Task(String reference, String description, String informalDescription, String technicalDescription,
                 int duration, double cost, TaskCategory taskCategory, Employee employee) {
@@ -61,5 +66,22 @@ public class Task {
     public Task clone() {
         return new Task(this.reference, this.description, this.informalDescription, this.technicalDescription,
                 this.duration, this.cost, this.taskCategory, this.employee);
+    }
+    // Methods to get start time and end time
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    // Setters for start time and end time if needed
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 }
