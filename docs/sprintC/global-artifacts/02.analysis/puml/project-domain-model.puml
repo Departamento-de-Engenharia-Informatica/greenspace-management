@@ -133,6 +133,9 @@ class ToDoList{
     DegreeOfUrgency
     Duration
 }
+class Entries{
+.....
+}
 
 
 
@@ -140,7 +143,10 @@ class ToDoList{
 Organization "1" -- "*" Employe : has
 Organization "1" -- "*" GreenSpaces : owns
 
-Employe "1" -- "*" Task : creates
+GSM "1" -- "*" Task : creates
+GSM "1" -- "*" Entries : creates
+Entries "1" -- "*" ToDoList : adds
+
 Employe "1" -- "1" GSM : can be
 Employe "1" -- "1" HRM : can be
 Employe "1" -- "1" VFM : can be
@@ -153,7 +159,6 @@ HRM "1" -- "*" Skill : creates
 Collaborator "1" -- "1" Job : has
 Collaborator "1" -- "1" Team : is a member of
 Collaborator "1" -- "*" Skill : possesses
-Collaborator "1" -- "*" Task : is assigned to
 Collaborator "1" -- "*" Vehicle : drives
 Collaborator "1" -- "*" Machine : uses
 Collaborator "1" -- "*" Equipment : uses
@@ -175,16 +180,18 @@ GreenSpaces "1" -- "0.*" GSU : has
 
 ToDoList "1" -- "1" GreenSpaces : associated with
 Agenda "1" -- "1" GreenSpaces : associated with
-ToDoList "1" -- "*" Agenda : exists in
+ToDoList "1" -- "*" Agenda : adds
 
 VFM "1" -- "*" CheckUp: register
 VFM "1" -- "*" Vehicle: manages
 
 GSM "1" -- "1" Portal: manages and reads
 GSM "1" -- "*" GreenSpaces: creats
-GSM "1" -- "*" ToDoList: adds
 GSM "1" -- "*" Agenda: adds
 
 Vehicle "1" -- "*" CheckUp : undergoes
+
+Task "1" -- "1" Team : assigned to
+
 
 @enduml
