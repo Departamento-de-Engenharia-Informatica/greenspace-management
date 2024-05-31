@@ -76,7 +76,7 @@ class Task {
 }
 
 class Agenda {
-    dateOfCreation
+    endDate
     state
 }
 
@@ -130,10 +130,18 @@ class Skill {
 
 class ToDoList{
     Description
-    DegreeOfUrgency
     Duration
 }
 class Entries{
+.....
+}
+class LowUrgency{
+.....
+}
+class MediumUrgency{
+.....
+}
+class HighUrgency{
 .....
 }
 
@@ -145,7 +153,11 @@ Organization "1" -- "*" GreenSpaces : owns
 
 GSM "1" -- "*" Task : creates
 GSM "1" -- "*" Entries : creates
-Entries "1" -- "*" ToDoList : adds
+Entries "*" -- "1" ToDoList : belongs to
+Entries "*" -- "1" Agenda : belongs to
+Entries "*" -- "1" LowUrgency : can be
+Entries "*" -- "1" MediumUrgency : can be
+Entries "*" -- "1" HighUrgency : can be
 
 Employe "1" -- "1" GSM : can be
 Employe "1" -- "1" HRM : can be
@@ -180,7 +192,7 @@ GreenSpaces "1" -- "0.*" GSU : has
 
 ToDoList "1" -- "1" GreenSpaces : associated with
 Agenda "1" -- "1" GreenSpaces : associated with
-ToDoList "1" -- "*" Agenda : adds
+ToDoList "1" -- "1" Agenda : associated with
 
 VFM "1" -- "*" CheckUp: register
 VFM "1" -- "*" Vehicle: manages

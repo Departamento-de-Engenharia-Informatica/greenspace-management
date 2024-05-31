@@ -239,5 +239,9 @@ public class Collaborator {
     public void removeSkill(Skill skill) {
         skills.remove(skill);
     }
+    @Override
+    public String toString() {
+        return name;
+    }
 
 }

@@ -13,13 +13,15 @@ public class Agenda {
     private TeamProposal teamProposal;
     private List<Vehicle> vehicles;
 
-    public Agenda(String taskDescription, String greenspaceName, LocalDate expectedDate, String status) {
+    public Agenda(String taskDescription, String greenspaceName, LocalDate expectedDate, String status, TeamProposal teamProposal) {
         this.taskDescription = taskDescription;
         this.greenspaceName = greenspaceName;
         this.expectedDate = expectedDate;
         this.status = status;
+        this.teamProposal = teamProposal;
 //        this.team = team;
     }
+
 
     // Getters and setters
     public String getTaskDescription() { return taskDescription; }
@@ -38,7 +40,8 @@ public class Agenda {
         return "Task Description: " + taskDescription +
                 ", Expected Date: " + expectedDate + "," +
                 " Greenspace: " + greenspaceName +
-                ", Status: " + status;
+                ", Status: " + status +
+                ", Team:" + teamProposal.getSelectedCollaborators().toString();
     }
 
     // Method to get the start time (for vehicle availability check)

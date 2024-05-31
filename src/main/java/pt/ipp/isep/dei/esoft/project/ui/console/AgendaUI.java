@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
+import pt.ipp.isep.dei.esoft.project.domain.TeamProposal;
 import pt.ipp.isep.dei.esoft.project.domain.ToDoList;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
@@ -17,6 +18,8 @@ import java.util.Scanner;
 public class AgendaUI implements Runnable {
     private final String userEmail;
     private final AgendaController agendaController;
+
+    private TeamProposal teamProposal;
 
     public AgendaUI(String userEmail) {
         this.userEmail = userEmail;
@@ -92,7 +95,7 @@ public class AgendaUI implements Runnable {
                 selectedToDo.getTaskDescription(),
                 selectedGreenSpace.getName(),
                 expectedDate,
-                status
+                status, teamProposal
         );
 
         if (agendaEntry.isPresent()) {
