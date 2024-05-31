@@ -84,6 +84,7 @@ RegisterGreenSpaceController .> Repositories : repositories
 Repositories -> "1" GreenSpaceRepository
 
 RegisterGreenSpaceController ..> GreenSpaceRepository : GreenSpaceRepository
+RegisterGreenSpaceController ..> GreenSpace
 
 ' Ligação dos tipos de parques com a classe GreenSpace
 GreenSpaceType --> Garden : can be
