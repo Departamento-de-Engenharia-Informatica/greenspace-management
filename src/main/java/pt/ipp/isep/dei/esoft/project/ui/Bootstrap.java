@@ -46,7 +46,8 @@ public class Bootstrap implements Runnable {
         addTeamProposals();
         addGreenspaces();
 //        addToDoListEntries();
-        addAgendaEntries();
+        //addAgendaEntries();
+        AssingTeam();
     }
 
 
@@ -111,7 +112,7 @@ public class Bootstrap implements Runnable {
     /**
      * Adds Agenda Entries to the repository.
      */
-    private void addAgendaEntries() {
+    /*private void addAgendaEntries() {
         AgendaRepository agendaRepository = Repositories.getInstance().getAgendaRepository();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         agendaRepository.add(new Agenda("Give water to the plants", "Jardim do Covelo", LocalDate.parse("10-10-2020", formatter), "Planned"));
@@ -120,7 +121,7 @@ public class Bootstrap implements Runnable {
 
 
 
-    }
+    }*/
 
 
 
@@ -291,9 +292,44 @@ public class Bootstrap implements Runnable {
         GreenSpaceRepository.addGreenSpace(new LargeSizedPark("parque gigante", 324242, "gsm@this.app"));
 
     }
+    private void AssingTeam(){
+        TeamProposalRepository teamProposalRepository = Repositories.getInstance().getTeamProposalRepository();
+        AgendaRepository agendaRepository = Repositories.getInstance().getAgendaRepository();
+        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+        CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
 
+        // Fetch required skills
+        Skill skillJava = skillRepository.getSkillByName("Java Programming");
+        Skill skillWebDev = skillRepository.getSkillByName("Web Development");
+        Skill skilltreepruner = skillRepository.getSkillByName("tree pruner");
 
+        // Fetch some collaborators
+        Collaborator joaoSilva = collaboratorRepository.getCollaboratorByName("João Silva").orElse(null);
+        Collaborator anaSantos = collaboratorRepository.getCollaboratorByName("Ana Santos").orElse(null);
+        Collaborator martaOliveira = collaboratorRepository.getCollaboratorByName("Marta Oliveira").orElse(null);
+        Collaborator pedroFerreira = collaboratorRepository.getCollaboratorByName("Pedro Ferreira").orElse(null);
+
+        // Create sets of required skills for team proposals
+        Set<Skill> requiredSkills1 = new HashSet<>(Arrays.asList(skillJava, skillWebDev));
+        Set<Skill> requiredSkills2 = new HashSet<>(Arrays.asList(skilltreepruner));
+
+        // Create lists of selected collaborators for team proposals
+        List<Collaborator> selectedCollaborators1 = Arrays.asList(joaoSilva, anaSantos);
+        List<Collaborator> selectedCollaborators2 = Arrays.asList(martaOliveira, pedroFerreira);
+
+        // Create team proposal instances
+        TeamProposal teamProposal1 = new TeamProposal(3, 2, requiredSkills1, selectedCollaborators1);
+        TeamProposal teamProposal2 = new TeamProposal(4, 3, requiredSkills2, selectedCollaborators2);
+
+        // Add team proposals to the repository
+        teamProposalRepository.addTeamProposal(teamProposal1);
+        teamProposalRepository.addTeamProposal(teamProposal2);
+
+        agendaRepository.add(new Agenda("coirtar relva", "Jardim do Covelo", LocalDate.parse("10-10-2020", formatter),"Done", teamProposal1));
+
+    }
 
 
 
