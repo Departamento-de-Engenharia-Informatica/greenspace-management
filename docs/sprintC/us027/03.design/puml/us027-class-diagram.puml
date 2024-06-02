@@ -1,0 +1,82 @@
+@startuml
+
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+
+class GreenSpace {
+    - String name
+    - double area
+    - GreenSpaceType type
+    - String email
+
+    + String getName()
+    + double getArea()
+    + GreenSpaceType getType()
+    + String getEmail()
+    + void displayDetails()
+}
+
+class GreenSpaceRepository {
+    - List<GreenSpace> greenSpaces
+
+    + void addGreenSpace(GreenSpace greenSpace)
+    + List<GreenSpace> getGreenSpaces()
+    + List<GreenSpace> findByUserEmail(String userEmail)
+}
+
+class RegisterGreenSpaceController {
+    + List<GreenSpace> getAllGreenSpaces()
+}
+
+class ListGreenSpacesUI {
+    + ListGreenSpacesUI(String userEmail)
+    + void run()
+}
+
+class ConfigReader {
+    + static GreenSpaceSorter readSortingAlgorithm()
+}
+
+interface GreenSpaceSorter {
+    + List<GreenSpace> sort(List<GreenSpace> greenSpaces)
+}
+
+class Repositories {
+    - GreenSpaceRepository greenSpaceRepository
+
+    + GreenSpaceRepository getGreenSpaceRepository()
+}
+class ApplicationSession {
+    + static getInstance()
+    + getCurrentSession()
+}
+
+class UserSession {
+    + getUserEmail()
+}
+Repositories -> Repositories : instance
+
+ListGreenSpacesUI .> RegisterGreenSpaceController
+ApplicationSession -> ApplicationSession : instance
+ApplicationSession --> "1" UserSession : userSession
+RegisterGreenSpaceController ..> ApplicationSession
+RegisterGreenSpaceController ..> UserSession
+RegisterGreenSpaceController .> Repositories : repositories
+
+Repositories -> "1" GreenSpaceRepository
+
+ListGreenSpacesUI ..> ConfigReader : configReader
+ListGreenSpacesUI ..> GreenSpaceSorter : sortingAlgorithm
+
+RegisterGreenSpaceController ..> GreenSpace : greenSpace
+
+GreenSpaceRepository --> GreenSpace
+
+
+@enduml
