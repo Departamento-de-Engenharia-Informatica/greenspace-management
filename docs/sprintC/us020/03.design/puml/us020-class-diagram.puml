@@ -34,19 +34,39 @@ class GreenSpace {
     {abstract} + displayDetails(): void
 }
 
-class Garden {
-    + Garden(name: String, area: double)
-    + displayDetails(): void
+class Collaborator {
+    - name: String
+    - birthdayDate: LocalDate
+    - admissionDate: LocalDate
+    - address: String
+    - phoneNumber: String
+    - email: String
+    - taxpayerNumber: int
+    - BINumber: long
+    - job: String
+    + Collaborator(name: String, birthdayDate: LocalDate, admissionDate: LocalDate, address: String, phoneNumber: String, email: String, taxpayerNumber: int, BINumber: long, job: String)
+    + equals(o: Object): boolean
+    + clone(): Collaborator
+    + getName(): String
+    + getBirthdayDate(): LocalDate
+    + getAdmissionDate(): LocalDate
+    + getAddress(): String
+    + getPhoneNumber(): String
+    + getEmail(): String
+    + getTaxpayerNumber(): int
+    + getBINumber(): long
+    + getJob(): String
+    + addJob(job: Job): void
 }
 
-class MediumSizedPark {
-    + MediumSizedPark(name: String, area: double)
-    + displayDetails(): void
-}
+class CollaboratorRepository {
+    - List<Collaborator> collaborators
 
-class LargeSizedPark {
-    + LargeSizedPark(name: String, area: double)
-    + displayDetails(): void
+    + addCollaborator(collaborator: Collaborator)
+    + removeCollaborator(collaborator: Collaborator)
+    + addSkillToCollaborator(collaboratorId: String, skill: Skill)
+    + getCollaborator(collaboratorId: String): Collaborator
+    + assignSkill(collaboratorId: String, skill: Skill)
 }
 
 class GreenSpaceRepository {
@@ -64,11 +84,6 @@ class RegisterGreenSpaceController {
     + getAllGreenSpaces(): List<GreenSpace>
 }
 
-enum GreenSpaceType {
-    GARDEN
-    MEDIUM_SIZED_PARK
-    LARGE_SIZED_PARK
-}
 
 ApplicationSession --> "1" UserSession : userSession
 
@@ -82,18 +97,16 @@ RegisterGreenSpaceUI .> RegisterGreenSpaceController
 RegisterGreenSpaceController .> Repositories : repositories
 
 Repositories -> "1" GreenSpaceRepository
+Repositories -> CollaboratorRepository
+CollaboratorRepository-> Collaborator
 
-RegisterGreenSpaceController ..> GreenSpaceRepository : GreenSpaceRepository
+Collaborator ..> GreenSpace
+RegisterGreenSpaceController ..> Collaborator
+Collaborator <.. GreenSpaceRepository
 RegisterGreenSpaceController ..> GreenSpace
 
-' Ligação dos tipos de parques com a classe GreenSpace
-GreenSpaceType --> Garden : can be
-GreenSpaceType --> MediumSizedPark : can be
-GreenSpaceType --> LargeSizedPark : can be
-
-GreenSpace --> "1" GreenSpaceType : has
 
 ' Legenda
-GreenSpaceRepository "1" --> "*" GreenSpace : GreenSpaces
+
 
 @enduml
