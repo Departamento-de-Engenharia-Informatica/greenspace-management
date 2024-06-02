@@ -1,0 +1,33 @@
+@startuml
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "GSM User" as GSM
+participant ":ListGreenSpacesUI" as UI
+
+activate GSM
+
+    GSM -> UI : run()
+
+    activate UI
+
+        ref over UI, CTRL : Retrieve All Green Spaces
+        UI -> CTRL : getAllGreenSpaces()
+        deactivate UI
+
+        ref over UI, ConfigReader : Read Sorting Algorithm
+        UI -> ConfigReader : readSortingAlgorithm()
+
+        ref over UI, Sorter : Sort Green Spaces
+        UI -> Sorter : sort(greenSpacesList)
+
+        UI --> GSM : displays sorted green spaces list for userEmail
+    deactivate UI
+
+deactivate GSM
+
+@enduml

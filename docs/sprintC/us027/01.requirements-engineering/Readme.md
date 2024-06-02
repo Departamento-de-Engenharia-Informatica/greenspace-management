@@ -18,30 +18,17 @@ algorithms should be available.
 **From the client clarifications:**
 
 > **Question:**
-> "Bom dia, Para a US02, gostaria de esclarecer o seguinte:
-É relevante associar uma área ou setor específico a cada Job? (Por exemplo, "Jardineiro" seria inserido no setor de "Manutenção")
-Deve-se incluir informações como salário, tipo de contratação (full-time ou part-time), e modalidade de trabalho (presencial, remoto ou híbrido) no Job? Ou essas informações encaixam-se melhor no âmbito do colaborador, ou talvez nem sejam necessárias?
-Que outras informações acha necessárias associar ao Job?
-Agradeço a atenção dispensada."
-
+> "Dear client, in this user story you only want to list the Green Spaces manage by the GSM. Due to this, the GSM should be register in the app previusly, isn't it? Which atributes should it have? A  GSM is a collaborator?"
 
 > **Answer:** 
-"Bom dia,
- não é necessário na medida que não existem US que sugiram que isso possa vir a ser necessário;
- idem;
- para já nenhumas;
-> De nada."
+"yes; the GSM (you can have many) should be registered in the app.
+GSM is a role that can be played a registered user with the appropriate priviliges;"
 
 > **Question:** 
- "Quais são os dados de entrada para a criação de uma profissão?"
+ "Dear client, which info about Green Spaces do you want the GSM see when listing? only the name ?"
 
 > **Answer:**
-"o Nome da profissão:
-jardineiro
-calceteiro
-electricista
-condutor
-...
+"Each de team can decide about the aspects related to UX/UI.
 "
 
 ### 1.3. Acceptance Criteria

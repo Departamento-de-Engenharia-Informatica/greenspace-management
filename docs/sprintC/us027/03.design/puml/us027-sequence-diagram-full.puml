@@ -1,0 +1,65 @@
+@startuml
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "GSM User" as GSM
+participant ":ListGreenSpacesUI" as UI
+participant ":RegisterGreenSpaceController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "GreenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepository
+participant "GreenSpaceSorter:\nGreenSpaceSorter" as Sorter
+participant "ConfigReader:\nConfigReader" as ConfigReader
+
+activate GSM
+
+    GSM -> UI : Requests to list all the green spaces managed by him
+
+    activate UI
+
+        UI -> CTRL : getAllGreenSpaces()
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getGreenSpaceRepository()
+            activate PLAT
+
+                PLAT --> CTRL : greenSpaceRepository
+            deactivate PLAT
+
+            CTRL -> GreenSpaceRepository : getGreenSpaces()
+            activate GreenSpaceRepository
+
+                GreenSpaceRepository --> CTRL : greenSpacesList
+            deactivate GreenSpaceRepository
+
+            CTRL --> UI : greenSpacesList
+        deactivate CTRL
+
+        UI -> ConfigReader : readSortingAlgorithm()
+        activate ConfigReader
+
+            ConfigReader --> UI : sortingAlgorithm
+        deactivate ConfigReader
+
+        UI -> Sorter : sort(greenSpacesList)
+        activate Sorter
+
+            Sorter --> UI : sortedGreenSpacesList
+        deactivate Sorter
+
+        UI --> GSM : displays sorted green spaces list for userEmail
+    deactivate UI
+
+deactivate GSM
+
+@enduml

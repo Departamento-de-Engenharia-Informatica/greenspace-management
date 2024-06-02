@@ -46,16 +46,16 @@ class LargePark {
     ...
 }
 
-class Parks {
+class GreenSpaces {
 }
 
 Organization "1" -- "*" Employe : has
-Organization "1" -- "*" Parks : owns
+Organization "1" -- "*" GreenSpaces : owns
 Employe "1" -- "1" GSM : can be
-Parks "*" -- "*" Garden : can be
-Parks "*" -- "*" MediumSizePark : can be
-Parks "*" -- "*" LargePark : can be
-GSM "1" -- "*" Parks: creats
+GreenSpaces "*" -- "*" Garden : can be
+GreenSpaces "*" -- "*" MediumSizePark : can be
+GreenSpaces "*" -- "*" LargePark : can be
+GSM "1" -- "*" GreenSpaces: creats
 
 
 @enduml
