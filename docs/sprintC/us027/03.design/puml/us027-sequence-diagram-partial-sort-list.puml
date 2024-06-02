@@ -1,0 +1,22 @@
+@startuml
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+participant ":ListGreenSpacesUI" as UI
+participant "GreenSpaceSorter:\nGreenSpaceSorter" as Sorter
+
+activate UI
+
+        UI -> Sorter : sort(greenSpacesList)
+        activate Sorter
+
+            Sorter --> UI : sortedGreenSpacesList
+        deactivate Sorter
+
+deactivate UI
+
+@enduml
