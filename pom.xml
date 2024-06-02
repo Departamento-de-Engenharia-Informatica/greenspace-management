@@ -80,6 +80,7 @@
             <scope>test</scope>
         </dependency>
 
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -98,6 +99,13 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
 
 
     </dependencies>
@@ -235,6 +243,17 @@
             <name>lei-soft</name>
             <url>https://repo.repsy.io/mvn/pmaio/lei-soft</url>
         </repository>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+            <id>repsy</id>
+            <name>lei-soft</name>
+            <url>https://repo.repsy.io/mvn/pmaio/lei-soft</url>
+        </repository>
     </repositories>
+
 
 </project>

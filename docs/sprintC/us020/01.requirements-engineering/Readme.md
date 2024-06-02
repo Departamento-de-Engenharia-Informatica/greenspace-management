@@ -38,7 +38,7 @@ area.
 ### 1.4. Found out Dependencies
 
 * There isn´t a dependencies on "US020 - Register a GreenSpace". 
-* 
+
 ### 1.5 Input and Output Data
 
 **Input Data:**

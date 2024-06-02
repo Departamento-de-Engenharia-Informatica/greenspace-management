@@ -29,8 +29,8 @@ public class Agenda {
     public LocalDate getExpectedDate() { return expectedDate; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
-//    public List<String> getTeam() { return team; }
-//    public void setTeam(List<String> team) { this.team = team; }
+
+    public void setTeamProposal(TeamProposal teamProposal) { this.teamProposal = teamProposal; }
 
 
     public void setVehicles(List<Vehicle> vehicles) { this.vehicles = vehicles; }
@@ -41,7 +41,7 @@ public class Agenda {
                 ", Expected Date: " + expectedDate + "," +
                 " Greenspace: " + greenspaceName +
                 ", Status: " + status +
-                ", Team:" + teamProposal.getSelectedCollaborators().toString();
+                ", Team:" + (teamProposal != null ? teamProposal.getSelectedCollaborators().toString() : "No team assigned");
     }
 
     // Method to get the start time (for vehicle availability check)

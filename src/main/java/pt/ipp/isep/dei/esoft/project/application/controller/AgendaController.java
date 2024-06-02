@@ -40,6 +40,12 @@ public class AgendaController {
         return Optional.empty();
     }
 
+    public List<TeamProposal> getAllTeamProposals() {
+        return repositories.getTeamProposalRepository().getAllTeamProposals();
+    }
+    public void updateAgendaEntry(Agenda agenda) {
+        repositories.getAgendaRepository().updateAgendaEntry(agenda);
+    }
 
     public static List<Agenda> getAllAgendaEntries() {
         return AgendaRepository.getAll();
