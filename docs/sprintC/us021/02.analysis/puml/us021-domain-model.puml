@@ -1,0 +1,55 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model - US021
+
+left to right direction
+
+class Organization {
+    name
+    vatNumber
+    website
+    phoneNumber
+    email
+}
+
+class GSM {
+    ...
+}
+
+class GreenSpaces {
+}
+
+class ToDoList {
+    Description
+    Duration
+}
+class Entries {
+    ...
+}
+class LowUrgency {
+    ...
+}
+class MediumUrgency {
+    ...
+}
+class HighUrgency {
+    ...
+}
+
+Organization "1" -- "*" GreenSpaces : owns
+Organization "1" -- "*" GSM : employs
+GSM "1" -- "*" Entries : creates
+Entries "*" -- "1" ToDoList : belongs to
+Entries "*" -- "1" LowUrgency : can be
+Entries "*" -- "1" MediumUrgency : can be
+Entries "*" -- "1" HighUrgency : can be
+
+ToDoList "1" -- "1" GreenSpaces : associated with
+
+@enduml

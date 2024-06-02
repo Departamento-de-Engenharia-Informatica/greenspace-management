@@ -113,9 +113,9 @@ Should the GSM define the skills needed for a To-Do entry?
 
 * Typed data:
     * Task description.
-    * Urgency level (High, Medium, Low).
     * Expected duration of the task in minutes.
 * Selected data:
+    * Urgency level (High, Medium, Low).
     * Green space for the new entry from the available list.
 
 **Output Data:**
