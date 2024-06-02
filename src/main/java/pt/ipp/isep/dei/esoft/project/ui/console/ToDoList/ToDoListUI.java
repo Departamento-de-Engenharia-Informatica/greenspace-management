@@ -45,10 +45,10 @@ public class ToDoListUI implements Runnable {
                 case 2:
                     ViewAllToDoListEntries.viewAllToDoListEntries(controller);
                     break;
+//                case 3:
+//                    ChangeToDoListEntryStatus.changeToDoListEntryStatus(controller,scanner);
+//                    break;
                 case 3:
-                    ChangeToDoListEntryStatus.changeToDoListEntryStatus(controller,scanner);
-                    break;
-                case 4:
                     running = false;
                     break;
                 default:
@@ -64,8 +64,8 @@ public class ToDoListUI implements Runnable {
         System.out.println("--- ToDoList Menu ---");
         System.out.println("1. Add New ToDoList Entry");
         System.out.println("2. View All ToDoList Entries");
-        System.out.println("3. Update Entry Status");
-        System.out.println("4. Exit");
+//        System.out.println("3. Update Entry Status");
+        System.out.println("3. Exit");
     }
 
     /**
