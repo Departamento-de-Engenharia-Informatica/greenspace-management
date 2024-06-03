@@ -25,13 +25,9 @@ System --> GSM : requests selection of a green space from the available list
 deactivate System
 
 GSM -> System : selects a green space
-activate System
-System --> GSM : validates the inputted data and displays the information to the user
 
-deactivate System
 
-GSM -> System : confirms the data
-deactivate GSM
+
 
 activate System
 System --> GSM : Success or error message
