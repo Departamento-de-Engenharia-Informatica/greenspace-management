@@ -1,71 +1,62 @@
-# US002 - Register a job
+# US028 - Consult the tasks assigned to me between two dates.
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an user resources manager, I want to register new jobs.
+As a Collaborator, I wish to consult the tasks assigned to me between two dates.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	MS has a wide range of employees who carry out the most varied tasks in the context
-    of managing green spaces. Some job examples are designer, estimator, gardener, electrician or bricklayer
-
+>	The list of tasks spaces must be sorted by date and the Collaborator should be able to filter the results by the
+status of the task.
 
 **From the client clarifications:**
 
 > **Question:**
-> "Bom dia, Para a US02, gostaria de esclarecer o seguinte:
-É relevante associar uma área ou setor específico a cada Job? (Por exemplo, "Jardineiro" seria inserido no setor de "Manutenção")
-Deve-se incluir informações como salário, tipo de contratação (full-time ou part-time), e modalidade de trabalho (presencial, remoto ou híbrido) no Job? Ou essas informações encaixam-se melhor no âmbito do colaborador, ou talvez nem sejam necessárias?
-Que outras informações acha necessárias associar ao Job?
-Agradeço a atenção dispensada."
+> "When a collaborator is registered, they are given an account with the registered email and a password? This allows them to log in and view their tasks later on. What should be the password for this collaborator's account?"
 
 
 > **Answer:** 
-"Bom dia,
- não é necessário na medida que não existem US que sugiram que isso possa vir a ser necessário;
- idem;
- para já nenhumas;
-> De nada."
+"
+Yes, it make sense.
+About the password, not important in this stage of the project."
 
 > **Question:** 
- "Quais são os dados de entrada para a criação de uma profissão?"
+ "In the US28, the tasks consulted will be the ones that were assigned to the team/teams that collaborator is in, right?
+Why do we need to show a list of green spaces? Are we assuming that one collaborator could work in 2 different parks?
+What should be the output? The description of the task + the team (if the first sentence is correct)?
+Thank you."
 
 > **Answer:**
-"o Nome da profissão:
-jardineiro
-calceteiro
-electricista
-condutor
-...
+"1) right"
+"2) Yes, a collaborator can work in multiples green spaces"
+"3) Development teams can decide about the UX/UI related aspects of the solution."
 "
 
 ### 1.3. Acceptance Criteria
 
- **AC1:** All required fields must be filled in.
- **AC2:** As a HRM i should be able to create a new job
- **AC3:** When creating a job that already exist, the system must reject such operation.
+ **AC1:** The list of tasks spaces must be sorted by date.
+ **AC2:** The Collaborator should be able to filter the results by the status of the task.
 
 ### 1.4. Found out Dependencies
 
-No found out dependencies
+There's a dependency in US22, as if I don't have entries in the Agenda I can't consult the tasks.
+There's a dependency in US23, as if I don't have entries assigned to a team I can't receive them in the email.
 
 ### 1.5 Input and Output Data
 
-**Input Data:**
-     jobName
 
 **Output Data:**
-(In)Success of the operation
+List of the tasks assigned to me.
 
 ### 1.6. System Sequence Diagram (SSD)
 
 
-![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram.svg)
+![System Sequence Diagram - Alternative One](svg/us028-system-sequence-diagram-System_Sequence_Diagram__SSD_.svg)
 
 
 
