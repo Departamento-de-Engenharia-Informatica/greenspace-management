@@ -54,10 +54,7 @@ public class ToDoList {
             System.out.println("Expected duration must be a positive integer.");
             throw new IllegalArgumentException("Expected duration must be a positive integer.");
         }
-        if (greenspaceName == null || greenspaceName.trim().isEmpty()) {
-            System.out.println("Greenspace name should be available");
 
-        }
     }
 
     /**
