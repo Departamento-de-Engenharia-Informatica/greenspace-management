@@ -45,6 +45,7 @@ Thank you."
 ### 1.4. Found out Dependencies
 
 There's a dependency in US22, as if I don't have entries in the Agenda I can't consult the tasks.
+
 There's a dependency in US23, as if I don't have entries assigned to a team I can't receive them in the email.
 
 ### 1.5 Input and Output Data
