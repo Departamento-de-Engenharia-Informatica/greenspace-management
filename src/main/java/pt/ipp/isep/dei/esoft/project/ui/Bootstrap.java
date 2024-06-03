@@ -298,6 +298,7 @@ public class Bootstrap implements Runnable {
         AgendaRepository agendaRepository = Repositories.getInstance().getAgendaRepository();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+
         // Fetch existing team proposals
         List<TeamProposal> teamProposals = teamProposalRepository.getAllTeamProposals();
 
