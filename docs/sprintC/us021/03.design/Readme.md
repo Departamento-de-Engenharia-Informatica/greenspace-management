@@ -1,34 +1,30 @@
-# US002 - Create a new job
+# US021 - Add a Entry to a to-do-List
 
 ## 3. Design - User Story Realization 
 
 ### 3.1. Rationale
 
-| Interaction ID                                     | Question: Which class is responsible for...                    | Answer            | Justification (with patterns)                                                                                      |
-|:---------------------------------------------------|:---------------------------------------------------------------|:------------------|:-------------------------------------------------------------------------------------------------------------------|
-| Step 1  		                                         | 	... interacting with the actor?                               | CreateJobUI       | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.      |
-| Step 2 - Requests data  (jobName) 		               | 	... displaying the form for the actor to input the data						 | CreateJobUI       | IE: is responsible for user interactions.                                                                          |
-| Step 3 - Types requested data (jobName)	           | 	... temporarily keeping the inputted data                      | CreateJobUI       | IE: is responsible for temporarily keeping the typed data until the actor confirms it                           |
-| Step 4 - Shows all data and requests confirmation	 | 	... displaying all information before submitting              | CreateJobUI       | IE: Temporarily shows inputted that until actor confirms it                                                         |
-| Step 5 - Confirm data		                            | 	... new job?                                                  | CreateJobController | IE: Responsible for coordinating the job creation process, interacts with both UI and repository.              |
-| 		                                                 | 			... saving the inputted data?				                            | Job               | IE: the created object has its own data                                                                            |              
-| 		                                                 | 	... validating the data(mandatory data)                       | Job               | IE: owns its data.                                                                                                 | 
-| 			  		                                            | 	... validating the data globally (checks for duplicate data)? | JobRepository     | IE: knows all the data.                                                                                            | 
-| 			  		                                            | 	... saving the created job?                                   | JobRepository     | IE: owns all the jobs.                                                                                             | 
-| Step 5 - Display operation success                  | 	... informing operation success?                              | CreateJobUI       | IE: is responsible for user interactions.                                                                          |  
+| Interaction ID                                     | Question: Which class is responsible for...                    | Answer               | Justification (with patterns)                                                                                      |
+|:---------------------------------------------------|:---------------------------------------------------------------|:---------------------|:-------------------------------------------------------------------------------------------------------------------|
+| Step 1                                             | ...interacting with the actor?                                 | ToDoListUI           | Pure Fabrication: não há razão para atribuir essa responsabilidade a nenhuma classe existente no Domain Model.      |
+| Step 2 - Requests data (taskDescription, urgency, expectedDuration, email) | ...solicitar os dados do utilizador?                           | ToDoListUI           | IE: responsável por interações com o usuário.                                                                       |
+| Step 3 - Provides requested data (taskDescription, urgency, expectedDuration, email) | ...temporarily keeping the inputted data?                      | ToDoListUI           | IE: responsável por manter temporariamente os dados inseridos até que o ator os confirme.                           |
+| Step 4 - Requests selection of a green space       | ...displaying the list of green spaces for selection?          | ToDoListUI           | IE: responsável por mostrar as informações antes da submissão.                                                      |
+| Step 5 - Selects a green space                     | ...validating and processing the input data?                   | ToDoListController   | Controller: responsável por coordenar o processo de criação de entrada, interagindo com o UI e o repositório.        |
+|                                                    | ...saving the new to-do list entry?                            | ToDoListRepository   | IE: responsável por armazenar todas as entradas da lista de tarefas.                                                |
+| Step 6 - Display operation success                 | ...informing operation success?                                | ToDoListUI           | IE: responsável por interações com o usuário.                                                                       |
 
 
-### Systematization ##
+### Systematization
 
-According to the taken rationale, the conceptual classes promoted to software classes are: 
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* Job
+* `ToDoList`
 
+Other software classes (i.e. Pure Fabrication) identified:
 
-Other software classes (i.e. Pure Fabrication) identified: 
-
-* CreateJobUI  
-* CreateJobController
+* `ToDoListUI`
+* `ToDoListController`
 
 
 ## 3.2. Sequence Diagram (SD)
