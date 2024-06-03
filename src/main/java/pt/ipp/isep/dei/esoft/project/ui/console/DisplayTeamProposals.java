@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.esoft.project.domain.TeamProposal;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.SkillAssignment;
 
 import java.util.List;
 
@@ -29,10 +28,10 @@ public class DisplayTeamProposals implements Runnable {
                 System.out.println("  - Required Skills:");
                 for (Skill skill : proposal.getRequiredSkills()) {
                     System.out.println("    - " + skill.getSkillName());
-                    System.out.println("      - Collaborators with this skill:");
-                    for (Collaborator collaborator : SkillAssignment.getCollaboratorsWithSkill(skill)) {
-                        System.out.println("        - " + collaborator.getName());
-                    }
+                }
+                System.out.println("  - Assigned Collaborators:");
+                for (Collaborator collaborator : proposal.getSelectedCollaborators()) {
+                    System.out.println("    - " + collaborator.getName());
                 }
             }
         }
