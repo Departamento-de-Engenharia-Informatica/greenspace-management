@@ -4,6 +4,8 @@ import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.TeamProposal;
+import pt.ipp.isep.dei.esoft.project.emailSender.EmailSender;
+import pt.ipp.isep.dei.esoft.project.emailSender.EmailConfig;
 
 import java.util.List;
 import java.util.Scanner;
@@ -11,10 +13,14 @@ import java.util.Scanner;
 public class AssignTeamToAgendaUI implements Runnable {
     private final AgendaController controller;
     private final Scanner scanner;
+    private final EmailSender emailSender;
 
     public AssignTeamToAgendaUI() {
         this.controller = new AgendaController();
         this.scanner = new Scanner(System.in);
+
+        EmailConfig emailConfig = new EmailConfig("email.properties");
+        this.emailSender = new EmailSender(emailConfig);
     }
 
     public void run() {
@@ -45,6 +51,7 @@ public class AssignTeamToAgendaUI implements Runnable {
         // Assign the selected team to the agenda entry
         selectedEntry.setTeamProposal(selectedTeam);
         controller.updateAgendaEntry(selectedEntry);
+        sendEmailNotifications(selectedTeam);
 
         System.out.println("Team assigned successfully.");
     }
@@ -81,5 +88,13 @@ public class AssignTeamToAgendaUI implements Runnable {
         }
 
         return teamProposals.get(index);
+    }
+    private void sendEmailNotifications(TeamProposal team) {
+        String subject = "You have been assigned to a new task";
+        String body = "Dear Collaborator,\n\nYou have been assigned to a new task. Please check your agenda for more details.\n\nBest regards,\nThe Team";
+
+        for (Collaborator collaborator : team.getSelectedCollaborators()) {
+            emailSender.sendEmail(collaborator.getEmail(), subject, body);
+        }
     }
 }

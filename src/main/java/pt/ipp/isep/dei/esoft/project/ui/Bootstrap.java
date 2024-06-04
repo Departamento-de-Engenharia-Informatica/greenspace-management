@@ -98,7 +98,7 @@ public class Bootstrap implements Runnable {
      */
     private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        collaboratorRepository.add(new Collaborator("João Silva", LocalDate.of(1985, 3, 15), LocalDate.of(2010, 7, 10), "Rua da Praia, n 123, 4400-001 Porto", "912345678", "joao.silva@gmail.com", 123456789, 12345678, "Gardener"));
+        collaboratorRepository.add(new Collaborator("João Silva", LocalDate.of(1985, 3, 15), LocalDate.of(2010, 7, 10), "Rua da Praia, n 123, 4400-001 Porto", "912345678", "rdm061sendemail@gmail.com", 123456789, 12345678, "Gardener"));
         collaboratorRepository.add(new Collaborator("Ana Santos", LocalDate.of(1978, 1, 25), LocalDate.of(2005, 9, 5), "Avenida Central, n 456, 1000-200 Lisboa", "934567890", "ana.santos@outlook.com", 987654321, 78901234, "Arborist"));
         collaboratorRepository.add(new Collaborator("Marta Oliveira", LocalDate.of(1992, 11, 10), LocalDate.of(2017, 4, 20), "Travessa das Flores, n 789, 3000-400 Coimbra", "920987654", "marta.oliveira@gmail.com", 246810753, 45678901, "Urban Planner"));
         collaboratorRepository.add(new Collaborator("Pedro Ferreira", LocalDate.of(1980, 9, 5), LocalDate.of(2012, 3, 15), "Rua dos Bosques, n 234, 5000-600 Vila Real", "917654321", "pedro.ferreira@outlook.pt", 369258147, 21098765, "Park Ranger"));
@@ -293,6 +293,7 @@ public class Bootstrap implements Runnable {
         GreenSpaceRepository.addGreenSpace(new LargeSizedPark("parque gigante", 324242, "gsm@this.app"));
 
     }
+
     private void assignTeam() {
         TeamProposalRepository teamProposalRepository = Repositories.getInstance().getTeamProposalRepository();
         AgendaRepository agendaRepository = Repositories.getInstance().getAgendaRepository();
@@ -316,7 +317,6 @@ public class Bootstrap implements Runnable {
         // Add the agenda to the repository
         agendaRepository.add(agenda);
     }
-
 
 
 
