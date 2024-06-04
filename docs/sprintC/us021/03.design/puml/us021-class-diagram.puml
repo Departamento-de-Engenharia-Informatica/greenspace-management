@@ -48,6 +48,7 @@ class ToDoListController {
 class Repositories {
     + static getInstance(): Repositories
     + getToDoListRepository(): ToDoListRepository
+    + getCollaboratorRepository(): CollaboratorRepository
 }
 
 class ToDoListUI {
@@ -78,27 +79,24 @@ class Collaborator {
 }
 
 class CollaboratorRepository {
-    - List<Collaborator> collaborators
+    - collaborators: List<Collaborator>
 
-    + addCollaborator(collaborator: Collaborator)
-    + removeCollaborator(collaborator: Collaborator)
-    + addSkillToCollaborator(collaboratorId: String, skill: Skill)
+    + addCollaborator(collaborator: Collaborator): void
+    + removeCollaborator(collaborator: Collaborator): void
+    + addSkillToCollaborator(collaboratorId: String, skill: Skill): void
     + getCollaborator(collaboratorId: String): Collaborator
-    + assignSkill(collaboratorId: String, skill: Skill)
+    + assignSkill(collaboratorId: String, skill: Skill): void
 }
 
 ToDoListController .> Repositories
-Repositories -> "1" ToDoListRepository
-Repositories -> "1" CollaboratorRepository
-CollaboratorRepository -> Collaborator
+Repositories --> ToDoListRepository
+Repositories --> CollaboratorRepository
+CollaboratorRepository --> Collaborator
 ToDoListUI .> ToDoListController
 ToDoListRepository --> ToDoList
 
-ApplicationSession --> "1" UserSession : userSession
+ApplicationSession --> UserSession : userSession
 ToDoListController ..> ApplicationSession
 ToDoListController ..> UserSession
-
-ToDoListRepository --> Collaborator
-Collaborator ..> ToDoList
-
+Collaborator ..> ToDoList : create a To Do List Entry
 @enduml

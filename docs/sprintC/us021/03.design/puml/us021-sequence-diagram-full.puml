@@ -8,14 +8,11 @@ autonumber
 actor "User" as USER
 participant "ToDoListUI" as UI
 participant "ToDoListController" as CTRL
-participant "Repositories" as RepositorySingleton
-participant "repositories : Repositories" as PLAT
-participant "toDoListRepository : ToDoListRepository" as ToDoListRepository
-participant "ApplicationSession" as _APP
-participant "appSession : ApplicationSession" as APP
-participant "currentSession : UserSession" as SESSAO
-participant "toDoList : ToDoList" as TODOLIST
-participant "collaborator : Collaborator" as COLLABORATOR
+participant "Repositories" as Repositories
+participant "ToDoListRepository" as ToDoListRepository
+participant "ApplicationSession" as APP
+participant "UserSession" as SESSION
+participant "ToDoList" as TODOLIST
 
 activate USER
 
@@ -25,52 +22,39 @@ activate USER
         UI --> USER : prompts for required fields (e.g., taskDescription, urgency, expectedDuration, greenspaceName, status)
     deactivate UI
 
-    USER -> UI : provides to-do list details (taskDescription, urgency, expectedDuration, greenspaceName, status)
+    USER -> UI : provides to-do list details (taskDescription, urgency, expectedDuration, greenspaceName, status, email)
     activate UI
 
         UI -> CTRL : createToDoListEntry(taskDescription, urgency, expectedDuration, greenspaceName, status, email)
         activate CTRL
 
-            CTRL -> RepositorySingleton : getInstance()
-            activate RepositorySingleton
+            CTRL -> Repositories : getInstance()
+            activate Repositories
 
-                RepositorySingleton --> CTRL : repositories
-            deactivate RepositorySingleton
+                Repositories --> CTRL : toDoListRepository
+            deactivate Repositories
 
-            CTRL -> PLAT : getToDoListRepository()
-            activate PLAT
-
-                PLAT --> CTRL : toDoListRepository
-            deactivate PLAT
-
-            CTRL -> _APP: getInstance()
-            activate _APP
-                _APP -> CTRL: appSession
-            deactivate _APP
-
-            CTRL -> APP: getCurrentSession()
+            CTRL -> APP: getInstance()
             activate APP
 
-                APP --> CTRL: currentSession
+                APP -> CTRL: getCurrentSession()
             deactivate APP
 
-            CTRL -> SESSAO: email = getUserEmail()
-            activate SESSAO
+            CTRL -> SESSION: getUserEmail()
+            activate SESSION
 
-                SESSAO --> CTRL: email
-            deactivate SESSAO
+                SESSION --> CTRL: email
+            deactivate SESSION
 
             CTRL -> TODOLIST : new ToDoList(taskDescription, urgency, expectedDuration, greenspaceName, status, email)
             activate TODOLIST
 
                 TODOLIST -> TODOLIST : validate details
-                TODOLIST -> toDoListRepository : add(TODOLIST)
-                deactivate TODOLIST
-
-            deactivate CTRL
+                TODOLIST -> ToDoListRepository : add(TODOLIST)
+            deactivate TODOLIST
 
             CTRL --> UI : confirms successful to-do list entry creation
-    deactivate UI
+    deactivate CTRL
 
     UI --> USER : confirms successful to-do list entry creation
 

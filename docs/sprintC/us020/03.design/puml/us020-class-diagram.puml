@@ -102,9 +102,9 @@ CollaboratorRepository-> Collaborator
 
 Collaborator ..> GreenSpace
 RegisterGreenSpaceController ..> Collaborator
-Collaborator <.. GreenSpaceRepository
-RegisterGreenSpaceController ..> GreenSpace
 
+RegisterGreenSpaceController ..> GreenSpace
+GreenSpace ..> GreenSpaceRepository
 
 ' Legenda
 
