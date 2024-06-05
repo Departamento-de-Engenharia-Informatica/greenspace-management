@@ -1,16 +1,15 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.authorization;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AuthenticationController;
+import pt.ipp.isep.dei.esoft.project.application.controller.GUIController.GsmUIMenuController;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
+import pt.ipp.isep.dei.esoft.project.ui.gui.GsmUIApplication;
+import pt.ipp.isep.dei.esoft.project.ui.gui.MainMenu;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.AuthenticationController;
-import pt.ipp.isep.dei.esoft.project.application.controller.RegisterGreenSpaceController;
-import pt.ipp.isep.dei.esoft.project.ui.console.RegisterGreenSpaceUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
-import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
-import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
+import pt.ipp.isep.dei.esoft.project.ui.gui.MainMenu;
+import javafx.application.Application;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,7 +39,7 @@ public class AuthenticationUI implements Runnable {
                 UserRoleDTO role = selectsRole(roles);
                 if (!Objects.isNull(role)) {
                     List<MenuItem> rolesUI = getMenuItemForRoles(userEmail);
-                    this.redirectToRoleUI(rolesUI, role); // Pass the userEmail to redirectToRoleUI
+                    this.redirectToRoleUI(rolesUI, role, userEmail); // Pass the userEmail to redirectToRoleUI
                 } else {
                     System.out.println("No role selected.");
                 }
@@ -84,14 +83,19 @@ public class AuthenticationUI implements Runnable {
         ctrl.doLogout();
     }
 
-    private void redirectToRoleUI(List<MenuItem> rolesUI, UserRoleDTO role) {
+    private void redirectToRoleUI(List<MenuItem> rolesUI, UserRoleDTO role, String userEmail) {
         boolean found = false;
         Iterator<MenuItem> it = rolesUI.iterator();
         while (it.hasNext() && !found) {
             MenuItem item = it.next();
             found = item.hasDescription(role.getDescription());
             if (found) {
-                item.run();
+                // Check if the role requires the JavaFX UI
+                if (role.getDescription().equals(AuthenticationController.ROLE_GSM)) {
+                    launchJavaFXUI(userEmail);
+                } else {
+                    item.run();
+                }
             }
         }
         if (!found) {
@@ -106,4 +110,13 @@ public class AuthenticationUI implements Runnable {
             return (UserRoleDTO) Utils.showAndSelectOne(roles, "Select the role you want to adopt in this session:");
         }
     }
+
+    // Inside your login UI class (either console or JavaFX)
+    private void launchJavaFXUI(String userEmail) {
+        GsmUIApplication.setUserEmail(userEmail); // Pass the user's email to GsmUIApplication
+
+        new Thread(() -> Application.launch(GsmUIApplication.class)).start(); // Launch the JavaFX application
+
+    }
+
 }

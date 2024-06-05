@@ -3,13 +3,19 @@ package pt.ipp.isep.dei.esoft.project.application.controller.GUIController;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpaceType;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterGreenSpaceController;
+import pt.ipp.isep.dei.esoft.project.ui.gui.ControllerWithEmail;
+import pt.ipp.isep.dei.esoft.project.ui.gui.SceneSwitcher;
 
-public class RegisterGreenSpaceControllerGUI {
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+
+public class RegisterGreenSpaceControllerGUI  implements ControllerWithEmail {
 
     @FXML
     private TextField nameField;
@@ -20,11 +26,16 @@ public class RegisterGreenSpaceControllerGUI {
     @FXML
     private ComboBox<String> typeComboBox;
 
-    private final String userEmail;
 
-    public RegisterGreenSpaceControllerGUI() {
-        // You may want to pass userEmail through the constructor or another method
-        this.userEmail = "tugahdchester@gmail.com"; // Placeholder
+
+    private String userEmail;
+    @Override
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+    public String getUserEmail() {
+
+        return userEmail; // Retrieve the user's email
     }
 
     @FXML
@@ -57,8 +68,11 @@ public class RegisterGreenSpaceControllerGUI {
         GreenSpaceType greenSpaceType = getGreenSpaceType(type);
 
         RegisterGreenSpaceController.registerGreenSpace(name, area, greenSpaceType, userEmail);
+
         showAlert(Alert.AlertType.INFORMATION, "Success", "Green space registered successfully.");
     }
+
+
 
     private boolean validateName(String name) {
         return name != null && name.matches("[a-zA-Z0-9 ]+");
@@ -91,6 +105,16 @@ public class RegisterGreenSpaceControllerGUI {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    @FXML
+    public void handleBack(javafx.event.ActionEvent actionEvent) {
+
+        try {
+            SceneSwitcher.switchToScene("/fxml/GsmUIMenu.fxml", "Register Green Space", (Node) actionEvent.getSource(), userEmail);
+
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the Main Menu.");
+        }
     }
 }
 
