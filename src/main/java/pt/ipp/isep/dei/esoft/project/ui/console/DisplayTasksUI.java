@@ -13,14 +13,25 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * The DisplayTasksUI class represents a user interface for displaying tasks based on user input criteria.
+ */
 public class DisplayTasksUI implements Runnable {
 
     private final String userEmail;
 
+    /**
+     * Constructs a new DisplayTasksUI with the given user email.
+     *
+     * @param userEmail the email of the user accessing the display tasks functionality
+     */
     public DisplayTasksUI(String userEmail) {
         this.userEmail = userEmail;
     }
 
+    /**
+     * Runs the display tasks user interface.
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -94,6 +105,13 @@ public class DisplayTasksUI implements Runnable {
         }
     }
 
+    /**
+     * Displays tasks based on the specified criteria.
+     *
+     * @param startDate the start date for filtering tasks
+     * @param endDate   the end date for filtering tasks
+     * @param status    the status of tasks to display
+     */
     public void DisplayTasks(LocalDate startDate, LocalDate endDate, String status) {
         List<Agenda> agendaEntries = Repositories.getInstance().getAgendaRepository().getAllAgendas();
 
@@ -145,9 +163,14 @@ public class DisplayTasksUI implements Runnable {
         }
     }
 
-
-
-
+    /**
+     * Checks if a given date is within a specified date range.
+     *
+     * @param date      the date to check
+     * @param startDate the start date of the range
+     * @param endDate   the end date of the range
+     * @return true if the date is within the range, false otherwise
+     */
     private boolean isWithinDateRange(LocalDate date, LocalDate startDate, LocalDate endDate) {
         return (date.isEqual(startDate) || date.isAfter(startDate)) &&
                 (date.isEqual(endDate) || date.isBefore(endDate));

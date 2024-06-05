@@ -7,16 +7,26 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColaboratorUI implements Runnable{
+/**
+ * The ColaboratorUI class represents the user interface for collaborator-related actions.
+ */
+public class ColaboratorUI implements Runnable {
 
     private final String userEmail;
 
+    /**
+     * Constructs a new ColaboratorUI with the given user email.
+     *
+     * @param userEmail the email of the collaborator accessing the interface
+     */
     public ColaboratorUI(String userEmail) {
         GreenSpaceRepository greenSpaceRepository = new GreenSpaceRepository();
         this.userEmail = userEmail;
-
     }
 
+    /**
+     * Runs the collaborator user interface.
+     */
     @Override
     public void run() {
         List<MenuItem> options = new ArrayList<>();
@@ -32,6 +42,4 @@ public class ColaboratorUI implements Runnable{
             }
         } while (option != -1);
     }
-
-
 }

@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The Agenda class represents a task entry in the project domain.
+ */
 public class Agenda {
     private String taskDescription;
     private String greenspaceName;
@@ -13,28 +16,57 @@ public class Agenda {
     private TeamProposal teamProposal;
     private List<Vehicle> vehicles;
 
+    /**
+     * Constructs a new Agenda with the specified task description, greenspace name, expected date, status, and team proposal.
+     *
+     * @param taskDescription the description of the task
+     * @param greenspaceName  the name of the greenspace associated with the task
+     * @param expectedDate    the expected date of the task
+     * @param status          the status of the task
+     * @param teamProposal    the team proposal associated with the task
+     */
     public Agenda(String taskDescription, String greenspaceName, LocalDate expectedDate, String status, TeamProposal teamProposal) {
         this.taskDescription = taskDescription;
         this.greenspaceName = greenspaceName;
         this.expectedDate = expectedDate;
         this.status = status;
         this.teamProposal = teamProposal;
-//        this.team = team;
     }
 
-
     // Getters and setters
-    public String getTaskDescription() { return taskDescription; }
-    public String getGreenspaceName() { return greenspaceName; }
-    public LocalDate getExpectedDate() { return expectedDate; }
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public String getTaskDescription() {
+        return taskDescription;
+    }
 
-    public void setTeamProposal(TeamProposal teamProposal) { this.teamProposal = teamProposal; }
+    public String getGreenspaceName() {
+        return greenspaceName;
+    }
 
+    public LocalDate getExpectedDate() {
+        return expectedDate;
+    }
 
-    public void setVehicles(List<Vehicle> vehicles) { this.vehicles = vehicles; }
+    public String getStatus() {
+        return status;
+    }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setTeamProposal(TeamProposal teamProposal) {
+        this.teamProposal = teamProposal;
+    }
+
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    /**
+     * Returns a string representation of the Agenda object.
+     *
+     * @return a string representation of the object
+     */
     @Override
     public String toString() {
         return "Task Description: " + taskDescription +
@@ -44,18 +76,25 @@ public class Agenda {
                 ", Team:" + (teamProposal != null ? teamProposal.getSelectedCollaborators().toString() : "No team assigned");
     }
 
-    // Method to get the start time (for vehicle availability check)
+    /**
+     * Returns the start time of the task (for vehicle availability check).
+     *
+     * @return the start time of the task
+     */
     public LocalDateTime getStartTime() {
-        // Adjust this according to the actual start time representation
         return expectedDate.atStartOfDay();
     }
 
-    // Method to get the end time (for vehicle availability check)
+    /**
+     * Returns the end time of the task (for vehicle availability check).
+     *
+     * @return the end time of the task
+     */
     public LocalDateTime getEndTime() {
-        // Adjust this according to the actual end time representation
         return expectedDate.atTime(23, 59);
     }
-    public TeamProposal getTeamProposal() { return teamProposal; }
 
-
+    public TeamProposal getTeamProposal() {
+        return teamProposal;
+    }
 }
