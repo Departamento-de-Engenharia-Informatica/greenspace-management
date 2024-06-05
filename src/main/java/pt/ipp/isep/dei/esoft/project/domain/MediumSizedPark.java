@@ -18,9 +18,12 @@ public class MediumSizedPark extends GreenSpace {
 
     /**
      * Displays the details of the medium-sized park, including its name and area.
+     *
+     * @return
      */
     @Override
-    public void displayDetails() {
+    public String displayDetails() {
         System.out.println("Medium-Sized Park: " + getName() + ", Area: " + getArea() + " sqm");
+        return null;
     }
 }

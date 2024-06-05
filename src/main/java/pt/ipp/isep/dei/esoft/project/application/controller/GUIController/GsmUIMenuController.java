@@ -3,21 +3,60 @@ package pt.ipp.isep.dei.esoft.project.application.controller.GUIController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class GsmUIMenuController {
 
     @FXML
     private void handleRegisterGreenSpace(ActionEvent event) {
-        showAlert("Register Green Space");
-        // Add your logic to show the Register Green Space UI
+        try {
+            // Load the FXML file for the Register Green Space form
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegisterGreenSpace.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage (window)
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene to the stage
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Register Green Space");
+
+            // Show the new stage
+            stage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the Register Green Space form.");
+        }
+
     }
+
+
 
     @FXML
     private void handleListGreenSpaces(ActionEvent event) {
-        showAlert("List all Green Spaces");
-        // Add your logic to show the List Green Spaces UI
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ListGreenSpaces.fxml"));
+            Parent root = loader.load();
+
+            ListGreenSpacesControllerGUI controller = loader.getController();
+            controller.setUserEmail("tugahdchester@gmail.com");
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("List Green Spaces");
+            stage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the List Green Spaces form.");
+        }
     }
 
     @FXML
@@ -61,6 +100,12 @@ public class GsmUIMenuController {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(title + " button clicked!");
+        alert.showAndWait();
+    }
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }

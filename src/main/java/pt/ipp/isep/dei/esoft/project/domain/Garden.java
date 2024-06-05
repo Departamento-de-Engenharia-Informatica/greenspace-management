@@ -18,10 +18,13 @@ public class Garden extends GreenSpace {
 
     /**
      * Displays the details of the garden, including its name and area.
+     *
+     * @return
      */
     @Override
-    public void displayDetails() {
+    public String displayDetails() {
         System.out.println("Garden: " + getName() + ", Area: " + getArea() + " sqm" );
+        return null;
     }
 }
 

@@ -18,9 +18,12 @@ public class LargeSizedPark extends GreenSpace {
 
     /**
      * Displays the details of the large-sized park, including its name and area.
+     *
+     * @return
      */
     @Override
-    public void displayDetails() {
+    public String displayDetails() {
         System.out.println("Large-Sized Park: " + getName() + ", Area: " + getArea() + " sqm");
+        return null;
     }
 }

@@ -88,7 +88,8 @@ public class GreenSpaceTest {
         }
 
         @Override
-        public void displayDetails() {
+        public String displayDetails() {
+            return null;
         }
     }
 }

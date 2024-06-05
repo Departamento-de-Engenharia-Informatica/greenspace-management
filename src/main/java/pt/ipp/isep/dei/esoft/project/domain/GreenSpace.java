@@ -76,6 +76,8 @@ public abstract class GreenSpace {
 
     /**
      * Displays the details of the green space.
+     *
+     * @return
      */
-    public abstract void displayDetails();
+    public abstract String displayDetails();
 }
