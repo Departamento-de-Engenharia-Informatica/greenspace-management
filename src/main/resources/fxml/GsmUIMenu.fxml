@@ -4,10 +4,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.GsmUIMenuController" spacing="10">
+<?import javafx.scene.control.Label?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.GsmUIMenuController" spacing="10"  >
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
+    <children>
+        <Label fx:id="emailLabel" text="User Email Placeholder"/>
+        <!-- Other UI elements -->
+    </children>
     <Button text="Register Green Space" onAction="#handleRegisterGreenSpace"/>
     <Button text="List Green Spaces" onAction="#handleListGreenSpaces"/>
     <Button text="To-Do List" onAction="#handleToDoList"/>

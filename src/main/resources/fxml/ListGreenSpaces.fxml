@@ -3,9 +3,11 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.control.Button?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
       fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.ListGreenSpacesControllerGUI">
-    <children>
-        <ListView fx:id="greenSpaceListView" prefWidth="400" prefHeight="300"/>
-    </children>
+
+    <ListView fx:id="greenSpaceListView" VBox.vgrow="ALWAYS" />
+    <Button text="Back" onAction="#handleBack" />
 </VBox>

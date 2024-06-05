@@ -24,6 +24,6 @@ public class MediumSizedPark extends GreenSpace {
     @Override
     public String displayDetails() {
         System.out.println("Medium-Sized Park: " + getName() + ", Area: " + getArea() + " sqm");
-        return null;
+        return "Medium-Sized Park: " + getName() + ", Area: " + getArea() + " sqm";
     }
 }

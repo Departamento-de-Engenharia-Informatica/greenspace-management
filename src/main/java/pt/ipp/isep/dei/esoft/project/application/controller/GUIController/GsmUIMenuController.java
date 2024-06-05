@@ -9,18 +9,40 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import pt.ipp.isep.dei.esoft.project.ui.console.menu.GsmUI;
+import pt.ipp.isep.dei.esoft.project.ui.gui.ControllerWithEmail;
+import pt.ipp.isep.dei.esoft.project.ui.gui.GsmUIApplication;
 
 import java.io.IOException;
 
-public class GsmUIMenuController {
+public class GsmUIMenuController implements ControllerWithEmail {
+
+
+    @FXML
+    private Label emailLabel;
+
+    private String userEmail;
+
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+        // Set the email label text
+        emailLabel.setText(userEmail);
+
+    }
 
     @FXML
     private void handleRegisterGreenSpace(ActionEvent event) {
         try {
             // Load the FXML file for the Register Green Space form
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegisterGreenSpace.fxml"));
+
             Parent root = loader.load();
+
+            RegisterGreenSpaceControllerGUI controller = loader.getController();
+            controller.setUserEmail(userEmail);
 
             // Get the current stage (window)
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -34,6 +56,7 @@ public class GsmUIMenuController {
             stage.show();
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the Register Green Space form.");
+            e.printStackTrace();
         }
 
     }
@@ -47,7 +70,8 @@ public class GsmUIMenuController {
             Parent root = loader.load();
 
             ListGreenSpacesControllerGUI controller = loader.getController();
-            controller.setUserEmail("tugahdchester@gmail.com");
+            controller.setUserEmail(userEmail);
+
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
