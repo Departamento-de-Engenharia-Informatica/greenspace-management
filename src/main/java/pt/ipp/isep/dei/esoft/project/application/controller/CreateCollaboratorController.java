@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+
 import pt.ipp.isep.dei.esoft.project.application.controller.*;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
@@ -21,7 +22,7 @@ import java.util.Optional;
 public class CreateCollaboratorController {
 
     private final CollaboratorRepository collaboratorRepository;
-    private final AuthenticationRepository authenticationRepository;
+    AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
 
     /**
      * Constructs a new {@code CreateCollaboratorController} object.
@@ -53,6 +54,12 @@ public class CreateCollaboratorController {
                                                      int taxpayerNumber, long BINumber, String job) {
         Collaborator collaborator = new Collaborator(name, birthdayDate, admissionDate,
                 address, phoneNumber, email, taxpayerNumber, BINumber, job);
+
+        int BINumber2 = Math.toIntExact(BINumber);
+        String BI = ""+BINumber2;
+
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLABORATOR, AuthenticationController.ROLE_COLLABORATOR);
+        authenticationRepository.addUserWithRole("Collaborator", email, BI, AuthenticationController.ROLE_COLLABORATOR);
         return collaboratorRepository.add(collaborator);
     }
 

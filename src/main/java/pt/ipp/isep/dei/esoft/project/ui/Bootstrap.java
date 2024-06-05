@@ -98,14 +98,32 @@ public class Bootstrap implements Runnable {
      */
     private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
+        AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLABORATOR, AuthenticationController.ROLE_COLLABORATOR);
         collaboratorRepository.add(new Collaborator("João Silva", LocalDate.of(1985, 3, 15), LocalDate.of(2010, 7, 10), "Rua da Praia, n 123, 4400-001 Porto", "912345678", "rdm061sendemail@gmail.com", 123456789, 12345678, "Gardener"));
+        authenticationRepository.addUserWithRole("Collaborator", "rdm061sendemail@gmail.com", "12345678",
+                AuthenticationController.ROLE_COLLABORATOR);
         collaboratorRepository.add(new Collaborator("Ana Santos", LocalDate.of(1978, 1, 25), LocalDate.of(2005, 9, 5), "Avenida Central, n 456, 1000-200 Lisboa", "934567890", "tugahdchester@gmail.com", 987654321, 78901234, "Arborist"));
+        authenticationRepository.addUserWithRole("Collaborator", "tugahdchester@gmail.com", "78901234",
+                AuthenticationController.ROLE_COLLABORATOR);
         collaboratorRepository.add(new Collaborator("Marta Oliveira", LocalDate.of(1992, 11, 10), LocalDate.of(2017, 4, 20), "Travessa das Flores, n 789, 3000-400 Coimbra", "920987654", "marta.oliveira@gmail.com", 246810753, 45678901, "Urban Planner"));
+        authenticationRepository.addUserWithRole("Collaborator", "marta.oliveira@gmail.com", "45678901",
+                AuthenticationController.ROLE_COLLABORATOR);
         collaboratorRepository.add(new Collaborator("Pedro Ferreira", LocalDate.of(1980, 9, 5), LocalDate.of(2012, 3, 15), "Rua dos Bosques, n 234, 5000-600 Vila Real", "917654321", "pedro.ferreira@outlook.pt", 369258147, 21098765, "Park Ranger"));
+        authenticationRepository.addUserWithRole("Collaborator", "pedro.ferreira@outlook.pt", "21098765",
+                AuthenticationController.ROLE_COLLABORATOR);
         collaboratorRepository.add(new Collaborator("Sofia Rodrigues", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432109", "sofia.rodrigues@live.com.pt", 582037469, 87654321, "Park Ranger"));
+        authenticationRepository.addUserWithRole("Collaborator", "sofia.rodrigues@live.com.pt", "87654321",
+                AuthenticationController.ROLE_COLLABORATOR);
         collaboratorRepository.add(new Collaborator("Sofia pedro", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432108", "sofia.rodrigues1@live.com.pt", 582037468, 87654322, "Park Ranger"));
+        authenticationRepository.addUserWithRole("Collaborator", "sofia.rodrigues1@live.com.pt", "87654322",
+                AuthenticationController.ROLE_COLLABORATOR);
         collaboratorRepository.add(new Collaborator("Sofia gomes", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432107", "sofia.rodrigues2@live.com.pt", 582037467, 87654323, "Park Ranger"));
+        authenticationRepository.addUserWithRole("Collaborator", "sofia.rodrigues2@live.com.pt", "87654323",
+                AuthenticationController.ROLE_COLLABORATOR);
         collaboratorRepository.add(new Collaborator("Sofia ribeiro", LocalDate.of(1987, 7, 20), LocalDate.of(2015, 2, 25), "Largo do Parque, n 567, 2000-300 Santarem", "925432106", "sofia.rodrigues3@live.com.pt", 582037466, 87654324, "Park Ranger"));
+        authenticationRepository.addUserWithRole("Collaborator", "sofia.rodrigues3@live.com.pt", "87654324",
+                AuthenticationController.ROLE_COLLABORATOR);
 
     }
 
@@ -154,6 +172,7 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_GSU, AuthenticationController.ROLE_GSU);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_QAM, AuthenticationController.ROLE_QAM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLABORATOR, AuthenticationController.ROLE_COLLABORATOR);
 
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
@@ -179,6 +198,8 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("QAM", "qam@this.app", "pwd",
                 AuthenticationController.ROLE_QAM);
+
+
     }
 
     private void addVehicles(){
