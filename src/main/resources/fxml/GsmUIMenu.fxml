@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="pt.ipp.isep.dei.esoft.project.ui.javafx.GsmUIMenuController"
-      spacing="10" alignment="center" padding="20">
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.GsmUIMenuController" spacing="10">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
     <Button text="Register Green Space" onAction="#handleRegisterGreenSpace"/>
-    <Button text="List all Green Spaces" onAction="#handleListGreenSpaces"/>
+    <Button text="List Green Spaces" onAction="#handleListGreenSpaces"/>
     <Button text="To-Do List" onAction="#handleToDoList"/>
     <Button text="Agenda" onAction="#handleAgenda"/>
     <Button text="List Agenda Entries" onAction="#handleListAgendaEntries"/>
