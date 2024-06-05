@@ -55,4 +55,7 @@ public class Agenda {
         // Adjust this according to the actual end time representation
         return expectedDate.atTime(23, 59);
     }
+    public TeamProposal getTeamProposal() { return teamProposal; }
+
+
 }

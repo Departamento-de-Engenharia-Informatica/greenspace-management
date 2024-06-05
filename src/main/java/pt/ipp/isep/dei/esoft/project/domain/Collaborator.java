@@ -1,5 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import pt.ipp.isep.dei.esoft.project.application.controller.AuthenticationController;
+import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +54,10 @@ public class Collaborator {
         this.BINumber = BINumber;
         this.job = job;
         this.skills = new ArrayList<>();
+
+        AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLABORATOR, AuthenticationController.ROLE_COLLABORATOR);
+        authenticationRepository.addUserWithRole(name, email, String.valueOf(BINumber), AuthenticationController.ROLE_COLLABORATOR);
     }
 
     public void addSkill(Skill skill) {

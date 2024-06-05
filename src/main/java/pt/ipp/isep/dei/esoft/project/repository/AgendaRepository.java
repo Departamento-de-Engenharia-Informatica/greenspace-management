@@ -31,4 +31,7 @@ public class AgendaRepository {
     public void save(Agenda entry) {
         updateAgendaEntry(entry);
     }
+    public List<Agenda> getAllAgendas() {
+        return new ArrayList<>(agendaEntries);
+    }
 }

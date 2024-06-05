@@ -320,8 +320,6 @@ public class Bootstrap implements Runnable {
         AgendaRepository agendaRepository = Repositories.getInstance().getAgendaRepository();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-
-        // Fetch existing team proposals
         List<TeamProposal> teamProposals = teamProposalRepository.getAllTeamProposals();
 
         if (teamProposals.isEmpty()) {
@@ -329,14 +327,36 @@ public class Bootstrap implements Runnable {
             return;
         }
 
-        // Choose a team proposal (e.g., the first one)
         TeamProposal selectedTeamProposal = teamProposals.get(0);
+        TeamProposal selectedTeamProposal1 = teamProposals.get(1);
 
-        // Create an agenda item with the selected team proposal
-        Agenda agenda = new Agenda("coirtar relva", "Jardim do Covelo", LocalDate.parse("10-10-2020", formatter), "Done", selectedTeamProposal);
+        Agenda agenda1 = new Agenda("coirtar relva", "Jardim do Covelo", LocalDate.parse("10-01-2023", formatter), "Done", selectedTeamProposal);
+        Agenda agenda2 = new Agenda("coirtar relva2", "Jardim do Covelo", LocalDate.parse("10-10-2020", formatter), "Planned", selectedTeamProposal);
+        Agenda agenda3 = new Agenda("coirtar relva3", "Parque das Planicies", LocalDate.parse("10-04-2021", formatter), "Postponed", selectedTeamProposal);
+        Agenda agenda4 = new Agenda("coirtar relva4", "Parque das Planicies", LocalDate.parse("10-01-2024", formatter), "Postponed", selectedTeamProposal);
+        Agenda agenda5 = new Agenda("coirtar relva5", "Parque das Planicies", LocalDate.parse("10-12-2019", formatter), "Planned", selectedTeamProposal);
+        Agenda agenda6 = new Agenda("coirtar relva6", "Parque Urbano de ermesinde", LocalDate.parse("10-08-2022", formatter), "Done", selectedTeamProposal);
+        Agenda agenda7 = new Agenda("coirtar relva7", "Parque Urbano de ermesinde", LocalDate.parse("10-09-2017", formatter), "Planned", selectedTeamProposal);
+        Agenda agenda8 = new Agenda("coirtar relva8", "Jardim do Covelo", LocalDate.parse("10-03-2020", formatter), "Done", selectedTeamProposal);
+        Agenda agenda9 = new Agenda("coirtar relva9", "Parque das Planicies", LocalDate.parse("10-06-2021", formatter), "Planned", selectedTeamProposal);
+        Agenda agenda10 = new Agenda("coirtar relva10", "parque gigante", LocalDate.parse("10-02-2024", formatter), "Canceled", selectedTeamProposal);
+        Agenda agenda11 = new Agenda("coirtar relva11", "parque gigante", LocalDate.parse("10-03-2024", formatter), "Postponed", selectedTeamProposal);
 
-        // Add the agenda to the repository
-        agendaRepository.add(agenda);
+        Agenda agenda12 = new Agenda("coirtar relva12", "parque gigante", LocalDate.parse("01-04-2024", formatter), "Postponed", selectedTeamProposal1);
+
+        agendaRepository.add(agenda1);
+        agendaRepository.add(agenda2);
+        agendaRepository.add(agenda3);
+        agendaRepository.add(agenda4);
+        agendaRepository.add(agenda5);
+        agendaRepository.add(agenda6);
+        agendaRepository.add(agenda7);
+        agendaRepository.add(agenda8);
+        agendaRepository.add(agenda9);
+        agendaRepository.add(agenda10);
+        agendaRepository.add(agenda11);
+        agendaRepository.add(agenda12);
+
     }
 
 

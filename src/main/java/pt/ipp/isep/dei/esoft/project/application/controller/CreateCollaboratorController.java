@@ -55,12 +55,8 @@ public class CreateCollaboratorController {
         Collaborator collaborator = new Collaborator(name, birthdayDate, admissionDate,
                 address, phoneNumber, email, taxpayerNumber, BINumber, job);
 
-        int BINumber2 = Math.toIntExact(BINumber);
-        String BI = ""+BINumber2;
 
-        authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLABORATOR, AuthenticationController.ROLE_COLLABORATOR);
-        authenticationRepository.addUserWithRole("Collaborator", email, BI, AuthenticationController.ROLE_COLLABORATOR);
-        return collaboratorRepository.add(collaborator);
+           return collaboratorRepository.add(collaborator);
     }
 
     /**
