@@ -1,10 +1,10 @@
-# US002 - Register a job
+# US028 - Consult the tasks assigned to me between two dates.
 
 ## 2. Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![Domain Model](svg/us002-domain-model.svg)
+![Domain Model](svg/us028-domain-model.svg)
 
 ### 2.2. Other Remarks
 

@@ -30,17 +30,56 @@ class Employe {
     phoneNumber
     email
 }
+class GSM {
+    ...
+}
+class ToDoList{
+    Description
+    Duration
+}
+class Agenda {
+    endDate
+    state
+}
+class Task {
+    name
+    description
+    duration
+    cost
+}
+class Team {
+    numberColaborators
+    skils
+}
+
 class HRM {
     ...
 }
-class Job {
+class Collaborator {
     name
-    description
+    birthDate
+    admissionDate
+    address
+    phoneNumber
+    email
+    taxpayerNumber
+    BINumber
 }
 
-
-Employe "1" -- "1" HRM : can be
 Organization "1" -- "*" Employe : has >
+GSM "1" -- "*" Task : creates
+GSM "1" -- "*" Entries : creates
+Entries "*" -- "1" ToDoList : belongs to
+Entries "*" -- "1" Agenda : belongs to
+Employe "1" -- "1" GSM : can be
+HRM "1" -- "*" Team : generate
+HRM "1" -- "*" Collaborator : creates
+Collaborator "1" -- "1" Team : is a member of
+Agenda "1" -- "*" Task : has
+GSM "1" -- "*" Agenda: adds
+Task "1" -- "1" Team : assigned to
+Employe "1" -- "1" HRM : can be
+ToDoList "1" -- "1" Agenda : associated with
 
-HRM "1" -- "*" Job : creates
+
 @enduml
