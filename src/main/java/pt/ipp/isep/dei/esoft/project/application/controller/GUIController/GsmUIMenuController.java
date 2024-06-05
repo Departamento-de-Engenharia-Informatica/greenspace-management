@@ -109,8 +109,16 @@ public class GsmUIMenuController implements ControllerWithEmail {
 
     @FXML
     private void handleAssignVehicle(ActionEvent event) {
-        showAlert("Assign Vehicle to Agenda Entry");
-        // Add your logic to show the Assign Vehicle to Agenda Entry UI
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AssignVehicleToAgendaEntry.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Assign Vehicle to Agenda Entry");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

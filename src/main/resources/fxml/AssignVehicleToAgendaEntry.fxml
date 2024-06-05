@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="360.0" prefWidth="450.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.AssignVehicleToAgendaEntryGUI">
+    <ComboBox fx:id="agendaEntryComboBox" onAction="#handleAgendaEntrySelection" prefHeight="25.0" prefWidth="452.0" promptText="Select Agenda Entry ..." />
+    <StackPane VBox.vgrow="ALWAYS">
+        <ListView fx:id="vehicleListView" />
+        <Label fx:id="promptLabel" text="Please select an agenda entry" style="-fx-text-fill: grey;" />
+    </StackPane>
+    <HBox spacing="10" alignment="CENTER">
+        <Button onAction="#handleAssignVehicles" text="Assign Vehicles" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button onAction="#handleExit" text="Exit" />
+    </HBox>
+    <VBox.margin>
+        <Insets bottom="10" right="10" left="10" />
+    </VBox.margin>
+</VBox>
