@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.AssignTeamToAgendaControllerGUI">
+    <Label text="Select an Agenda Entry:"/>
+    <ChoiceBox fx:id="agendaChoiceBox"/>
+
+    <Label text="Available Teams:"/>
+    <ListView fx:id="teamListView"/>
+
+    <Button text="Assign Team" onAction="#handleAssignTeam"/>
+</VBox>

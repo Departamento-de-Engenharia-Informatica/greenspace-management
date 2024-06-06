@@ -150,8 +150,7 @@ public class GsmUIMenuControllerGUI implements ControllerWithEmail {
 
     @FXML
     private void handleChangeAgendaStatus(ActionEvent event) {
-        showAlert("Change Agenda Status");
-        // Add your logic to show the Change Agenda Status UI
+
     }
 
     @FXML
@@ -170,8 +169,22 @@ public class GsmUIMenuControllerGUI implements ControllerWithEmail {
 
     @FXML
     private void handleAssignTeam(ActionEvent event) {
-        showAlert("Assign Team to Agenda Entry");
-        // Add your logic to show the Assign Team to Agenda Entry UI
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AssignTeamToAgenda.fxml"));
+            Parent root = loader.load();
+
+            AssignTeamToAgendaControllerGUI controller = loader.getController();
+
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Agenda");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the Agenda. See console for details.");
+        }
     }
 
     private void showAlert(String title) {
