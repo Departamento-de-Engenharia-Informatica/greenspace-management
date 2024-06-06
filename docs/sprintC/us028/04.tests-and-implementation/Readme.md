@@ -303,7 +303,7 @@ public class Agenda {
 
 ```
 
-### Class Job
+### Class AgendaRepository
 
 ```java
 package pt.ipp.isep.dei.esoft.project.repository;
