@@ -3,35 +3,38 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-actor "Human Resource Manager" as HRM
-participant ":CreateJobUI" as UI
-participant ":CreateJobController" as CTRL
+actor "Collaborator" as COLLAB
+participant ":DisplayTasksUI" as UI
 participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "job\n:Job" as JOB
+participant "repositories\n:AgendaRepository" as AGENDA_REPO
+participant "agenda\n:Agenda" as AGENDA
 
-activate HRM
+activate COLLAB
 
-HRM -> UI : asks to create a new job
-
+COLLAB -> UI : specifies date range and task status
 activate UI
 
-UI -> CTRL** : createJob
+UI -> AGENDA_REPO : getAllAgendas()
+activate AGENDA_REPO
+AGENDA_REPO --> UI : agendaEntries
 
-activate CTRL
+deactivate AGENDA_REPO
 
-CTRL -> PLAT: getJobRepository()
-PLAT --> CTRL: jobRepository
+alt agendaEntries is empty
+    UI --> COLLAB : No agenda entries found
+else agendaEntries is not empty
+    UI -> AGENDA : getExpectedDate(), getGreenspaceName(), getStatus(), getTeamProposal()
+    loop for each agenda in agendaEntries
+        AGENDA -> AGENDA : check if within date range and matches status
+        alt agenda matches criteria
+            AGENDA -> AGENDA : getTaskDescription(), getExpectedDate(), getGreenspaceName(), getStatus(), getTeamProposal()
+            UI --> COLLAB : displays task information
+        else agenda doesn't match criteria
+            AGENDA -> AGENDA : skip
+        end
+    end
+end
 
-CTRL -> JOB: createJob(jobName)
-JOB -> JOB: create(jobName)
-JOB -> JOB: addJob(job)
-
-JOB --> CTRL : job
-
-CTRL --> UI: job
-deactivate CTRL
-UI --> HRM: displays operation success
 deactivate UI
-deactivate HRM
+deactivate COLLAB
 @enduml
