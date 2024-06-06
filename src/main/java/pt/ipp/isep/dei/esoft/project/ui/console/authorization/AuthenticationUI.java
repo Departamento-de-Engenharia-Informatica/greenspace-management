@@ -1,14 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.authorization;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AuthenticationController;
-import pt.ipp.isep.dei.esoft.project.application.controller.GUIController.GsmUIMenuController;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import pt.ipp.isep.dei.esoft.project.ui.gui.GsmUIApplication;
-import pt.ipp.isep.dei.esoft.project.ui.gui.MainMenu;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
-import pt.ipp.isep.dei.esoft.project.ui.gui.MainMenu;
 import javafx.application.Application;
 
 import java.util.ArrayList;

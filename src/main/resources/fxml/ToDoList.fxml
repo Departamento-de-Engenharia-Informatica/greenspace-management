@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Label?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.ToDoListControllerGUI" spacing="10"  >
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <children>
+        <Label fx:id="emailLabel" text="User Email Placeholder"/>
+        <!-- Other UI elements -->
+    </children>
+    <Button text="Add New To-Do List Entry" onAction="#handleAddToDoListEntry"/>
+    <Button text="View All To-Do List Entries" onAction="#handleListToDoEntries"/>
+
+
+</VBox>

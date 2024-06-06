@@ -11,13 +11,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.GsmUI;
 import pt.ipp.isep.dei.esoft.project.ui.gui.ControllerWithEmail;
-import pt.ipp.isep.dei.esoft.project.ui.gui.GsmUIApplication;
 
 import java.io.IOException;
 
-public class GsmUIMenuController implements ControllerWithEmail {
+public class GsmUIMenuControllerGUI implements ControllerWithEmail {
 
 
     @FXML
@@ -85,8 +83,22 @@ public class GsmUIMenuController implements ControllerWithEmail {
 
     @FXML
     private void handleToDoList(ActionEvent event) {
-        showAlert("To-Do List");
-        // Add your logic to show the To-Do List UI
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ToDoList.fxml"));
+            Parent root = loader.load();
+
+            ToDoListControllerGUI controller = loader.getController();
+            controller.setUserEmail(userEmail);
+
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("To-Do List");
+            stage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the To-Do List.");
+        }
     }
 
     @FXML

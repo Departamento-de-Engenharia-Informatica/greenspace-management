@@ -32,7 +32,7 @@ public class AssignVehicleToAgendaEntryGUI {
         controller = new AssignVehicleToAgendaEntryController();
 
         List<Agenda> entries = AssignVehicleToAgendaEntryController.getAllAgendaEntries();
-        if (entries != null && !entries.isEmpty()) {
+        if (!entries.isEmpty()) {
             agendaEntryComboBox.setItems(FXCollections.observableArrayList(entries));
             System.out.println("Agenda entries loaded: " + entries.size());
         } else {
