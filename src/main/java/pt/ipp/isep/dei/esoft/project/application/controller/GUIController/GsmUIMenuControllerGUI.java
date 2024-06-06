@@ -11,6 +11,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
+import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
+import pt.ipp.isep.dei.esoft.project.ui.console.ListAgendaEntries;
 import pt.ipp.isep.dei.esoft.project.ui.gui.ControllerWithEmail;
 
 import java.io.IOException;
@@ -89,8 +92,6 @@ public class GsmUIMenuControllerGUI implements ControllerWithEmail {
 
             ToDoListControllerGUI controller = loader.getController();
             controller.setUserEmail(userEmail);
-
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -103,14 +104,48 @@ public class GsmUIMenuControllerGUI implements ControllerWithEmail {
 
     @FXML
     private void handleAgenda(ActionEvent event) {
-        showAlert("Agenda");
-        // Add your logic to show the Agenda UI
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Agenda.fxml"));
+            Parent root = loader.load();
+
+            AgendaControllerGUI controller = loader.getController();
+
+            controller.setAgendaController(new AgendaController());
+            controller.setToDoListController(new ToDoListController());
+            controller.setUserEmail(userEmail);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Agenda");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the Agenda. See console for details.");
+        }
     }
 
     @FXML
     private void handleListAgendaEntries(ActionEvent event) {
-        showAlert("List Agenda Entries");
-        // Add your logic to show the List Agenda Entries UI
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ListAgendaEntries.fxml"));
+            Parent root = loader.load();
+
+            ListAgendaEntriesControllerGUI controller = loader.getController();
+
+//            controller.setAgendaController(new AgendaController());
+//            controller.setToDoListController(new ToDoListController());
+//            controller.setUserEmail(userEmail);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Agenda");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the Agenda. See console for details.");
+        }
     }
 
     @FXML

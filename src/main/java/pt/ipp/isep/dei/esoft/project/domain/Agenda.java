@@ -26,9 +26,9 @@ public class Agenda {
      * @param teamProposal    the team proposal associated with the task
      */
     public Agenda(String taskDescription, String greenspaceName, LocalDate expectedDate, String status, TeamProposal teamProposal) {
-        if (teamProposal == null) {
-            throw new IllegalArgumentException("Team proposal cannot be null");
-        }
+//        if (teamProposal == null) {
+//            throw new IllegalArgumentException("Team proposal cannot be null");
+//        }
         this.taskDescription = taskDescription;
         this.greenspaceName = greenspaceName;
         this.expectedDate = expectedDate;

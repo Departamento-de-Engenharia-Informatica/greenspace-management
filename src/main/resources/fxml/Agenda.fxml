@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.AgendaControllerGUI">
+    <Label text="Create Agenda Entry" style="-fx-font-size: 16px;"/>
+    <Label text="Select Green Space:"/>
+    <ChoiceBox fx:id="greenSpaceChoiceBox"/>
+    <Label text="Select To-Do List Entry:"/>
+    <ChoiceBox fx:id="toDoListChoiceBox"/>
+    <Label text="Expected Date (dd-MM-yyyy):"/>
+    <TextField fx:id="dateField"/>
+    <Label text="Status:"/>
+    <ChoiceBox fx:id="statusChoiceBox"/>
+    <Button text="Create Agenda Entry" onAction="#handleCreateAgendaEntry"/>
+    <Label fx:id="feedbackLabel"/>
+    <Button text="Back" onAction="#handleBack" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+</VBox>
