@@ -1,488 +1,386 @@
 # US028 - Consult the tasks assigned to me between two dates.
 
-## 4.1 Tests 
+## 4.1 Domain Tests 
 
-**Test 1:** Tests the creation of a valid job.
+**Test 1:** This test checks if the Agenda object is correctly created using its constructor and if its getter methods return the expected values.
 
 	 @Test
-    void createValidJob() {
-        // Arrange
-        String jobName = "Software Engineer";
+    public void testAgendaConstructorAndGetters() {
+        LocalDate expectedDate = LocalDate.now();
+        Set<Skill> requiredSkills = new HashSet<>();
+        requiredSkills.add(new Skill("Programming"));
+        List<Collaborator> selectedCollaborators = List.of(new Collaborator("John", LocalDate.of(1990, 5, 20), LocalDate.of(2020, 1, 1),
+                "123 Main St", "123456789", "john@example.com", 123456789, 12345678, "Developer"));
+        TeamProposal teamProposal = new TeamProposal(5, 3, requiredSkills, selectedCollaborators);
+        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
 
-        // Act
-        Job job = new Job(jobName);
-
-        // Assert
-        assertEquals(jobName, job.getJobName());
+        assertEquals("Task", agenda.getTaskDescription());
+        assertEquals("Greenspace", agenda.getGreenspaceName());
+        assertEquals(expectedDate, agenda.getExpectedDate());
+        assertEquals("Pending", agenda.getStatus());
+        assertEquals(teamProposal, agenda.getTeamProposal());
     }
 
 
 
-**Test 2:** Tests creating a job with a null name, which should throw an IllegalArgumentException.
+**Test 2:** This test checks if the setter methods of the Agenda class correctly update the values of the object's attributes and if the getter methods return the updated values.
 
     @Test
-    void createJobWithNullName() {
-        assertThrows(IllegalArgumentException.class, () -> new Job(null));
+    public void testAgendaSetterAndGetters() {
+        LocalDate expectedDate = LocalDate.now();
+        Set<Skill> requiredSkills = new HashSet<>();
+        requiredSkills.add(new Skill("Programming"));
+        List<Collaborator> selectedCollaborators = List.of(new Collaborator("John", LocalDate.of(1990, 5, 20), LocalDate.of(2020, 1, 1),
+                "123 Main St", "123456789", "john@example.com", 123456789, 12345678, "Developer"));
+        TeamProposal teamProposal = new TeamProposal(5, 3, requiredSkills, selectedCollaborators);
+        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
+
+        agenda.setStatus("Completed");
+        assertEquals("Completed", agenda.getStatus());
+
+        TeamProposal newTeamProposal = new TeamProposal(3, 2, new HashSet<>(), List.of());
+        agenda.setTeamProposal(newTeamProposal);
+        assertEquals(newTeamProposal, agenda.getTeamProposal());
     }
 
 
-**Test 3:** Tests creating a job with an invalid name containing digits, which should throw an IllegalArgumentException.
+**Test 3:** This test verifies that the toString() method of the Agenda class returns the correct string representation of the object.
   
     @Test
-    void createJobWithInvalidNameContainingDigits() {
-        assertThrows(IllegalArgumentException.class, () -> new Job("Software Engineer 2"));
+    public void testToString() {
+        LocalDate expectedDate = LocalDate.now();
+        Set<Skill> requiredSkills = new HashSet<>();
+        requiredSkills.add(new Skill("Programming"));
+        List<Collaborator> selectedCollaborators = List.of(new Collaborator("John", LocalDate.of(1990, 5, 20), LocalDate.of(2020, 1, 1),
+                "123 Main St", "123456789", "john@example.com", 123456789, 12345678, "Developer"));
+        TeamProposal teamProposal = new TeamProposal(5, 3, requiredSkills, selectedCollaborators);
+        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
+
+        String expectedString = "Task Description: Task, Expected Date: " + expectedDate +
+                ", Greenspace: Greenspace, Status: Pending, Team:[John]";
+        assertEquals(expectedString, agenda.toString());
     }
 
-**Test 4:** Tests creating a job with an invalid name containing special characters, which should throw an IllegalArgumentException.
+**Test 4:** This test checks if the getStartTime() method correctly returns the start of the day (00:00) for the expected date.
 
     @Test
-    void createJobWithInvalidNameContainingSpecialCharacters() {
-        assertThrows(IllegalArgumentException.class, () -> new Job("Software@Engineer"));
+    public void testGetStartTime() {
+        LocalDate expectedDate = LocalDate.now();
+        TeamProposal teamProposal = new TeamProposal(5, 3, new HashSet<>(), List.of());
+        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
+        assertEquals(expectedDate.atStartOfDay(), agenda.getStartTime());
     }
 
     
-**Test 5:** Tests if equals method returns true when comparing the same instance.
+**Test 5:** This test checks if the getEndTime() method correctly returns the end of the day (23:59) for the expected date.
     
     @Test
-    void equals_sameInstance_returnsTrue() {
-        // Arrange
-        Job job = new Job("Software Engineer");
-
-        // Act & Assert
-        assertEquals(job, job);
+    public void testGetEndTime() {
+        LocalDate expectedDate = LocalDate.now();
+        TeamProposal teamProposal = new TeamProposal(5, 3, new HashSet<>(), List.of());
+        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
+        assertEquals(expectedDate.atTime(23, 59), agenda.getEndTime());
     }
 
-**Test 6:** Tests if equals method returns true when comparing equal jobs.
+**Test 6:** This test checks if the Agenda constructor throws an IllegalArgumentException when null is passed for the teamProposal parameter.
 
     @Test
-    void equals_equalJobs_returnsTrue() {
-    // Arrange
-    Job job1 = new Job("Software Engineer");
-    Job job2 = new Job("Software Engineer");
-
-        // Act & Assert
-        assertEquals(job1, job2);
+    public void testAgendaConstructorWithNullTeamProposal() {
+        LocalDate expectedDate = LocalDate.now();
+        assertThrows(IllegalArgumentException.class, () -> new Agenda("Task", "Greenspace", expectedDate, "Pending", null));
     }
 
     
-**Test 7:**  Tests if equals method returns false when comparing different jobs.
-     
-    @Test
-    void equals_differentJobs_returnsFalse() {
-        // Arrange
-        Job job1 = new Job("Software Engineer");
-        Job job2 = new Job("Data Analyst");
+**Test 7:**  This test checks if the setStatus method throws an IllegalArgumentException when null is passed as the status.
 
-        // Act & Assert
-        assertNotEquals(job1, job2);
+    @Test
+    public void testSetStatusWithNull() {
+        LocalDate expectedDate = LocalDate.now();
+        TeamProposal teamProposal = new TeamProposal(5, 3, new HashSet<>(), List.of());
+        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
+        assertThrows(IllegalArgumentException.class, () -> agenda.setStatus(null));
     }
 
-    
-**Test 8:**   Tests the clone method to ensure it returns a new instance with the same attributes.
-     
-    @Test
-    void clone_returnsNewInstanceWithSameAttributes() {
-        // Arrange
-        Job originalJob = new Job("Software Engineer");
-
-        // Act
-        Job clonedJob = originalJob.clone();
-
-        // Assert
-        assertNotSame(originalJob, clonedJob);
-        assertEquals(originalJob, clonedJob);
-    }
-
-    
-**Test 9:** Tests adding a duplicate job to the repository, which should fail.
-     
-    @Test
-    void addingDuplicateJobFails() {
-        // Arrange
-        JobRepository jobRepository = new JobRepository();
-        Job job1 = new Job("Software Engineer");
-        Job job2 = new Job("Software Engineer");
-
-        // Act
-        jobRepository.add(job1);
-        Optional<Job> result = jobRepository.add(job2);
-
-        // Assert
-        assertTrue(result.isEmpty(), "Adding duplicate job should fail");
-    }
 
 ## 4.2 Repository tests
 
 
-**Test 1:** Tests adding a job to the repository and retrieving it by name.
+**Test 1:** This test aims to verify the functionality of adding an agenda entry to the repository.
 
     @Test
-    public void testAddAndGetJobByName() {
-    // Add a job to the repository
-    Job job = new Job("Software Developer");
-    Optional<Job> addedJob = jobRepository.add(job);
-
-        // Ensure the job was added successfully
-        assertTrue(addedJob.isPresent());
-
-        // Retrieve the added job by name
-        Job retrievedJob = jobRepository.getJobByName("Software Developer");
-
-        // Check if the retrieved job matches the added job
-        assertEquals(job, retrievedJob);
+    void testAdd() {
+        TeamProposal teamProposal = createMockTeamProposal();
+        Agenda agenda = new Agenda("Test Task", "Greenspace", LocalDate.now(), "Pending", teamProposal);
+        Optional<Agenda> result = repository.add(agenda);
+        System.out.println("Add Result: " + (result.isPresent() ? "Present" : "Not Present"));
+        System.out.println("Task Description: " + (result.isPresent() ? result.get().getTaskDescription() : "N/A"));
+        System.out.println("Total Entries: " + AgendaRepository.getAll().size());
     }
 
 
-**Test 2:** Tests adding a duplicate job to the repository.
+**Test 2:** This test verifies the functionality of retrieving all agenda entries from the repository.
      
     @Test
-    public void testAddDuplicateJob() {
-        // Add a job to the repository
-        Job job = new Job("Software Developer");
-        Optional<Job> addedJob1 = jobRepository.add(job);
+    void testGetAll() {
+        TeamProposal teamProposal = createMockTeamProposal();
+        Agenda agenda1 = new Agenda("Task 1", "Greenspace 1", LocalDate.now(), "Pending", teamProposal);
+        Agenda agenda2 = new Agenda("Task 2", "Greenspace 2", LocalDate.now(), "Completed", teamProposal);
+        repository.add(agenda1);
+        repository.add(agenda2);
 
-        // Ensure the job was added successfully
-        assertTrue(addedJob1.isPresent());
-
-        // Attempt to add the same job again
-        Optional<Job> addedJob2 = jobRepository.add(job);
-
-        // Ensure the second addition fails and returns empty optional
-        assertTrue(addedJob2.isEmpty());
+        List<Agenda> agendas = AgendaRepository.getAll();
+        System.out.println("Total Entries: " + agendas.size());
+        System.out.println("Contains Task 1: " + agendas.contains(agenda1));
+        System.out.println("Contains Task 2: " + agendas.contains(agenda2));
     }
 
     
-**Test 3:** Tests attempting to retrieve a job by name that doesn't exist in the repository.
-     
+**Test 3:** This test checks the functionality of updating an existing agenda entry in the repository.
+
     @Test
-    public void testGetJobByNameNonExistent() {
-        // Attempt to retrieve a job that doesn't exist in the repository
-        assertThrows(IllegalArgumentException.class, () -> jobRepository.getJobByName("Nonexistent Job"));
+    void testUpdateAgendaEntry() {
+        TeamProposal teamProposal = createMockTeamProposal();
+        Agenda agenda1 = new Agenda("Task 1", "Greenspace 1", LocalDate.now(), "Pending", teamProposal);
+        Agenda agenda2 = new Agenda("Task 2", "Greenspace 2", LocalDate.now(), "Completed", teamProposal);
+        repository.add(agenda1);
+        repository.add(agenda2);
+
+        Agenda updatedAgenda = new Agenda("Task 1", "Greenspace 1", LocalDate.now(), "Updated Status", teamProposal);
+        repository.updateAgendaEntry(updatedAgenda);
+
+        List<Agenda> agendas = AgendaRepository.getAll();
+        System.out.println("Total Entries: " + agendas.size());
+        System.out.println("Updated Status for Task 1: " + agendas.get(0).getStatus());
+        System.out.println("Status for Task 2: " + agendas.get(1).getStatus());
     }
 
     
-**Test 4:** Tests retrieving the list of jobs from the repository.
+**Test 4:** This test ensures that the save method properly updates an existing agenda entry or adds a new one if it doesn't exist.
      
     @Test
-    public void testGetJobList() {
-        // Add some jobs to the repository
-        jobRepository.add(new Job("Software Developer"));
-        jobRepository.add(new Job("Data Analyst"));
-        jobRepository.add(new Job("Project Manager"));
+    void testSave() {
+        TeamProposal teamProposal = createMockTeamProposal();
+        Agenda agenda1 = new Agenda("Task 1", "Greenspace 1", LocalDate.now(), "Pending", teamProposal);
+        repository.add(agenda1);
 
-        // Retrieve the list of jobs from the repository
-        List<Job> jobList = jobRepository.getJobList();
+        Agenda updatedAgenda = new Agenda("Task 1", "Greenspace 1", LocalDate.now(), "Updated Status", teamProposal);
+        repository.save(updatedAgenda);
 
-        // Ensure the size of the retrieved list matches the number of added jobs
-        assertEquals(3, jobList.size());
-
-        // Ensure each added job is present in the retrieved list
-        assertTrue(jobList.contains(new Job("Software Developer")));
-        assertTrue(jobList.contains(new Job("Data Analyst")));
-        assertTrue(jobList.contains(new Job("Project Manager")));
+        List<Agenda> agendas = AgendaRepository.getAll();
+        System.out.println("Total Entries: " + agendas.size());
+        System.out.println("Updated Status for Task 1: " + agendas.get(0).getStatus());
     }
 
+**Test 5:** This test validates the functionality of retrieving all agenda entries directly from the repository instance.
+
+    @Test
+    void testGetAllAgendas() {
+        TeamProposal teamProposal = createMockTeamProposal();
+        Agenda agenda1 = new Agenda("Task 1", "Greenspace 1", LocalDate.now(), "Pending", teamProposal);
+        Agenda agenda2 = new Agenda("Task 2", "Greenspace 2", LocalDate.now(), "Completed", teamProposal);
+        repository.add(agenda1);
+        repository.add(agenda2);
+
+        List<Agenda> agendas = repository.getAllAgendas();
+        System.out.println("Total Entries: " + agendas.size());
+        System.out.println("Contains Task 1: " + agendas.contains(agenda1));
+        System.out.println("Contains Task 2: " + agendas.contains(agenda2));
+    }
 
 
 
 
 ## 5. Construction (Implementation)
 
-### Class CreateCollaboratorController 
+### Class Agenda 
 
 ```java
-public class CreateJobController {
+package pt.ipp.isep.dei.esoft.project.domain;
 
-    // Instance variables
-    private OrganizationRepository organizationRepository;
-    private TaskCategoryRepository taskCategoryRepository;
-    private AuthenticationRepository authenticationRepository;
-    private static JobRepository jobRepository;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * The Agenda class represents a task entry in the project domain.
+ */
+public class Agenda {
+    private String taskDescription;
+    private String greenspaceName;
+    private LocalDate expectedDate;
+    private String status;
+    private TeamProposal teamProposal;
+    private List<Vehicle> vehicles;
 
     /**
-     * Constructs a new {@code CreateJobController} object.
-     * Initializes repositories obtained from the Repositories class.
-     */
-    public CreateJobController() {
-            getOrganizationRepository();
-            getTaskCategoryRepository();
-            getAuthenticationRepository();
-            getJobRepository();
-            }
-    
-    /**
-     * Constructs a new {@code CreateJobController} object with specified repositories.
+     * Constructs a new Agenda with the specified task description, greenspace name, expected date, status, and team proposal.
      *
-     * @param organizationRepository    The organization repository.
-     * @param taskCategoryRepository    The task category repository.
-     * @param authenticationRepository  The authentication repository.
-     * @param jobRepository             The job repository.
+     * @param taskDescription the description of the task
+     * @param greenspaceName  the name of the greenspace associated with the task
+     * @param expectedDate    the expected date of the task
+     * @param status          the status of the task
+     * @param teamProposal    the team proposal associated with the task
      */
-    public CreateJobController(OrganizationRepository organizationRepository,
-            TaskCategoryRepository taskCategoryRepository,
-            AuthenticationRepository authenticationRepository,
-            JobRepository jobRepository) {
-            this.organizationRepository = organizationRepository;
-            this.taskCategoryRepository = taskCategoryRepository;
-            this.authenticationRepository = authenticationRepository;
-            this.jobRepository = jobRepository;
-            }
-    
+    public Agenda(String taskDescription, String greenspaceName, LocalDate expectedDate, String status, TeamProposal teamProposal) {
+        if (teamProposal == null) {
+            throw new IllegalArgumentException("Team proposal cannot be null");
+        }
+        this.taskDescription = taskDescription;
+        this.greenspaceName = greenspaceName;
+        this.expectedDate = expectedDate;
+        this.status = status;
+        this.teamProposal = teamProposal;
+    }
+
+    // Getters and setters
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public String getGreenspaceName() {
+        return greenspaceName;
+    }
+
+    public LocalDate getExpectedDate() {
+        return expectedDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        if (status == null) {
+            throw new IllegalArgumentException("Status cannot be null");
+        }
+        this.status = status;
+    }
+    public void setTeamProposal(TeamProposal teamProposal) {
+        this.teamProposal = teamProposal;
+    }
+
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
+
     /**
-     * Obtains the task category repository instance.
+     * Returns a string representation of the Agenda object.
      *
-     * @return The task category repository instance.
+     * @return a string representation of the object
      */
-    private TaskCategoryRepository getTaskCategoryRepository() {
-            if (taskCategoryRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            taskCategoryRepository = repositories.getTaskCategoryRepository();
-            }
-            return taskCategoryRepository;
-            }
-    
+    @Override
+    public String toString() {
+        return "Task Description: " + taskDescription +
+                ", Expected Date: " + expectedDate + "," +
+                " Greenspace: " + greenspaceName +
+                ", Status: " + status +
+                ", Team:" + (teamProposal != null ? teamProposal.getSelectedCollaborators().toString() : "No team assigned");
+    }
+
     /**
-     * Obtains the organization repository instance.
+     * Returns the start time of the task (for vehicle availability check).
      *
-     * @return The organization repository instance.
+     * @return the start time of the task
      */
-    private OrganizationRepository getOrganizationRepository() {
-            if (organizationRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            organizationRepository = repositories.getOrganizationRepository();
-            }
-            return organizationRepository;
-            }
-    
+    public LocalDateTime getStartTime() {
+        return expectedDate.atStartOfDay();
+    }
+
     /**
-     * Obtains the authentication repository instance.
+     * Returns the end time of the task (for vehicle availability check).
      *
-     * @return The authentication repository instance.
+     * @return the end time of the task
      */
-    private AuthenticationRepository getAuthenticationRepository() {
-            if (authenticationRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            authenticationRepository = repositories.getAuthenticationRepository();
-            }
-            return authenticationRepository;
-            }
-    
-    /**
-     * Obtains the job repository instance.
-     *
-     * @return The job repository instance.
-     */
-    private JobRepository getJobRepository() {
-            if (jobRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            jobRepository = repositories.getJobRepository();
-            }
-            return jobRepository;
-            }
-    
-    /**
-     * Creates a new job with the given name.
-     *
-     * @param jobName The name of the job.
-     * @return {@code true} if the job creation was successful, {@code false} otherwise.
-     */
-    public boolean createJob(String jobName) {
-            Job job = new Job(jobName);
-            Optional<Job> newJob = jobRepository.add(job);
-            return newJob.isPresent();
-            }
-    
-    /**
-     * Retrieves the list of available jobs.
-     *
-     * @return A list of Job objects representing the available jobs.
-     */
-    public static List<Job> getJobList() {
-            return jobRepository.getJobList();
-            }
+    public LocalDateTime getEndTime() {
+        return expectedDate.atTime(23, 59);
+    }
+
+    public TeamProposal getTeamProposal() {
+        return teamProposal;
+    }
 }
+
 ```
 
 ### Class Job
 
 ```java
-public class Job {
+package pt.ipp.isep.dei.esoft.project.repository;
 
-    // Instance variable
-    private final String jobName;
+import pt.ipp.isep.dei.esoft.project.domain.Agenda;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+/**
+ * The AgendaRepository class represents a repository for storing agenda entries.
+ */
+public class AgendaRepository {
+    private static final List<Agenda> agendaEntries = new ArrayList<>();
 
     /**
-     * Constructs a new {@code Job} object with the specified name.
+     * Adds a new agenda entry to the repository.
      *
-     * @param jobName The name of the job.
-     * @throws IllegalArgumentException If the job name is null, empty, contains digits, or special characters.
+     * @param agenda the agenda entry to add
+     * @return an Optional containing the added agenda entry, or empty if the addition fails
      */
-    public Job(String jobName) throws IllegalArgumentException {
-        validateJobName(jobName);
-        this.jobName = jobName;
+    public Optional<Agenda> add(Agenda agenda) {
+        agendaEntries.add(agenda);
+        return Optional.of(agenda);
     }
 
     /**
-     * Validates the job name to ensure it meets the required criteria.
+     * Retrieves all agenda entries from the repository.
      *
-     * @param jobName The name of the job to be validated.
-     * @throws IllegalArgumentException If the job name is null, empty, contains digits, or special characters.
+     * @return a list of all agenda entries
      */
-    private void validateJobName(String jobName) throws IllegalArgumentException {
-        if (jobName == null || jobName.isEmpty()) {
-            throw new IllegalArgumentException("Job name cannot be null or empty.");
-        }
-        // Check if job name contains any digits or special characters
-        if (jobName.matches(".*\\d.*") || !jobName.matches("[a-zA-Z\\s]+")) {
-            throw new IllegalArgumentException("Job name cannot contain numbers or special characters.");
-        }
+    public static List<Agenda> getAll() {
+        return new ArrayList<>(agendaEntries);
     }
 
     /**
-     * Retrieves the name of the job.
+     * Updates an existing agenda entry in the repository.
      *
-     * @return The name of the job.
+     * @param agenda the agenda entry to update
      */
-    public String getJobName() {
-        return jobName;
-    }
-
-    /**
-     * Checks if this job is equal to another object.
-     *
-     * @param o The object to compare with this job.
-     * @return {@code true} if the objects are equal, {@code false} otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Job)) return false;
-        Job job = (Job) o;
-        return Objects.equals(jobName, job.jobName);
-    }
-
-    /**
-     * Creates a clone of this job.
-     *
-     * @return A new {@code Job} object with the same name as this job.
-     */
-    public Job clone() {
-        return new Job(this.jobName);
-    }
-
-    /**
-     * Generates a hash code value for this job.
-     *
-     * @return The hash code value for this job.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(jobName);
-    }
-
-    /**
-     * Returns a string representation of the job.
-     *
-     * @return A string representation of the job, including its name.
-     */
-    @Override
-    public String toString() {
-        return "Job{" +
-                "jobName='" + jobName + '\'' +
-                '}';
-    }
-}
-```
-
-### Class JobRepository
-
-```java
-public class JobRepository {
-
-    private final List<Job> jobList;
-
-    /**
-     * Constructs a new {@code JobRepository} object.
-     * Initializes the list of jobs.
-     */
-    public JobRepository() {
-        jobList = new ArrayList<>();
-    }
-
-    /**
-     * Retrieves an existing job by its description.
-     *
-     * @param jobName The description of the job to be retrieved.
-     * @return The job with the specified description.
-     * @throws IllegalArgumentException if the job does not exist.
-     */
-    public Job getJobByName(String jobName) {
-        Job foundJob = null;
-        for (Job job : jobList) {
-            if (job.getJobName().equals(jobName)) {
-                foundJob = job;
+    public void updateAgendaEntry(Agenda agenda) {
+        for (int i = 0; i < agendaEntries.size(); i++) {
+            if (agendaEntries.get(i).getTaskDescription().equals(agenda.getTaskDescription())) {
+                agendaEntries.set(i, agenda);
                 break;
             }
         }
-        if (foundJob == null) {
-            throw new IllegalArgumentException(
-                    "Job requested for [" + jobName + "] does not exist.");
-        }
-        return foundJob;
     }
 
     /**
-     * Adds a new job to the repository.
+     * Saves an agenda entry by updating it in the repository.
      *
-     * @param job The job to be added.
-     * @return An optional containing the newly added job if successful, empty otherwise.
+     * @param entry the agenda entry to save
      */
-    public Optional<Job> add(Job job) {
-        Optional<Job> newJob = Optional.empty();
-        boolean operationSuccess = false;
-
-        if (validateJob(job)) {
-            newJob = Optional.of(job.clone());
-            operationSuccess = jobList.add(newJob.get());
-        }
-
-        if (!operationSuccess) {
-            newJob = Optional.empty();
-        }
-
-        return newJob;
+    public void save(Agenda entry) {
+        updateAgendaEntry(entry);
     }
 
     /**
-     * Validates whether a job can be added to the repository.
-     * Checks if the job already exists in the repository.
+     * Retrieves all agenda entries from the repository.
      *
-     * @param job The job to be validated.
-     * @return True if the job is valid (not already in the repository), false otherwise.
+     * @return a list of all agenda entries
      */
-    private boolean validateJob(Job job) {
-        return !jobList.contains(job);
-    }
-
-    /**
-     * Returns a defensive (immutable) copy of the list of jobs.
-     *
-     * @return The list of jobs.
-     */
-    public List<Job> getJobList() {
-        // This is a defensive copy, so that the repository cannot be modified from the outside.
-        return List.copyOf(jobList);
+    public List<Agenda> getAllAgendas() {
+        return new ArrayList<>(agendaEntries);
     }
 }
 
 ```
 
-
 ## 6. Integration and Demo 
 
-* A new option on the HRM menu options was added.
+* A new option on the GSM menu options was added.
 
-* For demo purposes some jobs are bootstrapped while system starts.
+* For demo purposes some agenda entries are bootstrapped while system starts.
 
 
 ## 7. Observations
