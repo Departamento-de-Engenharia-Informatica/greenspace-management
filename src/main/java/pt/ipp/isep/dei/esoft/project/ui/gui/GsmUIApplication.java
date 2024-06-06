@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pt.ipp.isep.dei.esoft.project.application.controller.GUIController.GsmUIMenuController;
+import pt.ipp.isep.dei.esoft.project.application.controller.GUIController.GsmUIMenuControllerGUI;
 
 public class GsmUIApplication extends Application {
     static String userEmail;
@@ -27,7 +27,7 @@ public class GsmUIApplication extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GsmUIMenu.fxml"));
         Scene scene = new Scene(loader.load());
 
-        GsmUIMenuController controller = loader.getController();
+        GsmUIMenuControllerGUI controller = loader.getController();
         controller.setUserEmail(userEmail);
 
         primaryStage.setScene(scene);
