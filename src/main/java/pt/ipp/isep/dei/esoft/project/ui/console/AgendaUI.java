@@ -82,8 +82,8 @@ public class AgendaUI implements Runnable {
         }
 
 
-        
-       
+
+
         String status;
         do {
             System.out.print("Enter status (Planned/Postponed/Canceled/Done): ");
