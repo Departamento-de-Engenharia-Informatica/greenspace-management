@@ -15,7 +15,6 @@
             prefHeight="400.0" prefWidth="600.0">
 
     <VBox alignment="CENTER" spacing="10">
-        <GridPane>
             <Label text="Start Date (DD-MM-YYYY):"/>
             <TextField fx:id="startDateField"/>
             <Label text="End Date (DD-MM-YYYY):"/>
@@ -23,8 +22,6 @@
             <Label text="Task Status:"/>
             <ComboBox fx:id="statusComboBox"/>
             <Button text="List Tasks" onAction="#handleListTasks"/>
-        </GridPane>
-
         <TextArea fx:id="taskListArea" prefWidth="400.0" prefHeight="300.0"/>
     </VBox>
 
