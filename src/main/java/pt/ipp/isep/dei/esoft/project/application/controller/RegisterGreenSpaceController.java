@@ -24,7 +24,7 @@ public class RegisterGreenSpaceController {
     /**
      * Registers a new green space in the system based on the provided name, area, type, and email.
      *
-     * @param name  the name of the green space
+     * @param name  the name of the green spac
      * @param area  the area of the green space in square meters
      * @param type  the type of the green space (GARDEN, MEDIUM_SIZED_PARK, LARGE_SIZED_PARK)
      * @param email the email associated with the green space
