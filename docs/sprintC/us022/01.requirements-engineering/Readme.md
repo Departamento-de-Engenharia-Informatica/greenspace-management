@@ -102,10 +102,14 @@ To-do list entries doesn't have dates!
 ### 1.5 Input and Output Data
 
 **Input Data:**
-     --
-
+     Expected date
+* Selected data:
+     * Select green available from that gsm
+     * Select to-do list entry available for that greenspace
+     * Select status (Planned, Postponed,Canceled,Done)
+  
 **Output Data:**
---
+* (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 

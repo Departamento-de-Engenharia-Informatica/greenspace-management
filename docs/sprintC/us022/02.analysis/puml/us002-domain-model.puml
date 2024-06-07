@@ -2,19 +2,13 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-
-'left to right direction
-
 skinparam classAttributeIconSize 0
-
 hide circle
 hide methods
 
-'title Domain Model
+title Domain Model - US002
 
-'class Platform {
-'  -description
-'}
+left to right direction
 
 class Organization {
     name
@@ -24,23 +18,52 @@ class Organization {
     email
 }
 
-class Employe {
-    name
-    role
-    phoneNumber
-    email
-}
-class HRM {
+class GSM {
     ...
 }
-class Job {
+
+class GreenSpaces {
+}
+
+class Task {
     name
     description
+    duration
+    cost
+}
+
+class Agenda {
+    endDate
+    state
 }
 
 
-Employe "1" -- "1" HRM : can be
-Organization "1" -- "*" Employe : has >
+class ToDoList {
+    Description
+    Duration
+}
 
-HRM "1" -- "*" Job : creates
+class Entries {
+    ...
+}
+
+Organization "1" -- "0.." GreenSpaces : owns
+Organization "1" -- "0.." GSM : employs
+Organization "1" -- "0.." Team : has
+Organization "1" -- "0.." ToDoList : has
+
+GSM "1" -- "0.." Task : creates
+GSM "1" -- "0.." Entries : creates
+Entries "*" -- "1" ToDoList : belongs to
+Entries "*" -- "1" Agenda : belongs to
+
+Team "1" -- "0.." Task : carries out
+Team "1" -- "0.." Entries : assigned to
+
+Agenda "1" -- "0..*" Task : has
+Agenda "1" -- "1" GreenSpaces : associated with
+
+ToDoList "1" -- "1" GreenSpaces : associated with
+ToDoList "1" -- "0..*" Agenda : associated with
+
 @enduml

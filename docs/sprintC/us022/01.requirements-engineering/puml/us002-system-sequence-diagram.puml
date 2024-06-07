@@ -3,34 +3,44 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD)
+title System Sequence Diagram (SSD) for US022 - Add a New Entry in the Agenda
 
 autonumber
 
-actor "Human Resource\nManager" as HRM
+actor "Green Spaces Manager" as GSM
 participant ":System" as System
 
-activate HRM
 
-    HRM -> System : asks to create a new job
-    activate System
-        System --> HRM : requests data (i.e. jobName)
+activate GSM
 
-    deactivate System
+GSM -> System : requests to add a new entry in the Agenda
+activate System
+System --> GSM : requests selection of a green space
 
-    HRM -> System : types requested data
-    activate System
+deactivate System
 
-    System --> HRM : Validates the inputed data and display the information to the user
-    deactivate System
-    activate HRM
+GSM -> System : selects a green space
+activate System
+System --> GSM : requests selection of a to-do list entry
 
-    HRM -> System : Confirms the data
-    deactivate HRM
+deactivate System
 
-    activate System
-    System --> HRM : Success or error message
+GSM -> System : selects a to-do list entry
+activate System
+System --> GSM : requests starting date
 
-    deactivate System
+deactivate System
+
+GSM -> System : provides starting date
+activate System
+System --> GSM : requests status (Planned, Postponed, Canceled, Done)
+
+deactivate System
+
+GSM -> System : selects status
+activate System
+System --> GSM : Success or error message
+
+deactivate System
 
 @enduml
