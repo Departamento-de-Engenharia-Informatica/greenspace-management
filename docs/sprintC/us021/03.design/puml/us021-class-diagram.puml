@@ -48,7 +48,7 @@ class ToDoListController {
 class Repositories {
     + static getInstance(): Repositories
     + getToDoListRepository(): ToDoListRepository
-    + getCollaboratorRepository(): CollaboratorRepository
+    + getOrganizationRepository(): OrganizationRepository
 }
 
 class ToDoListUI {
@@ -69,34 +69,40 @@ class ApplicationSession {
     + getCurrentSession(): UserSession
 }
 
-class Collaborator {
+class Organization {
     - name: String
+    - website: String
+    - phone: String
     - email: String
+    - vatNumber: String
+    - List<Employee> employees
+    - List<Task> tasks
 
-    + Collaborator(name: String, email: String)
-    + getName(): String
-    + getEmail(): String
+    + Organization(vatNumber: String)
+    + boolean employs(Employee employee)
+    + Optional<Task> createTask(String reference, String description, String informalDescription, String technicalDescription, int duration, double cost, TaskCategory taskCategory, Employee employee)
+    + boolean anyEmployeeHasEmail(String email)
+    + boolean addEmployee(Employee employee)
+    + Organization clone()
 }
 
-class CollaboratorRepository {
-    - collaborators: List<Collaborator>
+class OrganizationRepository {
+    - organizations: List<Organization>
 
-    + addCollaborator(collaborator: Collaborator): void
-    + removeCollaborator(collaborator: Collaborator): void
-    + addSkillToCollaborator(collaboratorId: String, skill: Skill): void
-    + getCollaborator(collaboratorId: String): Collaborator
-    + assignSkill(collaboratorId: String, skill: Skill): void
+    + Optional<Organization> getOrganizationByEmployee(Employee employee)
+    + Optional<Organization> getOrganizationByEmployeeEmail(String email)
+    + Optional<Organization> add(Organization organization)
 }
 
 ToDoListController .> Repositories
 Repositories --> ToDoListRepository
-Repositories --> CollaboratorRepository
-CollaboratorRepository --> Collaborator
+Repositories --> OrganizationRepository
+OrganizationRepository --> Organization
 ToDoListUI .> ToDoListController
 ToDoListRepository --> ToDoList
-
+ToDoListController --> ToDoList
 ApplicationSession --> UserSession : userSession
 ToDoListController ..> ApplicationSession
 ToDoListController ..> UserSession
-Collaborator ..> ToDoList : create a To Do List Entry
+Organization ..> ToDoList : create a To Do List Entry
 @enduml

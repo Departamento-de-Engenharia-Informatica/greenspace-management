@@ -5,7 +5,7 @@ skinparam shadowing false
 
 autonumber
 
-actor "User" as USER
+actor "Green Space Manager" as USER
 participant "ToDoListUI" as UI
 participant "ToDoListController" as CTRL
 participant "Repositories" as Repositories

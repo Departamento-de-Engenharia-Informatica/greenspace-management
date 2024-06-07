@@ -34,39 +34,29 @@ class GreenSpace {
     {abstract} + displayDetails(): void
 }
 
-class Collaborator {
+class Organization {
     - name: String
-    - birthdayDate: LocalDate
-    - admissionDate: LocalDate
-    - address: String
-    - phoneNumber: String
+    - website: String
+    - phone: String
     - email: String
-    - taxpayerNumber: int
-    - BINumber: long
-    - job: String
-    + Collaborator(name: String, birthdayDate: LocalDate, admissionDate: LocalDate, address: String, phoneNumber: String, email: String, taxpayerNumber: int, BINumber: long, job: String)
-    + equals(o: Object): boolean
-    + clone(): Collaborator
-    + getName(): String
-    + getBirthdayDate(): LocalDate
-    + getAdmissionDate(): LocalDate
-    + getAddress(): String
-    + getPhoneNumber(): String
-    + getEmail(): String
-    + getTaxpayerNumber(): int
-    + getBINumber(): long
-    + getJob(): String
-    + addJob(job: Job): void
+    - vatNumber: String
+    - List<Employee> employees
+    - List<Task> tasks
+
+    + Organization(vatNumber: String)
+    + boolean employs(Employee employee)
+    + Optional<Task> createTask(String reference, String description, String informalDescription, String technicalDescription, int duration, double cost, TaskCategory taskCategory, Employee employee)
+    + boolean anyEmployeeHasEmail(String email)
+    + boolean addEmployee(Employee employee)
+    + Organization clone()
 }
 
-class CollaboratorRepository {
-    - List<Collaborator> collaborators
+class OrganizationRepository {
+    - List<Organization> organizations
 
-    + addCollaborator(collaborator: Collaborator)
-    + removeCollaborator(collaborator: Collaborator)
-    + addSkillToCollaborator(collaboratorId: String, skill: Skill)
-    + getCollaborator(collaboratorId: String): Collaborator
-    + assignSkill(collaboratorId: String, skill: Skill)
+    + Optional<Organization> getOrganizationByEmployee(Employee employee)
+    + Optional<Organization> getOrganizationByEmployeeEmail(String email)
+    + Optional<Organization> add(Organization organization)
 }
 
 class GreenSpaceRepository {
@@ -97,16 +87,12 @@ RegisterGreenSpaceUI .> RegisterGreenSpaceController
 RegisterGreenSpaceController .> Repositories : repositories
 
 Repositories -> "1" GreenSpaceRepository
-Repositories -> CollaboratorRepository
-CollaboratorRepository-> Collaborator
+Repositories -> OrganizationRepository
+OrganizationRepository -> Organization
 
-Collaborator ..> GreenSpace
-RegisterGreenSpaceController ..> Collaborator
+Organization ..> GreenSpace : creates
+RegisterGreenSpaceController ..> Organization
 
-RegisterGreenSpaceController ..> GreenSpace
-GreenSpace ..> GreenSpaceRepository
-
-' Legenda
-
+GreenSpace <.. GreenSpaceRepository
 
 @enduml
