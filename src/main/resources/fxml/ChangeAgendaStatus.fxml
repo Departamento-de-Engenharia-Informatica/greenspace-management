@@ -3,18 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.ChangeStatusAgendaGUI"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.ChangeStatusAgendaGUI">
 
-    <ComboBox fx:id="comboBox" prefWidth="150"/>
+    <ChoiceBox fx:id="choiceBox" prefWidth="150.0" />
 
-    <Region VBox.vgrow="ALWAYS" />
-
-    <HBox spacing="10" alignment="CENTER">
-        <Button text="Button 1" onAction="#handleCanceledStatus"/>
-        <Button text="Button 2" onAction="#handlePostponedStatus"/>
+    <HBox alignment="BOTTOM_LEFT" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+        <Button onAction="#handleCanceledStatus" text="Canceled" />
+        <Button onAction="#handlePostponedStatus" text="Postponed" />
+        <Button text="Back" onAction="#handleBack" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0"/>
     </HBox>
 
 </AnchorPane>
