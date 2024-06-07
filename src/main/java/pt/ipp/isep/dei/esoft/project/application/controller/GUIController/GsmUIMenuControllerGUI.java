@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
-import pt.ipp.isep.dei.esoft.project.ui.console.ListAgendaEntries;
 import pt.ipp.isep.dei.esoft.project.ui.gui.ControllerWithEmail;
 
 import java.io.IOException;
@@ -147,10 +146,23 @@ public class GsmUIMenuControllerGUI implements ControllerWithEmail {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the Agenda. See console for details.");
         }
     }
-
     @FXML
     private void handleChangeAgendaStatus(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GsmUIMenu.fxml"));
+            Parent root = loader.load();
 
+            ChangeStatusAgendaGUI controller = loader.getController();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Agenda");
+            stage.show();
+        }catch (IOException e){
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the Agenda. See console for details.");
+        }
     }
 
     @FXML
