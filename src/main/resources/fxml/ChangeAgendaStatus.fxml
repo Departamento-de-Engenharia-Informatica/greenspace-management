@@ -8,10 +8,13 @@
             fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.ChangeStatusAgendaGUI"
             prefHeight="400.0" prefWidth="600.0">
 
-    <VBox spacing="10" alignment="CENTER">
-        <ComboBox fx:id="comboBox" prefWidth="150"/>
-        <Button text="Cancel Task" onAction="#handleCanceledStatus"/>
-        <Button text="Postpone Task" onAction="#handlePostponedStatus"/>
-    </VBox>
+    <ComboBox fx:id="comboBox" prefWidth="150"/>
+
+    <Region VBox.vgrow="ALWAYS" />
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Button 1" onAction="#handleCanceledStatus"/>
+        <Button text="Button 2" onAction="#handlePostponedStatus"/>
+    </HBox>
 
 </AnchorPane>
