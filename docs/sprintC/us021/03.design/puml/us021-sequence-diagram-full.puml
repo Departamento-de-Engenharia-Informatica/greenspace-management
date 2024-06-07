@@ -12,6 +12,8 @@ participant "Repositories" as Repositories
 participant "ToDoListRepository" as ToDoListRepository
 participant "ApplicationSession" as APP
 participant "UserSession" as SESSION
+participant "OrganizationRepository" as OrganizationRepository
+participant "Organization" as ORGANIZATION
 participant "ToDoList" as TODOLIST
 
 activate USER
@@ -31,7 +33,7 @@ activate USER
             CTRL -> Repositories : getInstance()
             activate Repositories
 
-                Repositories --> CTRL : toDoListRepository
+                Repositories --> CTRL : toDoListRepository, organizationRepository
             deactivate Repositories
 
             CTRL -> APP: getInstance()
@@ -46,12 +48,23 @@ activate USER
                 SESSION --> CTRL: email
             deactivate SESSION
 
-            CTRL -> TODOLIST : new ToDoList(taskDescription, urgency, expectedDuration, greenspaceName, status, email)
-            activate TODOLIST
+            CTRL -> OrganizationRepository : getOrganizationByEmployeeEmail(email)
+            activate OrganizationRepository
 
-                TODOLIST -> TODOLIST : validate details
-                TODOLIST -> ToDoListRepository : add(TODOLIST)
-            deactivate TODOLIST
+                OrganizationRepository --> CTRL : organization
+            deactivate OrganizationRepository
+
+            CTRL -> ORGANIZATION : createToDoListEntry(taskDescription, urgency, expectedDuration, greenspaceName, status, email)
+            activate ORGANIZATION
+
+                ORGANIZATION -> TODOLIST : new ToDoList(taskDescription, urgency, expectedDuration, greenspaceName, status, email)
+                activate TODOLIST
+
+                    TODOLIST -> TODOLIST : validate details
+                    TODOLIST -> ToDoListRepository : add(TODOLIST)
+                deactivate TODOLIST
+
+            deactivate ORGANIZATION
 
             CTRL --> UI : confirms successful to-do list entry creation
     deactivate CTRL

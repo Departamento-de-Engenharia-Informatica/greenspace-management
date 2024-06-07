@@ -35,43 +35,9 @@ _**Note that SSD - Alternative Two is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us002-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us021-sequence-diagram-full.svg)
 
-[//]: # (### Split Diagrams)
-
-[//]: # ()
-[//]: # (The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.)
-
-[//]: # ()
-[//]: # (It uses Interaction Occurrence &#40;a.k.a. Interaction Use&#41;.)
-
-[//]: # ()
-[//]: # (![Sequence Diagram - split]&#40;svg/us006-sequence-diagram-split.svg&#41;)
-
-[//]: # ()
-[//]: # (**Get Task Category List Partial SD**)
-
-[//]: # ()
-[//]: # (![Sequence Diagram - Partial - Get Task Category List]&#40;svg/us006-sequence-diagram-partial-get-task-category-list.svg&#41;)
-
-[//]: # ()
-[//]: # (**Get Task Category Object**)
-
-[//]: # ()
-[//]: # (![Sequence Diagram - Partial - Get Task Category Object]&#40;svg/us006-sequence-diagram-partial-get-task-category.svg&#41;)
-
-[//]: # ()
-[//]: # (**Get Employee**)
-
-[//]: # ()
-[//]: # (![Sequence Diagram - Partial - Get Employee]&#40;svg/us006-sequence-diagram-partial-get-employee.svg&#41;)
-
-[//]: # ()
-[//]: # (**Create Task**)
-
-[//]: # ()
-[//]: # (![Sequence Diagram - Partial - Create Task]&#40;svg/us006-sequence-diagram-partial-create-task.svg&#41;)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us002-class-diagram.svg)
+![Class Diagram](svg/us021-class-diagram.svg)

@@ -10,10 +10,12 @@ participant "RegisterGreenSpaceUI" as UI
 participant "RegisterGreenSpaceController" as CTRL
 participant "Repositories" as RepositorySingleton
 participant "repositories : Repositories" as PLAT
-participant "greenSpaceRepository : GreenSpaceRepository" as GreenSpaceRepository
 participant "ApplicationSession" as _APP
 participant "appSession : ApplicationSession" as APP
 participant "currentSession : UserSession" as SESSAO
+participant "organizationRepository : OrganizationRepository" as OrganizationRepository
+participant "organization : Organization" as ORGANIZATION
+participant "greenSpaceRepository : GreenSpaceRepository" as GreenSpaceRepository
 participant "greenSpace : GreenSpace" as GREENSPACE
 
 activate GSM
@@ -36,10 +38,10 @@ activate GSM
                 RepositorySingleton --> CTRL : repositories
             deactivate RepositorySingleton
 
-            CTRL -> PLAT : getGreenSpaceRepository()
+            CTRL -> PLAT : getOrganizationRepository()
             activate PLAT
 
-                PLAT --> CTRL : greenSpaceRepository
+                PLAT --> CTRL : organizationRepository
             deactivate PLAT
 
             CTRL -> _APP: getInstance()
@@ -59,14 +61,29 @@ activate GSM
                 SESSAO --> CTRL: email
             deactivate SESSAO
 
-            CTRL -> GREENSPACE : new GreenSpace(name, area, type)
-            activate GREENSPACE
+            CTRL -> OrganizationRepository : getOrganizationByEmployeeEmail(email)
+            activate OrganizationRepository
 
-                GREENSPACE -> GREENSPACE : validate details
-                GREENSPACE -> greenSpaceRepository : registerGreenSpace(greenSpaceRepository)
+                OrganizationRepository --> CTRL : organization
+            deactivate OrganizationRepository
+
+            CTRL -> PLAT : getGreenSpaceRepository()
+            activate PLAT
+
+                PLAT --> CTRL : greenSpaceRepository
+            deactivate PLAT
+
+            CTRL -> ORGANIZATION : createGreenSpace(name, area, type)
+            activate ORGANIZATION
+
+                ORGANIZATION -> GREENSPACE : new GreenSpace(name, area, type)
+                activate GREENSPACE
+
+                    GREENSPACE -> GREENSPACE : validate details
+                    GREENSPACE -> GreenSpaceRepository : registerGreenSpace(greenSpace)
                 deactivate GREENSPACE
 
-            deactivate CTRL
+            deactivate ORGANIZATION
 
             CTRL --> UI : confirms successful green space registration
     deactivate UI
