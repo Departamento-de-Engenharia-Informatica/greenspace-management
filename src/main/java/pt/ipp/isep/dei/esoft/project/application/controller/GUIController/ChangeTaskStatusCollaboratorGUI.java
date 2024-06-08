@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
@@ -18,6 +17,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * GUI controller for changing the status of tasks assigned to a collaborator.
+ */
 public class ChangeTaskStatusCollaboratorGUI implements ControllerWithEmail {
 
     @FXML
@@ -30,17 +32,29 @@ public class ChangeTaskStatusCollaboratorGUI implements ControllerWithEmail {
     private List<Agenda> agendaEntries;
     private String userEmail;
 
+    /**
+     * Initializes the controller. Loads tasks assigned to the user.
+     */
+    @FXML
     public void initialize() {
         agendaController = new AgendaController();
         loadUserTasks();  // Load tasks assigned to the user
     }
 
+    /**
+     * Sets the email of the user and reloads the tasks assigned to the user.
+     *
+     * @param email the email of the user
+     */
     @Override
     public void setUserEmail(String email) {
         this.userEmail = email;
         loadUserTasks();  // Reload tasks when user email is set
     }
 
+    /**
+     * Loads tasks assigned to the logged-in user with status "Planned" and populates the ChoiceBox.
+     */
     private void loadUserTasks() {
         if (userEmail == null || userEmail.isEmpty()) {
             return;  // Do not load tasks if user email is not set
@@ -63,16 +77,31 @@ public class ChangeTaskStatusCollaboratorGUI implements ControllerWithEmail {
         }
     }
 
+    /**
+     * Checks if the given task is assigned to the logged-in user.
+     *
+     * @param agenda the agenda entry to check
+     * @return true if the task is assigned to the user, false otherwise
+     */
     private boolean isTaskAssignedToUser(Agenda agenda) {
         return agenda.getTeamProposal().getSelectedCollaborators().stream()
                 .anyMatch(collaborator -> collaborator.getEmail().equals(userEmail));
     }
 
+    /**
+     * Formats the task details into a string for display in the ChoiceBox.
+     *
+     * @param agenda the agenda entry to format
+     * @return a formatted string containing task details
+     */
     private String formatTaskDetails(Agenda agenda) {
         return "Task: " + agenda.getTaskDescription() + ", Greenspace: " + agenda.getGreenspaceName() +
                 ", Date: " + agenda.getExpectedDate() + ", Status: " + agenda.getStatus();
     }
 
+    /**
+     * Handles the action of marking a selected task as "Done".
+     */
     @FXML
     private void handleDoneStatus() {
         String selectedTask = choiceBox.getSelectionModel().getSelectedItem();
@@ -96,6 +125,9 @@ public class ChangeTaskStatusCollaboratorGUI implements ControllerWithEmail {
         }
     }
 
+    /**
+     * Handles the action of navigating back to the Collaborator menu.
+     */
     @FXML
     private void handleBack() {
         try {
@@ -116,6 +148,13 @@ public class ChangeTaskStatusCollaboratorGUI implements ControllerWithEmail {
         }
     }
 
+    /**
+     * Displays an alert with the given title and message.
+     *
+     * @param alertType the type of the alert
+     * @param title     the title of the alert
+     * @param message   the message of the alert
+     */
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

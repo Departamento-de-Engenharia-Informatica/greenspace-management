@@ -14,6 +14,9 @@ import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import java.util.List;
 
+/**
+ * GUI controller for assigning vehicles to an agenda entry.
+ */
 public class AssignVehicleToAgendaEntryGUI {
 
     @FXML
@@ -27,6 +30,9 @@ public class AssignVehicleToAgendaEntryGUI {
 
     private AssignVehicleToAgendaEntryController controller;
 
+    /**
+     * Initializes the controller. Loads agenda entries and sets up the vehicle list view.
+     */
     @FXML
     public void initialize() {
         controller = new AssignVehicleToAgendaEntryController();
@@ -43,6 +49,10 @@ public class AssignVehicleToAgendaEntryGUI {
         updatePromptLabelVisibility();
     }
 
+    /**
+     * Handles the selection of an agenda entry from the combo box.
+     * Loads available vehicles for the selected agenda entry.
+     */
     @FXML
     public void handleAgendaEntrySelection() {
         Agenda selectedEntry = agendaEntryComboBox.getValue();
@@ -59,6 +69,10 @@ public class AssignVehicleToAgendaEntryGUI {
         updatePromptLabelVisibility();
     }
 
+    /**
+     * Handles the assignment of selected vehicles to the selected agenda entry.
+     * Displays an alert indicating success or failure.
+     */
     @FXML
     public void handleAssignVehicles() {
         Agenda selectedEntry = agendaEntryComboBox.getValue();
@@ -72,17 +86,29 @@ public class AssignVehicleToAgendaEntryGUI {
         }
     }
 
+    /**
+     * Handles the exit action by closing the current stage.
+     */
     @FXML
     public void handleExit() {
         Stage stage = (Stage) agendaEntryComboBox.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Updates the visibility of the prompt label based on whether an agenda entry is selected.
+     */
     private void updatePromptLabelVisibility() {
         boolean hasSelectedEntry = agendaEntryComboBox.getValue() != null;
         promptLabel.setVisible(!hasSelectedEntry);
     }
 
+    /**
+     * Displays an alert with the given title and message.
+     *
+     * @param title   the title of the alert
+     * @param message the message of the alert
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
