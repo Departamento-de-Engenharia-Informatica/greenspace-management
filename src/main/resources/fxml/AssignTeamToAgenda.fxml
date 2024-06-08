@@ -10,4 +10,5 @@
     <ListView fx:id="teamListView"/>
 
     <Button text="Assign Team" onAction="#handleAssignTeam"/>
+    <Button text="Back" onAction="#handleBack" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
 </VBox>
