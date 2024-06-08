@@ -20,7 +20,7 @@ participant "GmailEmailServiceAdapter" as GMAILADAPTER
 participant "GmailService" as GMAILSERVICE
 participant "DEIEmailServiceAdapter" as DEIADAPTER
 participant "DEIService" as DEISERVICE
-participant "Organization" as ORGANIZATIO
+participant "Organization" as ORGANIZATION
 participant "OrganizationRepository" as OrganizationRepository
 
 activate USER
@@ -58,16 +58,14 @@ activate USER
         USER -> UI : selectAgendaEntry()
         activate UI
 
-            UI -> CTRL : getAgendaEntry
+            UI -> CTRL : getAgendaEntry(entryId)
             activate CTRL
 
-                CTRL -> AgendaRepository : getAgendaEntry
+                CTRL -> AgendaRepository : getAgendaEntry(entryId)
                 activate AgendaRepository
 
                     AgendaRepository --> CTRL : Agenda
                 deactivate AgendaRepository
-
-
 
                 CTRL --> UI : Agenda
             deactivate CTRL
@@ -75,20 +73,53 @@ activate USER
         USER -> UI : selectTeamProposal()
         activate UI
 
-            UI -> CTRL : getAvailableTeamProposals
+            UI -> CTRL : getAvailableTeamProposals(entryId)
             activate CTRL
 
-                CTRL -> TeamProposalRepository : getAvailableTeamProposals
+                CTRL -> TeamProposalRepository : getAvailableTeamProposals(entryId)
                 activate TeamProposalRepository
 
-                    TeamProposalRepository --> CTRL : TeamProposal
+                    TeamProposalRepository --> CTRL : List<TeamProposal>
                 deactivate TeamProposalRepository
 
-                CTRL --> UI : TeamProposal
+                CTRL --> UI : List<TeamProposal>
             deactivate CTRL
 
         USER -> UI : sendEmailNotifications()
         activate UI
+
+            UI -> CTRL : assignTeamToAgendaEntry(agenda, teamProposal)
+            activate CTRL
+
+                CTRL -> OrganizationRepository : getOrganizationByEmployeeEmail(email)
+                activate OrganizationRepository
+
+                    OrganizationRepository --> CTRL : Organization
+                deactivate OrganizationRepository
+
+                CTRL -> ORGANIZATION : addAgendaEntry(agenda, teamProposal)
+                activate ORGANIZATION
+
+                    ORGANIZATION -> AGENDA : new Agenda(taskDescription, greenSpaceName, expectedDate, status)
+                    activate AGENDA
+
+                        AGENDA -> AgendaRepository : saveAgendaEntry(agenda)
+                        activate AgendaRepository
+
+                            AgendaRepository --> AGENDA : confirmation
+                        deactivate AgendaRepository
+
+                    deactivate AGENDA
+
+                    ORGANIZATION -> TeamProposalRepository : addTeamProposal(teamProposal)
+                    activate TeamProposalRepository
+
+                        TeamProposalRepository --> ORGANIZATION : confirmation
+                    deactivate TeamProposalRepository
+
+                deactivate ORGANIZATION
+
+            deactivate CTRL
 
             alt Gmail
                 UI -> EMAILSERVICE : sendEmail(recipient, subject, body)
