@@ -4,31 +4,33 @@
 
 ### 3.1. Rationale
 
-| Interaction ID                                     | Question: Which class is responsible for...                    | Answer            | Justification (with patterns)                                                                                      |
-|:---------------------------------------------------|:---------------------------------------------------------------|:------------------|:-------------------------------------------------------------------------------------------------------------------|
-| Step 1  		                                         | 	... interacting with the actor?                               | CreateJobUI       | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.      |
-| Step 2 - Requests data  (jobName) 		               | 	... displaying the form for the actor to input the data						 | CreateJobUI       | IE: is responsible for user interactions.                                                                          |
-| Step 3 - Types requested data (jobName)	           | 	... temporarily keeping the inputted data                      | CreateJobUI       | IE: is responsible for temporarily keeping the typed data until the actor confirms it                           |
-| Step 4 - Shows all data and requests confirmation	 | 	... displaying all information before submitting              | CreateJobUI       | IE: Temporarily shows inputted that until actor confirms it                                                         |
-| Step 5 - Confirm data		                            | 	... new job?                                                  | CreateJobController | IE: Responsible for coordinating the job creation process, interacts with both UI and repository.              |
-| 		                                                 | 			... saving the inputted data?				                            | Job               | IE: the created object has its own data                                                                            |              
-| 		                                                 | 	... validating the data(mandatory data)                       | Job               | IE: owns its data.                                                                                                 | 
-| 			  		                                            | 	... validating the data globally (checks for duplicate data)? | JobRepository     | IE: knows all the data.                                                                                            | 
-| 			  		                                            | 	... saving the created job?                                   | JobRepository     | IE: owns all the jobs.                                                                                             | 
-| Step 5 - Display operation success                  | 	... informing operation success?                              | CreateJobUI       | IE: is responsible for user interactions.                                                                          |  
+| Interaction ID                                            | Question: Which class is responsible for...                    | Answer           | Justification (with patterns)                                                                                 |
+|:----------------------------------------------------------|:---------------------------------------------------------------|:-----------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1  		                                                | 	... interacting with the actor?                               | AgendaUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| Step 2                                                    | 	... displaying the form for the actor to input the data						 | AgendaUI         | IE: is responsible for user interactions.                                                                     |
+| Step 3                                                    | 	... displaying the available greenspaces					                 |                  | IE: is responsible for user interactions.                                                                     |
+| Step 4                                                    | 	... displaying the available to-do list entries				           |                  | IE: is responsible for user interactions.                                                                     |
+| Step 5	                                                   | 	... requesting expectedDate			                                |                  | IE: is responsible for user interactions.                                                                     |
+| 	Step 6	                                                  | 	... requesting status				                                     |                  | IE: is responsible for user interactions.                                                                     |
+| Step 7 - Types requested data                             | 	... temporarily keeping the inputted data                     | AgendaUI         | IE: is responsible for temporarily keeping the typed data until the actor confirms it                         |
+| Step 8 - Shows all data and requests confirmation	        | 	... displaying all information before submitting              | AgendaUI         | IE: Temporarily shows inputted that until actor confirms it                                                   |
+| Step 9 - Validating details and creating agenda object?		 | 	... Agenda?                                                   | Agenda           | Creator: Agenda is responsible for creating the appropriate agenda object based on the provided details.      | | 
+| Step 10 - Display operation success                       | 	... informing operation success?                              | AgendaController | IE: is responsible for user interactions.                                                                     |  
+|           | 	... saving typed data                                         | AgendaRepository | Repository: Handles storage and retrieval of agenda entries, ensuring data integrity and persistence.                                                                |  
 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Job
+* Agenda
+* AgendaRepository
 
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateJobUI  
-* CreateJobController
+* AgendaUI  
+
 
 
 ## 3.2. Sequence Diagram (SD)

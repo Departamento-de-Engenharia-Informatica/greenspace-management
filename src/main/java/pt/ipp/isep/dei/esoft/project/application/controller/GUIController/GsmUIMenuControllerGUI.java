@@ -131,10 +131,7 @@ public class GsmUIMenuControllerGUI implements ControllerWithEmail {
             Parent root = loader.load();
 
             ListAgendaEntriesControllerGUI controller = loader.getController();
-
-//            controller.setAgendaController(new AgendaController());
-//            controller.setToDoListController(new ToDoListController());
-//            controller.setUserEmail(userEmail);
+            controller.setUserEmail(userEmail);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -184,6 +181,7 @@ public class GsmUIMenuControllerGUI implements ControllerWithEmail {
             Parent root = loader.load();
 
             AssignTeamToAgendaControllerGUI controller = loader.getController();
+            controller.setUserEmail(userEmail);
 
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

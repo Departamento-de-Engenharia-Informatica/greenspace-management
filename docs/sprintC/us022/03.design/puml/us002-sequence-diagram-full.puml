@@ -3,35 +3,87 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-actor "Human Resource Manager" as HRM
-participant ":CreateJobUI" as UI
-participant ":CreateJobController" as CTRL
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "job\n:Job" as JOB
+autonumber
 
-activate HRM
+actor "Green Space Manager" as USER
+participant "AgendaUI" as UI
+participant "AgendaController" as CTRL
+participant "Repositories" as Repositories
+participant "ToDoListRepository" as ToDoListRepository
+participant "GreenSpaceRepository" as GreenSpaceRepository
+participant "AgendaRepository" as AgendaRepository
+participant "ApplicationSession" as APP
+participant "UserSession" as SESSION
+participant "GreenSpace" as GREENSPACE
+participant "ToDoList" as TODOLIST
+participant "Agenda" as AGENDA
 
-HRM -> UI : asks to create a new job
+activate USER
 
-activate UI
+    USER -> UI : requests to create a new agenda entry
+    activate UI
 
-UI -> CTRL** : createJob
+        UI -> CTRL : createAgendaEntryRequest()
+        activate CTRL
 
-activate CTRL
+            CTRL -> APP : getCurrentSession()
+            activate APP
 
-CTRL -> PLAT: getJobRepository()
-PLAT --> CTRL: jobRepository
+                APP -> SESSION : getUserEmail()
+                activate SESSION
 
-CTRL -> JOB: createJob(jobName)
-JOB -> JOB: create(jobName)
-JOB -> JOB: addJob(job)
+                    SESSION --> APP : email
+                deactivate SESSION
 
-JOB --> CTRL : job
+                APP --> CTRL : email
+            deactivate APP
 
-CTRL --> UI: job
-deactivate CTRL
-UI --> HRM: displays operation success
-deactivate UI
-deactivate HRM
+            CTRL -> Repositories : getRepositories()
+            activate Repositories
+
+                Repositories --> CTRL : toDoListRepository, greenSpaceRepository, agendaRepository
+            deactivate Repositories
+
+            CTRL -> GreenSpaceRepository : getAllManagedGreenSpaces(userEmail)
+            activate GreenSpaceRepository
+
+                GreenSpaceRepository --> CTRL : List<GreenSpace>
+            deactivate GreenSpaceRepository
+
+            CTRL -> ToDoListRepository : getAllToDoListEntries(userEmail)
+            activate ToDoListRepository
+
+                ToDoListRepository --> CTRL : List<ToDoList>
+            deactivate ToDoListRepository
+
+            CTRL --> UI : displayAvailableOptions(List<GreenSpace>, List<ToDoList>)
+        deactivate CTRL
+
+    deactivate UI
+
+    USER -> UI : selects green space and to-do list entry, provides expected date and status
+    activate UI
+
+        UI -> CTRL : provideAgendaEntryDetails(selectedGreenSpace, selectedToDo, expectedDate, status)
+        activate CTRL
+
+            CTRL -> AgendaRepository : addAgendaEntry(selectedToDo, selectedGreenSpace, expectedDate, status)
+            activate AgendaRepository
+
+                AgendaRepository -> AGENDA : new Agenda(selectedToDo, selectedGreenSpace, expectedDate, status)
+                activate AGENDA
+
+                    AGENDA -> AGENDA : validateDetails()
+                    AGENDA -> AgendaRepository : saveAgendaEntry(AGENDA)
+                deactivate AGENDA
+
+            deactivate AgendaRepository
+
+            CTRL --> UI : confirmAgendaEntryCreation()
+    deactivate CTRL
+
+    UI --> USER : confirms successful agenda entry creation
+
+deactivate USER
+
 @enduml

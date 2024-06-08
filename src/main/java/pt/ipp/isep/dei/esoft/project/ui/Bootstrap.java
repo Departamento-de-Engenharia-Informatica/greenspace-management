@@ -106,8 +106,8 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.add(new Collaborator("Ana Santos", LocalDate.of(1978, 1, 25), LocalDate.of(2005, 9, 5), "Avenida Central, n 456, 1000-200 Lisboa", "934567890", "tugahdchester@gmail.com", 987654321, 78901234, "Arborist"));
         authenticationRepository.addUserWithRole("Collaborator", "tugahdchester@gmail.com", "78901234",
                 AuthenticationController.ROLE_COLLABORATOR);
-        collaboratorRepository.add(new Collaborator("Marta Oliveira", LocalDate.of(1992, 11, 10), LocalDate.of(2017, 4, 20), "Travessa das Flores, n 789, 3000-400 Coimbra", "920987654", "marta.oliveira@gmail.com", 246810753, 45678901, "Urban Planner"));
-        authenticationRepository.addUserWithRole("Collaborator", "marta.oliveira@gmail.com", "45678901",
+        collaboratorRepository.add(new Collaborator("Marta Oliveira", LocalDate.of(1992, 11, 10), LocalDate.of(2017, 4, 20), "Travessa das Flores, n 789, 3000-400 Coimbra", "920987654", "eduramos015.pt@gmail.com", 246810753, 45678901, "Urban Planner"));
+        authenticationRepository.addUserWithRole("Collaborator", "eduramos015.pt@gmail.com", "45678901",
                 AuthenticationController.ROLE_COLLABORATOR);
         collaboratorRepository.add(new Collaborator("Pedro Ferreira", LocalDate.of(1980, 9, 5), LocalDate.of(2012, 3, 15), "Rua dos Bosques, n 234, 5000-600 Vila Real", "917654321", "pedro.ferreira@outlook.pt", 369258147, 21098765, "Park Ranger"));
         authenticationRepository.addUserWithRole("Collaborator", "pedro.ferreira@outlook.pt", "21098765",
@@ -126,23 +126,6 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_COLLABORATOR);
 
     }
-
-    /**
-     * Adds Agenda Entries to the repository.
-     */
-    /*private void addAgendaEntries() {
-        AgendaRepository agendaRepository = Repositories.getInstance().getAgendaRepository();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        agendaRepository.add(new Agenda("Give water to the plants", "Jardim do Covelo", LocalDate.parse("10-10-2020", formatter), "Planned"));
-        agendaRepository.add(new Agenda("Load the vehicles", "Jardim do Covelo", LocalDate.parse("10-12-2020", formatter), "Planned"));
-        agendaRepository.add(new Agenda("Fill the tank of the vehicles", "Jardim do Covelo", LocalDate.parse("10-01-2021", formatter), "Canceled"));
-
-
-
-    }*/
-
-
-
 
     /**
      * Adds skills to the repository.
