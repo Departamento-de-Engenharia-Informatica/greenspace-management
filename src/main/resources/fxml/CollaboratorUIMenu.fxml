@@ -12,5 +12,6 @@
     <children>
         <Label fx:id="emailLabel" text="User Email Placeholder"/>
         <Button text="Consult tasks" onAction="#handlelistTasks"/>
+        <Button text="Mark tasks as Done" onAction="#handleChangeTaskStatus"/>
     </children>
 </VBox>
