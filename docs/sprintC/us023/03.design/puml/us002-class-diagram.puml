@@ -1,41 +1,146 @@
 @startuml
 
-'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
-skinparam linetype ortho
+skinparam linetype orto
+skinparam classAttributeIconSize 0
 
-class CreateJobController {
-    + CreateJobController()
-    + createJob(jobName: String): boolean
-    + getJobList(): List<Job>
-}
+class AssignTeamToAgendaUI {
+    - controller: AgendaController
+    - scanner: Scanner
+    - emailSender: EmailSender
+    - agendaRepository: AgendaRepository
+    - teamProposalRepository: TeamProposalRepository
 
-class Job {
-    - jobName: String
-    + Job(jobName: String)
-    + getJobName(): String
-}
-
-class JobRepository {
-    - jobList: List<Job>
-    + add(job: Job): Optional<Job>
-    + getJobList(): List<Job>
-}
-
-class CreateJobUI {
-    + CreateJobUI()
+    + AssignTeamToAgendaUI()
     + run(): void
+    - selectAgendaEntry(): Agenda
+    - selectTeamProposal(): TeamProposal
+    - sendEmailNotifications(team: TeamProposal): void
 }
+
+class AgendaController {
+    - agendaRepository: AgendaRepository
+    - teamProposalRepository: TeamProposalRepository
+
+    + AgendaController()
+    + getAgendaEntryById(entryId: String): Agenda
+    + getAvailableTeamProposals(entryId: String): List<TeamProposal>
+}
+
+class AgendaRepository {
+    - agendas: List<Agenda>
+
+    + add(agenda: Agenda): Optional<Agenda>
+    + getAllAgendas(): List<Agenda>
+    + findById(id: String): Optional<Agenda>
+}
+
+class TeamProposalRepository {
+    - teamProposals: List<TeamProposal>
+
+    + add(teamProposal: TeamProposal): Optional<TeamProposal>
+    + getAllTeamProposals(): List<TeamProposal>
+    + findById(id: String): Optional<TeamProposal>
+}
+
+
 
 class Repositories {
-    + getJobRepository(): JobRepository
+    + static getInstance(): Repositories
+    + getToDoListRepository(): ToDoListRepository
+    + getGreenSpaceRepository(): GreenSpaceRepository
+    + getAgendaRepository(): AgendaRepository
+    + getTeamProposalRepository(): TeamProposalRepository
 }
 
-CreateJobUI --> CreateJobController
-CreateJobController --> JobRepository
-CreateJobController --> Repositories
-JobRepository --> Job
+class UserSession {
+    + getUserEmail(): String
+}
+
+class ApplicationSession {
+    + static getInstance(): ApplicationSession
+    + getCurrentSession(): UserSession
+}
+class OrganizationRepository {
+    - organizations: List<Organization>
+
+    + Optional<Organization> getOrganizationByEmployee(Employee employee)
+    + Optional<Organization> getOrganizationByEmployeeEmail(String email)
+    + Optional<Organization> add(Organization organization)
+}
+class Organization {
+    - name: String
+    - website: String
+    - phone: String
+    - email: String
+    - vatNumber: String
+    - List<Employee> employees
+    - List<Task> tasks
+
+    + Organization(vatNumber: String)
+    + boolean employs(Employee employee)
+    + Optional<Task> createTask(String reference, String description, String informalDescription, String technicalDescription, int duration, double cost, TaskCategory taskCategory, Employee employee)
+    + boolean anyEmployeeHasEmail(String email)
+    + boolean addEmployee(Employee employee)
+    + Organization clone()
+}
+class Agenda {
+    - taskDescription: String
+    - greenSpaceName: String
+    - expectedDate: LocalDate
+    - status: String
+
+    + Agenda(taskDescription: String, greenSpaceName: String, expectedDate: LocalDate, status: String)
+    + getTaskDescription(): String
+    + getGreenSpaceName(): String
+    + getExpectedDate(): LocalDate
+    + getStatus(): String
+}
+
+interface EmailService {
+    +sendEmail(recipient: String, subject: String, body: String): void
+}
+
+' Define the first adapter for Gmail
+class GmailEmailServiceAdapter {
+    +sendEmail(recipient: String, subject: String, body: String): void
+}
+' Define the Gmail specific implementation
+class GmailService {
+    +sendGmail(recipient: String, subject: String, body: String): void
+}
+
+' Define the second adapter for DEI
+class DEIEmailServiceAdapter {
+    +sendEmail(recipient: String, subject: String, body: String): void
+}
+
+' Define the DEI specific implementation
+class DEIService {
+    +sendDEIEmail(recipient: String, subject: String, body: String): void
+}
+
+' Implement the relationships
+EmailService <|.. GmailEmailServiceAdapter
+EmailService <|.. DEIEmailServiceAdapter
+
+GmailEmailServiceAdapter ..> GmailService : adapts
+DEIEmailServiceAdapter ..> DEIService : adapts
+
+
+
+AssignTeamToAgendaUI --> AgendaController : uses
+AssignTeamToAgendaUI..> Repositories : instance
+AssignTeamToAgendaUI --> EmailService : uses
+Repositories --> AgendaRepository : uses
+Repositories --> OrganizationRepository
+OrganizationRepository --> Organization
+Repositories --> TeamProposalRepository : uses
+Organization --> Agenda : owns agenda entries
+ApplicationSession --> UserSession : userSession
+AgendaController ..> ApplicationSession : uses
+AgendaController ..> UserSession : uses
 
 @enduml

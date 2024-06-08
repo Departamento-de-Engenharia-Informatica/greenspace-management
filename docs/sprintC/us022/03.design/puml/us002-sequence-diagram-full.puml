@@ -17,6 +17,8 @@ participant "UserSession" as SESSION
 participant "GreenSpace" as GREENSPACE
 participant "ToDoList" as TODOLIST
 participant "Agenda" as AGENDA
+participant "OrganizationRepository" as OrganizationRepository
+participant "Organization" as ORGANIZATION
 
 activate USER
 
@@ -41,7 +43,7 @@ activate USER
             CTRL -> Repositories : getRepositories()
             activate Repositories
 
-                Repositories --> CTRL : toDoListRepository, greenSpaceRepository, agendaRepository
+                Repositories --> CTRL : toDoListRepository, greenSpaceRepository, agendaRepository, organizationRepository
             deactivate Repositories
 
             CTRL -> GreenSpaceRepository : getAllManagedGreenSpaces(userEmail)
@@ -56,6 +58,12 @@ activate USER
                 ToDoListRepository --> CTRL : List<ToDoList>
             deactivate ToDoListRepository
 
+            CTRL -> OrganizationRepository : getOrganizationByEmployeeEmail(email)
+            activate OrganizationRepository
+
+                OrganizationRepository --> CTRL : Optional<Organization>
+            deactivate OrganizationRepository
+
             CTRL --> UI : displayAvailableOptions(List<GreenSpace>, List<ToDoList>)
         deactivate CTRL
 
@@ -67,15 +75,17 @@ activate USER
         UI -> CTRL : provideAgendaEntryDetails(selectedGreenSpace, selectedToDo, expectedDate, status)
         activate CTRL
 
-            CTRL -> AgendaRepository : addAgendaEntry(selectedToDo, selectedGreenSpace, expectedDate, status)
-            activate AgendaRepository
+            CTRL -> ORGANIZATION: addAgendaEntry(selectedToDo, selectedGreenSpace, expectedDate, status)
+            activate ORGANIZATION
 
-                AgendaRepository -> AGENDA : new Agenda(selectedToDo, selectedGreenSpace, expectedDate, status)
+                ORGANIZATION -> AGENDA : new Agenda(selectedToDo, selectedGreenSpace, expectedDate, status)
                 activate AGENDA
 
                     AGENDA -> AGENDA : validateDetails()
                     AGENDA -> AgendaRepository : saveAgendaEntry(AGENDA)
                 deactivate AGENDA
+                activate "AgendaRepository"
+                    "AgendaRepository" ->CTRL : saveAgendaEntry(AGENDA
 
             deactivate AgendaRepository
 
