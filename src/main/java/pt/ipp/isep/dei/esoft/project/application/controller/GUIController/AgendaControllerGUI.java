@@ -4,7 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
@@ -21,6 +24,9 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The AgendaControllerGUI class represents the controller for managing agenda entries in the GUI.
+ */
 public class AgendaControllerGUI implements ControllerWithEmail {
 
     @FXML
@@ -43,23 +49,44 @@ public class AgendaControllerGUI implements ControllerWithEmail {
     private String userEmail;
     private TeamProposal teamProposal;
 
+    /**
+     * Initializes the controller.
+     */
     public void initialize() {
         statusChoiceBox.setItems(FXCollections.observableArrayList("Planned", "Postponed", "Canceled", "Done"));
     }
 
+    /**
+     * Sets the email of the current user.
+     *
+     * @param userEmail the email of the current user
+     */
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
         populateGreenSpaceChoiceBox();
     }
 
+    /**
+     * Sets the agenda controller.
+     *
+     * @param agendaController the agenda controller
+     */
     public void setAgendaController(AgendaController agendaController) {
         this.agendaController = agendaController;
     }
 
+    /**
+     * Sets the to-do list controller.
+     *
+     * @param toDoListController the to-do list controller
+     */
     public void setToDoListController(ToDoListController toDoListController) {
         this.toDoListController = toDoListController;
     }
 
+    /**
+     * Populates the green space choice box.
+     */
     private void populateGreenSpaceChoiceBox() {
         List<GreenSpace> greenSpaces = agendaController.getGreenSpaces(userEmail);
         if (greenSpaces.isEmpty()) {
@@ -73,6 +100,11 @@ public class AgendaControllerGUI implements ControllerWithEmail {
         }
     }
 
+    /**
+     * Populates the to-do list choice box based on the selected green space.
+     *
+     * @param greenSpaceName the name of the selected green space
+     */
     private void populateToDoListChoiceBox(String greenSpaceName) {
         if (greenSpaceName != null) {
             List<ToDoList> toDoListEntries = agendaController.getToDoListEntries(userEmail, greenSpaceName);
@@ -89,6 +121,11 @@ public class AgendaControllerGUI implements ControllerWithEmail {
         }
     }
 
+    /**
+     * Handles the event of creating an agenda entry.
+     *
+     * @param event the ActionEvent representing the event
+     */
     @FXML
     private void handleCreateAgendaEntry(ActionEvent event) {
         String selectedGreenSpaceName = greenSpaceChoiceBox.getValue();
@@ -115,28 +152,38 @@ public class AgendaControllerGUI implements ControllerWithEmail {
 
         Optional<Agenda> agendaEntry = agendaController.createAgendaEntry(selectedToDoDescription, selectedGreenSpaceName, expectedDate, status, teamProposal);
         if (agendaEntry.isPresent()) {
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Agenda entry added with sucess.");
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Agenda entry added with success.");
             toDoListController.updateToDoListStatus(selectedToDoDescription, "Processed");
         } else {
             feedbackLabel.setText("Failed to create agenda entry. Ensure the task exists in the To-Do list and the green space is managed by you.");
         }
     }
+
+    /**
+     * Shows an alert dialog with the specified type, title, and message.
+     *
+     * @param alertType the type of the alert dialog
+     * @param title     the title of the alert dialog
+     * @param message   the message of the alert dialog
+     */
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /**
+     * Handles the event of navigating back to the previous scene.
+     *
+     * @param actionEvent the ActionEvent representing the event
+     */
     @FXML
     public void handleBack(javafx.event.ActionEvent actionEvent) {
-
         try {
             SceneSwitcher.switchToScene("/fxml/GsmUIMenu.fxml", "Register Green Space", (Node) actionEvent.getSource(), userEmail);
-
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the Main Menu.");
         }
     }
-
-
 }

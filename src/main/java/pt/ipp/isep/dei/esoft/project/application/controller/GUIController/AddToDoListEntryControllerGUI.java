@@ -4,7 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterGreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
@@ -15,6 +18,9 @@ import pt.ipp.isep.dei.esoft.project.ui.gui.SceneSwitcher;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The AddToDoListEntryControllerGUI class represents the controller for adding a to-do list entry in the GUI.
+ */
 public class AddToDoListEntryControllerGUI implements ControllerWithEmail {
 
     @FXML
@@ -35,15 +41,22 @@ public class AddToDoListEntryControllerGUI implements ControllerWithEmail {
     private ToDoListController toDoListController;
     private String userEmail;
 
+    /**
+     * Initializes the controller.
+     */
     public void initialize() {
         setUserEmail(GsmUIApplication.getUserEmail());
         populateGreenSpaceChoiceBox();
         urgencyChoiceBox.setItems(FXCollections.observableArrayList("High", "Medium", "Low"));
     }
 
+    /**
+     * Sets the email of the current user.
+     *
+     * @param email the email of the current user
+     */
     public void setUserEmail(String email) {
         this.userEmail = email;
-        System.out.println("link 2"+userEmail);
     }
 
 
@@ -67,6 +80,11 @@ public class AddToDoListEntryControllerGUI implements ControllerWithEmail {
         }
     }
 
+    /**
+     * Handles the event of adding a to-do list entry.
+     *
+     * @param event the ActionEvent representing the event
+     */
     @FXML
     private void handleAddToDoListEntry(ActionEvent event) {
         String taskDescription = taskDescriptionField.getText().trim();
@@ -98,17 +116,37 @@ public class AddToDoListEntryControllerGUI implements ControllerWithEmail {
 
         String status = "Pending";
         toDoListController.createToDoListEntry(taskDescription, urgency, expectedDuration, selectedGreenSpaceName, status, userEmail);
-        showAlert(Alert.AlertType.INFORMATION, "Success", "To-Do List entry addes succesfully.");
+        showAlert(Alert.AlertType.INFORMATION, "Success", "To-Do List entry added successfully.");
     }
+
+    /**
+     * Sets the to-do list controller.
+     *
+     * @param toDoListController the to-do list controller
+     */
     public void setToDoListController(ToDoListController toDoListController) {
         this.toDoListController = toDoListController;
     }
+
+    /**
+     * Shows an alert dialog with the specified type, title, and message.
+     *
+     * @param alertType the type of the alert dialog
+     * @param title     the title of the alert dialog
+     * @param message   the message of the alert dialog
+     */
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /**
+     * Handles the event of navigating back to the previous scene.
+     *
+     * @param actionEvent the ActionEvent representing the event
+     */
     @FXML
     public void handleBack(javafx.event.ActionEvent actionEvent) {
 

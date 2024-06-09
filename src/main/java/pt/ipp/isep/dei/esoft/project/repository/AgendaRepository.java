@@ -5,7 +5,6 @@ import pt.ipp.isep.dei.esoft.project.domain.Agenda;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * The AgendaRepository class represents a repository for storing agenda entries.

@@ -121,6 +121,15 @@ class DEIEmailServiceAdapter {
 class DEIService {
     +sendDEIEmail(recipient: String, subject: String, body: String): void
 }
+class TeamProposal {
+    - maxTeamSize: int
+    - minTeamSize: int
+    - requiredSkills: Set<Skill>
+    + TeamProposal(maxTeamSize, minTeamSize, requiredSkills)
+    + getMaxTeamSize(): int
+    + getMinTeamSize(): int
+    + getRequiredSkills(): Set<Skill>
+}
 
 ' Implement the relationships
 EmailService <|.. GmailEmailServiceAdapter
@@ -136,6 +145,10 @@ AssignTeamToAgendaUI..> Repositories : instance
 AssignTeamToAgendaUI --> EmailService : uses
 Repositories --> AgendaRepository : uses
 Repositories --> OrganizationRepository
+AgendaRepository --> Agenda
+TeamProposalRepository --> TeamProposal
+Organization --> TeamProposal: owns
+TeamProposal --> Agenda : go to agenda
 OrganizationRepository --> Organization
 Repositories --> TeamProposalRepository : uses
 Organization --> Agenda : owns agenda entries

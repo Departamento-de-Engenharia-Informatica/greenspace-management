@@ -6,14 +6,17 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 
+<?import javafx.scene.layout.HBox?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.ListGreenSpacesControllerGUI">
 
-    <children>
-        <ChoiceBox fx:id="sortingAlgorithmChoiceBox" VBox.vgrow="NEVER" />
-        <ListView fx:id="greenSpaceListView" VBox.vgrow="ALWAYS" />
+    <ChoiceBox fx:id="sortingAlgorithmChoiceBox" VBox.vgrow="NEVER" />
+
+    <ListView fx:id="greenSpaceListView" VBox.vgrow="ALWAYS" />
+
+    <HBox spacing="10" alignment="CENTER">
         <Button text="Back" onAction="#handleBack" />
         <Button text="Update Sorting Algorithm" onAction="#updateSortingAlgorithm" />
-    </children>
+    </HBox>
 </VBox>

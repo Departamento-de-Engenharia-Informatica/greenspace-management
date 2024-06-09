@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Button?>
 <VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.ListToDoListEntriesControllerGUI">
 
-    <ListView fx:id="toDoListView" VBox.vgrow="ALWAYS" />
-    <Button text="Back" onAction="#handleBack" />
+    <ListView fx:id="toDoListView" VBox.vgrow="ALWAYS" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-color: transparent; -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0, 0);"/>
+
+    <Button text="Back" onAction="#handleBack" style="-fx-font-size: 14px; -fx-padding: 10 20; -fx-background-color: #007bff; -fx-text-fill: white; -fx-background-radius: 5;"/>
 </VBox>

@@ -2,19 +2,31 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Label?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.ToDoListControllerGUI" spacing="10"  >
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
-    <children>
-        <Label fx:id="emailLabel" text="User Email Placeholder"/>
-        <!-- Other UI elements -->
-    </children>
-    <Button text="Add New To-Do List Entry" onAction="#handleAddToDoListEntry"/>
-    <Button text="View All To-Do List Entries" onAction="#handleListToDoEntries"/>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.ToDoListControllerGUI"
+      style="-fx-background-color: #f4f4f9; -fx-alignment: center;">
 
+    <Label fx:id="emailLabel"
+           text="User Email Placeholder"
+           style="-fx-font-size: 18px; -fx-text-fill: #333;"
+           alignment="CENTER"/>
+
+    <VBox spacing="10" alignment="CENTER" style="-fx-background-color: #ffffff; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.5, 0.0, 0.0);">
+        <Label text="Manage To-Do List"
+               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+        <HBox spacing="15" alignment="CENTER">
+            <Button text="Add New Entry"
+                    onAction="#handleAddToDoListEntry"
+                    style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+            <Button text="View All Entries"
+                    onAction="#handleListToDoEntries"
+                    style="-fx-background-color: #2196f3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+        </HBox>
+    </VBox>
 </VBox>

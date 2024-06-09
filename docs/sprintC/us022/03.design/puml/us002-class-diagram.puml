@@ -131,6 +131,7 @@ class Repositories {
     + getAgendaRepository(): AgendaRepository
 }
 
+
 ApplicationSession --> UserSession : userSession
 AgendaController ..> ApplicationSession : uses
 AgendaController ..> UserSession : uses
@@ -141,6 +142,7 @@ Repositories --> OrganizationRepository
 OrganizationRepository --> Organization
 Organization --> ToDoList : gets available to-do list entry
 Organization --> Agenda : Creates agenda entry
+Organization --> GreenSpace : gets available greenSpaces
 ToDoListRepository --> ToDoList
 GreenSpaceRepository --> GreenSpace
 AgendaRepository --> Agenda

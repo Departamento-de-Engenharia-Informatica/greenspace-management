@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The AssignTeamToAgendaControllerGUI class represents the controller for assigning teams to agenda entries in the GUI.
+ */
 public class AssignTeamToAgendaControllerGUI implements ControllerWithEmail {
 
     @FXML
@@ -34,6 +37,9 @@ public class AssignTeamToAgendaControllerGUI implements ControllerWithEmail {
     private final TeamProposalController teamProposalController = new TeamProposalController();
     private final EmailSender emailSender;
 
+    /**
+     * Constructor for AssignTeamToAgendaControllerGUI.
+     */
     public AssignTeamToAgendaControllerGUI() {
         EmailConfig emailConfig = new EmailConfig("email.properties");
         this.emailSender = new EmailSender(emailConfig);
@@ -43,7 +49,12 @@ public class AssignTeamToAgendaControllerGUI implements ControllerWithEmail {
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
-
+    public String getUserEmail() {
+        return userEmail;
+    }
+    /**
+     * Initializes the controller.
+     */
     public void initialize() {
         List<Agenda> agendaEntries = agendaController.getAllAgendaEntries()
                 .stream()
@@ -57,11 +68,14 @@ public class AssignTeamToAgendaControllerGUI implements ControllerWithEmail {
         });
     }
 
+    /**
+     * Populates the team list view.
+     */
     private void populateTeamListView() {
         List<TeamProposal> teamProposals = teamProposalController.getAllTeamProposals();
         teamListView.getItems().clear();
         for (TeamProposal teamProposal : teamProposals) {
-            String teamDetails = "Team " +  ": \n" + teamProposal.getSelectedCollaborators()
+            String teamDetails = "Team " + ": \n" + teamProposal.getSelectedCollaborators()
                     .stream()
                     .map(Collaborator::getName)
                     .collect(Collectors.joining("\n   - ", "   - ", ""));
@@ -69,6 +83,11 @@ public class AssignTeamToAgendaControllerGUI implements ControllerWithEmail {
         }
     }
 
+    /**
+     * Handles the event of assigning a team to an agenda entry.
+     *
+     * @param actionEvent the ActionEvent representing the event
+     */
     @FXML
     private void handleAssignTeam(ActionEvent actionEvent) {
         Agenda selectedAgenda = agendaChoiceBox.getValue();
@@ -90,6 +109,12 @@ public class AssignTeamToAgendaControllerGUI implements ControllerWithEmail {
         }
     }
 
+    /**
+     * Retrieves a team proposal based on its details.
+     *
+     * @param teamDetails the details of the team proposal
+     * @return the TeamProposal object if found, null otherwise
+     */
     private TeamProposal getTeamProposalByDetails(String teamDetails) {
         List<TeamProposal> teamProposals = teamProposalController.getAllTeamProposals();
         for (TeamProposal teamProposal : teamProposals) {
@@ -104,6 +129,11 @@ public class AssignTeamToAgendaControllerGUI implements ControllerWithEmail {
         return null;
     }
 
+    /**
+     * Sends email notifications to the team members.
+     *
+     * @param team the team proposal to send notifications to
+     */
     private void sendEmailNotifications(TeamProposal team) {
         String subject = "You have been assigned to a new task";
         String body = "Dear Collaborator,\n\nYou have been assigned to a new task. Please check your agenda for more details.\n\nBest regards,\nThe Team";
@@ -113,6 +143,13 @@ public class AssignTeamToAgendaControllerGUI implements ControllerWithEmail {
         }
     }
 
+    /**
+     * Shows an alert dialog with the specified type, title, and message.
+     *
+     * @param alertType the type of the alert dialog
+     * @param title     the title of the alert dialog
+     * @param message   the message of the alert dialog
+     */
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -120,6 +157,11 @@ public class AssignTeamToAgendaControllerGUI implements ControllerWithEmail {
         alert.showAndWait();
     }
 
+    /**
+     * Handles the event of navigating back to the previous scene.
+     *
+     * @param actionEvent the ActionEvent representing the event
+     */
     @FXML
     public void handleBack(javafx.event.ActionEvent actionEvent) {
         try {

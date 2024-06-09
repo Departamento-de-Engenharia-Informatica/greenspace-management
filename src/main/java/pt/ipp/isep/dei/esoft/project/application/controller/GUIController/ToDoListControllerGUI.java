@@ -14,15 +14,33 @@ import pt.ipp.isep.dei.esoft.project.ui.gui.ControllerWithEmail;
 
 import java.io.IOException;
 
+/**
+ * Controller class for the To-Do List GUI.
+ * Manages actions related to the To-Do List, including adding and listing entries.
+ */
 public class ToDoListControllerGUI implements ControllerWithEmail {
+
     static String userEmail;
+
     @FXML
     private Label emailLabel;
+
+    /**
+     * Sets the user email and updates the email label.
+     *
+     * @param userEmail the email of the user
+     */
     @Override
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
         emailLabel.setText(userEmail);
     }
+
+    /**
+     * Handles the action for adding a new to-do list entry.
+     *
+     * @param event the action event
+     */
     @FXML
     private void handleAddToDoListEntry(ActionEvent event) {
         try {
@@ -32,8 +50,6 @@ public class ToDoListControllerGUI implements ControllerWithEmail {
             AddToDoListEntryControllerGUI controller = loader.getController();
             controller.setUserEmail(userEmail);
             controller.setToDoListController(new ToDoListController());
-            System.out.println("Teste email " + userEmail);
-
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -44,6 +60,12 @@ public class ToDoListControllerGUI implements ControllerWithEmail {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the Add New To-Do List Entry form.");
         }
     }
+
+    /**
+     * Handles the action for listing to-do list entries.
+     *
+     * @param event the action event
+     */
     @FXML
     private void handleListToDoEntries(ActionEvent event) {
         try {
@@ -52,10 +74,6 @@ public class ToDoListControllerGUI implements ControllerWithEmail {
 
             ListToDoListEntriesControllerGUI controller = loader.getController();
             controller.setUserEmail(userEmail);
-//            controller.setToDoListController(new ToDoListController());
-
-
-            System.out.println("Teste email " + userEmail);
 
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -68,11 +86,17 @@ public class ToDoListControllerGUI implements ControllerWithEmail {
         }
     }
 
+    /**
+     * Shows an alert with the given alert type, title, and message.
+     *
+     * @param alertType the type of alert
+     * @param title     the title of the alert
+     * @param message   the message of the alert
+     */
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }

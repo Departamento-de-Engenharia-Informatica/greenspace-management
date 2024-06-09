@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.AddToDoListEntryControllerGUI">
-    <children>
-        <Label text="Enter task description:"/>
-        <TextField fx:id="taskDescriptionField"/>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.AddToDoListEntryControllerGUI">
 
-        <Label text="Select urgency:"/>
-        <ChoiceBox fx:id="urgencyChoiceBox">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="High"/>
-                    <String fx:value="Medium"/>
-                    <String fx:value="Low"/>
-                </FXCollections>
-            </items>
-        </ChoiceBox>
+    <Label text="Enter Task Description:"/>
+    <TextField fx:id="taskDescriptionField" promptText="Task description" />
 
-        <Label text="Enter expected duration (in minutes):"/>
-        <TextField fx:id="durationField"/>
+    <Label text="Select Urgency:"/>
+    <ChoiceBox fx:id="urgencyChoiceBox">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="High"/>
+                <String fx:value="Medium"/>
+                <String fx:value="Low"/>
+            </FXCollections>
+        </items>
+    </ChoiceBox>
 
-        <Label text="Available Green Spaces:"/>
-        <ChoiceBox fx:id="greenSpaceChoiceBox"/>
+    <Label text="Enter Expected Duration (in minutes):"/>
+    <TextField fx:id="durationField" promptText="Duration"/>
 
+    <Label text="Available Green Spaces:"/>
+    <ChoiceBox fx:id="greenSpaceChoiceBox" />
+
+    <HBox spacing="10">
         <Button text="Add ToDoList Entry" onAction="#handleAddToDoListEntry"/>
-        <Label fx:id="feedbackLabel"/>
-        <Button text="Back" onAction="#handleBack" />
-    </children>
+        <Label fx:id="feedbackLabel" style="-fx-text-fill: #007bff;"/>
+    </HBox>
+
+    <Button text="Back" onAction="#handleBack" />
 </VBox>

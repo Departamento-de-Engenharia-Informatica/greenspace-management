@@ -19,7 +19,6 @@ public class SceneSwitcher {
         if (loader.getController() instanceof ControllerWithEmail) {
             ((ControllerWithEmail) loader.getController()).setUserEmail(userEmail);
         }
-        System.out.println("Testazadas " +userEmail);
 
         Stage stage = (Stage) node.getScene().getWindow();
         Scene scene = new Scene(root);
