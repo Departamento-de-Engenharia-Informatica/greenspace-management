@@ -1,151 +1,101 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.esoft.project.domain.Agenda;
-import pt.ipp.isep.dei.esoft.project.domain.TeamProposal;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Test class for the Agenda class.
- */
-public class AgendaTest {
+class AgendaTest {
+    private Agenda agenda;
+    private TeamProposal teamProposal;
 
-    /**
-     * Tests the constructor and getters of Agenda.
-     */
+    @BeforeEach
+    void setUp() {
+        List<Collaborator> collaborators = new ArrayList<>();
+        collaborators.add(new Collaborator("John Doe", LocalDate.of(1990, 1, 1), LocalDate.of(2020, 1, 1),
+                "123 Main St", "123456789", "john.doe@example.com", 123456789, 12345678L, "Developer"));
+        Set<Skill> skills = new HashSet<>();
+        teamProposal = new TeamProposal(5, 2, skills, collaborators);
+
+        agenda = new Agenda("Task 1", "Central Park", LocalDate.of(2024, 6, 15), "Pending", teamProposal);
+    }
+
     @Test
-    public void testAgendaConstructorAndGetters() {
-        // Arrange
-        LocalDate expectedDate = LocalDate.now();
-        Set<Skill> requiredSkills = new HashSet<>();
-        requiredSkills.add(new Skill("Programming"));
-        List<Collaborator> selectedCollaborators = List.of(new Collaborator("John", LocalDate.of(1990, 5, 20), LocalDate.of(2020, 1, 1),
-                "123 Main St", "123456789", "john@example.com", 123456789, 12345678, "Developer"));
-        TeamProposal teamProposal = new TeamProposal(5, 3, requiredSkills, selectedCollaborators);
-
-        // Act
-        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
-
-        // Assert
-        assertEquals("Task", agenda.getTaskDescription());
-        assertEquals("Greenspace", agenda.getGreenspaceName());
-        assertEquals(expectedDate, agenda.getExpectedDate());
+    void testConstructorAndGetters() {
+        assertEquals("Task 1", agenda.getTaskDescription());
+        assertEquals("Central Park", agenda.getGreenspaceName());
+        assertEquals(LocalDate.of(2024, 6, 15), agenda.getExpectedDate());
         assertEquals("Pending", agenda.getStatus());
         assertEquals(teamProposal, agenda.getTeamProposal());
     }
 
-    /**
-     * Tests the setters and getters of Agenda.
-     */
     @Test
-    public void testAgendaSetterAndGetters() {
-        // Arrange
-        LocalDate expectedDate = LocalDate.now();
-        Set<Skill> requiredSkills = new HashSet<>();
-        requiredSkills.add(new Skill("Programming"));
-        List<Collaborator> selectedCollaborators = List.of(new Collaborator("John", LocalDate.of(1990, 5, 20), LocalDate.of(2020, 1, 1),
-                "123 Main St", "123456789", "john@example.com", 123456789, 12345678, "Developer"));
-        TeamProposal teamProposal = new TeamProposal(5, 3, requiredSkills, selectedCollaborators);
-        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
-
-        // Act
+    void testSetStatus() {
         agenda.setStatus("Completed");
-
-        // Assert
         assertEquals("Completed", agenda.getStatus());
 
-        // Arrange
-        TeamProposal newTeamProposal = new TeamProposal(3, 2, new HashSet<>(), List.of());
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            agenda.setStatus(null);
+        });
+        assertEquals("Status cannot be null", exception.getMessage());
+    }
 
-        // Act
+    @Test
+    void testSetTeamProposal() {
+        List<Collaborator> newCollaborators = new ArrayList<>();
+        newCollaborators.add(new Collaborator("Jane Doe", LocalDate.of(1992, 2, 2), LocalDate.of(2021, 2, 2),
+                "456 Main St", "987654321", "jane.doe@example.com", 987654321, 87654321L, "Manager"));
+        TeamProposal newTeamProposal = new TeamProposal(5, 2, new HashSet<>(), newCollaborators);
         agenda.setTeamProposal(newTeamProposal);
-
-        // Assert
         assertEquals(newTeamProposal, agenda.getTeamProposal());
     }
 
-    /**
-     * Tests the toString method of Agenda.
-     */
     @Test
-    public void testToString() {
-        // Arrange
-        LocalDate expectedDate = LocalDate.now();
-        Set<Skill> requiredSkills = new HashSet<>();
-        requiredSkills.add(new Skill("Programming"));
-        List<Collaborator> selectedCollaborators = List.of(new Collaborator("John", LocalDate.of(1990, 5, 20), LocalDate.of(2020, 1, 1),
-                "123 Main St", "123456789", "john@example.com", 123456789, 12345678, "Developer"));
-        TeamProposal teamProposal = new TeamProposal(5, 3, requiredSkills, selectedCollaborators);
-        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
+    void testSetVehicles() {
+        List<Vehicle> vehicles = new ArrayList<>();
+        vehicles.add(new Vehicle("ABC123", "Model X", "Truck", 1500, 5000, 30000,
+                "2022-01-01", "2021-01-01", 10000, 25000));
+        agenda.setVehicles(vehicles);
 
-        // Act
-        String expectedString = "Task Description: Task, Expected Date: " + expectedDate +
-                ", Greenspace: Greenspace, Status: Pending, Team:[John]";
-
-        // Assert
-        assertEquals(expectedString, agenda.toString());
+        // Reflectively check if vehicles are set correctly
+        try {
+            var field = Agenda.class.getDeclaredField("vehicles");
+            field.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            List<Vehicle> retrievedVehicles = (List<Vehicle>) field.get(agenda);
+            assertEquals(vehicles, retrievedVehicles);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            fail("Vehicles field not found or inaccessible");
+        }
     }
 
-    /**
-     * Tests the getStartTime method of Agenda.
-     */
     @Test
-    public void testGetStartTime() {
-        // Arrange
-        LocalDate expectedDate = LocalDate.now();
-        TeamProposal teamProposal = new TeamProposal(5, 3, new HashSet<>(), List.of());
-        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
-
-        // Act & Assert
-        assertEquals(expectedDate.atStartOfDay(), agenda.getStartTime());
+    void testSetExpectedDate() {
+        LocalDate newDate = LocalDate.of(2024, 6, 20);
+        agenda.setExpectedDate(newDate);
+        assertEquals(newDate, agenda.getExpectedDate());
     }
 
-    /**
-     * Tests the getEndTime method of Agenda.
-     */
     @Test
-    public void testGetEndTime() {
-        // Arrange
-        LocalDate expectedDate = LocalDate.now();
-        TeamProposal teamProposal = new TeamProposal(5, 3, new HashSet<>(), List.of());
-        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
-
-        // Act & Assert
-        assertEquals(expectedDate.atTime(23, 59), agenda.getEndTime());
+    void testToString() {
+        String expected = "Task Description: Task 1, Expected Date: 2024-06-15, Greenspace: Central Park, Status: Pending, Team:[John Doe]";
+        assertEquals(expected, agenda.toString());
     }
 
-    /**
-     * Tests the constructor of Agenda with a null TeamProposal, which should throw an IllegalArgumentException.
-     */
     @Test
-    public void testAgendaConstructorWithNullTeamProposal() {
-        // Arrange
-        LocalDate expectedDate = LocalDate.now();
-
-        // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Agenda("Task", "Greenspace", expectedDate, "Pending", null));
+    void testGetStartTime() {
+        assertEquals(LocalDate.of(2024, 6, 15).atStartOfDay(), agenda.getStartTime());
     }
 
-    /**
-     * Tests the setStatus method of Agenda with null, which should throw an IllegalArgumentException.
-     */
     @Test
-    public void testSetStatusWithNull() {
-        // Arrange
-        LocalDate expectedDate = LocalDate.now();
-        TeamProposal teamProposal = new TeamProposal(5, 3, new HashSet<>(), List.of());
-        Agenda agenda = new Agenda("Task", "Greenspace", expectedDate, "Pending", teamProposal);
-
-        // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> agenda.setStatus(null));
+    void testGetEndTime() {
+        assertEquals(LocalDate.of(2024, 6, 15).atTime(23, 59), agenda.getEndTime());
     }
 }
