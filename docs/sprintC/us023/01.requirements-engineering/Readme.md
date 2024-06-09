@@ -1,4 +1,4 @@
-# US002 - Assign a team to entry in Agenda
+# US023 - Assign a team to entry in Agenda
 
 
 ## 1. Requirements Engineering

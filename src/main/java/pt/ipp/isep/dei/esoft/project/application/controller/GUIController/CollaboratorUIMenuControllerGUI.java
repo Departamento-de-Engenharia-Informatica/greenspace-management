@@ -45,6 +45,25 @@ public class CollaboratorUIMenuControllerGUI implements ControllerWithEmail {
         }
     }
 
+    @FXML
+    private void handleChangeTaskStatus() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChangeTaskStatusCollaborator.fxml"));
+            Parent root = loader.load();
+
+            ChangeTaskStatusCollaboratorGUI controller = loader.getController();
+            controller.setUserEmail(userEmail);
+
+            Stage stage = (Stage) emailLabel.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Change Task Status");
+            stage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the Change Task Status form.");
+            e.printStackTrace();
+        }
+    }
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

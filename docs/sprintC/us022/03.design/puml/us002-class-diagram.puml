@@ -63,7 +63,29 @@ class Agenda {
     + getExpectedDate(): LocalDate
     + getStatus(): String
 }
+class OrganizationRepository {
+    - organizations: List<Organization>
 
+    + Optional<Organization> getOrganizationByEmployee(Employee employee)
+    + Optional<Organization> getOrganizationByEmployeeEmail(String email)
+    + Optional<Organization> add(Organization organization)
+}
+class Organization {
+    - name: String
+    - website: String
+    - phone: String
+    - email: String
+    - vatNumber: String
+    - List<Employee> employees
+    - List<Task> tasks
+
+    + Organization(vatNumber: String)
+    + boolean employs(Employee employee)
+    + Optional<Task> createTask(String reference, String description, String informalDescription, String technicalDescription, int duration, double cost, TaskCategory taskCategory, Employee employee)
+    + boolean anyEmployeeHasEmail(String email)
+    + boolean addEmployee(Employee employee)
+    + Organization clone()
+}
 class AgendaRepository {
     - agendas: List<Agenda>
 
@@ -114,13 +136,16 @@ AgendaController ..> ApplicationSession : uses
 AgendaController ..> UserSession : uses
 AgendaController ..> Repositories : instance
 AgendaUI .> AgendaController : uses
-AgendaController --> Agenda : 0..*
-
-ToDoListRepository --> ToDoList : 0..*
-GreenSpaceRepository --> GreenSpace : 0..*
-AgendaRepository --> Agenda : 0..*
-Repositories --> ToDoListRepository : 1
-Repositories --> GreenSpaceRepository : 1
-Repositories --> AgendaRepository : 1
+AgendaController --> Agenda
+Repositories --> OrganizationRepository
+OrganizationRepository --> Organization
+Organization --> ToDoList : gets available to-do list entry
+Organization --> Agenda : Creates agenda entry
+ToDoListRepository --> ToDoList
+GreenSpaceRepository --> GreenSpace
+AgendaRepository --> Agenda
+Repositories --> ToDoListRepository
+Repositories --> GreenSpaceRepository
+Repositories --> AgendaRepository
 
 @enduml
