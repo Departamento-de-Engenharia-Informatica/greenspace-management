@@ -1,0 +1,106 @@
+@startuml
+
+
+skinparam monochrome false
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam linetype orto
+
+
+class DisplayTasksUI {
+    + DisplayTasksUI(userEmail: String)
+    + run(): void
+    + DisplayTasks(startDate: LocalDate, endDate: LocalDate, status: String): void
+}
+
+class AgendaController {
+    - repositories: Repositories
+    + AgendaController()
+    + getAllAgendaEntries(): List<Agenda>
+    + createAgendaEntry(taskDescription: String, greenSpaceName: String, expectedDate: LocalDate, status: String, teamProposal: TeamProposal): Optional<Agenda>
+    + updateAgendaEntry(agenda: Agenda): void
+    + getGreenSpaces(userEmail: String): List<GreenSpace>
+    + getToDoListEntries(userEmail: String, greenSpaceName: String): List<ToDoList>
+    + getAllTeamProposals(): List<TeamProposal>
+}
+
+class Repositories {
+    + getInstance(): Repositories
+    + getAgendaRepository(): AgendaRepository
+    + getCollaboratorRepository(): CollaboratorRepository
+}
+
+class Agenda {
+    - taskDescription: String
+    - greenspaceName: String
+    - expectedDate: LocalDate
+    - status: String
+    - teamProposal: TeamProposal
+    - vehicles: List<Vehicle>
+    + Agenda(taskDescription: String, greenspaceName: String, expectedDate: LocalDate, status: String, teamProposal: TeamProposal)
+    + getTaskDescription(): String
+    + getGreenspaceName(): String
+    + getExpectedDate(): LocalDate
+    + getStatus(): String
+    + setStatus(status: String): void
+    + setTeamProposal(teamProposal: TeamProposal): void
+    + setVehicles(vehicles: List<Vehicle>): void
+    + getStartTime(): LocalDateTime
+    + getEndTime(): LocalDateTime
+    + getTeamProposal(): TeamProposal
+    + setExpectedDate(expectedDate: LocalDate): void
+}
+
+class AgendaRepository {
+    - agendaEntries: List<Agenda>
+    + add(agenda: Agenda): Optional<Agenda>
+    + getAll(): List<Agenda>
+    + updateAgendaEntry(agenda: Agenda): void
+    + save(entry: Agenda): void
+    + getAllAgendas(): List<Agenda>
+}
+
+class CollaboratorRepository {
+    + findByEmail(email: String): Optional<Collaborator>
+}
+class Collaborator {
+    - name: String
+    - birthdayDate: LocalDate
+    - admissionDate: LocalDate
+    - address: String
+    - phoneNumber: String
+    - email: String
+    - taxpayerNumber: int
+    - BINumber: long
+    - job: String
+    - skills: List<Skill>
+    + Collaborator(name: String, birthdayDate: LocalDate, admissionDate: LocalDate, address: String, phoneNumber: String, email: String, taxpayerNumber: int, BINumber: long, job: String)
+    + addSkill(skill: Skill): void
+    + getSkills(): List<Skill>
+    + equals(o: Object): boolean
+    + clone(): Collaborator
+    + getName(): String
+    + getBirthdayDate(): LocalDate
+    + getAdmissionDate(): LocalDate
+    + getAddress(): String
+    + getPhoneNumber(): String
+    + getEmail(): String
+    + getTaxpayerNumber(): int
+    + getBINumber(): long
+    + getJob(): String
+    + hasSkill(skill: Skill): boolean
+    + removeSkill(skill: Skill): void
+    + toString(): String
+}
+
+DisplayTasksUI ..> AgendaController
+AgendaController ..> Repositories
+Repositories ..> AgendaRepository
+Repositories ..> CollaboratorRepository
+AgendaRepository ..> Agenda
+CollaboratorRepository ..> Collaborator
+AgendaController ..> Collaborator
+Collaborator ..> Agenda : asks to list
+
+@enduml

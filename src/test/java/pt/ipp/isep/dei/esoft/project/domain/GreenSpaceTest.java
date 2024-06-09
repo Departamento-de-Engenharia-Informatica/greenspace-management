@@ -1,9 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GreenSpaceTest {
 
@@ -55,6 +55,7 @@ public class GreenSpaceTest {
             new TestGreenSpace("", 100.0, GreenSpaceType.GARDEN, "test@example.com");
         });
     }
+
     @Test
     public void testNullName() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -68,6 +69,7 @@ public class GreenSpaceTest {
             new TestGreenSpace("Test", 100.0, GreenSpaceType.GARDEN, "invalid-email");
         });
     }
+
     @Test
     public void testNullEmail() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -82,14 +84,19 @@ public class GreenSpaceTest {
         });
     }
 
-    private class TestGreenSpace extends GreenSpace {
+    private static class TestGreenSpace extends GreenSpace {
         public TestGreenSpace(String name, double area, GreenSpaceType type, String email) {
             super(name, area, type, email);
         }
 
         @Override
         public String displayDetails() {
-            return null;
+            return "TestGreenSpace{" +
+                    "name='" + getName() + '\'' +
+                    ", area=" + getArea() +
+                    ", type=" + getType() +
+                    ", email='" + getEmail() + '\'' +
+                    '}';
         }
     }
 }

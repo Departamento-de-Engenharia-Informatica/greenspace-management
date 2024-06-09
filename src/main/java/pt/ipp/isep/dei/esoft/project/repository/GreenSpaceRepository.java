@@ -57,7 +57,7 @@ public class GreenSpaceRepository {
      * @param userEmail the user's email
      * @return a list of GreenSpace objects managed by the user
      */
-    public List<GreenSpace> findByUserEmail(String userEmail) {
+    public static List<GreenSpace> findByUserEmail(String userEmail) {
         List<GreenSpace> userGreenSpaces = new ArrayList<>();
         for (GreenSpace greenSpace : greenSpaces) {
             if (greenSpace.getEmail().equals(userEmail)) {

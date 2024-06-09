@@ -1,14 +1,14 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.esoft.project.domain.Garden;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for GreenSpaceRepository.
@@ -18,7 +18,7 @@ public class GreenSpaceRepositoryTest {
     /**
      * Clears the list of GreenSpace objects in the repository before each test.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         GreenSpaceRepository.getGreenSpaces().clear();
     }
@@ -26,7 +26,7 @@ public class GreenSpaceRepositoryTest {
     /**
      * Clears the list of GreenSpace objects in the repository after each test.
      */
-    @After
+    @AfterEach
     public void tearDown() {
         GreenSpaceRepository.getGreenSpaces().clear();
     }
@@ -87,4 +87,6 @@ public class GreenSpaceRepositoryTest {
             GreenSpaceRepository.addGreenSpace(greenSpace);
         });
     }
+
+    
 }

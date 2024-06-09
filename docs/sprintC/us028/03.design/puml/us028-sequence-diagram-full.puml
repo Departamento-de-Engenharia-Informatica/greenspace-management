@@ -1,0 +1,41 @@
+@startuml
+
+actor "Collaborator" as Collaborator
+participant ":DisplayTasksUI" as DisplayUI
+participant ":AgendaController" as AgendaController
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "AgendaRepository:\nAgendaRepository" as AgendaRepository
+
+activate Collaborator
+
+Collaborator -> DisplayUI : Requests to consult tasks
+
+activate DisplayUI
+
+DisplayUI -> AgendaController : DisplayTasks(startDate, endDate, status)
+
+activate AgendaController
+
+AgendaController -> RepositorySingleton : getInstance()
+RepositorySingleton --> AgendaController: repositories
+AgendaController -> PLAT : getAgendaRepository()
+PLAT --> AgendaController : agendaRepository
+AgendaController -> AgendaRepository : getAllAgendas()
+AgendaRepository --> AgendaController : agendaEntries
+
+loop through agendaEntries
+    AgendaController -> AgendaController : Filter tasks
+end
+
+AgendaController --> DisplayUI : Display filtered tasks
+
+deactivate AgendaController
+
+DisplayUI --> Collaborator : Display filtered tasks
+
+deactivate DisplayUI
+
+deactivate Collaborator
+
+@enduml

@@ -1,6 +1,5 @@
 @startuml
 
-'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
@@ -21,13 +20,35 @@ class GreenSpace {
     + String getEmail()
     + void displayDetails()
 }
+class Organization {
+    - name: String
+    - website: String
+    - phone: String
+    - email: String
+    - vatNumber: String
+    - List<Employee> employees
+    - List<Task> tasks
 
+    + Organization(vatNumber: String)
+    + boolean employs(Employee employee)
+    + Optional<Task> createTask(String reference, String description, String informalDescription, String technicalDescription, int duration, double cost, TaskCategory taskCategory, Employee employee)
+    + boolean anyEmployeeHasEmail(String email)
+    + boolean addEmployee(Employee employee)
+    + Organization clone()
+}
 class GreenSpaceRepository {
     - List<GreenSpace> greenSpaces
 
     + void addGreenSpace(GreenSpace greenSpace)
     + List<GreenSpace> getGreenSpaces()
     + List<GreenSpace> findByUserEmail(String userEmail)
+}
+class OrganizationRepository {
+    - organizations: List<Organization>
+
+    + Optional<Organization> getOrganizationByEmployee(Employee employee)
+    + Optional<Organization> getOrganizationByEmployeeEmail(String email)
+    + Optional<Organization> add(Organization organization)
 }
 
 class RegisterGreenSpaceController {
@@ -39,13 +60,6 @@ class ListGreenSpacesUI {
     + void run()
 }
 
-class ConfigReader {
-    + static GreenSpaceSorter readSortingAlgorithm()
-}
-
-interface GreenSpaceSorter {
-    + List<GreenSpace> sort(List<GreenSpace> greenSpaces)
-}
 
 class Repositories {
     - GreenSpaceRepository greenSpaceRepository
@@ -66,15 +80,15 @@ ListGreenSpacesUI .> RegisterGreenSpaceController
 ApplicationSession -> ApplicationSession : instance
 ApplicationSession --> "1" UserSession : userSession
 RegisterGreenSpaceController ..> ApplicationSession
-RegisterGreenSpaceController ..> UserSession
+UserSession ..> RegisterGreenSpaceController
 RegisterGreenSpaceController .> Repositories : repositories
 
 Repositories -> "1" GreenSpaceRepository
+Repositories -> "1" OrganizationRepository
 
-ListGreenSpacesUI ..> ConfigReader : configReader
-ListGreenSpacesUI ..> GreenSpaceSorter : sortingAlgorithm
-
-RegisterGreenSpaceController ..> GreenSpace : greenSpace
+OrganizationRepository ..> Organization : organization
+Organization ..> GreenSpace : asks to list
+RegisterGreenSpaceController ..> Organization
 
 GreenSpaceRepository --> GreenSpace
 
