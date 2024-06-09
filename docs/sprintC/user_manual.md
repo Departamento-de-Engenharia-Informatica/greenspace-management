@@ -42,7 +42,6 @@ To ensure the Green Space Management Application runs smoothly, please ensure yo
 ### Software Requirements
 - **Operating System:** Windows 10 or later, macOS 10.13 or later, or a Linux distribution with kernel 4.15+
 - **Web Browser:** Latest version of Chrome, Firefox, Safari, or Edge
-- **Database:** MySQL 5.7 or later / PostgreSQL 9.6 or later
 - **Additional Software:** .NET Framework 4.7.2 or later, Java Runtime Environment (JRE) 8 or later
 
 --- 
