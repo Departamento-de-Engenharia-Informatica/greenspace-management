@@ -81,7 +81,7 @@ ListGreenSpacesUI .> RegisterGreenSpaceController
 ApplicationSession -> ApplicationSession : instance
 ApplicationSession --> "1" UserSession : userSession
 RegisterGreenSpaceController ..> ApplicationSession
-RegisterGreenSpaceController ..> UserSession
+UserSession ..> RegisterGreenSpaceController
 RegisterGreenSpaceController .> Repositories : repositories
 
 Repositories -> "1" GreenSpaceRepository
@@ -89,6 +89,7 @@ Repositories -> "1" OrganizationRepository
 
 OrganizationRepository ..> Organization : organization
 Organization ..> GreenSpace : asks to list
+RegisterGreenSpaceController ..> Organization
 
 GreenSpaceRepository --> GreenSpace
 
