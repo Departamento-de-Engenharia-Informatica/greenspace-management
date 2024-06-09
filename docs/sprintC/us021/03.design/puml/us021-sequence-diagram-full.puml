@@ -21,13 +21,13 @@ activate USER
     USER -> UI : requests to add new to-do list entry
     activate UI
 
-        UI --> USER : prompts for required fields (e.g., taskDescription, urgency, expectedDuration, greenspaceName, status)
+        UI --> USER : prompts for required fields (e.g., taskDescription, urgency, expectedDuration, greenspaceName)
     deactivate UI
 
-    USER -> UI : provides to-do list details (taskDescription, urgency, expectedDuration, greenspaceName, status, email)
+    USER -> UI : provides to-do list details (taskDescription, urgency, expectedDuration, greenspaceName)
     activate UI
 
-        UI -> CTRL : createToDoListEntry(taskDescription, urgency, expectedDuration, greenspaceName, status, email)
+        UI -> CTRL : createToDoListEntry(taskDescription, urgency, expectedDuration, greenspaceName)
         activate CTRL
 
             CTRL -> Repositories : getInstance()
@@ -54,10 +54,10 @@ activate USER
                 OrganizationRepository --> CTRL : organization
             deactivate OrganizationRepository
 
-            CTRL -> ORGANIZATION : createToDoListEntry(taskDescription, urgency, expectedDuration, greenspaceName, status, email)
+            CTRL -> ORGANIZATION : createToDoListEntry(taskDescription, urgency, expectedDuration, greenspaceName)
             activate ORGANIZATION
 
-                ORGANIZATION -> TODOLIST : new ToDoList(taskDescription, urgency, expectedDuration, greenspaceName, status, email)
+                ORGANIZATION -> TODOLIST : new ToDoList(taskDescription, urgency, expectedDuration, greenspaceName)
                 activate TODOLIST
 
                     TODOLIST -> TODOLIST : validate details

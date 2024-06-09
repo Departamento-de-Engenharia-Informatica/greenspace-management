@@ -3,35 +3,140 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-actor "Human Resource Manager" as HRM
-participant ":CreateJobUI" as UI
-participant ":CreateJobController" as CTRL
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "job\n:Job" as JOB
+autonumber
 
-activate HRM
+actor "User" as USER
+participant "AssignTeamToAgendaUI" as UI
+participant "AgendaController" as CTRL
+participant "Repositories" as Repositories
+participant "AgendaRepository" as AgendaRepository
+participant "TeamProposalRepository" as TeamProposalRepository
+participant "ApplicationSession" as APP
+participant "UserSession" as SESSION
+participant "Agenda" as AGENDA
+participant "TeamProposal" as TEAMPROPOSAL
+participant "EmailService" as EMAILSERVICE
+participant "GmailEmailServiceAdapter" as GMAILADAPTER
+participant "GmailService" as GMAILSERVICE
+participant "DEIEmailServiceAdapter" as DEIADAPTER
+participant "DEIService" as DEISERVICE
+participant "Organization" as ORGANIZATION
+participant "OrganizationRepository" as OrganizationRepository
 
-HRM -> UI : asks to create a new job
+activate USER
 
-activate UI
+    USER -> UI : run()
+    activate UI
 
-UI -> CTRL** : createJob
+        UI -> APP : getInstance()
+        activate APP
 
-activate CTRL
+            APP -> SESSION : getCurrentSession()
+            activate SESSION
 
-CTRL -> PLAT: getJobRepository()
-PLAT --> CTRL: jobRepository
+                SESSION -> APP : getUserEmail()
+                activate SESSION
 
-CTRL -> JOB: createJob(jobName)
-JOB -> JOB: create(jobName)
-JOB -> JOB: addJob(job)
+                    SESSION --> APP : email
+                deactivate SESSION
 
-JOB --> CTRL : job
+                APP --> UI : email
+            deactivate APP
 
-CTRL --> UI: job
-deactivate CTRL
-UI --> HRM: displays operation success
-deactivate UI
-deactivate HRM
+        UI -> Repositories : getInstance()
+        activate Repositories
+
+            Repositories --> UI : agendaRepository, teamProposalRepository
+        deactivate Repositories
+
+        UI -> AgendaRepository : getAllAgendas()
+        activate AgendaRepository
+
+            AgendaRepository --> UI : List<Agenda>
+        deactivate AgendaRepository
+
+        USER -> UI : selectAgendaEntry()
+        activate UI
+
+            UI -> CTRL : getAgendaEntry(entryId)
+            activate CTRL
+
+                CTRL -> AgendaRepository : getAgendaEntry(entryId)
+                activate AgendaRepository
+
+                    AgendaRepository --> CTRL : Agenda
+                deactivate AgendaRepository
+
+                CTRL --> UI : Agenda
+            deactivate CTRL
+
+        USER -> UI : selectTeamProposal()
+        activate UI
+
+            UI -> CTRL : getAvailableTeamProposals(entryId)
+            activate CTRL
+
+                CTRL -> TeamProposalRepository : getAvailableTeamProposals(entryId)
+                activate TeamProposalRepository
+
+                    TeamProposalRepository --> CTRL : List<TeamProposal>
+                deactivate TeamProposalRepository
+
+                CTRL --> UI : List<TeamProposal>
+            deactivate CTRL
+
+        USER -> UI : sendEmailNotifications()
+        activate UI
+
+            UI -> CTRL : assignTeamToAgendaEntry(agenda, teamProposal)
+            activate CTRL
+
+                CTRL -> OrganizationRepository : getOrganizationByEmployeeEmail(email)
+                activate OrganizationRepository
+
+                    OrganizationRepository --> CTRL : Organization
+                deactivate OrganizationRepository
+
+                CTRL -> ORGANIZATION : addAgendaEntry(agenda, teamProposal)
+                activate ORGANIZATION
+
+                    ORGANIZATION -> AGENDA : new Agenda(taskDescription, greenSpaceName, expectedDate, status)
+                    activate AGENDA
+
+                        AGENDA -> AgendaRepository : saveAgendaEntry(agenda)
+                        activate AgendaRepository
+
+                            AgendaRepository --> AGENDA : confirmation
+                        deactivate AgendaRepository
+
+                    deactivate AGENDA
+
+                    ORGANIZATION -> TeamProposalRepository : addTeamProposal(teamProposal)
+                    activate TeamProposalRepository
+
+                        TeamProposalRepository --> ORGANIZATION : confirmation
+                    deactivate TeamProposalRepository
+
+                deactivate ORGANIZATION
+
+            deactivate CTRL
+
+            alt Gmail
+                UI -> EMAILSERVICE : sendEmail(recipient, subject, body)
+                EMAILSERVICE -> GMAILADAPTER : sendEmail(recipient, subject, body)
+                GMAILADAPTER -> GMAILSERVICE : sendGmail(recipient, subject, body)
+            end
+
+            alt DEI
+                UI -> EMAILSERVICE : sendEmail(recipient, subject, body)
+                EMAILSERVICE -> DEIADAPTER : sendEmail(recipient, subject, body)
+                DEIADAPTER -> DEISERVICE : sendDEIEmail(recipient, subject, body)
+            end
+
+        deactivate UI
+
+    UI --> USER : confirms successful agenda entry creation
+
+deactivate USER
+
 @enduml

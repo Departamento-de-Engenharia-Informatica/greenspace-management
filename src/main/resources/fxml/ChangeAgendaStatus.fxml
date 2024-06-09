@@ -3,18 +3,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.ChangeStatusAgendaGUI"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="300.0" prefWidth="230.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.application.controller.GUIController.ChangeStatusAgendaGUI">
+    <VBox alignment="CENTER" spacing="6">
+        <Label text="Select Agenda Entry:"/>
+        <ChoiceBox fx:id="choiceBox" prefWidth="230.0" />
+        <Label text="Select date to postpone:" fx:id="datelbl" visible="false"/>
+        <DatePicker fx:id="datePicker" visible="false" prefWidth="230.0"/>
+    </VBox>
 
-    <ComboBox fx:id="comboBox" prefWidth="150"/>
-
-    <Region VBox.vgrow="ALWAYS" />
-
-    <HBox spacing="10" alignment="CENTER">
-        <Button text="Button 1" onAction="#handleCanceledStatus"/>
-        <Button text="Button 2" onAction="#handlePostponedStatus"/>
+    <HBox alignment="BOTTOM_LEFT" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+        <Button onAction="#handleCanceledStatus" text="Canceled" fx:id="canceledbtn"/>
+        <Button onAction="#handlePostponedStatus" text="Postponed" fx:id="postponedbtn" />
+        <Button text="Back" onAction="#handleBack" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" fx:id="backbtn"/>
     </HBox>
 
 </AnchorPane>

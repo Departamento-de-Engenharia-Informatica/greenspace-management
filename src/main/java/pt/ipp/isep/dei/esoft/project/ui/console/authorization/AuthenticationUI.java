@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console.authorization;
 import pt.ipp.isep.dei.esoft.project.application.controller.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
+import pt.ipp.isep.dei.esoft.project.ui.gui.CollaboratorUIApplication;
 import pt.ipp.isep.dei.esoft.project.ui.gui.GsmUIApplication;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
@@ -89,8 +90,11 @@ public class AuthenticationUI implements Runnable {
             if (found) {
                 // Check if the role requires the JavaFX UI
                 if (role.getDescription().equals(AuthenticationController.ROLE_GSM)) {
-                    launchJavaFXUI(userEmail);
-                } else {
+                    launchJavaFXUI(userEmail, role.getDescription());
+                } else if (role.getDescription().equals(AuthenticationController.ROLE_COLLABORATOR)) {
+                    launchJavaFXUI(userEmail, role.getDescription());
+                }
+                {
                     item.run();
                 }
             }
@@ -109,11 +113,14 @@ public class AuthenticationUI implements Runnable {
     }
 
     // Inside your login UI class (either console or JavaFX)
-    private void launchJavaFXUI(String userEmail) {
-        GsmUIApplication.setUserEmail(userEmail); // Pass the user's email to GsmUIApplication
+    private void launchJavaFXUI(String userEmail, String role) {
+        if(role.equals(AuthenticationController.ROLE_COLLABORATOR)){
+            CollaboratorUIApplication.setUserEmail(userEmail);
+            new Thread(() -> Application.launch(CollaboratorUIApplication.class)).start();
+        } else if (role.equals(AuthenticationController.ROLE_GSM)) {
+            GsmUIApplication.setUserEmail(userEmail);
+            new Thread(() -> Application.launch(GsmUIApplication.class)).start();
 
-        new Thread(() -> Application.launch(GsmUIApplication.class)).start(); // Launch the JavaFX application
-
+        }
     }
-
 }

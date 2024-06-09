@@ -24,73 +24,10 @@ public class TeamProposalController {
         this.collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
     }
 
-    /*public TeamProposal generateTeamProposal(int maxTeamSize, int minTeamSize, Set<Skill> requiredSkills) {
-        // Check if enough collaborators are available for the required skills
-        Map<Skill, Integer> requiredSkillCounts = getRequiredSkillCounts(requiredSkills);
-        Map<Skill, List<Collaborator>> availableCollaborators = getAvailableCollaboratorsForSkills(requiredSkillCounts);
-
-        if (validateRequiredSkills(requiredSkillCounts, availableCollaborators)) {
-            List<Collaborator> selectedCollaborators = selectCollaborators(requiredSkillCounts, availableCollaborators, maxTeamSize);
-            TeamProposal teamProposal = new TeamProposal(maxTeamSize, minTeamSize, requiredSkills);
-            teamProposal.setSelectedCollaborators(selectedCollaborators);
-            teamProposalRepository.addTeamProposal(teamProposal);
-            return teamProposal;
-        } else {
-            System.out.println("Not enough collaborators with the required skills.");
-            return null;
-        }
-    }*/
-
-    private Map<Skill, Integer> getRequiredSkillCounts(Set<Skill> requiredSkills) {
-        Map<Skill, Integer> skillCounts = new HashMap<>();
-        for (Skill skill : requiredSkills) {
-            skillCounts.put(skill, Collections.frequency(requiredSkills, skill));
-        }
-        return skillCounts;
-    }
-
-
-
-    private boolean validateRequiredSkills(Map<Skill, Integer> requiredSkillCounts, Map<Skill, List<Collaborator>> availableCollaborators) {
-        for (Map.Entry<Skill, Integer> entry : requiredSkillCounts.entrySet()) {
-            Skill skill = entry.getKey();
-            int requiredCount = entry.getValue();
-            List<Collaborator> collaborators = availableCollaborators.get(skill);
-            if (collaborators == null || collaborators.size() < requiredCount) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private List<Collaborator> selectCollaborators(Map<Skill, Integer> requiredSkillCounts, Map<Skill, List<Collaborator>> availableCollaborators, int maxTeamSize) {
-        List<Collaborator> selectedCollaborators = new ArrayList<>();
-        for (Map.Entry<Skill, Integer> entry : requiredSkillCounts.entrySet()) {
-            Skill skill = entry.getKey();
-            int requiredCount = entry.getValue();
-            List<Collaborator> collaborators = availableCollaborators.get(skill);
-            if (collaborators != null) {
-                for (int i = 0; i < requiredCount && i < collaborators.size() && selectedCollaborators.size() < maxTeamSize; i++) {
-                    selectedCollaborators.add(collaborators.get(i));
-                }
-            }
-        }
-        return selectedCollaborators;
-    }
-
     public static List<TeamProposal> getAllTeamProposals() {
         return teamProposalRepository.getAllTeamProposals();
     }
-    public Set<Collaborator> findCollaboratorsForTeam(TeamProposal teamProposal) {
-        Set<Collaborator> potentialCollaborators = new HashSet<>();
 
-        for (Skill requiredSkill : teamProposal.getRequiredSkills()) {
-            List<Collaborator> collaboratorsWithSkill = SkillAssignment.getCollaboratorsWithSkill(requiredSkill);
-            potentialCollaborators.addAll(collaboratorsWithSkill);
-        }
-
-        return potentialCollaborators;
-    }
     public Set<Collaborator> findCollaboratorsForSkills(Set<Skill> requiredSkills) {
         Set<Collaborator> collaborators = new HashSet<>();
         for (Skill skill : requiredSkills) {

@@ -102,4 +102,8 @@ public class Agenda {
     public TeamProposal getTeamProposal() {
         return teamProposal;
     }
+    public void setExpectedDate(LocalDate expectedDate) {
+        this.expectedDate = expectedDate;
+    }
+
 }
